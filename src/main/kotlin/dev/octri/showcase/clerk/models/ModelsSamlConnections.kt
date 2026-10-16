@@ -3,10 +3,10 @@
 
 package dev.octri.showcase.clerk.models
 
-/**
- * Typed representation of the `SAMLConnection` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = SAMLConnection.Deserializer::class)
+/** Typed representation of the `SAMLConnection` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = SAMLConnection.Deserializer::class
+)
 sealed interface SAMLConnection {
     /** Chooses the branch this payload is shaped like. */
     class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<SAMLConnection>() {
@@ -17,61 +17,54 @@ sealed interface SAMLConnection {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
             return when {
-                else -> ValueSAMLConnection(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<Any>() {}))
+                else ->
+                    ValueSAMLConnection(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<Any>() {},
+                        )
+                    )
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ValueSAMLConnection(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) : SAMLConnection
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ValueSAMLConnection(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) :
+    SAMLConnection
 
-/**
- * Typed representation of the `SAMLConnectionAttributeMapping` API schema.
- */
+/** Typed representation of the `SAMLConnectionAttributeMapping` API schema. */
 data class SAMLConnectionAttributeMapping(
-    /**
-     * Required `string` value serialized in the `user_id` wire field.
-     */
+    /** Required `string` value serialized in the `user_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String,
-    /**
-     * Required `string` value serialized in the `email_address` wire field.
-     */
+    /** Required `string` value serialized in the `email_address` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("email_address") val emailAddress: String,
-    /**
-     * Required `string` value serialized in the `first_name` wire field.
-     */
+    /** Required `string` value serialized in the `first_name` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("first_name") val firstName: String,
-    /**
-     * Required `string` value serialized in the `last_name` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_name") val lastName: String
+    /** Required `string` value serialized in the `last_name` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_name") val lastName: String,
 )
 
-/**
- * Configuration for the login_hint sent to the IdP on SSO sign-in
- */
+/** Configuration for the login_hint sent to the IdP on SSO sign-in */
 data class SAMLConnectionLoginHint(
-    /**
-     * Controls the login_hint sent to the IdP on SSO sign-in
-     */
+    /** Controls the login_hint sent to the IdP on SSO sign-in */
     val mode: SAMLConnectionLoginHintModeEnum,
     /**
-     * The user public_metadata key whose value is sent as the login_hint when mode is custom_attribute
+     * The user public_metadata key whose value is sent as the login_hint when mode is
+     * custom_attribute
      */
-    val source: String? = null
+    val source: String? = null,
 )
 
-/**
- * Typed representation of the `SAMLConnections` API schema.
- */
+/** Typed representation of the `SAMLConnections` API schema. */
 data class SAMLConnections(
-    /**
-     * Required array value serialized in the `data` wire field.
-     */
+    /** Required array value serialized in the `data` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<SAMLConnection>,
-    /**
-     * Total number of SAML Connections
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long
+    /** Total number of SAML Connections */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long,
 )

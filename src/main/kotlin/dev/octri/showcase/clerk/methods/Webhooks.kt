@@ -11,44 +11,52 @@ import dev.octri.showcase.clerk.SvixURL
 
 object Webhooks {
 
-
-    /**
-     * Create a Svix app and associate it with the current instance
-     */
+    /** Create a Svix app and associate it with the current instance */
     fun createSvixApp(clientConfig: ClientConfig, options: RequestOptions? = null): SvixURL {
-        return SdkClient.request<SvixURL>(SdkClient.RequestSpec("POST", "/webhooks/svix", config = clientConfig, operationId = "createSvixApp", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java))).data
+        return SdkClient.request<SvixURL>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/webhooks/svix",
+                    config = clientConfig,
+                    operationId = "createSvixApp",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors = mapOf("400" to ClerkErrors::class.java),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
-    /**
-     * Delete a Svix app and disassociate it from the current instance
-     */
+    /** Delete a Svix app and disassociate it from the current instance */
     fun deleteSvixApp(clientConfig: ClientConfig, options: RequestOptions? = null): Unit {
-        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/webhooks/svix", config = clientConfig, operationId = "deleteSvixApp", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("400" to ClerkErrors::class.java)))
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/webhooks/svix",
+                config = clientConfig,
+                operationId = "deleteSvixApp",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors = mapOf("400" to ClerkErrors::class.java),
+            )
+        )
     }
-
-
-
-
-
-
 
     /**
      * Generate a new URL for accessing the Svix's management dashboard for that particular instance
      */
     fun generateSvixAuthUrl(clientConfig: ClientConfig, options: RequestOptions? = null): SvixURL {
-        return SdkClient.request<SvixURL>(SdkClient.RequestSpec("POST", "/webhooks/svix_url", config = clientConfig, operationId = "generateSvixAuthUrl", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java))).data
+        return SdkClient.request<SvixURL>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/webhooks/svix_url",
+                    config = clientConfig,
+                    operationId = "generateSvixAuthUrl",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors = mapOf("400" to ClerkErrors::class.java),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }

@@ -3,43 +3,88 @@
 
 package dev.octri.showcase.clerk
 
-
 class InvitationsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates a new invitation for the given email address and sends the invitation email. Keep in mind that you cannot create an invitation if there is already one for the given email address. Also, trying to create an invitation for an email address that already exists in your application will result to an error.
+     * Creates a new invitation for the given email address and sends the invitation email. Keep in
+     * mind that you cannot create an invitation if there is already one for the given email
+     * address. Also, trying to create an invitation for an email address that already exists in
+     * your application will result to an error.
      */
-    fun create(request: dev.octri.showcase.clerk.methods.Invitations.CreateInvitationRequest, options: RequestOptions? = null): Invitation {
-        return dev.octri.showcase.clerk.methods.Invitations.createInvitation(clientConfig, request, options)
+    fun create(
+        request: dev.octri.showcase.clerk.methods.Invitations.CreateInvitationRequest,
+        options: RequestOptions? = null,
+    ): Invitation {
+        return dev.octri.showcase.clerk.methods.Invitations.createInvitation(
+            clientConfig,
+            request,
+            options,
+        )
+    }
+
+    /** Returns all non-revoked invitations for your application, sorted by creation date */
+    fun list(
+        request: dev.octri.showcase.clerk.methods.Invitations.ListInvitationsRequest,
+        options: RequestOptions? = null,
+    ): List<Invitation> {
+        return dev.octri.showcase.clerk.methods.Invitations.listInvitations(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Returns all non-revoked invitations for your application, sorted by creation date
-     */
-    fun list(request: dev.octri.showcase.clerk.methods.Invitations.ListInvitationsRequest, options: RequestOptions? = null): List<Invitation> {
-        return dev.octri.showcase.clerk.methods.Invitations.listInvitations(clientConfig, request, options)
-    }
-
-    /**
-     * Creates multiple invitations for the supplied email addresses. Include an `email_address` in each item; set `ignore_existing` to allow an existing invitation, but you cannot invite an address associated with an existing user. Send at most 10 invitations per request, and use `notify` to control whether invitation emails are sent.
+     * Creates multiple invitations for the supplied email addresses. Include an `email_address` in
+     * each item; set `ignore_existing` to allow an existing invitation, but you cannot invite an
+     * address associated with an existing user. Send at most 10 invitations per request, and use
+     * `notify` to control whether invitation emails are sent.
      *
-     * Use this API operation to create multiple invitations for the provided email addresses. You can choose to send the invitations as emails by setting the `notify` parameter to `true`. There cannot be an existing invitation for any of the email addresses you provide unless you set `ignore_existing` to `true` for specific email addresses. Please note that there must be no existing user for any of the email addresses you provide, and this rule cannot be bypassed. This endpoint is…
+     * Use this API operation to create multiple invitations for the provided email addresses. You
+     * can choose to send the invitations as emails by setting the `notify` parameter to `true`.
+     * There cannot be an existing invitation for any of the email addresses you provide unless you
+     * set `ignore_existing` to `true` for specific email addresses. Please note that there must be
+     * no existing user for any of the email addresses you provide, and this rule cannot be
+     * bypassed. This endpoint is…
      */
-    fun createBulk(body: List<dev.octri.showcase.clerk.methods.Invitations.CreateBulkInvitationsItem>? = null, options: RequestOptions? = null): List<Invitation> {
-        return dev.octri.showcase.clerk.methods.Invitations.createBulkInvitations(clientConfig, body, options)
+    fun createBulk(
+        body: List<dev.octri.showcase.clerk.methods.Invitations.CreateBulkInvitationsItem>? = null,
+        options: RequestOptions? = null,
+    ): List<Invitation> {
+        return dev.octri.showcase.clerk.methods.Invitations.createBulkInvitations(
+            clientConfig,
+            body,
+            options,
+        )
     }
 
     /**
-     * Permanently deletes the given invitation and the copies of the invitation email Clerk stored for its recipient. Unlike revoking, deleting removes the invitation record itself, which helps honor a data erasure request from someone who was invited but never signed up. Other records that contain the same email address, such as users or organization invitations, are not affected. Invitations of any status can be deleted.
+     * Permanently deletes the given invitation and the copies of the invitation email Clerk stored
+     * for its recipient. Unlike revoking, deleting removes the invitation record itself, which
+     * helps honor a data erasure request from someone who was invited but never signed up. Other
+     * records that contain the same email address, such as users or organization invitations, are
+     * not affected. Invitations of any status can be deleted.
      */
     fun delete(invitationId: String, options: RequestOptions? = null): DeletedObject {
-        return dev.octri.showcase.clerk.methods.Invitations.deleteInvitation(clientConfig, invitationId, options)
+        return dev.octri.showcase.clerk.methods.Invitations.deleteInvitation(
+            clientConfig,
+            invitationId,
+            options,
+        )
     }
 
     /**
-     * Revokes the given invitation. Revoking an invitation will prevent the user from using the invitation link that was sent to them. However, it doesn't prevent the user from signing up if they follow the sign up flow. Only active (i.e. non-revoked) invitations can be revoked.
+     * Revokes the given invitation. Revoking an invitation will prevent the user from using the
+     * invitation link that was sent to them. However, it doesn't prevent the user from signing up
+     * if they follow the sign up flow. Only active (i.e. non-revoked) invitations can be revoked.
      */
-    fun revoke(invitationId: String, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.Invitations.SchemaSchemadd079084 {
-        return dev.octri.showcase.clerk.methods.Invitations.revokeInvitation(clientConfig, invitationId, options)
+    fun revoke(
+        invitationId: String,
+        options: RequestOptions? = null,
+    ): dev.octri.showcase.clerk.methods.Invitations.SchemaSchemadd079084 {
+        return dev.octri.showcase.clerk.methods.Invitations.revokeInvitation(
+            clientConfig,
+            invitationId,
+            options,
+        )
     }
-
 }

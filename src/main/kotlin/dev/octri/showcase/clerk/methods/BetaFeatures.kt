@@ -11,88 +11,159 @@ import dev.octri.showcase.clerk.SdkClient
 
 object BetaFeatures {
 
-data class SchemaSchema382061cc(
-    /**
-     * String representing the object's type. Objects of the same type share the same value.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: SchemaSchemaObjectEnume5de16a2? = null,
-    val id: String? = null,
-    @com.fasterxml.jackson.annotation.JsonProperty("restricted_to_allowlist") val restrictedToAllowlist: Boolean? = null,
-    @com.fasterxml.jackson.annotation.JsonProperty("from_email_address") val fromEmailAddress: String? = null,
-    @com.fasterxml.jackson.annotation.JsonProperty("progressive_sign_up") val progressiveSignUp: Boolean? = null,
-    /**
-     * Deprecated. This setting is retired and no longer affects email delivery; all email is sent through the instance's configured email sending domain. The field is preserved for API compatibility only and will be removed in a future version.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("enhanced_email_deliverability") val enhancedEmailDeliverability: Boolean? = null
-)
+    data class SchemaSchema382061cc(
+        /** String representing the object's type. Objects of the same type share the same value. */
+        @com.fasterxml.jackson.annotation.JsonProperty("object")
+        val `object`: SchemaSchemaObjectEnume5de16a2? = null,
+        val id: String? = null,
+        @com.fasterxml.jackson.annotation.JsonProperty("restricted_to_allowlist")
+        val restrictedToAllowlist: Boolean? = null,
+        @com.fasterxml.jackson.annotation.JsonProperty("from_email_address")
+        val fromEmailAddress: String? = null,
+        @com.fasterxml.jackson.annotation.JsonProperty("progressive_sign_up")
+        val progressiveSignUp: Boolean? = null,
+        /**
+         * Deprecated. This setting is retired and no longer affects email delivery; all email is
+         * sent through the instance's configured email sending domain. The field is preserved for
+         * API compatibility only and will be removed in a future version.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("enhanced_email_deliverability")
+        val enhancedEmailDeliverability: Boolean? = null,
+    )
 
-
     /**
-     * Updates instance authentication settings, including allowlist restrictions, the sender address for authentication emails, progressive sign-up, and test mode. Set `from_email_address` to an alphanumeric local part only; `restricted_to_allowlist` defaults to false when omitted, and test mode defaults to true for development instances.
+     * Updates instance authentication settings, including allowlist restrictions, the sender
+     * address for authentication emails, progressive sign-up, and test mode. Set
+     * `from_email_address` to an alphanumeric local part only; `restricted_to_allowlist` defaults
+     * to false when omitted, and test mode defaults to true for development instances.
      *
      * Updates the settings of an instance
      *
-     * @param restrictedToAllowlist Whether sign up is restricted to email addresses,
-     *   phone numbers and usernames that are on the allowlist.
-     * @param fromEmailAddress The local part of the email address from which
-     *   authentication-related emails (e.g. OTP code, magic links) will be sent. Only
-     *   alphanumeric values are allowed. Note that this value should contain only the
-     *   local part of the address (e.g. `foo` for `foo@example.com`).
-     * @param progressiveSignUp Enable the Progressive Sign Up algorithm. This
-     *   feature is deprecated, please contact support if you need assistance.
-     * @param testMode Toggles test mode for this instance, allowing the use of test
-     *   email addresses and phone numbers. Defaults to true for development instances.
+     * @param restrictedToAllowlist Whether sign up is restricted to email addresses, phone numbers
+     *   and usernames that are on the allowlist.
+     * @param fromEmailAddress The local part of the email address from which authentication-related
+     *   emails (e.g. OTP code, magic links) will be sent. Only alphanumeric values are allowed.
+     *   Note that this value should contain only the local part of the address (e.g. `foo` for
+     *   `foo@example.com`).
+     * @param progressiveSignUp Enable the Progressive Sign Up algorithm. This feature is
+     *   deprecated, please contact support if you need assistance.
+     * @param testMode Toggles test mode for this instance, allowing the use of test email addresses
+     *   and phone numbers. Defaults to true for development instances.
      */
-    fun updateInstanceAuthConfig(clientConfig: ClientConfig, restrictedToAllowlist: SdkClient.SdkOptional<Boolean?>? = null, fromEmailAddress: SdkClient.SdkOptional<String?>? = null, progressiveSignUp: SdkClient.SdkOptional<Boolean?>? = null, testMode: SdkClient.SdkOptional<Boolean?>? = null, options: RequestOptions? = null): SchemaSchema382061cc {
-        return SdkClient.request<SchemaSchema382061cc>(SdkClient.RequestSpec("PATCH", "/beta_features/instance_settings", config = clientConfig, body = SdkClient.bodyMap("restricted_to_allowlist" to
-    (restrictedToAllowlist ?: SdkClient.SdkOptional.Omitted), "from_email_address" to
-    (fromEmailAddress ?: SdkClient.SdkOptional.Omitted), "progressive_sign_up" to
-    (progressiveSignUp ?: SdkClient.SdkOptional.Omitted), "test_mode" to (testMode ?: SdkClient.SdkOptional.Omitted)), operationId = "updateInstanceAuthConfig", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("402" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
+    fun updateInstanceAuthConfig(
+        clientConfig: ClientConfig,
+        restrictedToAllowlist: SdkClient.SdkOptional<Boolean?>? = null,
+        fromEmailAddress: SdkClient.SdkOptional<String?>? = null,
+        progressiveSignUp: SdkClient.SdkOptional<Boolean?>? = null,
+        testMode: SdkClient.SdkOptional<Boolean?>? = null,
+        options: RequestOptions? = null,
+    ): SchemaSchema382061cc {
+        return SdkClient.request<SchemaSchema382061cc>(
+                SdkClient.RequestSpec(
+                    "PATCH",
+                    "/beta_features/instance_settings",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "restricted_to_allowlist" to
+                                (restrictedToAllowlist ?: SdkClient.SdkOptional.Omitted),
+                            "from_email_address" to
+                                (fromEmailAddress ?: SdkClient.SdkOptional.Omitted),
+                            "progressive_sign_up" to
+                                (progressiveSignUp ?: SdkClient.SdkOptional.Omitted),
+                            "test_mode" to (testMode ?: SdkClient.SdkOptional.Omitted),
+                        ),
+                    operationId = "updateInstanceAuthConfig",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf("402" to ClerkErrors::class.java, "422" to ClerkErrors::class.java),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Change the domain of a production instance. Changing the domain requires updating the DNS records accordingly, deploying new SSL certificates, updating your Social Connection's redirect URLs and setting the new keys in your code. WARNING: Changing your domain will invalidate all current user sessions (i.e. users will be logged out). Also, while your application is being deployed, a small downtime is expected to occur. Returns 403 `domain_managed_by_integration` for…
+     * Change the domain of a production instance. Changing the domain requires updating the DNS
+     * records accordingly, deploying new SSL certificates, updating your Social Connection's
+     * redirect URLs and setting the new keys in your code. WARNING: Changing your domain will
+     * invalidate all current user sessions (i.e. users will be logged out). Also, while your
+     * application is being deployed, a small downtime is expected to occur. Returns 403
+     * `domain_managed_by_integration` for…
      *
-     * @param homeUrl The new home URL of the production instance e.g.
-     *   www.example.com
+     * @param homeUrl The new home URL of the production instance e.g. www.example.com
      * @param isSecondary Whether the domain is a secondary app.
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
-    fun updateProductionInstanceDomain(clientConfig: ClientConfig, homeUrl: String? = null, isSecondary: Boolean? = null, options: RequestOptions? = null): Unit {
-        SdkClient.request<Unit>(SdkClient.RequestSpec("PUT", "/beta_features/domain", config = clientConfig, body = SdkClient.bodyMap("home_url" to (SdkClient.omitIfNull(homeUrl)), "is_secondary" to (SdkClient.omitIfNull(isSecondary))), operationId = "updateProductionInstanceDomain", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("400" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "422" to ClerkErrors::class.java)))
+    fun updateProductionInstanceDomain(
+        clientConfig: ClientConfig,
+        homeUrl: String? = null,
+        isSecondary: Boolean? = null,
+        options: RequestOptions? = null,
+    ): Unit {
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "PUT",
+                "/beta_features/domain",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "home_url" to (SdkClient.omitIfNull(homeUrl)),
+                        "is_secondary" to (SdkClient.omitIfNull(isSecondary)),
+                    ),
+                operationId = "updateProductionInstanceDomain",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ClerkErrors::class.java,
+                        "403" to ClerkErrors::class.java,
+                        "422" to ClerkErrors::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
-
 
     /**
-     * Change the domain of a production instance. Changing the domain requires updating the DNS records accordingly, deploying new SSL certificates, updating your Social Connection's redirect URLs and setting the new keys in your code. WARNING: Changing your domain will invalidate all current user sessions (i.e. users will be logged out). Also, while your application is being deployed, a small downtime is expected to occur. Returns 403 `domain_managed_by_integration` for…
+     * Change the domain of a production instance. Changing the domain requires updating the DNS
+     * records accordingly, deploying new SSL certificates, updating your Social Connection's
+     * redirect URLs and setting the new keys in your code. WARNING: Changing your domain will
+     * invalidate all current user sessions (i.e. users will be logged out). Also, while your
+     * application is being deployed, a small downtime is expected to occur. Returns 403
+     * `domain_managed_by_integration` for…
      *
-     * @param homeUrl The new home URL of the production instance e.g.
-     *   www.example.com
-     * @param isSecondary Whether this is a domain for a secondary app, meaning that
-     *   any subdomain provided is significant and will be stored as part of the
-     *   domain. This is useful for supporting multiple apps (one primary and multiple
-     *   secondaries) on the same root domain (eTLD+1).
+     * @param homeUrl The new home URL of the production instance e.g. www.example.com
+     * @param isSecondary Whether this is a domain for a secondary app, meaning that any subdomain
+     *   provided is significant and will be stored as part of the domain. This is useful for
+     *   supporting multiple apps (one primary and multiple secondaries) on the same root domain
+     *   (eTLD+1).
      */
-    fun changeProductionInstanceDomain(clientConfig: ClientConfig, homeUrl: String? = null, isSecondary: Boolean? = null, options: RequestOptions? = null): Unit {
-        SdkClient.request<Unit>(SdkClient.RequestSpec("POST", "/instance/change_domain", config = clientConfig, body = SdkClient.bodyMap("home_url" to (SdkClient.omitIfNull(homeUrl)), "is_secondary" to (SdkClient.omitIfNull(isSecondary))), operationId = "changeProductionInstanceDomain", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("400" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "422" to ClerkErrors::class.java)))
+    fun changeProductionInstanceDomain(
+        clientConfig: ClientConfig,
+        homeUrl: String? = null,
+        isSecondary: Boolean? = null,
+        options: RequestOptions? = null,
+    ): Unit {
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/instance/change_domain",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "home_url" to (SdkClient.omitIfNull(homeUrl)),
+                        "is_secondary" to (SdkClient.omitIfNull(isSecondary)),
+                    ),
+                operationId = "changeProductionInstanceDomain",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ClerkErrors::class.java,
+                        "403" to ClerkErrors::class.java,
+                        "422" to ClerkErrors::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

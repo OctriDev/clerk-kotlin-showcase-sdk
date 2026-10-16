@@ -3,68 +3,85 @@
 
 package dev.octri.showcase.clerk.models
 
-/**
- * Typed representation of the `EmailAddress` API schema.
- */
+/** Typed representation of the `EmailAddress` API schema. */
 data class EmailAddress(
-    /**
-     * String representing the object's type. Objects of the same type share the same value.
-     */
+    /** String representing the object's type. Objects of the same type share the same value. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: EmailAddressObjectEnum,
-    /**
-     * Required `string` value serialized in the `email_address` wire field.
-     */
+    /** Required `string` value serialized in the `email_address` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("email_address") val emailAddress: String,
-    /**
-     * Required `boolean` value serialized in the `reserved` wire field.
-     */
+    /** Required `boolean` value serialized in the `reserved` wire field. */
     val reserved: Boolean,
-    /**
-     * Required object value serialized in the `verification` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("verification", required = true) val verification: EmailAddressVerification?,
-    /**
-     * Required array value serialized in the `linked_to` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("linked_to") val linkedTo: List<IdentificationLink>,
-    /**
-     * Unix timestamp of creation
-     */
+    /** Required object value serialized in the `verification` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("verification", required = true)
+    val verification: EmailAddressVerification?,
+    /** Required array value serialized in the `linked_to` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("linked_to")
+    val linkedTo: List<IdentificationLink>,
+    /** Unix timestamp of creation */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Unix timestamp of creation
-     */
+    /** Unix timestamp of creation */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
-    /**
-     * Optional `string` value serialized in the `id` wire field.
-     */
+    /** Optional `string` value serialized in the `id` wire field. */
     val id: String? = null,
-    /**
-     * Indicates whether this email address domain matches an active enterprise connection.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("matches_sso_connection") val matchesSsoConnection: Boolean? = null
+    /** Indicates whether this email address domain matches an active enterprise connection. */
+    @com.fasterxml.jackson.annotation.JsonProperty("matches_sso_connection")
+    val matchesSsoConnection: Boolean? = null,
 )
 
-/**
- * Required object value serialized in the `verification` wire field.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "object", visible = true, defaultImpl = UnknownEmailAddressVerification::class)
+/** Required object value serialized in the `verification` wire field. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "object",
+    visible = true,
+    defaultImpl = UnknownEmailAddressVerification::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = VerificationOtp::class, name = "verification_otp"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = VerificationAdmin::class, name = "verification_admin"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = VerificationFromOauth::class, name = "verification_from_oauth"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = VerificationTicket::class, name = "verification_ticket"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = VerificationSaml::class, name = "verification_saml"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = VerificationEmailLink::class, name = "verification_email_link"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = VerificationScim::class, name = "verification_scim")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = VerificationOtp::class,
+        name = "verification_otp",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = VerificationAdmin::class,
+        name = "verification_admin",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = VerificationFromOauth::class,
+        name = "verification_from_oauth",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = VerificationTicket::class,
+        name = "verification_ticket",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = VerificationSaml::class,
+        name = "verification_saml",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = VerificationEmailLink::class,
+        name = "verification_email_link",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = VerificationScim::class,
+        name = "verification_scim",
+    ),
 )
 sealed interface EmailAddressVerification
 
 /** A [EmailAddressVerification] whose `object` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownEmailAddressVerification @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownEmailAddressVerification
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : EmailAddressVerification {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("object").asText()
+    val tag: String
+        get() = raw.path("object").asText()
 }

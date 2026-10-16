@@ -3,14 +3,14 @@
 
 package dev.octri.showcase.clerk.models
 
-/**
- * The format of the response.
- */
-class RefreshSessionFormatEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RefreshSessionFormatEnum && value == other.value
+/** The format of the response. */
+class RefreshSessionFormatEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RefreshSessionFormatEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -18,51 +18,70 @@ class RefreshSessionFormatEnum private constructor(
         @JvmField val TOKEN = RefreshSessionFormatEnum("token")
         @JvmField val COOKIE = RefreshSessionFormatEnum("cookie")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RefreshSessionFormatEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RefreshSessionFormatEnum(value)
     }
 }
 
-class CreateSessionTokenResponseObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is CreateSessionTokenResponseObjectEnum && value == other.value
+class CreateSessionTokenResponseObjectEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is CreateSessionTokenResponseObjectEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val TOKEN = CreateSessionTokenResponseObjectEnum("token")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = CreateSessionTokenResponseObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = CreateSessionTokenResponseObjectEnum(value)
     }
 }
 
-class CreateSessionTokenFromTemplateResponseObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is CreateSessionTokenFromTemplateResponseObjectEnum && value == other.value
+class CreateSessionTokenFromTemplateResponseObjectEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is CreateSessionTokenFromTemplateResponseObjectEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val TOKEN = CreateSessionTokenFromTemplateResponseObjectEnum("token")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = CreateSessionTokenFromTemplateResponseObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = CreateSessionTokenFromTemplateResponseObjectEnum(value)
     }
 }
 
 /**
- * Optional parameter that lets a user with a second factor enabled complete the sign in without being prompted for it. When omitted, redeeming the token completes only the first factor, and the user must still complete their second factor. `fresh`: the second factor is treated as verified at sign in. The session token's `fva` claim reports a second factor age of 0. `stale`: the second factor is treated as unverified. The session token's `fva` claim reports the maximum second…
+ * Optional parameter that lets a user with a second factor enabled complete the sign in without
+ * being prompted for it. When omitted, redeeming the token completes only the first factor, and the
+ * user must still complete their second factor. `fresh`: the second factor is treated as verified
+ * at sign in. The session token's `fva` claim reports a second factor age of 0. `stale`: the second
+ * factor is treated as unverified. The session token's `fva` claim reports the maximum second…
  */
-class CreateSignInTokenSecondFactorVerificationEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is CreateSignInTokenSecondFactorVerificationEnum && value == other.value
+class CreateSignInTokenSecondFactorVerificationEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is CreateSignInTokenSecondFactorVerificationEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -70,16 +89,21 @@ class CreateSignInTokenSecondFactorVerificationEnum private constructor(
         @JvmField val FRESH = CreateSignInTokenSecondFactorVerificationEnum("fresh")
         @JvmField val STALE = CreateSignInTokenSecondFactorVerificationEnum("stale")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = CreateSignInTokenSecondFactorVerificationEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = CreateSignInTokenSecondFactorVerificationEnum(value)
     }
 }
 
-class GetTemplateListParameterEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is GetTemplateListParameterEnum && value == other.value
+class GetTemplateListParameterEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is GetTemplateListParameterEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -87,16 +111,21 @@ class GetTemplateListParameterEnum private constructor(
         @JvmField val EMAIL = GetTemplateListParameterEnum("email")
         @JvmField val SMS = GetTemplateListParameterEnum("sms")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = GetTemplateListParameterEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = GetTemplateListParameterEnum(value)
     }
 }
 
-class GetTemplateParameterEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is GetTemplateParameterEnum && value == other.value
+class GetTemplateParameterEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is GetTemplateParameterEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -104,16 +133,21 @@ class GetTemplateParameterEnum private constructor(
         @JvmField val EMAIL = GetTemplateParameterEnum("email")
         @JvmField val SMS = GetTemplateParameterEnum("sms")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = GetTemplateParameterEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = GetTemplateParameterEnum(value)
     }
 }
 
-class UpsertTemplateParameterEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is UpsertTemplateParameterEnum && value == other.value
+class UpsertTemplateParameterEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is UpsertTemplateParameterEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -121,16 +155,21 @@ class UpsertTemplateParameterEnum private constructor(
         @JvmField val EMAIL = UpsertTemplateParameterEnum("email")
         @JvmField val SMS = UpsertTemplateParameterEnum("sms")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = UpsertTemplateParameterEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = UpsertTemplateParameterEnum(value)
     }
 }
 
-class RevertTemplateParameterEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is RevertTemplateParameterEnum && value == other.value
+class RevertTemplateParameterEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is RevertTemplateParameterEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -138,16 +177,21 @@ class RevertTemplateParameterEnum private constructor(
         @JvmField val EMAIL = RevertTemplateParameterEnum("email")
         @JvmField val SMS = RevertTemplateParameterEnum("sms")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = RevertTemplateParameterEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = RevertTemplateParameterEnum(value)
     }
 }
 
-class ToggleTemplateDeliveryParameterEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ToggleTemplateDeliveryParameterEnum && value == other.value
+class ToggleTemplateDeliveryParameterEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ToggleTemplateDeliveryParameterEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -155,16 +199,21 @@ class ToggleTemplateDeliveryParameterEnum private constructor(
         @JvmField val EMAIL = ToggleTemplateDeliveryParameterEnum("email")
         @JvmField val SMS = ToggleTemplateDeliveryParameterEnum("sms")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ToggleTemplateDeliveryParameterEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ToggleTemplateDeliveryParameterEnum(value)
     }
 }
 
-class CreateUserEmailAddressIdentificationStatusItemEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is CreateUserEmailAddressIdentificationStatusItemEnum && value == other.value
+class CreateUserEmailAddressIdentificationStatusItemEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is CreateUserEmailAddressIdentificationStatusItemEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -172,16 +221,21 @@ class CreateUserEmailAddressIdentificationStatusItemEnum private constructor(
         @JvmField val VERIFIED = CreateUserEmailAddressIdentificationStatusItemEnum("verified")
         @JvmField val RESERVED = CreateUserEmailAddressIdentificationStatusItemEnum("reserved")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = CreateUserEmailAddressIdentificationStatusItemEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = CreateUserEmailAddressIdentificationStatusItemEnum(value)
     }
 }
 
-class CreateUserPhoneNumberIdentificationStatusItemEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is CreateUserPhoneNumberIdentificationStatusItemEnum && value == other.value
+class CreateUserPhoneNumberIdentificationStatusItemEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is CreateUserPhoneNumberIdentificationStatusItemEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -189,19 +243,28 @@ class CreateUserPhoneNumberIdentificationStatusItemEnum private constructor(
         @JvmField val VERIFIED = CreateUserPhoneNumberIdentificationStatusItemEnum("verified")
         @JvmField val RESERVED = CreateUserPhoneNumberIdentificationStatusItemEnum("reserved")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = CreateUserPhoneNumberIdentificationStatusItemEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = CreateUserPhoneNumberIdentificationStatusItemEnum(value)
     }
 }
 
 /**
- * Controls the status of the replacement email address. Defaults to `verified`. Set to `reserved` to create it reserved (unverified but usable for sign-in and locked so no other user can claim it), or to `unverified` to create it neither usable for sign-in nor locked. **Warning:** `unverified` can lock the user out of their account. An unverified email address cannot be used to sign in, so if the user has no other verified or reserved identifier, they will be unable to…
+ * Controls the status of the replacement email address. Defaults to `verified`. Set to `reserved`
+ * to create it reserved (unverified but usable for sign-in and locked so no other user can claim
+ * it), or to `unverified` to create it neither usable for sign-in nor locked. **Warning:**
+ * `unverified` can lock the user out of their account. An unverified email address cannot be used
+ * to sign in, so if the user has no other verified or reserved identifier, they will be unable to…
  */
-class ReplaceUserEmailAddressIdentificationStatusEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ReplaceUserEmailAddressIdentificationStatusEnum && value == other.value
+class ReplaceUserEmailAddressIdentificationStatusEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ReplaceUserEmailAddressIdentificationStatusEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -210,16 +273,21 @@ class ReplaceUserEmailAddressIdentificationStatusEnum private constructor(
         @JvmField val RESERVED = ReplaceUserEmailAddressIdentificationStatusEnum("reserved")
         @JvmField val UNVERIFIED = ReplaceUserEmailAddressIdentificationStatusEnum("unverified")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ReplaceUserEmailAddressIdentificationStatusEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ReplaceUserEmailAddressIdentificationStatusEnum(value)
     }
 }
 
-class UsersGetOrganizationInvitationsParameterEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is UsersGetOrganizationInvitationsParameterEnum && value == other.value
+class UsersGetOrganizationInvitationsParameterEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is UsersGetOrganizationInvitationsParameterEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -229,19 +297,28 @@ class UsersGetOrganizationInvitationsParameterEnum private constructor(
         @JvmField val REVOKED = UsersGetOrganizationInvitationsParameterEnum("revoked")
         @JvmField val EXPIRED = UsersGetOrganizationInvitationsParameterEnum("expired")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = UsersGetOrganizationInvitationsParameterEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = UsersGetOrganizationInvitationsParameterEnum(value)
     }
 }
 
 /**
- * Controls the status of the replacement phone number. Defaults to `verified`. Set to `reserved` to create it reserved (unverified but usable for sign-in and locked so no other user can claim it), or to `unverified` to create it neither usable for sign-in nor locked. **Warning:** `unverified` can lock the user out of their account. An unverified phone number cannot be used to sign in, so if the user has no other verified or reserved identifier, they will be unable to…
+ * Controls the status of the replacement phone number. Defaults to `verified`. Set to `reserved` to
+ * create it reserved (unverified but usable for sign-in and locked so no other user can claim it),
+ * or to `unverified` to create it neither usable for sign-in nor locked. **Warning:** `unverified`
+ * can lock the user out of their account. An unverified phone number cannot be used to sign in, so
+ * if the user has no other verified or reserved identifier, they will be unable to…
  */
-class ReplaceUserPhoneNumberIdentificationStatusEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ReplaceUserPhoneNumberIdentificationStatusEnum && value == other.value
+class ReplaceUserPhoneNumberIdentificationStatusEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ReplaceUserPhoneNumberIdentificationStatusEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -250,16 +327,21 @@ class ReplaceUserPhoneNumberIdentificationStatusEnum private constructor(
         @JvmField val RESERVED = ReplaceUserPhoneNumberIdentificationStatusEnum("reserved")
         @JvmField val UNVERIFIED = ReplaceUserPhoneNumberIdentificationStatusEnum("unverified")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ReplaceUserPhoneNumberIdentificationStatusEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ReplaceUserPhoneNumberIdentificationStatusEnum(value)
     }
 }
 
-class VerifyTOTPResponseCodeTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is VerifyTOTPResponseCodeTypeEnum && value == other.value
+class VerifyTOTPResponseCodeTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is VerifyTOTPResponseCodeTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -267,16 +349,21 @@ class VerifyTOTPResponseCodeTypeEnum private constructor(
         @JvmField val TOTP = VerifyTOTPResponseCodeTypeEnum("totp")
         @JvmField val BACKUP_CODE = VerifyTOTPResponseCodeTypeEnum("backup_code")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = VerifyTOTPResponseCodeTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = VerifyTOTPResponseCodeTypeEnum(value)
     }
 }
 
-class ListWaitlistEntriesParameterEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ListWaitlistEntriesParameterEnum && value == other.value
+class ListWaitlistEntriesParameterEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ListWaitlistEntriesParameterEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -286,7 +373,10 @@ class ListWaitlistEntriesParameterEnum private constructor(
         @JvmField val COMPLETED = ListWaitlistEntriesParameterEnum("completed")
         @JvmField val REJECTED = ListWaitlistEntriesParameterEnum("rejected")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ListWaitlistEntriesParameterEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ListWaitlistEntriesParameterEnum(value)
     }
 }

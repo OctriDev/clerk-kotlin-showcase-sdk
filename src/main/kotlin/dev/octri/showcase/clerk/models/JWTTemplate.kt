@@ -3,48 +3,28 @@
 
 package dev.octri.showcase.clerk.models
 
-/**
- * Typed representation of the `JWTTemplate` API schema.
- */
+/** Typed representation of the `JWTTemplate` API schema. */
 data class JWTTemplate(
-    /**
-     * Required enumerated value serialized in the `object` wire field.
-     */
+    /** Required enumerated value serialized in the `object` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: JWTTemplateObjectEnum,
-    /**
-     * Required `string` value serialized in the `id` wire field.
-     */
+    /** Required `string` value serialized in the `id` wire field. */
     val id: String,
-    /**
-     * Required `string` value serialized in the `name` wire field.
-     */
+    /** Required `string` value serialized in the `name` wire field. */
     val name: String,
-    /**
-     * Required object value serialized in the `claims` wire field.
-     */
+    /** Required object value serialized in the `claims` wire field. */
     val claims: Map<String, Any>,
-    /**
-     * Required `integer` value serialized in the `lifetime` wire field.
-     */
+    /** Required `integer` value serialized in the `lifetime` wire field. */
     val lifetime: Long,
-    /**
-     * Required `integer` value serialized in the `allowed_clock_skew` wire field.
-     */
+    /** Required `integer` value serialized in the `allowed_clock_skew` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("allowed_clock_skew") val allowedClockSkew: Long,
-    /**
-     * Required `boolean` value serialized in the `custom_signing_key` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("custom_signing_key") val customSigningKey: Boolean,
-    /**
-     * Required `string` value serialized in the `signing_algorithm` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("signing_algorithm") val signingAlgorithm: String,
-    /**
-     * Unix timestamp of creation.
-     */
+    /** Required `boolean` value serialized in the `custom_signing_key` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("custom_signing_key")
+    val customSigningKey: Boolean,
+    /** Required `string` value serialized in the `signing_algorithm` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("signing_algorithm")
+    val signingAlgorithm: String,
+    /** Unix timestamp of creation. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Unix timestamp of last update.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long
+    /** Unix timestamp of last update. */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
 )

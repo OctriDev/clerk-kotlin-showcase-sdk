@@ -3,36 +3,53 @@
 
 package dev.octri.showcase.clerk
 
-
 class RedirectUrlsNamespace(private val clientConfig: ClientConfig) {
-    /**
-     * Lists all whitelisted redirect_urls for the instance
-     */
-    fun list(paginated: Boolean? = null, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): List<RedirectURL> {
-        return dev.octri.showcase.clerk.methods.RedirectUrls.listRedirectUrls(clientConfig, paginated, limit, offset, options)
+    /** Lists all whitelisted redirect_urls for the instance */
+    fun list(
+        paginated: Boolean? = null,
+        limit: Long? = null,
+        offset: Long? = null,
+        options: RequestOptions? = null,
+    ): List<RedirectURL> {
+        return dev.octri.showcase.clerk.methods.RedirectUrls.listRedirectUrls(
+            clientConfig,
+            paginated,
+            limit,
+            offset,
+            options,
+        )
     }
 
     /**
-     * Creates a redirect URL. When you provide a request body, include `url` as a full URL prefixed with `` or a URL using a custom scheme. The response includes the created redirect URL and its timestamps.
+     * Creates a redirect URL. When you provide a request body, include `url` as a full URL prefixed
+     * with `` or a URL using a custom scheme. The response includes the created redirect URL and
+     * its timestamps.
      *
      * Create a redirect URL
      */
     fun create(url: String, options: RequestOptions? = null): RedirectURL {
-        return dev.octri.showcase.clerk.methods.RedirectUrls.createRedirectUrl(clientConfig, url, options)
+        return dev.octri.showcase.clerk.methods.RedirectUrls.createRedirectUrl(
+            clientConfig,
+            url,
+            options,
+        )
     }
 
-    /**
-     * Retrieve the details of the redirect URL with the given ID
-     */
+    /** Retrieve the details of the redirect URL with the given ID */
     fun get(id: String, options: RequestOptions? = null): RedirectURL {
-        return dev.octri.showcase.clerk.methods.RedirectUrls.getRedirectUrl(clientConfig, id, options)
+        return dev.octri.showcase.clerk.methods.RedirectUrls.getRedirectUrl(
+            clientConfig,
+            id,
+            options,
+        )
     }
 
-    /**
-     * Remove the selected redirect URL from the whitelist of the instance
-     */
+    /** Remove the selected redirect URL from the whitelist of the instance */
     fun delete(id: String, options: RequestOptions? = null): DeletedObject {
-        return dev.octri.showcase.clerk.methods.RedirectUrls.deleteRedirectUrl(clientConfig, id, options)
+        return dev.octri.showcase.clerk.methods.RedirectUrls.deleteRedirectUrl(
+            clientConfig,
+            id,
+            options,
+        )
     }
-
 }

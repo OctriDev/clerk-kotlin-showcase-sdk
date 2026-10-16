@@ -3,96 +3,57 @@
 
 package dev.octri.showcase.clerk.models
 
-/**
- * Typed representation of the `Machine` API schema.
- */
+/** Typed representation of the `Machine` API schema. */
 data class Machine(
-    /**
-     * Required enumerated value serialized in the `object` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: MachineWithoutScopedMachinesObjectEnum,
-    /**
-     * Unique identifier for the machine.
-     */
+    /** Required enumerated value serialized in the `object` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: MachineWithoutScopedMachinesObjectEnum,
+    /** Unique identifier for the machine. */
     val id: String,
-    /**
-     * The name of the machine.
-     */
+    /** The name of the machine. */
     val name: String,
-    /**
-     * The ID of the instance this machine belongs to.
-     */
+    /** The ID of the instance this machine belongs to. */
     @com.fasterxml.jackson.annotation.JsonProperty("instance_id") val instanceId: String,
-    /**
-     * Unix timestamp of creation.
-     */
+    /** Unix timestamp of creation. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Unix timestamp of last update.
-     */
+    /** Unix timestamp of last update. */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
-    /**
-     * Array of machines this machine has access to.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("scoped_machines") val scopedMachines: List<MachineWithoutScopedMachines>,
-    /**
-     * The default time-to-live (TTL) in seconds for tokens created by this machine.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("default_token_ttl") val defaultTokenTtl: Long? = null
+    /** Array of machines this machine has access to. */
+    @com.fasterxml.jackson.annotation.JsonProperty("scoped_machines")
+    val scopedMachines: List<MachineWithoutScopedMachines>,
+    /** The default time-to-live (TTL) in seconds for tokens created by this machine. */
+    @com.fasterxml.jackson.annotation.JsonProperty("default_token_ttl")
+    val defaultTokenTtl: Long? = null,
 )
 
-/**
- * Typed representation of the `MachineScope` API schema.
- */
+/** Typed representation of the `MachineScope` API schema. */
 data class MachineScope(
-    /**
-     * Required enumerated value serialized in the `object` wire field.
-     */
+    /** Required enumerated value serialized in the `object` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: MachineScopeObjectEnum,
-    /**
-     * The ID of the machine that has access to the target machine.
-     */
+    /** The ID of the machine that has access to the target machine. */
     @com.fasterxml.jackson.annotation.JsonProperty("from_machine_id") val fromMachineId: String,
-    /**
-     * The ID of the machine that is being accessed.
-     */
+    /** The ID of the machine that is being accessed. */
     @com.fasterxml.jackson.annotation.JsonProperty("to_machine_id") val toMachineId: String,
-    /**
-     * Unix timestamp of creation.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long
+    /** Unix timestamp of creation. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
 )
 
-/**
- * Typed representation of the `MachineWithoutScopedMachines` API schema.
- */
+/** Typed representation of the `MachineWithoutScopedMachines` API schema. */
 data class MachineWithoutScopedMachines(
-    /**
-     * Required enumerated value serialized in the `object` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: MachineWithoutScopedMachinesObjectEnum,
-    /**
-     * Unique identifier for the machine.
-     */
+    /** Required enumerated value serialized in the `object` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: MachineWithoutScopedMachinesObjectEnum,
+    /** Unique identifier for the machine. */
     val id: String,
-    /**
-     * The name of the machine.
-     */
+    /** The name of the machine. */
     val name: String,
-    /**
-     * The ID of the instance this machine belongs to.
-     */
+    /** The ID of the instance this machine belongs to. */
     @com.fasterxml.jackson.annotation.JsonProperty("instance_id") val instanceId: String,
-    /**
-     * Unix timestamp of creation.
-     */
+    /** Unix timestamp of creation. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Unix timestamp of last update.
-     */
+    /** Unix timestamp of last update. */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
-    /**
-     * The default time-to-live (TTL) in seconds for tokens created by this machine.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("default_token_ttl") val defaultTokenTtl: Long? = null
+    /** The default time-to-live (TTL) in seconds for tokens created by this machine. */
+    @com.fasterxml.jackson.annotation.JsonProperty("default_token_ttl")
+    val defaultTokenTtl: Long? = null,
 )

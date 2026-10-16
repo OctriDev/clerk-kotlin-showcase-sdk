@@ -14,112 +14,200 @@ import dev.octri.showcase.clerk.Validation
 
 object OrganizationPermissions {
 
-
     /**
      * Retrieves all organization permissions for the given instance.
      *
-     * @param query Returns organization permissions with ID, name, or key that match
-     *   the given query. Uses exact match for permission ID and partial match for name
-     *   and key.
-     * @param orderBy Allows to return organization permissions in a particular
-     *   order. At the moment, you can order the returned permissions by their
-     *   `created_at`, `name`, or `key`. In order to specify the direction, you can use
-     *   the `+/-` symbols prepended in the property to order by. For example, if you
-     *   want permissions to be returned in descending order according to their
-     *   `created_at` property, you can use `-created_at`.
-     * @param limit Applies a limit to the number of results returned. Can be used
-     *   for paginating the results together with `offset`.
-     * @param offset Skip the first `offset` results when paginating. Needs to be an
-     *   integer greater or equal to zero. To be used in conjunction with `limit`.
+     * @param query Returns organization permissions with ID, name, or key that match the given
+     *   query. Uses exact match for permission ID and partial match for name and key.
+     * @param orderBy Allows to return organization permissions in a particular order. At the
+     *   moment, you can order the returned permissions by their `created_at`, `name`, or `key`. In
+     *   order to specify the direction, you can use the `+/-` symbols prepended in the property to
+     *   order by. For example, if you want permissions to be returned in descending order according
+     *   to their `created_at` property, you can use `-created_at`.
+     * @param limit Applies a limit to the number of results returned. Can be used for paginating
+     *   the results together with `offset`.
+     * @param offset Skip the first `offset` results when paginating. Needs to be an integer greater
+     *   or equal to zero. To be used in conjunction with `limit`.
      */
-    fun listOrganizationPermissions(clientConfig: ClientConfig, query: String? = null, orderBy: String? = null, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): Permissions {
+    fun listOrganizationPermissions(
+        clientConfig: ClientConfig,
+        query: String? = null,
+        orderBy: String? = null,
+        limit: Long? = null,
+        offset: Long? = null,
+        options: RequestOptions? = null,
+    ): Permissions {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 500.0))
-}
+        }
 
         if (offset != null) {
             Validation.validateRange("offset", offset, Validation.RangeOpts(min = 0.0))
-}
+        }
 
-        return SdkClient.request<Permissions>(SdkClient.RequestSpec("GET", "/organization_permissions", config = clientConfig, query = mapOf("query" to SdkClient.queryValue(query, "form", true), "order_by" to SdkClient.queryValue(orderBy, "form", true), "limit" to SdkClient.queryValue(limit, "form", true), "offset" to SdkClient.queryValue(offset, "form", true)), operationId = "listOrganizationPermissions", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
+        return SdkClient.request<Permissions>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/organization_permissions",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "query" to SdkClient.queryValue(query, "form", true),
+                            "order_by" to SdkClient.queryValue(orderBy, "form", true),
+                            "limit" to SdkClient.queryValue(limit, "form", true),
+                            "offset" to SdkClient.queryValue(offset, "form", true),
+                        ),
+                    operationId = "listOrganizationPermissions",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf("401" to ClerkErrors::class.java, "422" to ClerkErrors::class.java),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
      * Creates a new organization permission for the given instance.
      *
      * @param name The name of the permission.
-     * @param key The key of the permission. Must have the format
-     *   "org:feature:action" where feature and action are segments consisting of
-     *   lowercase letters, digits, or underscores, for example "org:billing:manage" or
-     *   "org:team:read". Cannot begin with "org:sys_" as that prefix is reserved for
-     *   system permissions.
+     * @param key The key of the permission. Must have the format "org:feature:action" where feature
+     *   and action are segments consisting of lowercase letters, digits, or underscores, for
+     *   example "org:billing:manage" or "org:team:read". Cannot begin with "org:sys_" as that
+     *   prefix is reserved for system permissions.
      * @param description A description of the permission.
      */
-    fun createOrganizationPermission(clientConfig: ClientConfig, name: String, key: String, description: String? = null, options: RequestOptions? = null): Permission {
-        return SdkClient.request<Permission>(SdkClient.RequestSpec("POST", "/organization_permissions", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "key" to (key), "description" to (SdkClient.omitIfNull(description))), operationId = "createOrganizationPermission", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "402" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
+    fun createOrganizationPermission(
+        clientConfig: ClientConfig,
+        name: String,
+        key: String,
+        description: String? = null,
+        options: RequestOptions? = null,
+    ): Permission {
+        return SdkClient.request<Permission>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/organization_permissions",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "name" to (name),
+                            "key" to (key),
+                            "description" to (SdkClient.omitIfNull(description)),
+                        ),
+                    operationId = "createOrganizationPermission",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ClerkErrors::class.java,
+                            "401" to ClerkErrors::class.java,
+                            "402" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                            "422" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
      * Retrieves the details of an organization permission.
      *
      * @param permissionId The ID of the permission to retrieve
      */
-    fun getOrganizationPermission(clientConfig: ClientConfig, permissionId: String, options: RequestOptions? = null): Permission {
-        return SdkClient.request<Permission>(SdkClient.RequestSpec("GET", "/organization_permissions/${SdkClient.encodePathSegment(permissionId)}", config = clientConfig, operationId = "getOrganizationPermission", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
+    fun getOrganizationPermission(
+        clientConfig: ClientConfig,
+        permissionId: String,
+        options: RequestOptions? = null,
+    ): Permission {
+        return SdkClient.request<Permission>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/organization_permissions/${SdkClient.encodePathSegment(permissionId)}",
+                    config = clientConfig,
+                    operationId = "getOrganizationPermission",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf("401" to ClerkErrors::class.java, "404" to ClerkErrors::class.java),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Updates the properties of an existing organization permission. System permissions cannot be updated.
+     * Updates the properties of an existing organization permission. System permissions cannot be
+     * updated.
      *
      * @param permissionId The ID of the permission to update
      * @param name The name of the permission.
-     * @param key The key of the permission. Must have the format
-     *   "org:feature:action" where feature and action are segments consisting of
-     *   lowercase letters, digits, or underscores. Cannot begin with "org:sys_" as
-     *   that prefix is reserved for system permissions.
+     * @param key The key of the permission. Must have the format "org:feature:action" where feature
+     *   and action are segments consisting of lowercase letters, digits, or underscores. Cannot
+     *   begin with "org:sys_" as that prefix is reserved for system permissions.
      * @param description A description of the permission.
      */
-    fun updateOrganizationPermission(clientConfig: ClientConfig, permissionId: String, name: String? = null, key: String? = null, description: String? = null, options: RequestOptions? = null): Permission {
-        return SdkClient.request<Permission>(SdkClient.RequestSpec("PATCH", "/organization_permissions/${SdkClient.encodePathSegment(permissionId)}", config = clientConfig, body = SdkClient.bodyMap("name" to (SdkClient.omitIfNull(name)), "key" to (SdkClient.omitIfNull(key)), "description" to (SdkClient.omitIfNull(description))), operationId = "updateOrganizationPermission", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
+    fun updateOrganizationPermission(
+        clientConfig: ClientConfig,
+        permissionId: String,
+        name: String? = null,
+        key: String? = null,
+        description: String? = null,
+        options: RequestOptions? = null,
+    ): Permission {
+        return SdkClient.request<Permission>(
+                SdkClient.RequestSpec(
+                    "PATCH",
+                    "/organization_permissions/${SdkClient.encodePathSegment(permissionId)}",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "name" to (SdkClient.omitIfNull(name)),
+                            "key" to (SdkClient.omitIfNull(key)),
+                            "description" to (SdkClient.omitIfNull(description)),
+                        ),
+                    operationId = "updateOrganizationPermission",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ClerkErrors::class.java,
+                            "401" to ClerkErrors::class.java,
+                            "403" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                            "422" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
      * Deletes an organization permission. System permissions cannot be deleted.
      *
      * @param permissionId The ID of the permission to delete
      */
-    fun deleteOrganizationPermission(clientConfig: ClientConfig, permissionId: String, options: RequestOptions? = null): DeletedObject {
-        return SdkClient.request<DeletedObject>(SdkClient.RequestSpec("DELETE", "/organization_permissions/${SdkClient.encodePathSegment(permissionId)}", config = clientConfig, operationId = "deleteOrganizationPermission", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
+    fun deleteOrganizationPermission(
+        clientConfig: ClientConfig,
+        permissionId: String,
+        options: RequestOptions? = null,
+    ): DeletedObject {
+        return SdkClient.request<DeletedObject>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/organization_permissions/${SdkClient.encodePathSegment(permissionId)}",
+                    config = clientConfig,
+                    operationId = "deleteOrganizationPermission",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to ClerkErrors::class.java,
+                            "403" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }

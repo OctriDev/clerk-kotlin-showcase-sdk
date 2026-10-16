@@ -5,146 +5,102 @@ package dev.octri.showcase.clerk.models
 
 typealias Directories = List<Directory>
 
-/**
- * Required object value serialized in the `custom_attributes[]` wire field.
- */
+/** Required object value serialized in the `custom_attributes[]` wire field. */
 data class DirectoryCustomAttributesItem(
-    /**
-     * Display name for the custom attribute
-     */
+    /** Display name for the custom attribute */
     val name: String? = null,
-    /**
-     * Key used to store the attribute in the user's public/private/unsafe metadata
-     */
+    /** Key used to store the attribute in the user's public/private/unsafe metadata */
     val key: String? = null,
-    /**
-     * Path to extract the attribute value from SSO claims (SAML assertions or OIDC claims)
-     */
+    /** Path to extract the attribute value from SSO claims (SAML assertions or OIDC claims) */
     @com.fasterxml.jackson.annotation.JsonProperty("sso_path") val ssoPath: String? = null,
-    /**
-     * The legacy name for `directory_path`. Carries the same value.
-     */
+    /** The legacy name for `directory_path`. Carries the same value. */
     @com.fasterxml.jackson.annotation.JsonProperty("scim_path") val scimPath: String? = null,
+    /** GJSON path to extract the attribute value from directory sync user resources */
+    @com.fasterxml.jackson.annotation.JsonProperty("directory_path")
+    val directoryPath: String? = null,
     /**
-     * GJSON path to extract the attribute value from directory sync user resources
+     * When true, the attribute supports multiple values; values from the IdP are written to
+     * public_metadata as an array. Defaults to false.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("directory_path") val directoryPath: String? = null,
-    /**
-     * When true, the attribute supports multiple values; values from the IdP are written to public_metadata as an array. Defaults to false.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("multi_valued") val multiValued: Boolean? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("multi_valued") val multiValued: Boolean? = null,
 )
 
-/**
- * A directory configuration for provisioning users from an identity provider.
- */
+/** A directory configuration for provisioning users from an identity provider. */
 data class Directory(
-    /**
-     * String representing the object's type. Always "directory".
-     */
+    /** String representing the object's type. Always "directory". */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: DirectoryObjectEnum,
-    /**
-     * Unique identifier for the directory.
-     */
+    /** Unique identifier for the directory. */
     val id: String,
-    /**
-     * A human-friendly name for the directory.
-     */
+    /** A human-friendly name for the directory. */
     val name: String,
-    /**
-     * The provisioning endpoint URL for this directory.
-     */
+    /** The provisioning endpoint URL for this directory. */
     @com.fasterxml.jackson.annotation.JsonProperty("endpoint_url") val endpointUrl: String,
-    /**
-     * The identity provider for this directory.
-     */
+    /** The identity provider for this directory. */
     val provider: String,
-    /**
-     * Whether the directory is enabled.
-     */
+    /** Whether the directory is enabled. */
     val enabled: Boolean,
-    /**
-     * Whether group-to-role mapping is enabled for this directory.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("group_role_mapping_enabled") val groupRoleMappingEnabled: Boolean,
-    /**
-     * Mapping of user attributes to the directory attribute paths they are extracted from.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("attribute_mapping") val attributeMapping: Map<String, String>,
-    /**
-     * Unix timestamp when the directory was created.
-     */
+    /** Whether group-to-role mapping is enabled for this directory. */
+    @com.fasterxml.jackson.annotation.JsonProperty("group_role_mapping_enabled")
+    val groupRoleMappingEnabled: Boolean,
+    /** Mapping of user attributes to the directory attribute paths they are extracted from. */
+    @com.fasterxml.jackson.annotation.JsonProperty("attribute_mapping")
+    val attributeMapping: Map<String, String>,
+    /** Unix timestamp when the directory was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Unix timestamp when the directory was last updated.
-     */
+    /** Unix timestamp when the directory was last updated. */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
+    /** The ID of the associated enterprise connection. */
+    @com.fasterxml.jackson.annotation.JsonProperty("enterprise_connection_id")
+    val enterpriseConnectionId: String? = null,
     /**
-     * The ID of the associated enterprise connection.
+     * Custom attributes to map from the IdP to the user's profile via directory sync. Requires the
+     * custom attributes feature to be enabled for the instance.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("enterprise_connection_id") val enterpriseConnectionId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes")
+    val customAttributes: List<DirectoryCustomAttributesItem>? = null,
     /**
-     * Custom attributes to map from the IdP to the user's profile via directory sync. Requires the custom attributes feature to be enabled for the instance.
+     * The API key for authenticating provisioning requests. Only returned when the directory is
+     * created or the key is rotated.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes") val customAttributes: List<DirectoryCustomAttributesItem>? = null,
-    /**
-     * The API key for authenticating provisioning requests. Only returned when the directory is created or the key is rotated.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("api_key") val apiKey: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("api_key") val apiKey: String? = null,
 )
 
 /**
- * A mapping from a directory group to an organization role. Members of the group are assigned the role; the lowest-precedence match wins when a user belongs to multiple mapped groups.
+ * A mapping from a directory group to an organization role. Members of the group are assigned the
+ * role; the lowest-precedence match wins when a user belongs to multiple mapped groups.
  */
 data class DirectoryGroupRoleMapping(
-    /**
-     * String representing the object's type. Always "directory_group_role_mapping".
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: DirectoryGroupRoleMappingObjectEnum,
-    /**
-     * Unique identifier for the directory group role mapping.
-     */
+    /** String representing the object's type. Always "directory_group_role_mapping". */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: DirectoryGroupRoleMappingObjectEnum,
+    /** Unique identifier for the directory group role mapping. */
     val id: String,
-    /**
-     * The ID of the directory this mapping belongs to.
-     */
+    /** The ID of the directory this mapping belongs to. */
     @com.fasterxml.jackson.annotation.JsonProperty("directory_id") val directoryId: String,
-    /**
-     * The legacy name for `directory_id`. Carries the same value.
-     */
+    /** The legacy name for `directory_id`. Carries the same value. */
     @com.fasterxml.jackson.annotation.JsonProperty("scim_directory_id") val scimDirectoryId: String,
-    /**
-     * The group ID from the identity provider.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("directory_group_id") val directoryGroupId: String,
-    /**
-     * The legacy name for `directory_group_id`. Carries the same value.
-     */
+    /** The group ID from the identity provider. */
+    @com.fasterxml.jackson.annotation.JsonProperty("directory_group_id")
+    val directoryGroupId: String,
+    /** The legacy name for `directory_group_id`. Carries the same value. */
     @com.fasterxml.jackson.annotation.JsonProperty("scim_group_id") val scimGroupId: String,
+    /** The display name of the group, as reported by the identity provider. */
+    @com.fasterxml.jackson.annotation.JsonProperty("directory_group_display_name")
+    val directoryGroupDisplayName: String,
+    /** The legacy name for `directory_group_display_name`. Carries the same value. */
+    @com.fasterxml.jackson.annotation.JsonProperty("scim_group_display_name")
+    val scimGroupDisplayName: String,
     /**
-     * The display name of the group, as reported by the identity provider.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("directory_group_display_name") val directoryGroupDisplayName: String,
-    /**
-     * The legacy name for `directory_group_display_name`. Carries the same value.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("scim_group_display_name") val scimGroupDisplayName: String,
-    /**
-     * Mapping precedence, starting at 1. Lower values take priority when a user belongs to multiple mapped groups.
+     * Mapping precedence, starting at 1. Lower values take priority when a user belongs to multiple
+     * mapped groups.
      */
     val precedence: Long,
-    /**
-     * Unix timestamp (milliseconds) of when the mapping was created.
-     */
+    /** Unix timestamp (milliseconds) of when the mapping was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Unix timestamp (milliseconds) of when the mapping was last updated.
-     */
+    /** Unix timestamp (milliseconds) of when the mapping was last updated. */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
-    /**
-     * Optional object value serialized in the `role` wire field.
-     */
-    val role: Role? = null
+    /** Optional object value serialized in the `role` wire field. */
+    val role: Role? = null,
 )
 
 typealias DirectoryGroupRoleMappings = List<DirectoryGroupRoleMapping>

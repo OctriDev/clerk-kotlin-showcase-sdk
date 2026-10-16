@@ -3,223 +3,141 @@
 
 package dev.octri.showcase.clerk.models
 
-/**
- * Typed representation of the `JWKS` API schema.
- */
+/** Typed representation of the `JWKS` API schema. */
 data class JWKS(
-    /**
-     * Optional array value serialized in the `keys` wire field.
-     */
+    /** Optional array value serialized in the `keys` wire field. */
     val keys: List<JWKSKeysItem>? = null
 )
 
-/**
- * Typed representation of the `JWKSEcdsaPrivateKey` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `JWKSEcdsaPrivateKey` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class JWKSEcdsaPrivateKey(
-    /**
-     * Required `string` value serialized in the `kid` wire field.
-     */
+    /** Required `string` value serialized in the `kid` wire field. */
     val kid: String,
-    /**
-     * Required `string` value serialized in the `alg` wire field.
-     */
+    /** Required `string` value serialized in the `alg` wire field. */
     val alg: String,
-    /**
-     * Required `string` value serialized in the `use` wire field.
-     */
+    /** Required `string` value serialized in the `use` wire field. */
     val use: String,
-    /**
-     * Required enumerated value serialized in the `kty` wire field.
-     */
+    /** Required enumerated value serialized in the `kty` wire field. */
     val kty: JWKSEcdsaPrivateKeyKtyEnum,
-    /**
-     * Required `string` value serialized in the `crv` wire field.
-     */
+    /** Required `string` value serialized in the `crv` wire field. */
     val crv: String,
-    /**
-     * Required `string` value serialized in the `x` wire field.
-     */
+    /** Required `string` value serialized in the `x` wire field. */
     val x: String,
-    /**
-     * Required `string` value serialized in the `y` wire field.
-     */
+    /** Required `string` value serialized in the `y` wire field. */
     val y: String,
-    /**
-     * Required `string` value serialized in the `d` wire field.
-     */
+    /** Required `string` value serialized in the `d` wire field. */
     val d: String,
-    /**
-     * Optional array value serialized in the `x5c` wire field.
-     */
+    /** Optional array value serialized in the `x5c` wire field. */
     val x5c: List<String>? = null,
-    /**
-     * Optional `string` value serialized in the `x5t` wire field.
-     */
+    /** Optional `string` value serialized in the `x5t` wire field. */
     val x5t: String? = null,
-    /**
-     * Optional `string` value serialized in the `x5t#S256` wire field.
-     */
+    /** Optional `string` value serialized in the `x5t#S256` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("x5t#S256") val x5tS256: String? = null,
-    /**
-     * Optional `string` value serialized in the `x5u` wire field.
-     */
-    val x5u: String? = null
+    /** Optional `string` value serialized in the `x5u` wire field. */
+    val x5u: String? = null,
 ) : JWKSKeysItem
 
-/**
- * Typed representation of the `JWKSEcdsaPublicKey` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `JWKSEcdsaPublicKey` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class JWKSEcdsaPublicKey(
-    /**
-     * Required `string` value serialized in the `kid` wire field.
-     */
+    /** Required `string` value serialized in the `kid` wire field. */
     val kid: String,
-    /**
-     * Required `string` value serialized in the `alg` wire field.
-     */
+    /** Required `string` value serialized in the `alg` wire field. */
     val alg: String,
-    /**
-     * Required `string` value serialized in the `use` wire field.
-     */
+    /** Required `string` value serialized in the `use` wire field. */
     val use: String,
-    /**
-     * Required enumerated value serialized in the `kty` wire field.
-     */
+    /** Required enumerated value serialized in the `kty` wire field. */
     val kty: JWKSEcdsaPublicKeyKtyEnum,
-    /**
-     * Required `string` value serialized in the `crv` wire field.
-     */
+    /** Required `string` value serialized in the `crv` wire field. */
     val crv: String,
-    /**
-     * Required `string` value serialized in the `x` wire field.
-     */
+    /** Required `string` value serialized in the `x` wire field. */
     val x: String,
-    /**
-     * Required `string` value serialized in the `y` wire field.
-     */
+    /** Required `string` value serialized in the `y` wire field. */
     val y: String,
-    /**
-     * Optional array value serialized in the `x5c` wire field.
-     */
+    /** Optional array value serialized in the `x5c` wire field. */
     val x5c: List<String>? = null,
-    /**
-     * Optional `string` value serialized in the `x5t` wire field.
-     */
+    /** Optional `string` value serialized in the `x5t` wire field. */
     val x5t: String? = null,
-    /**
-     * Optional `string` value serialized in the `x5t#S256` wire field.
-     */
+    /** Optional `string` value serialized in the `x5t#S256` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("x5t#S256") val x5tS256: String? = null,
-    /**
-     * Optional `string` value serialized in the `x5u` wire field.
-     */
-    val x5u: String? = null
+    /** Optional `string` value serialized in the `x5u` wire field. */
+    val x5u: String? = null,
 ) : JWKSKeysItem
 
-/**
- * Typed representation of the `JWKSEd25519PrivateKey` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `JWKSEd25519PrivateKey` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class JWKSEd25519PrivateKey(
-    /**
-     * Required `string` value serialized in the `kid` wire field.
-     */
+    /** Required `string` value serialized in the `kid` wire field. */
     val kid: String,
-    /**
-     * Required `string` value serialized in the `alg` wire field.
-     */
+    /** Required `string` value serialized in the `alg` wire field. */
     val alg: String,
-    /**
-     * Required `string` value serialized in the `use` wire field.
-     */
+    /** Required `string` value serialized in the `use` wire field. */
     val use: String,
-    /**
-     * Required enumerated value serialized in the `kty` wire field.
-     */
+    /** Required enumerated value serialized in the `kty` wire field. */
     val kty: JWKSEd25519PrivateKeyKtyEnum,
-    /**
-     * Required enumerated value serialized in the `crv` wire field.
-     */
+    /** Required enumerated value serialized in the `crv` wire field. */
     val crv: JWKSEd25519PrivateKeyCrvEnum,
-    /**
-     * Required `string` value serialized in the `x` wire field.
-     */
+    /** Required `string` value serialized in the `x` wire field. */
     val x: String,
-    /**
-     * Required `string` value serialized in the `d` wire field.
-     */
+    /** Required `string` value serialized in the `d` wire field. */
     val d: String,
-    /**
-     * Optional array value serialized in the `x5c` wire field.
-     */
+    /** Optional array value serialized in the `x5c` wire field. */
     val x5c: List<String>? = null,
-    /**
-     * Optional `string` value serialized in the `x5t` wire field.
-     */
+    /** Optional `string` value serialized in the `x5t` wire field. */
     val x5t: String? = null,
-    /**
-     * Optional `string` value serialized in the `x5t#S256` wire field.
-     */
+    /** Optional `string` value serialized in the `x5t#S256` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("x5t#S256") val x5tS256: String? = null,
-    /**
-     * Optional `string` value serialized in the `x5u` wire field.
-     */
-    val x5u: String? = null
+    /** Optional `string` value serialized in the `x5u` wire field. */
+    val x5u: String? = null,
 ) : JWKSKeysItem
 
-/**
- * Typed representation of the `JWKSEd25519PublicKey` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `JWKSEd25519PublicKey` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class JWKSEd25519PublicKey(
-    /**
-     * Required `string` value serialized in the `kid` wire field.
-     */
+    /** Required `string` value serialized in the `kid` wire field. */
     val kid: String,
-    /**
-     * Required `string` value serialized in the `alg` wire field.
-     */
+    /** Required `string` value serialized in the `alg` wire field. */
     val alg: String,
-    /**
-     * Required `string` value serialized in the `use` wire field.
-     */
+    /** Required `string` value serialized in the `use` wire field. */
     val use: String,
-    /**
-     * Required enumerated value serialized in the `kty` wire field.
-     */
+    /** Required enumerated value serialized in the `kty` wire field. */
     val kty: JWKSEd25519PublicKeyKtyEnum,
-    /**
-     * Required enumerated value serialized in the `crv` wire field.
-     */
+    /** Required enumerated value serialized in the `crv` wire field. */
     val crv: JWKSEd25519PublicKeyCrvEnum,
-    /**
-     * Required `string` value serialized in the `x` wire field.
-     */
+    /** Required `string` value serialized in the `x` wire field. */
     val x: String,
-    /**
-     * Optional array value serialized in the `x5c` wire field.
-     */
+    /** Optional array value serialized in the `x5c` wire field. */
     val x5c: List<String>? = null,
-    /**
-     * Optional `string` value serialized in the `x5t` wire field.
-     */
+    /** Optional `string` value serialized in the `x5t` wire field. */
     val x5t: String? = null,
-    /**
-     * Optional `string` value serialized in the `x5t#S256` wire field.
-     */
+    /** Optional `string` value serialized in the `x5t#S256` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("x5t#S256") val x5tS256: String? = null,
-    /**
-     * Optional `string` value serialized in the `x5u` wire field.
-     */
-    val x5u: String? = null
+    /** Optional `string` value serialized in the `x5u` wire field. */
+    val x5u: String? = null,
 ) : JWKSKeysItem
 
-/**
- * Required API value serialized in the `keys[]` wire field.
- */
+/** Required API value serialized in the `keys[]` wire field. */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = JWKSKeysItem.Deserializer::class)
 sealed interface JWKSKeysItem {
     /** Chooses the branch this payload is shaped like. */
@@ -230,11 +148,16 @@ sealed interface JWKSKeysItem {
         ): JWKSKeysItem {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val ownedType: Class<out JWKSKeysItem>? = when {
-                node.has("p") || node.has("q") || node.has("dp") || node.has("dq") || node.has("qi") -> JWKSRsaPrivateKey::class.java
-                node.has("k") -> JWKSSymmetricKey::class.java
-                else -> null
-            }
+            val ownedType: Class<out JWKSKeysItem>? =
+                when {
+                    node.has("p") ||
+                        node.has("q") ||
+                        node.has("dp") ||
+                        node.has("dq") ||
+                        node.has("qi") -> JWKSRsaPrivateKey::class.java
+                    node.has("k") -> JWKSSymmetricKey::class.java
+                    else -> null
+                }
             if (ownedType != null) {
                 try {
                     return mapper.convertValue(node, ownedType)
@@ -242,7 +165,16 @@ sealed interface JWKSKeysItem {
                     // Tried with the other branches below.
                 }
             }
-            val objectTypes: List<Class<out JWKSKeysItem>> = listOf(JWKSEd25519PublicKey::class.java, JWKSEcdsaPublicKey::class.java, JWKSRsaPublicKey::class.java, JWKSEd25519PrivateKey::class.java, JWKSEcdsaPrivateKey::class.java, JWKSRsaPrivateKey::class.java, JWKSSymmetricKey::class.java)
+            val objectTypes: List<Class<out JWKSKeysItem>> =
+                listOf(
+                    JWKSEd25519PublicKey::class.java,
+                    JWKSEcdsaPublicKey::class.java,
+                    JWKSRsaPublicKey::class.java,
+                    JWKSEd25519PrivateKey::class.java,
+                    JWKSEcdsaPrivateKey::class.java,
+                    JWKSRsaPrivateKey::class.java,
+                    JWKSSymmetricKey::class.java,
+                )
             for (objectType in objectTypes) {
                 try {
                     return mapper.convertValue(node, objectType)
@@ -251,170 +183,113 @@ sealed interface JWKSKeysItem {
                 }
             }
             return when {
-                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, JWKSKeysItem::class.java, "no JWKSKeysItem branch accepts this payload")
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        JWKSKeysItem::class.java,
+                        "no JWKSKeysItem branch accepts this payload",
+                    )
             }
         }
     }
 }
 
-/**
- * Typed representation of the `JWKSRsaPrivateKey` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `JWKSRsaPrivateKey` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class JWKSRsaPrivateKey(
-    /**
-     * Required `string` value serialized in the `kid` wire field.
-     */
+    /** Required `string` value serialized in the `kid` wire field. */
     val kid: String,
-    /**
-     * Required `string` value serialized in the `alg` wire field.
-     */
+    /** Required `string` value serialized in the `alg` wire field. */
     val alg: String,
-    /**
-     * Required `string` value serialized in the `use` wire field.
-     */
+    /** Required `string` value serialized in the `use` wire field. */
     val use: String,
-    /**
-     * Required enumerated value serialized in the `kty` wire field.
-     */
+    /** Required enumerated value serialized in the `kty` wire field. */
     val kty: JWKSRsaPrivateKeyKtyEnum,
-    /**
-     * Required `string` value serialized in the `n` wire field.
-     */
+    /** Required `string` value serialized in the `n` wire field. */
     val n: String,
-    /**
-     * Required `string` value serialized in the `e` wire field.
-     */
+    /** Required `string` value serialized in the `e` wire field. */
     val e: String,
-    /**
-     * Required `string` value serialized in the `d` wire field.
-     */
+    /** Required `string` value serialized in the `d` wire field. */
     val d: String,
-    /**
-     * Required `string` value serialized in the `p` wire field.
-     */
+    /** Required `string` value serialized in the `p` wire field. */
     val p: String,
-    /**
-     * Required `string` value serialized in the `q` wire field.
-     */
+    /** Required `string` value serialized in the `q` wire field. */
     val q: String,
-    /**
-     * Optional `string` value serialized in the `dp` wire field.
-     */
+    /** Optional `string` value serialized in the `dp` wire field. */
     val dp: String? = null,
-    /**
-     * Optional `string` value serialized in the `dq` wire field.
-     */
+    /** Optional `string` value serialized in the `dq` wire field. */
     val dq: String? = null,
-    /**
-     * Optional `string` value serialized in the `qi` wire field.
-     */
+    /** Optional `string` value serialized in the `qi` wire field. */
     val qi: String? = null,
-    /**
-     * Optional array value serialized in the `x5c` wire field.
-     */
+    /** Optional array value serialized in the `x5c` wire field. */
     val x5c: List<String>? = null,
-    /**
-     * Optional `string` value serialized in the `x5t` wire field.
-     */
+    /** Optional `string` value serialized in the `x5t` wire field. */
     val x5t: String? = null,
-    /**
-     * Optional `string` value serialized in the `x5t#S256` wire field.
-     */
+    /** Optional `string` value serialized in the `x5t#S256` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("x5t#S256") val x5tS256: String? = null,
-    /**
-     * Optional `string` value serialized in the `x5u` wire field.
-     */
-    val x5u: String? = null
+    /** Optional `string` value serialized in the `x5u` wire field. */
+    val x5u: String? = null,
 ) : JWKSKeysItem
 
-/**
- * Typed representation of the `JWKSRsaPublicKey` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `JWKSRsaPublicKey` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class JWKSRsaPublicKey(
-    /**
-     * Required `string` value serialized in the `kid` wire field.
-     */
+    /** Required `string` value serialized in the `kid` wire field. */
     val kid: String,
-    /**
-     * Required `string` value serialized in the `alg` wire field.
-     */
+    /** Required `string` value serialized in the `alg` wire field. */
     val alg: String,
-    /**
-     * Required `string` value serialized in the `use` wire field.
-     */
+    /** Required `string` value serialized in the `use` wire field. */
     val use: String,
-    /**
-     * Required enumerated value serialized in the `kty` wire field.
-     */
+    /** Required enumerated value serialized in the `kty` wire field. */
     val kty: JWKSRsaPublicKeyKtyEnum,
-    /**
-     * Required `string` value serialized in the `n` wire field.
-     */
+    /** Required `string` value serialized in the `n` wire field. */
     val n: String,
-    /**
-     * Required `string` value serialized in the `e` wire field.
-     */
+    /** Required `string` value serialized in the `e` wire field. */
     val e: String,
-    /**
-     * Optional array value serialized in the `x5c` wire field.
-     */
+    /** Optional array value serialized in the `x5c` wire field. */
     val x5c: List<String>? = null,
-    /**
-     * Optional `string` value serialized in the `x5t` wire field.
-     */
+    /** Optional `string` value serialized in the `x5t` wire field. */
     val x5t: String? = null,
-    /**
-     * Optional `string` value serialized in the `x5t#S256` wire field.
-     */
+    /** Optional `string` value serialized in the `x5t#S256` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("x5t#S256") val x5tS256: String? = null,
-    /**
-     * Optional `string` value serialized in the `x5u` wire field.
-     */
-    val x5u: String? = null
+    /** Optional `string` value serialized in the `x5u` wire field. */
+    val x5u: String? = null,
 ) : JWKSKeysItem
 
-/**
- * Typed representation of the `JWKSSymmetricKey` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Typed representation of the `JWKSSymmetricKey` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class JWKSSymmetricKey(
-    /**
-     * Required `string` value serialized in the `kid` wire field.
-     */
+    /** Required `string` value serialized in the `kid` wire field. */
     val kid: String,
-    /**
-     * Required `string` value serialized in the `alg` wire field.
-     */
+    /** Required `string` value serialized in the `alg` wire field. */
     val alg: String,
-    /**
-     * Required `string` value serialized in the `use` wire field.
-     */
+    /** Required `string` value serialized in the `use` wire field. */
     val use: String,
-    /**
-     * Required enumerated value serialized in the `kty` wire field.
-     */
+    /** Required enumerated value serialized in the `kty` wire field. */
     val kty: JWKSSymmetricKeyKtyEnum,
-    /**
-     * Required `string` value serialized in the `k` wire field.
-     */
+    /** Required `string` value serialized in the `k` wire field. */
     val k: String,
-    /**
-     * Optional array value serialized in the `x5c` wire field.
-     */
+    /** Optional array value serialized in the `x5c` wire field. */
     val x5c: List<String>? = null,
-    /**
-     * Optional `string` value serialized in the `x5t` wire field.
-     */
+    /** Optional `string` value serialized in the `x5t` wire field. */
     val x5t: String? = null,
-    /**
-     * Optional `string` value serialized in the `x5t#S256` wire field.
-     */
+    /** Optional `string` value serialized in the `x5t#S256` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("x5t#S256") val x5tS256: String? = null,
-    /**
-     * Optional `string` value serialized in the `x5u` wire field.
-     */
-    val x5u: String? = null
+    /** Optional `string` value serialized in the `x5u` wire field. */
+    val x5u: String? = null,
 ) : JWKSKeysItem

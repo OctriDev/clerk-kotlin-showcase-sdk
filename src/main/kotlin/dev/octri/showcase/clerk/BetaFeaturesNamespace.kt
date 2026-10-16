@@ -3,32 +3,73 @@
 
 package dev.octri.showcase.clerk
 
-
 class BetaFeaturesNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Updates instance authentication settings, including allowlist restrictions, the sender address for authentication emails, progressive sign-up, and test mode. Set `from_email_address` to an alphanumeric local part only; `restricted_to_allowlist` defaults to false when omitted, and test mode defaults to true for development instances.
+     * Updates instance authentication settings, including allowlist restrictions, the sender
+     * address for authentication emails, progressive sign-up, and test mode. Set
+     * `from_email_address` to an alphanumeric local part only; `restricted_to_allowlist` defaults
+     * to false when omitted, and test mode defaults to true for development instances.
      *
      * Updates the settings of an instance
      */
-    fun updateInstanceAuthConfig(restrictedToAllowlist: SdkClient.SdkOptional<Boolean?>? = null, fromEmailAddress: SdkClient.SdkOptional<String?>? = null, progressiveSignUp: SdkClient.SdkOptional<Boolean?>? = null, testMode: SdkClient.SdkOptional<Boolean?>? = null, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.BetaFeatures.SchemaSchema382061cc {
-        return dev.octri.showcase.clerk.methods.BetaFeatures.updateInstanceAuthConfig(clientConfig, restrictedToAllowlist, fromEmailAddress, progressiveSignUp, testMode, options)
+    fun updateInstanceAuthConfig(
+        restrictedToAllowlist: SdkClient.SdkOptional<Boolean?>? = null,
+        fromEmailAddress: SdkClient.SdkOptional<String?>? = null,
+        progressiveSignUp: SdkClient.SdkOptional<Boolean?>? = null,
+        testMode: SdkClient.SdkOptional<Boolean?>? = null,
+        options: RequestOptions? = null,
+    ): dev.octri.showcase.clerk.methods.BetaFeatures.SchemaSchema382061cc {
+        return dev.octri.showcase.clerk.methods.BetaFeatures.updateInstanceAuthConfig(
+            clientConfig,
+            restrictedToAllowlist,
+            fromEmailAddress,
+            progressiveSignUp,
+            testMode,
+            options,
+        )
     }
 
     /**
-     * Change the domain of a production instance. Changing the domain requires updating the DNS records accordingly, deploying new SSL certificates, updating your Social Connection's redirect URLs and setting the new keys in your code. WARNING: Changing your domain will invalidate all current user sessions (i.e. users will be logged out). Also, while your application is being deployed, a small downtime is expected to occur. Returns 403 `domain_managed_by_integration` for…
+     * Change the domain of a production instance. Changing the domain requires updating the DNS
+     * records accordingly, deploying new SSL certificates, updating your Social Connection's
+     * redirect URLs and setting the new keys in your code. WARNING: Changing your domain will
+     * invalidate all current user sessions (i.e. users will be logged out). Also, while your
+     * application is being deployed, a small downtime is expected to occur. Returns 403
+     * `domain_managed_by_integration` for…
      *
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
-    fun updateProductionInstanceDomain(homeUrl: String? = null, isSecondary: Boolean? = null, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.clerk.methods.BetaFeatures.updateProductionInstanceDomain(clientConfig, homeUrl, isSecondary, options)
+    fun updateProductionInstanceDomain(
+        homeUrl: String? = null,
+        isSecondary: Boolean? = null,
+        options: RequestOptions? = null,
+    ): Unit {
+        return dev.octri.showcase.clerk.methods.BetaFeatures.updateProductionInstanceDomain(
+            clientConfig,
+            homeUrl,
+            isSecondary,
+            options,
+        )
     }
 
     /**
-     * Change the domain of a production instance. Changing the domain requires updating the DNS records accordingly, deploying new SSL certificates, updating your Social Connection's redirect URLs and setting the new keys in your code. WARNING: Changing your domain will invalidate all current user sessions (i.e. users will be logged out). Also, while your application is being deployed, a small downtime is expected to occur. Returns 403 `domain_managed_by_integration` for…
+     * Change the domain of a production instance. Changing the domain requires updating the DNS
+     * records accordingly, deploying new SSL certificates, updating your Social Connection's
+     * redirect URLs and setting the new keys in your code. WARNING: Changing your domain will
+     * invalidate all current user sessions (i.e. users will be logged out). Also, while your
+     * application is being deployed, a small downtime is expected to occur. Returns 403
+     * `domain_managed_by_integration` for…
      */
-    fun changeProductionInstanceDomain(homeUrl: String? = null, isSecondary: Boolean? = null, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.clerk.methods.BetaFeatures.changeProductionInstanceDomain(clientConfig, homeUrl, isSecondary, options)
+    fun changeProductionInstanceDomain(
+        homeUrl: String? = null,
+        isSecondary: Boolean? = null,
+        options: RequestOptions? = null,
+    ): Unit {
+        return dev.octri.showcase.clerk.methods.BetaFeatures.changeProductionInstanceDomain(
+            clientConfig,
+            homeUrl,
+            isSecondary,
+            options,
+        )
     }
-
 }

@@ -3,82 +3,180 @@
 
 package dev.octri.showcase.clerk
 
-
 class ScimDirectoriesNamespace(private val clientConfig: ClientConfig) {
-    /**
-     * Returns a list of all directories for the instance.
-     */
-    fun list(limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.SchemaSchemaa0ee7c0b {
-        return dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.listScimDirectories(clientConfig, limit, offset, options)
+    /** Returns a list of all directories for the instance. */
+    fun list(
+        limit: Long? = null,
+        offset: Long? = null,
+        options: RequestOptions? = null,
+    ): dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.SchemaSchemaa0ee7c0b {
+        return dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.listScimDirectories(
+            clientConfig,
+            limit,
+            offset,
+            options,
+        )
     }
 
     /**
-     * Creates a SCIM directory for the instance and associates it with an enterprise connection. Supply `enterprise_connection_id` and `provider`; you can also include group-to-role mappings to create with the directory. The created directory response includes its SCIM endpoint URL and API key.
+     * Creates a SCIM directory for the instance and associates it with an enterprise connection.
+     * Supply `enterprise_connection_id` and `provider`; you can also include group-to-role mappings
+     * to create with the directory. The created directory response includes its SCIM endpoint URL
+     * and API key.
      *
      * Create a new directory for the instance.
      */
-    fun create(enterpriseConnectionId: String, provider: String, name: String? = null, groupRoleMappings: List<dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.CreateSCIMDirectoryGroupRoleMappingsItem>? = null, options: RequestOptions? = null): SCIMDirectory {
-        return dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.createScimDirectory(clientConfig, enterpriseConnectionId, provider, name, groupRoleMappings, options)
+    fun create(
+        enterpriseConnectionId: String,
+        provider: String,
+        name: String? = null,
+        groupRoleMappings:
+            List<
+                dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.CreateSCIMDirectoryGroupRoleMappingsItem
+            >? =
+            null,
+        options: RequestOptions? = null,
+    ): SCIMDirectory {
+        return dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.createScimDirectory(
+            clientConfig,
+            enterpriseConnectionId,
+            provider,
+            name,
+            groupRoleMappings,
+            options,
+        )
     }
 
     /**
-     * Retrieves the configuration for a SCIM directory. Use its identifier to look up details such as its provider, endpoint URL, enabled state, and attribute mappings.
+     * Retrieves the configuration for a SCIM directory. Use its identifier to look up details such
+     * as its provider, endpoint URL, enabled state, and attribute mappings.
      *
      * Returns the details of a directory.
      */
     fun get(scimDirectoryId: String, options: RequestOptions? = null): SCIMDirectory {
-        return dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.getScimDirectory(clientConfig, scimDirectoryId, options)
+        return dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.getScimDirectory(
+            clientConfig,
+            scimDirectoryId,
+            options,
+        )
     }
 
     /**
-     * Updates the configuration of a SCIM directory. Supply only the settings you want to change; `attribute_mapping` entries are merged, and setting a key to `null` removes it from the mapping.
+     * Updates the configuration of a SCIM directory. Supply only the settings you want to change;
+     * `attribute_mapping` entries are merged, and setting a key to `null` removes it from the
+     * mapping.
      *
      * Updates a directory.
      */
-    fun update(request: dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.UpdateScimDirectoryRequest, options: RequestOptions? = null): SCIMDirectory {
-        return dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.updateScimDirectory(clientConfig, request, options)
+    fun update(
+        request: dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.UpdateScimDirectoryRequest,
+        options: RequestOptions? = null,
+    ): SCIMDirectory {
+        return dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.updateScimDirectory(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Deletes a directory and stops provisioning for it. SCIM requests authenticated with the directory's API key are rejected afterwards.
+     * Deletes a directory and stops provisioning for it. SCIM requests authenticated with the
+     * directory's API key are rejected afterwards.
      */
     fun delete(scimDirectoryId: String, options: RequestOptions? = null): DeletedObject {
-        return dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.deleteScimDirectory(clientConfig, scimDirectoryId, options)
+        return dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.deleteScimDirectory(
+            clientConfig,
+            scimDirectoryId,
+            options,
+        )
     }
 
     /**
-     * Generates a new API key for the directory and returns it in the `api_key` field. This is the only way to obtain the key after creation, so make sure to update it in your identity provider. The previous key remains valid for a short grace period before it expires.
+     * Generates a new API key for the directory and returns it in the `api_key` field. This is the
+     * only way to obtain the key after creation, so make sure to update it in your identity
+     * provider. The previous key remains valid for a short grace period before it expires.
      */
     fun rotateApiKey(scimDirectoryId: String, options: RequestOptions? = null): SCIMDirectory {
-        return dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.rotateScimDirectoryApiKey(clientConfig, scimDirectoryId, options)
+        return dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.rotateScimDirectoryApiKey(
+            clientConfig,
+            scimDirectoryId,
+            options,
+        )
     }
 
     /**
-     * Returns the list of SCIM group to organization role mappings for a directory, ordered by precedence.
+     * Returns the list of SCIM group to organization role mappings for a directory, ordered by
+     * precedence.
      */
-    fun listScimGroupRoleMappings(scimDirectoryId: String, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.SchemaSchemac6c780d9 {
-        return dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.listScimGroupRoleMappings(clientConfig, scimDirectoryId, options)
+    fun listScimGroupRoleMappings(
+        scimDirectoryId: String,
+        options: RequestOptions? = null,
+    ): dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.SchemaSchemac6c780d9 {
+        return dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.listScimGroupRoleMappings(
+            clientConfig,
+            scimDirectoryId,
+            options,
+        )
     }
 
     /**
-     * Creates a new SCIM group to organization role mapping for a directory. Mappings can be created while group role mapping is disabled on the directory, but they only take effect once it is enabled.
+     * Creates a new SCIM group to organization role mapping for a directory. Mappings can be
+     * created while group role mapping is disabled on the directory, but they only take effect once
+     * it is enabled.
      */
-    fun createScimGroupRoleMapping(scimDirectoryId: String, scimGroupId: String, roleId: String, precedence: Long? = null, options: RequestOptions? = null): SCIMGroupRoleMapping {
-        return dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.createScimGroupRoleMapping(clientConfig, scimDirectoryId, scimGroupId, roleId, precedence, options)
+    fun createScimGroupRoleMapping(
+        scimDirectoryId: String,
+        scimGroupId: String,
+        roleId: String,
+        precedence: Long? = null,
+        options: RequestOptions? = null,
+    ): SCIMGroupRoleMapping {
+        return dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.createScimGroupRoleMapping(
+            clientConfig,
+            scimDirectoryId,
+            scimGroupId,
+            roleId,
+            precedence,
+            options,
+        )
     }
 
     /**
-     * Replaces the entire set of SCIM group role mappings for a directory. The position of each item in the `mappings` array determines its precedence (the first item gets precedence 1). Passing an empty array removes all mappings. Mappings can be replaced while group role mapping is disabled on the directory, but they only take effect once it is enabled.
+     * Replaces the entire set of SCIM group role mappings for a directory. The position of each
+     * item in the `mappings` array determines its precedence (the first item gets precedence 1).
+     * Passing an empty array removes all mappings. Mappings can be replaced while group role
+     * mapping is disabled on the directory, but they only take effect once it is enabled.
      */
-    fun replaceScimGroupRoleMappings(scimDirectoryId: String, mappings: List<dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.ReplaceSCIMGroupRoleMappingsMappingsItem>, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.SchemaSchemac6c780d9 {
-        return dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.replaceScimGroupRoleMappings(clientConfig, scimDirectoryId, mappings, options)
+    fun replaceScimGroupRoleMappings(
+        scimDirectoryId: String,
+        mappings:
+            List<
+                dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.ReplaceSCIMGroupRoleMappingsMappingsItem
+            >,
+        options: RequestOptions? = null,
+    ): dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.SchemaSchemac6c780d9 {
+        return dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.replaceScimGroupRoleMappings(
+            clientConfig,
+            scimDirectoryId,
+            mappings,
+            options,
+        )
     }
 
     /**
-     * Deletes a single SCIM group role mapping. Mappings can be deleted while group role mapping is disabled on the directory, but the change only takes effect once it is enabled.
+     * Deletes a single SCIM group role mapping. Mappings can be deleted while group role mapping is
+     * disabled on the directory, but the change only takes effect once it is enabled.
      */
-    fun deleteScimGroupRoleMapping(scimDirectoryId: String, mappingId: String, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.SchemaSchemab78302a9 {
-        return dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.deleteScimGroupRoleMapping(clientConfig, scimDirectoryId, mappingId, options)
+    fun deleteScimGroupRoleMapping(
+        scimDirectoryId: String,
+        mappingId: String,
+        options: RequestOptions? = null,
+    ): dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.SchemaSchemab78302a9 {
+        return dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.deleteScimGroupRoleMapping(
+            clientConfig,
+            scimDirectoryId,
+            mappingId,
+            options,
+        )
     }
-
 }
