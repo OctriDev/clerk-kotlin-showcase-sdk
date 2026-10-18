@@ -86,10 +86,10 @@ data class BillingPriceResponse(
     /** The monthly amount in cents when billed annually. */
     @com.fasterxml.jackson.annotation.JsonProperty("annual_monthly_amount")
     val annualMonthlyAmount: Long,
-    /** Required API value serialized in the `fee` wire field. */
+    /** Required object value serialized in the `fee` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("fee", required = true)
     val fee: CommerceMoneyResponse?,
-    /** Required API value serialized in the `annual_monthly_fee` wire field. */
+    /** Required object value serialized in the `annual_monthly_fee` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("annual_monthly_fee", required = true)
     val annualMonthlyFee: CommerceMoneyResponse?,
     /** Whether this price is the default price for its plan. */
@@ -276,13 +276,13 @@ data class CommercePlan2(
     val id: String,
     /** The name of the commerce plan. */
     val name: String,
-    /** Required API value serialized in the `fee` wire field. */
+    /** Required object value serialized in the `fee` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("fee", required = true)
     val fee: CommerceMoneyResponse?,
-    /** Required API value serialized in the `annual_monthly_fee` wire field. */
+    /** Required object value serialized in the `annual_monthly_fee` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("annual_monthly_fee", required = true)
     val annualMonthlyFee: CommerceMoneyResponse?,
-    /** Required API value serialized in the `annual_fee` wire field. */
+    /** Required object value serialized in the `annual_fee` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("annual_fee", required = true)
     val annualFee: CommerceMoneyResponse?,
     /** The amount in cents for the plan. */

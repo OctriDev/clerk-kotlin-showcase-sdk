@@ -9,7 +9,7 @@ class DirectoriesNamespace(private val clientConfig: ClientConfig) {
         limit: Long? = null,
         offset: Long? = null,
         options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.DirectoriesMethods.SchemaSchemadb46323d {
+    ): DirectoryList {
         return dev.octri.showcase.clerk.methods.DirectoriesMethods.listDirectories(
             clientConfig,
             limit,
@@ -111,7 +111,7 @@ class DirectoriesNamespace(private val clientConfig: ClientConfig) {
     fun listGroupRoleMappings(
         directoryId: String,
         options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.DirectoriesMethods.SchemaSchema1459c10b {
+    ): DirectoryGroupRoleMappingList {
         return dev.octri.showcase.clerk.methods.DirectoriesMethods.listDirectoryGroupRoleMappings(
             clientConfig,
             directoryId,
@@ -156,7 +156,7 @@ class DirectoriesNamespace(private val clientConfig: ClientConfig) {
                 dev.octri.showcase.clerk.methods.DirectoriesMethods.ReplaceDirectoryGroupRoleMappingsMappingsItem
             >,
         options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.DirectoriesMethods.SchemaSchema1459c10b {
+    ): DirectoryGroupRoleMappingList {
         return dev.octri.showcase.clerk.methods.DirectoriesMethods
             .replaceDirectoryGroupRoleMappings(clientConfig, directoryId, mappings, options)
     }
@@ -169,7 +169,7 @@ class DirectoriesNamespace(private val clientConfig: ClientConfig) {
         directoryId: String,
         mappingId: String,
         options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.DirectoriesMethods.SchemaSchema0a4178a1 {
+    ): DirectoryGroupRoleMappingDeleted {
         return dev.octri.showcase.clerk.methods.DirectoriesMethods.deleteDirectoryGroupRoleMapping(
             clientConfig,
             directoryId,

@@ -16,8 +16,8 @@ class WaitlistEntriesNamespace(private val clientConfig: ClientConfig) {
         status: ListWaitlistEntriesParameterEnum? = null,
         orderBy: String? = null,
         options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.WaitlistEntries.SchemaSchema45ad91e0 {
-        return dev.octri.showcase.clerk.methods.WaitlistEntries.listWaitlistEntries(
+    ): WaitlistEntries {
+        return dev.octri.showcase.clerk.methods.WaitlistEntriesMethods.listWaitlistEntries(
             clientConfig,
             limit,
             offset,
@@ -37,7 +37,7 @@ class WaitlistEntriesNamespace(private val clientConfig: ClientConfig) {
         notify: SdkClient.SdkOptional<Boolean?>? = null,
         options: RequestOptions? = null,
     ): WaitlistEntry {
-        return dev.octri.showcase.clerk.methods.WaitlistEntries.createWaitlistEntry(
+        return dev.octri.showcase.clerk.methods.WaitlistEntriesMethods.createWaitlistEntry(
             clientConfig,
             emailAddress,
             notify,
@@ -60,11 +60,13 @@ class WaitlistEntriesNamespace(private val clientConfig: ClientConfig) {
      */
     fun createBulk(
         body:
-            List<dev.octri.showcase.clerk.methods.WaitlistEntries.CreateBulkWaitlistEntriesItem>? =
+            List<
+                dev.octri.showcase.clerk.methods.WaitlistEntriesMethods.CreateBulkWaitlistEntriesItem
+            >? =
             null,
         options: RequestOptions? = null,
     ): List<WaitlistEntry> {
-        return dev.octri.showcase.clerk.methods.WaitlistEntries.createBulkWaitlistEntries(
+        return dev.octri.showcase.clerk.methods.WaitlistEntriesMethods.createBulkWaitlistEntries(
             clientConfig,
             body,
             options,
@@ -79,7 +81,7 @@ class WaitlistEntriesNamespace(private val clientConfig: ClientConfig) {
      * Delete a pending waitlist entry.
      */
     fun delete(waitlistEntryId: String, options: RequestOptions? = null): DeletedObject {
-        return dev.octri.showcase.clerk.methods.WaitlistEntries.deleteWaitlistEntry(
+        return dev.octri.showcase.clerk.methods.WaitlistEntriesMethods.deleteWaitlistEntry(
             clientConfig,
             waitlistEntryId,
             options,
@@ -92,7 +94,7 @@ class WaitlistEntriesNamespace(private val clientConfig: ClientConfig) {
         ignoreExisting: SdkClient.SdkOptional<Boolean?>? = null,
         options: RequestOptions? = null,
     ): WaitlistEntry {
-        return dev.octri.showcase.clerk.methods.WaitlistEntries.inviteWaitlistEntry(
+        return dev.octri.showcase.clerk.methods.WaitlistEntriesMethods.inviteWaitlistEntry(
             clientConfig,
             waitlistEntryId,
             ignoreExisting,
@@ -108,7 +110,7 @@ class WaitlistEntriesNamespace(private val clientConfig: ClientConfig) {
      * Reject a waitlist entry.
      */
     fun reject(waitlistEntryId: String, options: RequestOptions? = null): WaitlistEntry {
-        return dev.octri.showcase.clerk.methods.WaitlistEntries.rejectWaitlistEntry(
+        return dev.octri.showcase.clerk.methods.WaitlistEntriesMethods.rejectWaitlistEntry(
             clientConfig,
             waitlistEntryId,
             options,

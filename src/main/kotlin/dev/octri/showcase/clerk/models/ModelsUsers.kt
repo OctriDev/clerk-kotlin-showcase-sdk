@@ -30,6 +30,14 @@ data class BiometricCredential(
     @com.fasterxml.jackson.annotation.JsonProperty("revoked_at") val revokedAt: Long? = null,
 )
 
+/** Typed representation of the `BiometricCredentialList` API schema. */
+data class BiometricCredentialList(
+    /** Required array value serialized in the `data` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<BiometricCredential>,
+    /** Total number of biometric credentials */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long,
+)
+
 /** Typed representation of the `EnterpriseAccount` API schema. */
 data class EnterpriseAccount(
     /** Required `string` value serialized in the `id` wire field. */
@@ -70,41 +78,42 @@ data class EnterpriseAccount(
 )
 
 /** Typed representation of the `EnterpriseAccountConnection` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = EnterpriseAccountConnection.Deserializer::class
+data class EnterpriseAccountConnection(
+    /** Required `string` value serialized in the `id` wire field. */
+    val id: String,
+    /** Required `string` value serialized in the `protocol` wire field. */
+    val protocol: String,
+    /** Required `string` value serialized in the `provider` wire field. */
+    val provider: String,
+    /** Required `string` value serialized in the `name` wire field. */
+    val name: String,
+    /** Required `string` value serialized in the `logo_public_url` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("logo_public_url", required = true)
+    val logoPublicUrl: String?,
+    /** Required `boolean` value serialized in the `active` wire field. */
+    val active: Boolean,
+    /** Required `boolean` value serialized in the `sync_user_attributes` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sync_user_attributes")
+    val syncUserAttributes: Boolean,
+    /** Required `boolean` value serialized in the `allow_subdomains` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("allow_subdomains") val allowSubdomains: Boolean,
+    /** Required `boolean` value serialized in the `allow_idp_initiated` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("allow_idp_initiated")
+    val allowIdpInitiated: Boolean,
+    /**
+     * Required `boolean` value serialized in the `disable_additional_identifications` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("disable_additional_identifications")
+    val disableAdditionalIdentifications: Boolean,
+    /** Unix timestamp of creation. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
+    /** Unix timestamp of last update. */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
+    /** Optional `string` value serialized in the `domain` wire field. */
+    val domain: String? = null,
+    /** Optional array value serialized in the `domains` wire field. */
+    val domains: List<String>? = null,
 )
-sealed interface EnterpriseAccountConnection {
-    /** Chooses the branch this payload is shaped like. */
-    class Deserializer :
-        com.fasterxml.jackson.databind.JsonDeserializer<EnterpriseAccountConnection>() {
-        override fun deserialize(
-            parser: com.fasterxml.jackson.core.JsonParser,
-            context: com.fasterxml.jackson.databind.DeserializationContext,
-        ): EnterpriseAccountConnection {
-            val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
-            val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            return when {
-                else ->
-                    ValueEnterpriseAccountConnection(
-                        mapper.convertValue(
-                            node,
-                            object : com.fasterxml.jackson.core.type.TypeReference<Any>() {},
-                        )
-                    )
-            }
-        }
-    }
-}
-
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class ValueEnterpriseAccountConnection(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: Any
-) : EnterpriseAccountConnection
 
 /** Required object value serialized in the `verification` wire field. */
 @com.fasterxml.jackson.annotation.JsonTypeInfo(
@@ -329,40 +338,38 @@ data class SAMLAccount(
 )
 
 /** Typed representation of the `SAMLAccountConnection` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = SAMLAccountConnection.Deserializer::class
+data class SAMLAccountConnection(
+    /** Required `string` value serialized in the `id` wire field. */
+    val id: String,
+    /** Required `string` value serialized in the `name` wire field. */
+    val name: String,
+    /** Required `boolean` value serialized in the `active` wire field. */
+    val active: Boolean,
+    /** Required `string` value serialized in the `provider` wire field. */
+    val provider: String,
+    /** Required `boolean` value serialized in the `sync_user_attributes` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sync_user_attributes")
+    val syncUserAttributes: Boolean,
+    /** Unix timestamp of creation. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
+    /** Unix timestamp of last update. */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
+    /** Optional `string` value serialized in the `domain` wire field. */
+    val domain: String? = null,
+    /** Optional array value serialized in the `domains` wire field. */
+    val domains: List<String>? = null,
+    /** Optional `boolean` value serialized in the `allow_subdomains` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("allow_subdomains")
+    val allowSubdomains: Boolean? = null,
+    /** Optional `boolean` value serialized in the `allow_idp_initiated` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("allow_idp_initiated")
+    val allowIdpInitiated: Boolean? = null,
+    /**
+     * Optional `boolean` value serialized in the `disable_additional_identifications` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("disable_additional_identifications")
+    val disableAdditionalIdentifications: Boolean? = null,
 )
-sealed interface SAMLAccountConnection {
-    /** Chooses the branch this payload is shaped like. */
-    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<SAMLAccountConnection>() {
-        override fun deserialize(
-            parser: com.fasterxml.jackson.core.JsonParser,
-            context: com.fasterxml.jackson.databind.DeserializationContext,
-        ): SAMLAccountConnection {
-            val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
-            val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            return when {
-                else ->
-                    ValueSAMLAccountConnection(
-                        mapper.convertValue(
-                            node,
-                            object : com.fasterxml.jackson.core.type.TypeReference<Any>() {},
-                        )
-                    )
-            }
-        }
-    }
-}
-
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class ValueSAMLAccountConnection(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: Any
-) : SAMLAccountConnection
 
 /** Required object value serialized in the `verification` wire field. */
 @com.fasterxml.jackson.annotation.JsonTypeInfo(

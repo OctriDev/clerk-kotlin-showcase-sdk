@@ -103,4 +103,31 @@ data class DirectoryGroupRoleMapping(
     val role: Role? = null,
 )
 
+/** Typed representation of the `DirectoryGroupRoleMappingDeleted` API schema. */
+data class DirectoryGroupRoleMappingDeleted(
+    /** String representing the object's type. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: DirectoryGroupRoleMappingDeletedObjectEnum,
+    /** The ID of the deleted directory group role mapping. */
+    val id: String,
+    /** Whether the directory group role mapping was successfully deleted. */
+    val deleted: Boolean,
+)
+
+/** Typed representation of the `DirectoryGroupRoleMappingList` API schema. */
+data class DirectoryGroupRoleMappingList(
+    /** Required array value serialized in the `data` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: DirectoryGroupRoleMappings,
+    /** Total number of directory group role mappings in the directory. */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long,
+)
+
 typealias DirectoryGroupRoleMappings = List<DirectoryGroupRoleMapping>
+
+/** Typed representation of the `DirectoryList` API schema. */
+data class DirectoryList(
+    /** Required array value serialized in the `data` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: Directories,
+    /** Total number of directories. */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long,
+)

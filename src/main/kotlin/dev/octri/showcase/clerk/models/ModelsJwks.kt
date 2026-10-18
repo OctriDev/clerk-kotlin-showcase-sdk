@@ -148,16 +148,8 @@ sealed interface JWKSKeysItem {
         ): JWKSKeysItem {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val ownedType: Class<out JWKSKeysItem>? =
-                when {
-                    node.has("p") ||
-                        node.has("q") ||
-                        node.has("dp") ||
-                        node.has("dq") ||
-                        node.has("qi") -> JWKSRsaPrivateKey::class.java
-                    node.has("k") -> JWKSSymmetricKey::class.java
-                    else -> null
-                }
+            val ownedType =
+                JWKSKeysItemOwnedTypes.firstOrNull { (keys, _) -> keys.any(node::has) }?.second
             if (ownedType != null) {
                 try {
                     return mapper.convertValue(node, ownedType)
@@ -175,12 +167,8 @@ sealed interface JWKSKeysItem {
                     JWKSRsaPrivateKey::class.java,
                     JWKSSymmetricKey::class.java,
                 )
-            for (objectType in objectTypes) {
-                try {
-                    return mapper.convertValue(node, objectType)
-                } catch (ignored: IllegalArgumentException) {
-                    // Not this branch.
-                }
+            dev.octri.showcase.clerk.sdkObjectBranch(mapper, node, objectTypes)?.let {
+                return it
             }
             return when {
                 else ->
@@ -193,6 +181,12 @@ sealed interface JWKSKeysItem {
         }
     }
 }
+
+internal val JWKSKeysItemOwnedTypes: List<Pair<List<String>, Class<out JWKSKeysItem>>> =
+    listOf(
+        listOf("p", "q", "dp", "dq", "qi") to JWKSRsaPrivateKey::class.java,
+        listOf("k") to JWKSSymmetricKey::class.java,
+    )
 
 /** Typed representation of the `JWKSRsaPrivateKey` API schema. */
 @com.fasterxml.jackson.databind.annotation.JsonDeserialize(

@@ -14,7 +14,7 @@ class OAuthAccessTokensNamespace(private val clientConfig: ClientConfig) {
         accessToken: String? = null,
         secret: String? = null,
         options: RequestOptions? = null,
-    ): Map<String, Any> {
+    ): VerifyOAuthAccessTokenResponse {
         return dev.octri.showcase.clerk.methods.OAuthAccessTokens.verifyOAuthAccessToken(
             clientConfig,
             accessToken,

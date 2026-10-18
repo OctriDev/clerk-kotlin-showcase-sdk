@@ -91,7 +91,7 @@ class PhoneNumbersNamespace(private val clientConfig: ClientConfig) {
     fun prepareVerification(
         phoneNumberId: String,
         options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.PhoneNumbers.SchemaSchema3e93ce8e {
+    ): VerificationResponse {
         return dev.octri.showcase.clerk.methods.PhoneNumbers.preparePhoneNumberVerification(
             clientConfig,
             phoneNumberId,
@@ -112,7 +112,7 @@ class PhoneNumbersNamespace(private val clientConfig: ClientConfig) {
         verificationId: String,
         code: String,
         options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.PhoneNumbers.SchemaSchema3e93ce8e {
+    ): VerificationResponse {
         return dev.octri.showcase.clerk.methods.PhoneNumbers.attemptPhoneNumberVerification(
             clientConfig,
             phoneNumberId,

@@ -4,6 +4,7 @@
 package dev.octri.showcase.clerk.methods
 
 import dev.octri.showcase.clerk.BiometricCredential
+import dev.octri.showcase.clerk.BiometricCredentialList
 import dev.octri.showcase.clerk.ClerkErrors
 import dev.octri.showcase.clerk.ClientConfig
 import dev.octri.showcase.clerk.CommerceCreditBalanceResponse
@@ -16,6 +17,7 @@ import dev.octri.showcase.clerk.OrganizationMemberships
 import dev.octri.showcase.clerk.RequestOptions
 import dev.octri.showcase.clerk.SdkClient
 import dev.octri.showcase.clerk.TrustedDevice
+import dev.octri.showcase.clerk.TrustedDeviceList
 import dev.octri.showcase.clerk.User
 import dev.octri.showcase.clerk.UsersGetOrganizationInvitationsParameterEnum
 import dev.octri.showcase.clerk.Validation
@@ -613,8 +615,8 @@ internal object UsersListUserTrustedDevicesOperation {
         clientConfig: ClientConfig,
         userId: String,
         options: RequestOptions? = null,
-    ): Users.SchemaSchema36c20f95 {
-        return SdkClient.request<Users.SchemaSchema36c20f95>(
+    ): TrustedDeviceList {
+        return SdkClient.request<TrustedDeviceList>(
                 SdkClient.RequestSpec(
                     "GET",
                     "/users/${SdkClient.encodePathSegment(userId)}/trusted_devices",
@@ -678,8 +680,8 @@ internal object UsersListUserBiometricCredentialsOperation {
         clientConfig: ClientConfig,
         userId: String,
         options: RequestOptions? = null,
-    ): Users.SchemaSchema {
-        return SdkClient.request<Users.SchemaSchema>(
+    ): BiometricCredentialList {
+        return SdkClient.request<BiometricCredentialList>(
                 SdkClient.RequestSpec(
                     "GET",
                     "/users/${SdkClient.encodePathSegment(userId)}/biometric_credentials",

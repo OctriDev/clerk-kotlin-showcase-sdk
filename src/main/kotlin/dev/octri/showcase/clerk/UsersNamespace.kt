@@ -425,10 +425,7 @@ class UsersNamespace(private val clientConfig: ClientConfig) {
      *
      * @deprecated This operation is deprecated and may be removed in a future release.
      */
-    fun listTrustedDevices(
-        userId: String,
-        options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.Users.SchemaSchema36c20f95 {
+    fun listTrustedDevices(userId: String, options: RequestOptions? = null): TrustedDeviceList {
         return dev.octri.showcase.clerk.methods.Users.listUserTrustedDevices(
             clientConfig,
             userId,
@@ -458,7 +455,7 @@ class UsersNamespace(private val clientConfig: ClientConfig) {
     fun listBiometricCredentials(
         userId: String,
         options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.Users.SchemaSchema {
+    ): BiometricCredentialList {
         return dev.octri.showcase.clerk.methods.Users.listUserBiometricCredentials(
             clientConfig,
             userId,

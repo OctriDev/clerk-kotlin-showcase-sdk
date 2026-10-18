@@ -77,10 +77,7 @@ class InvitationsNamespace(private val clientConfig: ClientConfig) {
      * invitation link that was sent to them. However, it doesn't prevent the user from signing up
      * if they follow the sign up flow. Only active (i.e. non-revoked) invitations can be revoked.
      */
-    fun revoke(
-        invitationId: String,
-        options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.Invitations.SchemaSchemadd079084 {
+    fun revoke(invitationId: String, options: RequestOptions? = null): InvitationRevoked {
         return dev.octri.showcase.clerk.methods.Invitations.revokeInvitation(
             clientConfig,
             invitationId,

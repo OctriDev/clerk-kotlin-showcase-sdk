@@ -14,7 +14,7 @@ class MachinesNamespace(private val clientConfig: ClientConfig) {
         query: String? = null,
         orderBy: String? = null,
         options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.Machines.SchemaSchema11ae8042 {
+    ): MachineList {
         return dev.octri.showcase.clerk.methods.Machines.listMachines(
             clientConfig,
             limit,
@@ -36,7 +36,7 @@ class MachinesNamespace(private val clientConfig: ClientConfig) {
         scopedMachines: List<String>? = null,
         defaultTokenTtl: Long? = null,
         options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.Machines.SchemaSchema6ad3d7e4 {
+    ): MachineCreated {
         return dev.octri.showcase.clerk.methods.Machines.createMachine(
             clientConfig,
             name,
@@ -82,10 +82,7 @@ class MachinesNamespace(private val clientConfig: ClientConfig) {
      *
      * Deletes a machine.
      */
-    fun delete(
-        machineId: String,
-        options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.Machines.SchemaSchema7a4a2eaa {
+    fun delete(machineId: String, options: RequestOptions? = null): MachineDeleted {
         return dev.octri.showcase.clerk.methods.Machines.deleteMachine(
             clientConfig,
             machineId,
@@ -99,10 +96,7 @@ class MachinesNamespace(private val clientConfig: ClientConfig) {
      *
      * Returns the secret key for a machine.
      */
-    fun getSecretKey(
-        machineId: String,
-        options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.Machines.SchemaSchema23990ad7 {
+    fun getSecretKey(machineId: String, options: RequestOptions? = null): MachineSecretKey {
         return dev.octri.showcase.clerk.methods.Machines.getMachineSecretKey(
             clientConfig,
             machineId,
@@ -119,7 +113,7 @@ class MachinesNamespace(private val clientConfig: ClientConfig) {
         machineId: String,
         previousTokenTtl: Long,
         options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.Machines.SchemaSchema23990ad7 {
+    ): MachineSecretKey {
         return dev.octri.showcase.clerk.methods.Machines.rotateMachineSecretKey(
             clientConfig,
             machineId,
@@ -150,7 +144,7 @@ class MachinesNamespace(private val clientConfig: ClientConfig) {
         machineId: String,
         otherMachineId: String,
         options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.Machines.SchemaSchema5f07b6af {
+    ): MachineScopeDeleted {
         return dev.octri.showcase.clerk.methods.Machines.deleteMachineScope(
             clientConfig,
             machineId,

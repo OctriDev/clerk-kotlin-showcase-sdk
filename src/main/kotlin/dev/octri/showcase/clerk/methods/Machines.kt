@@ -6,77 +6,17 @@ package dev.octri.showcase.clerk.methods
 import dev.octri.showcase.clerk.ClerkErrors
 import dev.octri.showcase.clerk.ClientConfig
 import dev.octri.showcase.clerk.Machine
+import dev.octri.showcase.clerk.MachineCreated
+import dev.octri.showcase.clerk.MachineDeleted
+import dev.octri.showcase.clerk.MachineList
 import dev.octri.showcase.clerk.MachineScope
-import dev.octri.showcase.clerk.MachineWithoutScopedMachines
-import dev.octri.showcase.clerk.MachineWithoutScopedMachinesObjectEnum
+import dev.octri.showcase.clerk.MachineScopeDeleted
+import dev.octri.showcase.clerk.MachineSecretKey
 import dev.octri.showcase.clerk.RequestOptions
-import dev.octri.showcase.clerk.SchemaSchemaObjectEnum384b96ba
-import dev.octri.showcase.clerk.SchemaSchemaObjectEnum47b1d8ed
-import dev.octri.showcase.clerk.SchemaSchemaObjectEnumab22cdb6
 import dev.octri.showcase.clerk.SdkClient
 import dev.octri.showcase.clerk.Validation
 
 object Machines {
-
-    data class SchemaSchema11ae8042(
-        @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Machine>,
-        /** Total number of machines */
-        @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long,
-    )
-
-    data class SchemaSchema6ad3d7e4(
-        /** Required enumerated value serialized in the `object` wire field. */
-        @com.fasterxml.jackson.annotation.JsonProperty("object")
-        val `object`: MachineWithoutScopedMachinesObjectEnum,
-        /** Unique identifier for the machine. */
-        val id: String,
-        /** The name of the machine. */
-        val name: String,
-        /** The ID of the instance this machine belongs to. */
-        @com.fasterxml.jackson.annotation.JsonProperty("instance_id") val instanceId: String,
-        /** Unix timestamp of creation. */
-        @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-        /** Unix timestamp of last update. */
-        @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
-        /** Array of machines this machine has access to. */
-        @com.fasterxml.jackson.annotation.JsonProperty("scoped_machines")
-        val scopedMachines: List<MachineWithoutScopedMachines>,
-        /** The secret key for the machine, only returned upon creation. */
-        @com.fasterxml.jackson.annotation.JsonProperty("secret_key") val secretKey: String,
-        /** The default time-to-live (TTL) in seconds for tokens created by this machine. */
-        @com.fasterxml.jackson.annotation.JsonProperty("default_token_ttl")
-        val defaultTokenTtl: Long? = null,
-    )
-
-    data class SchemaSchema7a4a2eaa(
-        /** String representing the object's type. */
-        @com.fasterxml.jackson.annotation.JsonProperty("object")
-        val `object`: SchemaSchemaObjectEnum384b96ba,
-        /** The ID of the deleted machine */
-        val id: String,
-        /** Whether the machine was successfully deleted */
-        val deleted: Boolean,
-    )
-
-    data class SchemaSchema23990ad7(
-        /** String representing the object's type. */
-        @com.fasterxml.jackson.annotation.JsonProperty("object")
-        val `object`: SchemaSchemaObjectEnumab22cdb6,
-        /** The secret key for the machine. */
-        val secret: String,
-    )
-
-    data class SchemaSchema5f07b6af(
-        /** String representing the object's type. */
-        @com.fasterxml.jackson.annotation.JsonProperty("object")
-        val `object`: SchemaSchemaObjectEnum47b1d8ed,
-        /** The ID of the machine that had access to the target machine */
-        @com.fasterxml.jackson.annotation.JsonProperty("from_machine_id") val fromMachineId: String,
-        /** The ID of the machine that was being accessed */
-        @com.fasterxml.jackson.annotation.JsonProperty("to_machine_id") val toMachineId: String,
-        /** Whether the machine scope was successfully deleted */
-        val deleted: Boolean,
-    )
 
     /**
      * This request returns the list of machines for an instance. The machines are ordered by
@@ -101,7 +41,7 @@ object Machines {
         query: String? = null,
         orderBy: String? = null,
         options: RequestOptions? = null,
-    ): SchemaSchema11ae8042 {
+    ): MachineList {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 500.0))
         }
@@ -110,7 +50,7 @@ object Machines {
             Validation.validateRange("offset", offset, Validation.RangeOpts(min = 0.0))
         }
 
-        return SdkClient.request<SchemaSchema11ae8042>(
+        return SdkClient.request<MachineList>(
                 SdkClient.RequestSpec(
                     "GET",
                     "/machines",
@@ -155,7 +95,7 @@ object Machines {
         scopedMachines: List<String>? = null,
         defaultTokenTtl: Long? = null,
         options: RequestOptions? = null,
-    ): SchemaSchema6ad3d7e4 {
+    ): MachineCreated {
         Validation.validateLength("name", name, Validation.LengthOpts(min = 1, max = 255))
 
         if (scopedMachines != null) {
@@ -174,7 +114,7 @@ object Machines {
             )
         }
 
-        return SdkClient.request<SchemaSchema6ad3d7e4>(
+        return SdkClient.request<MachineCreated>(
                 SdkClient.RequestSpec(
                     "POST",
                     "/machines",
@@ -299,8 +239,8 @@ object Machines {
         clientConfig: ClientConfig,
         machineId: String,
         options: RequestOptions? = null,
-    ): SchemaSchema7a4a2eaa {
-        return SdkClient.request<SchemaSchema7a4a2eaa>(
+    ): MachineDeleted {
+        return SdkClient.request<MachineDeleted>(
                 SdkClient.RequestSpec(
                     "DELETE",
                     "/machines/${SdkClient.encodePathSegment(machineId)}",
@@ -333,8 +273,8 @@ object Machines {
         clientConfig: ClientConfig,
         machineId: String,
         options: RequestOptions? = null,
-    ): SchemaSchema23990ad7 {
-        return SdkClient.request<SchemaSchema23990ad7>(
+    ): MachineSecretKey {
+        return SdkClient.request<MachineSecretKey>(
                 SdkClient.RequestSpec(
                     "GET",
                     "/machines/${SdkClient.encodePathSegment(machineId)}/secret_key",
@@ -370,14 +310,14 @@ object Machines {
         machineId: String,
         previousTokenTtl: Long,
         options: RequestOptions? = null,
-    ): SchemaSchema23990ad7 {
+    ): MachineSecretKey {
         Validation.validateRange(
             "previous_token_ttl",
             previousTokenTtl,
             Validation.RangeOpts(min = 0.0, max = 28800.0),
         )
 
-        return SdkClient.request<SchemaSchema23990ad7>(
+        return SdkClient.request<MachineSecretKey>(
                 SdkClient.RequestSpec(
                     "POST",
                     "/machines/${SdkClient.encodePathSegment(machineId)}/secret_key/rotate",
@@ -446,8 +386,8 @@ object Machines {
         machineId: String,
         otherMachineId: String,
         options: RequestOptions? = null,
-    ): SchemaSchema5f07b6af {
-        return SdkClient.request<SchemaSchema5f07b6af>(
+    ): MachineScopeDeleted {
+        return SdkClient.request<MachineScopeDeleted>(
                 SdkClient.RequestSpec(
                     "DELETE",
                     "/machines/${SdkClient.encodePathSegment(machineId)}/scopes/${SdkClient.encodePathSegment(otherMachineId)}",

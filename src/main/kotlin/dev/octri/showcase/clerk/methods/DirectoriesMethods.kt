@@ -6,22 +6,16 @@ package dev.octri.showcase.clerk.methods
 import dev.octri.showcase.clerk.ClerkErrors
 import dev.octri.showcase.clerk.ClientConfig
 import dev.octri.showcase.clerk.DeletedObject
-import dev.octri.showcase.clerk.Directories
 import dev.octri.showcase.clerk.Directory
 import dev.octri.showcase.clerk.DirectoryGroupRoleMapping
-import dev.octri.showcase.clerk.DirectoryGroupRoleMappings
+import dev.octri.showcase.clerk.DirectoryGroupRoleMappingDeleted
+import dev.octri.showcase.clerk.DirectoryGroupRoleMappingList
+import dev.octri.showcase.clerk.DirectoryList
 import dev.octri.showcase.clerk.RequestOptions
-import dev.octri.showcase.clerk.SchemaSchemaObjectEnum
 import dev.octri.showcase.clerk.SdkClient
 import dev.octri.showcase.clerk.Validation
 
 object DirectoriesMethods {
-
-    data class SchemaSchemadb46323d(
-        @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: Directories,
-        /** Total number of directories. */
-        @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long,
-    )
 
     data class CreateDirectoryGroupRoleMappingsItem(
         /** The organization role ID to assign to members of the group. */
@@ -51,13 +45,6 @@ object DirectoriesMethods {
         val precedence: Long? = null,
     )
 
-    data class SchemaSchema1459c10b(
-        @com.fasterxml.jackson.annotation.JsonProperty("data")
-        val `data`: DirectoryGroupRoleMappings,
-        /** Total number of directory group role mappings in the directory. */
-        @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long,
-    )
-
     data class ReplaceDirectoryGroupRoleMappingsMappingsItem(
         /** The ID of the organization role to assign to members of the group. */
         @com.fasterxml.jackson.annotation.JsonProperty("role_id") val roleId: String,
@@ -75,16 +62,6 @@ object DirectoriesMethods {
         val scimGroupId: String? = null,
     )
 
-    data class SchemaSchema0a4178a1(
-        /** String representing the object's type. */
-        @com.fasterxml.jackson.annotation.JsonProperty("object")
-        val `object`: SchemaSchemaObjectEnum,
-        /** The ID of the deleted directory group role mapping. */
-        val id: String,
-        /** Whether the directory group role mapping was successfully deleted. */
-        val deleted: Boolean,
-    )
-
     /**
      * Returns a list of all directories for the instance.
      *
@@ -98,7 +75,7 @@ object DirectoriesMethods {
         limit: Long? = null,
         offset: Long? = null,
         options: RequestOptions? = null,
-    ): SchemaSchemadb46323d {
+    ): DirectoryList {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 500.0))
         }
@@ -107,7 +84,7 @@ object DirectoriesMethods {
             Validation.validateRange("offset", offset, Validation.RangeOpts(min = 0.0))
         }
 
-        return SdkClient.request<SchemaSchemadb46323d>(
+        return SdkClient.request<DirectoryList>(
                 SdkClient.RequestSpec(
                     "GET",
                     "/directories",
@@ -341,8 +318,8 @@ object DirectoriesMethods {
         clientConfig: ClientConfig,
         directoryId: String,
         options: RequestOptions? = null,
-    ): SchemaSchema1459c10b {
-        return SdkClient.request<SchemaSchema1459c10b>(
+    ): DirectoryGroupRoleMappingList {
+        return SdkClient.request<DirectoryGroupRoleMappingList>(
                 SdkClient.RequestSpec(
                     "GET",
                     "/directories/${SdkClient.encodePathSegment(directoryId)}/group_role_mappings",
@@ -432,8 +409,8 @@ object DirectoriesMethods {
         directoryId: String,
         mappings: List<ReplaceDirectoryGroupRoleMappingsMappingsItem>,
         options: RequestOptions? = null,
-    ): SchemaSchema1459c10b {
-        return SdkClient.request<SchemaSchema1459c10b>(
+    ): DirectoryGroupRoleMappingList {
+        return SdkClient.request<DirectoryGroupRoleMappingList>(
                 SdkClient.RequestSpec(
                     "PUT",
                     "/directories/${SdkClient.encodePathSegment(directoryId)}/group_role_mappings",
@@ -467,8 +444,8 @@ object DirectoriesMethods {
         directoryId: String,
         mappingId: String,
         options: RequestOptions? = null,
-    ): SchemaSchema0a4178a1 {
-        return SdkClient.request<SchemaSchema0a4178a1>(
+    ): DirectoryGroupRoleMappingDeleted {
+        return SdkClient.request<DirectoryGroupRoleMappingDeleted>(
                 SdkClient.RequestSpec(
                     "DELETE",
                     "/directories/${SdkClient.encodePathSegment(directoryId)}/group_role_mappings/${SdkClient.encodePathSegment(mappingId)}",

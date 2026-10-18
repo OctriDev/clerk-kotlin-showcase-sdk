@@ -9,7 +9,7 @@ class ScimDirectoriesNamespace(private val clientConfig: ClientConfig) {
         limit: Long? = null,
         offset: Long? = null,
         options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.SchemaSchemaa0ee7c0b {
+    ): SCIMDirectoryList {
         return dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.listScimDirectories(
             clientConfig,
             limit,
@@ -111,7 +111,7 @@ class ScimDirectoriesNamespace(private val clientConfig: ClientConfig) {
     fun listScimGroupRoleMappings(
         scimDirectoryId: String,
         options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.SchemaSchemac6c780d9 {
+    ): SCIMGroupRoleMappingList {
         return dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.listScimGroupRoleMappings(
             clientConfig,
             scimDirectoryId,
@@ -154,7 +154,7 @@ class ScimDirectoriesNamespace(private val clientConfig: ClientConfig) {
                 dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.ReplaceSCIMGroupRoleMappingsMappingsItem
             >,
         options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.SchemaSchemac6c780d9 {
+    ): SCIMGroupRoleMappingList {
         return dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.replaceScimGroupRoleMappings(
             clientConfig,
             scimDirectoryId,
@@ -171,7 +171,7 @@ class ScimDirectoriesNamespace(private val clientConfig: ClientConfig) {
         scimDirectoryId: String,
         mappingId: String,
         options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.SchemaSchemab78302a9 {
+    ): SCIMGroupRoleMappingDeleted {
         return dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.deleteScimGroupRoleMapping(
             clientConfig,
             scimDirectoryId,

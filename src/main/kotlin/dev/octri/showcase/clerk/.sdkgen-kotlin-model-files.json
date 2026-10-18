@@ -15,6 +15,8 @@
     "models/EnumsPart6.kt",
     "models/EnumsPart7.kt",
     "models/EnumsPart8.kt",
+    "models/InstanceSettings.kt",
+    "models/InvitationRevoked.kt",
     "models/JWTTemplate.kt",
     "models/ModelsAllowListBlockList.kt",
     "models/ModelsBilling.kt",
@@ -42,11 +44,11 @@
     "models/ModelsSharedOrganization.kt",
     "models/ModelsSharedPhone.kt",
     "models/ModelsSharedSession.kt",
-    "models/ModelsSharedVerification.kt",
     "models/ModelsSignUps.kt",
     "models/ModelsSsoBypass.kt",
     "models/ModelsUsers.kt",
     "models/ModelsUsersPart2.kt",
+    "models/ModelsWaitlistEntries.kt",
     "models/Permissions.kt",
     "models/ProxyCheck.kt",
     "models/RedirectURL.kt",
@@ -55,7 +57,9 @@
     "models/SvixURL.kt",
     "models/Template.kt",
     "models/TestingToken.kt",
-    "models/WaitlistEntry.kt",
-    "ModelsPart2.kt"
+    "models/VerificationResponse.kt",
+    "models/VerifyOAuthAccessTokenResponse.kt",
+    "ModelsPart2.kt",
+    "ModelsPart3.kt"
   ]
 }

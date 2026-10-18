@@ -68,6 +68,14 @@ data class SCIMDirectory(
     @com.fasterxml.jackson.annotation.JsonProperty("api_key") val apiKey: String? = null,
 )
 
+/** Typed representation of the `SCIMDirectoryList` API schema. */
+data class SCIMDirectoryList(
+    /** Required array value serialized in the `data` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: SCIMDirectories,
+    /** Total number of directories. */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long,
+)
+
 /**
  * A mapping from a SCIM group to an organization role. Members of the group are assigned the role;
  * the lowest-precedence match wins when a user belongs to multiple mapped groups.
@@ -107,6 +115,25 @@ data class SCIMGroupRoleMapping(
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
     /** Optional object value serialized in the `role` wire field. */
     val role: Role? = null,
+)
+
+/** Typed representation of the `SCIMGroupRoleMappingDeleted` API schema. */
+data class SCIMGroupRoleMappingDeleted(
+    /** String representing the object's type. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: SCIMGroupRoleMappingDeletedObjectEnum,
+    /** The ID of the deleted SCIM group role mapping. */
+    val id: String,
+    /** Whether the SCIM group role mapping was successfully deleted. */
+    val deleted: Boolean,
+)
+
+/** Typed representation of the `SCIMGroupRoleMappingList` API schema. */
+data class SCIMGroupRoleMappingList(
+    /** Required array value serialized in the `data` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: SCIMGroupRoleMappings,
+    /** Total number of SCIM group role mappings in the directory. */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long,
 )
 
 typealias SCIMGroupRoleMappings = List<SCIMGroupRoleMapping>

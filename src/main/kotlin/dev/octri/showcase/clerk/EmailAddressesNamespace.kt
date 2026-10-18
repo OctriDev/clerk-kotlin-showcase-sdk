@@ -91,7 +91,7 @@ class EmailAddressesNamespace(private val clientConfig: ClientConfig) {
     fun prepareEmailAddressVerification(
         emailAddressId: String,
         options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.EmailAddresses.SchemaSchema3e93ce8e {
+    ): VerificationResponse {
         return dev.octri.showcase.clerk.methods.EmailAddresses.prepareEmailAddressVerification(
             clientConfig,
             emailAddressId,
@@ -112,7 +112,7 @@ class EmailAddressesNamespace(private val clientConfig: ClientConfig) {
         verificationId: String,
         code: String,
         options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.EmailAddresses.SchemaSchema3e93ce8e {
+    ): VerificationResponse {
         return dev.octri.showcase.clerk.methods.EmailAddresses.attemptEmailAddressVerification(
             clientConfig,
             emailAddressId,

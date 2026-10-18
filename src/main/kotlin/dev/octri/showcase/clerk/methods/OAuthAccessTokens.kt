@@ -6,6 +6,7 @@ package dev.octri.showcase.clerk.methods
 import dev.octri.showcase.clerk.ClientConfig
 import dev.octri.showcase.clerk.RequestOptions
 import dev.octri.showcase.clerk.SdkClient
+import dev.octri.showcase.clerk.VerifyOAuthAccessTokenResponse
 
 object OAuthAccessTokens {
 
@@ -23,8 +24,8 @@ object OAuthAccessTokens {
         accessToken: String? = null,
         secret: String? = null,
         options: RequestOptions? = null,
-    ): Map<String, Any> {
-        return SdkClient.request<Map<String, Any>>(
+    ): VerifyOAuthAccessTokenResponse {
+        return SdkClient.request<VerifyOAuthAccessTokenResponse>(
                 SdkClient.RequestSpec(
                     "POST",
                     "/oauth_applications/access_tokens/verify",

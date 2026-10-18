@@ -10,25 +10,9 @@ import dev.octri.showcase.clerk.EmailAddress
 import dev.octri.showcase.clerk.ReplaceUserEmailAddressIdentificationStatusEnum
 import dev.octri.showcase.clerk.RequestOptions
 import dev.octri.showcase.clerk.SdkClient
+import dev.octri.showcase.clerk.VerificationResponse
 
 object EmailAddresses {
-
-    data class SchemaSchema3e93ce8e(
-        /** The type of the verification object. */
-        @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-        /** The ID of the verification. Pass this to attempt_verification. */
-        val id: String? = null,
-        /** The status of the verification (unverified, verified, expired, or failed). */
-        val status: String? = null,
-        /** The verification strategy (email_code or phone_code). */
-        val strategy: String? = null,
-        /** The number of attempts made against this verification. */
-        val attempts: Long? = null,
-        /** Unix timestamp (milliseconds) at which the code expires. */
-        @com.fasterxml.jackson.annotation.JsonProperty("expire_at") val expireAt: Long? = null,
-        /** The channel the code was sent over (phone numbers only). */
-        val channel: String? = null,
-    )
 
     /**
      * Creates a new email address for a user. Supply `user_id` and an RFC 5322-formatted
@@ -216,8 +200,8 @@ object EmailAddresses {
         clientConfig: ClientConfig,
         emailAddressId: String,
         options: RequestOptions? = null,
-    ): SchemaSchema3e93ce8e {
-        return SdkClient.request<SchemaSchema3e93ce8e>(
+    ): VerificationResponse {
+        return SdkClient.request<VerificationResponse>(
                 SdkClient.RequestSpec(
                     "POST",
                     "/email_addresses/${SdkClient.encodePathSegment(emailAddressId)}/prepare_verification",
@@ -258,8 +242,8 @@ object EmailAddresses {
         verificationId: String,
         code: String,
         options: RequestOptions? = null,
-    ): SchemaSchema3e93ce8e {
-        return SdkClient.request<SchemaSchema3e93ce8e>(
+    ): VerificationResponse {
+        return SdkClient.request<VerificationResponse>(
                 SdkClient.RequestSpec(
                     "POST",
                     "/email_addresses/${SdkClient.encodePathSegment(emailAddressId)}/attempt_verification",

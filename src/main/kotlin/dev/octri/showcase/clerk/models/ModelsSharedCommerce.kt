@@ -36,10 +36,10 @@ data class CommerceCreditLedgerResponse(
 
 /** Typed representation of the `CommerceCreditsResponse` API schema. */
 data class CommerceCreditsResponse(
-    /** Required API value serialized in the `proration` wire field. */
+    /** Required object value serialized in the `proration` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("proration", required = true)
     val proration: CommerceProrationCreditDetailResponse?,
-    /** Required API value serialized in the `payer` wire field. */
+    /** Required object value serialized in the `payer` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("payer", required = true)
     val payer: CommercePayerCreditResponse?,
     /** Required object value serialized in the `total` wire field. */
@@ -48,7 +48,7 @@ data class CommerceCreditsResponse(
 
 /** Typed representation of the `CommerceDiscountsResponse` API schema. */
 data class CommerceDiscountsResponse(
-    /** Required API value serialized in the `proration` wire field. */
+    /** Required object value serialized in the `proration` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("proration", required = true)
     val proration: CommerceProrationDiscountResponse?,
     /** Required object value serialized in the `total` wire field. */
@@ -204,13 +204,13 @@ data class CommercePlan(
     val id: String,
     /** The name of the plan. */
     val name: String,
-    /** Required API value serialized in the `fee` wire field. */
+    /** Required object value serialized in the `fee` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("fee", required = true)
     val fee: CommerceMoneyResponse?,
-    /** Required API value serialized in the `annual_monthly_fee` wire field. */
+    /** Required object value serialized in the `annual_monthly_fee` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("annual_monthly_fee", required = true)
     val annualMonthlyFee: CommerceMoneyResponse?,
-    /** Required API value serialized in the `annual_fee` wire field. */
+    /** Required object value serialized in the `annual_fee` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("annual_fee", required = true)
     val annualFee: CommerceMoneyResponse?,
     /** The description of the plan. */

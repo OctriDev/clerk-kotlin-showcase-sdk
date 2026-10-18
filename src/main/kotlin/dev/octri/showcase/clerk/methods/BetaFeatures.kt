@@ -5,31 +5,11 @@ package dev.octri.showcase.clerk.methods
 
 import dev.octri.showcase.clerk.ClerkErrors
 import dev.octri.showcase.clerk.ClientConfig
+import dev.octri.showcase.clerk.InstanceSettings
 import dev.octri.showcase.clerk.RequestOptions
-import dev.octri.showcase.clerk.SchemaSchemaObjectEnume5de16a2
 import dev.octri.showcase.clerk.SdkClient
 
 object BetaFeatures {
-
-    data class SchemaSchema382061cc(
-        /** String representing the object's type. Objects of the same type share the same value. */
-        @com.fasterxml.jackson.annotation.JsonProperty("object")
-        val `object`: SchemaSchemaObjectEnume5de16a2? = null,
-        val id: String? = null,
-        @com.fasterxml.jackson.annotation.JsonProperty("restricted_to_allowlist")
-        val restrictedToAllowlist: Boolean? = null,
-        @com.fasterxml.jackson.annotation.JsonProperty("from_email_address")
-        val fromEmailAddress: String? = null,
-        @com.fasterxml.jackson.annotation.JsonProperty("progressive_sign_up")
-        val progressiveSignUp: Boolean? = null,
-        /**
-         * Deprecated. This setting is retired and no longer affects email delivery; all email is
-         * sent through the instance's configured email sending domain. The field is preserved for
-         * API compatibility only and will be removed in a future version.
-         */
-        @com.fasterxml.jackson.annotation.JsonProperty("enhanced_email_deliverability")
-        val enhancedEmailDeliverability: Boolean? = null,
-    )
 
     /**
      * Updates instance authentication settings, including allowlist restrictions, the sender
@@ -57,8 +37,8 @@ object BetaFeatures {
         progressiveSignUp: SdkClient.SdkOptional<Boolean?>? = null,
         testMode: SdkClient.SdkOptional<Boolean?>? = null,
         options: RequestOptions? = null,
-    ): SchemaSchema382061cc {
-        return SdkClient.request<SchemaSchema382061cc>(
+    ): InstanceSettings {
+        return SdkClient.request<InstanceSettings>(
                 SdkClient.RequestSpec(
                     "PATCH",
                     "/beta_features/instance_settings",

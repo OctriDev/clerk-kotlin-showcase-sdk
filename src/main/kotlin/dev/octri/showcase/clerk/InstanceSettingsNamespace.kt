@@ -12,7 +12,10 @@ class InstanceSettingsNamespace(private val clientConfig: ClientConfig) {
      * Fetches the current instance
      */
     fun getInstance(options: RequestOptions? = null): Instance {
-        return dev.octri.showcase.clerk.methods.InstanceSettings.getInstance(clientConfig, options)
+        return dev.octri.showcase.clerk.methods.InstanceSettingsMethods.getInstance(
+            clientConfig,
+            options,
+        )
     }
 
     /**
@@ -24,10 +27,10 @@ class InstanceSettingsNamespace(private val clientConfig: ClientConfig) {
      * Updates the settings of an instance
      */
     fun updateInstance(
-        request: dev.octri.showcase.clerk.methods.InstanceSettings.UpdateInstanceRequest,
+        request: dev.octri.showcase.clerk.methods.InstanceSettingsMethods.UpdateInstanceRequest,
         options: RequestOptions? = null,
     ): Unit {
-        return dev.octri.showcase.clerk.methods.InstanceSettings.updateInstance(
+        return dev.octri.showcase.clerk.methods.InstanceSettingsMethods.updateInstance(
             clientConfig,
             request,
             options,
@@ -49,7 +52,7 @@ class InstanceSettingsNamespace(private val clientConfig: ClientConfig) {
         blockDisposableEmailDomains: SdkClient.SdkOptional<Boolean?>? = null,
         options: RequestOptions? = null,
     ): InstanceRestrictions {
-        return dev.octri.showcase.clerk.methods.InstanceSettings.updateInstanceRestrictions(
+        return dev.octri.showcase.clerk.methods.InstanceSettingsMethods.updateInstanceRestrictions(
             clientConfig,
             allowlist,
             blocklist,
@@ -66,7 +69,7 @@ class InstanceSettingsNamespace(private val clientConfig: ClientConfig) {
      * where rules are scored and recorded without blocking traffic.
      */
     fun getInstanceProtect(options: RequestOptions? = null): InstanceProtect {
-        return dev.octri.showcase.clerk.methods.InstanceSettings.getInstanceProtect(
+        return dev.octri.showcase.clerk.methods.InstanceSettingsMethods.getInstanceProtect(
             clientConfig,
             options,
         )
@@ -81,7 +84,7 @@ class InstanceSettingsNamespace(private val clientConfig: ClientConfig) {
         rulesEnabled: SdkClient.SdkOptional<Boolean?>? = null,
         options: RequestOptions? = null,
     ): InstanceProtect {
-        return dev.octri.showcase.clerk.methods.InstanceSettings.updateInstanceProtect(
+        return dev.octri.showcase.clerk.methods.InstanceSettingsMethods.updateInstanceProtect(
             clientConfig,
             rulesEnabled,
             options,
@@ -92,7 +95,7 @@ class InstanceSettingsNamespace(private val clientConfig: ClientConfig) {
      * Retrieves the per-instance SMS communication settings, including the SMS country blocklist.
      */
     fun getInstanceCommunication(options: RequestOptions? = null): InstanceCommunication {
-        return dev.octri.showcase.clerk.methods.InstanceSettings.getInstanceCommunication(
+        return dev.octri.showcase.clerk.methods.InstanceSettingsMethods.getInstanceCommunication(
             clientConfig,
             options,
         )
@@ -107,7 +110,7 @@ class InstanceSettingsNamespace(private val clientConfig: ClientConfig) {
         blockedCountryCodes: SdkClient.SdkOptional<List<String>?>? = null,
         options: RequestOptions? = null,
     ): InstanceCommunication {
-        return dev.octri.showcase.clerk.methods.InstanceSettings.updateInstanceCommunication(
+        return dev.octri.showcase.clerk.methods.InstanceSettingsMethods.updateInstanceCommunication(
             clientConfig,
             blockedCountryCodes,
             options,
@@ -121,26 +124,24 @@ class InstanceSettingsNamespace(private val clientConfig: ClientConfig) {
     fun getInstanceOAuthApplicationSettings(
         options: RequestOptions? = null
     ): OAuthApplicationSettings {
-        return dev.octri.showcase.clerk.methods.InstanceSettings
+        return dev.octri.showcase.clerk.methods.InstanceSettingsMethods
             .getInstanceOAuthApplicationSettings(clientConfig, options)
     }
 
     /** Updates the OAuth application settings for the instance. */
     fun updateInstanceOAuthApplicationSettings(
         request:
-            dev.octri.showcase.clerk.methods.InstanceSettings.UpdateInstanceOAuthApplicationSettingsRequest,
+            dev.octri.showcase.clerk.methods.InstanceSettingsMethods.UpdateInstanceOAuthApplicationSettingsRequest,
         options: RequestOptions? = null,
     ): OAuthApplicationSettings {
-        return dev.octri.showcase.clerk.methods.InstanceSettings
+        return dev.octri.showcase.clerk.methods.InstanceSettingsMethods
             .updateInstanceOAuthApplicationSettings(clientConfig, request, options)
     }
 
     /** Retrieves the organization settings of the instance */
     fun getInstanceOrganizationSettings(options: RequestOptions? = null): OrganizationSettings {
-        return dev.octri.showcase.clerk.methods.InstanceSettings.getInstanceOrganizationSettings(
-            clientConfig,
-            options,
-        )
+        return dev.octri.showcase.clerk.methods.InstanceSettingsMethods
+            .getInstanceOrganizationSettings(clientConfig, options)
     }
 
     /**
@@ -153,13 +154,10 @@ class InstanceSettingsNamespace(private val clientConfig: ClientConfig) {
      */
     fun updateInstanceOrganizationSettings(
         request:
-            dev.octri.showcase.clerk.methods.InstanceSettings.UpdateInstanceOrganizationSettingsRequest,
+            dev.octri.showcase.clerk.methods.InstanceSettingsMethods.UpdateInstanceOrganizationSettingsRequest,
         options: RequestOptions? = null,
     ): OrganizationSettings {
-        return dev.octri.showcase.clerk.methods.InstanceSettings.updateInstanceOrganizationSettings(
-            clientConfig,
-            request,
-            options,
-        )
+        return dev.octri.showcase.clerk.methods.InstanceSettingsMethods
+            .updateInstanceOrganizationSettings(clientConfig, request, options)
     }
 }

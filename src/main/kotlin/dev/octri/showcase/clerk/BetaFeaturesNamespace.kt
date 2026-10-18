@@ -18,7 +18,7 @@ class BetaFeaturesNamespace(private val clientConfig: ClientConfig) {
         progressiveSignUp: SdkClient.SdkOptional<Boolean?>? = null,
         testMode: SdkClient.SdkOptional<Boolean?>? = null,
         options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.BetaFeatures.SchemaSchema382061cc {
+    ): InstanceSettings {
         return dev.octri.showcase.clerk.methods.BetaFeatures.updateInstanceAuthConfig(
             clientConfig,
             restrictedToAllowlist,
