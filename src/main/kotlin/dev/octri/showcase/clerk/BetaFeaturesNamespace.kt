@@ -10,7 +10,7 @@ class BetaFeaturesNamespace(private val clientConfig: ClientConfig) {
      *
      * Updates the settings of an instance
      */
-    fun updateInstanceAuthConfig(restrictedToAllowlist: SdkClient.SdkOptional<Boolean?>? = null, fromEmailAddress: SdkClient.SdkOptional<String?>? = null, progressiveSignUp: SdkClient.SdkOptional<Boolean?>? = null, testMode: SdkClient.SdkOptional<Boolean?>? = null, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.BetaFeatures.SchemaSchema382061cc {
+    fun updateInstanceAuthConfig(restrictedToAllowlist: SdkClient.SdkOptional<Boolean?>? = null, fromEmailAddress: SdkClient.SdkOptional<String?>? = null, progressiveSignUp: SdkClient.SdkOptional<Boolean?>? = null, testMode: SdkClient.SdkOptional<Boolean?>? = null, options: RequestOptions? = null): InstanceSettings {
         return dev.octri.showcase.clerk.methods.BetaFeatures.updateInstanceAuthConfig(clientConfig, restrictedToAllowlist, fromEmailAddress, progressiveSignUp, testMode, options)
     }
 

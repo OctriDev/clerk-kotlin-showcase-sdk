@@ -5,26 +5,11 @@ package dev.octri.showcase.clerk.methods
 
 import dev.octri.showcase.clerk.ClerkErrors
 import dev.octri.showcase.clerk.ClientConfig
+import dev.octri.showcase.clerk.InstanceSettings
 import dev.octri.showcase.clerk.RequestOptions
-import dev.octri.showcase.clerk.SchemaSchemaObjectEnume5de16a2
 import dev.octri.showcase.clerk.SdkClient
 
 object BetaFeatures {
-
-data class SchemaSchema382061cc(
-    /**
-     * String representing the object's type. Objects of the same type share the same value.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: SchemaSchemaObjectEnume5de16a2? = null,
-    val id: String? = null,
-    @com.fasterxml.jackson.annotation.JsonProperty("restricted_to_allowlist") val restrictedToAllowlist: Boolean? = null,
-    @com.fasterxml.jackson.annotation.JsonProperty("from_email_address") val fromEmailAddress: String? = null,
-    @com.fasterxml.jackson.annotation.JsonProperty("progressive_sign_up") val progressiveSignUp: Boolean? = null,
-    /**
-     * Deprecated. This setting is retired and no longer affects email delivery; all email is sent through the instance's configured email sending domain. The field is preserved for API compatibility only and will be removed in a future version.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("enhanced_email_deliverability") val enhancedEmailDeliverability: Boolean? = null
-)
 
 
     /**
@@ -43,8 +28,8 @@ data class SchemaSchema382061cc(
      * @param testMode Toggles test mode for this instance, allowing the use of test
      *   email addresses and phone numbers. Defaults to true for development instances.
      */
-    fun updateInstanceAuthConfig(clientConfig: ClientConfig, restrictedToAllowlist: SdkClient.SdkOptional<Boolean?>? = null, fromEmailAddress: SdkClient.SdkOptional<String?>? = null, progressiveSignUp: SdkClient.SdkOptional<Boolean?>? = null, testMode: SdkClient.SdkOptional<Boolean?>? = null, options: RequestOptions? = null): SchemaSchema382061cc {
-        return SdkClient.request<SchemaSchema382061cc>(SdkClient.RequestSpec("PATCH", "/beta_features/instance_settings", config = clientConfig, body = SdkClient.bodyMap("restricted_to_allowlist" to
+    fun updateInstanceAuthConfig(clientConfig: ClientConfig, restrictedToAllowlist: SdkClient.SdkOptional<Boolean?>? = null, fromEmailAddress: SdkClient.SdkOptional<String?>? = null, progressiveSignUp: SdkClient.SdkOptional<Boolean?>? = null, testMode: SdkClient.SdkOptional<Boolean?>? = null, options: RequestOptions? = null): InstanceSettings {
+        return SdkClient.request<InstanceSettings>(SdkClient.RequestSpec("PATCH", "/beta_features/instance_settings", config = clientConfig, body = SdkClient.bodyMap("restricted_to_allowlist" to
     (restrictedToAllowlist ?: SdkClient.SdkOptional.Omitted), "from_email_address" to
     (fromEmailAddress ?: SdkClient.SdkOptional.Omitted), "progressive_sign_up" to
     (progressiveSignUp ?: SdkClient.SdkOptional.Omitted), "test_mode" to (testMode ?: SdkClient.SdkOptional.Omitted)), operationId = "updateInstanceAuthConfig", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("402" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data

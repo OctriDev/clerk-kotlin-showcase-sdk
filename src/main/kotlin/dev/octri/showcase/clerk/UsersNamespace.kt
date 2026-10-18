@@ -223,7 +223,7 @@ class UsersNamespace(private val clientConfig: ClientConfig) {
      * @deprecated This operation is deprecated and may be removed in a future
      *   release.
      */
-    fun listTrustedDevices(userId: String, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.Users.SchemaSchema36c20f95 {
+    fun listTrustedDevices(userId: String, options: RequestOptions? = null): TrustedDeviceList {
         return dev.octri.showcase.clerk.methods.Users.listUserTrustedDevices(clientConfig, userId, options)
     }
 
@@ -240,7 +240,7 @@ class UsersNamespace(private val clientConfig: ClientConfig) {
     /**
      * Returns the active biometric credentials enrolled by the user.
      */
-    fun listBiometricCredentials(userId: String, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.Users.SchemaSchema {
+    fun listBiometricCredentials(userId: String, options: RequestOptions? = null): BiometricCredentialList {
         return dev.octri.showcase.clerk.methods.Users.listUserBiometricCredentials(clientConfig, userId, options)
     }
 

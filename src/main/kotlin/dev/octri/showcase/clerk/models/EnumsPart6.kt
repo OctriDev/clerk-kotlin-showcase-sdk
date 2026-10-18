@@ -387,6 +387,41 @@ class VerificationWeb3StrategyEnum private constructor(
     }
 }
 
+class VerifyOAuthAccessTokenResponseVariant0ObjectEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is VerifyOAuthAccessTokenResponseVariant0ObjectEnum && value == other.value
+    override fun hashCode(): Int = value.hashCode()
+    override fun toString(): String = value
+
+    companion object {
+
+        @JvmField val CLERK_IDP_OAUTH_ACCESS_TOKEN = VerifyOAuthAccessTokenResponseVariant0ObjectEnum("clerk_idp_oauth_access_token")
+
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = VerifyOAuthAccessTokenResponseVariant0ObjectEnum(value)
+    }
+}
+
+/**
+ * Indicates that a JWT access token is not active (expired)
+ */
+class VerifyOAuthAccessTokenResponseVariant1ActiveEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: Boolean,
+) {
+    override fun equals(other: Any?): Boolean = other is VerifyOAuthAccessTokenResponseVariant1ActiveEnum && value == other.value
+    override fun hashCode(): Int = value.hashCode()
+    override fun toString(): String = value.toString()
+
+    companion object {
+
+        @JvmField val FALSE = VerifyOAuthAccessTokenResponseVariant1ActiveEnum(false)
+
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: Boolean) = VerifyOAuthAccessTokenResponseVariant1ActiveEnum(value)
+    }
+}
+
 /**
  * Required enumerated value serialized in the `object` wire field.
  */
@@ -544,53 +579,5 @@ class CreateApiKeyResponseObjectEnum private constructor(
 
         @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
         @JvmStatic fun fromValue(value: String) = CreateApiKeyResponseObjectEnum(value)
-    }
-}
-
-class DeleteApiKeyResponseDeletedEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: Boolean,
-) {
-    override fun equals(other: Any?): Boolean = other is DeleteApiKeyResponseDeletedEnum && value == other.value
-    override fun hashCode(): Int = value.hashCode()
-    override fun toString(): String = value.toString()
-
-    companion object {
-
-        @JvmField val TRUE = DeleteApiKeyResponseDeletedEnum(true)
-
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: Boolean) = DeleteApiKeyResponseDeletedEnum(value)
-    }
-}
-
-class DeleteApiKeyResponseObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is DeleteApiKeyResponseObjectEnum && value == other.value
-    override fun hashCode(): Int = value.hashCode()
-    override fun toString(): String = value
-
-    companion object {
-
-        @JvmField val API_KEY = DeleteApiKeyResponseObjectEnum("api_key")
-
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = DeleteApiKeyResponseObjectEnum(value)
-    }
-}
-
-class GetApiKeyResponseObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is GetApiKeyResponseObjectEnum && value == other.value
-    override fun hashCode(): Int = value.hashCode()
-    override fun toString(): String = value
-
-    companion object {
-
-        @JvmField val API_KEY = GetApiKeyResponseObjectEnum("api_key")
-
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = GetApiKeyResponseObjectEnum(value)
     }
 }

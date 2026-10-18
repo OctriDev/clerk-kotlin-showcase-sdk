@@ -4,6 +4,7 @@
 package dev.octri.showcase.clerk.methods
 
 import dev.octri.showcase.clerk.BiometricCredential
+import dev.octri.showcase.clerk.BiometricCredentialList
 import dev.octri.showcase.clerk.ClerkErrors
 import dev.octri.showcase.clerk.ClientConfig
 import dev.octri.showcase.clerk.CommerceCreditBalanceResponse
@@ -16,6 +17,7 @@ import dev.octri.showcase.clerk.OrganizationMemberships
 import dev.octri.showcase.clerk.RequestOptions
 import dev.octri.showcase.clerk.SdkClient
 import dev.octri.showcase.clerk.TrustedDevice
+import dev.octri.showcase.clerk.TrustedDeviceList
 import dev.octri.showcase.clerk.User
 import dev.octri.showcase.clerk.UsersGetOrganizationInvitationsParameterEnum
 import dev.octri.showcase.clerk.Validation
@@ -258,8 +260,8 @@ internal object UsersListUserTrustedDevicesOperation {
      * @deprecated This operation is deprecated and may be removed in a future
      *   release.
      */
-    fun listUserTrustedDevices(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): Users.SchemaSchema36c20f95 {
-        return SdkClient.request<Users.SchemaSchema36c20f95>(SdkClient.RequestSpec("GET", "/users/${SdkClient.encodePathSegment(userId)}/trusted_devices", config = clientConfig, operationId = "listUserTrustedDevices", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
+    fun listUserTrustedDevices(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): TrustedDeviceList {
+        return SdkClient.request<TrustedDeviceList>(SdkClient.RequestSpec("GET", "/users/${SdkClient.encodePathSegment(userId)}/trusted_devices", config = clientConfig, operationId = "listUserTrustedDevices", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
     }
 }
 
@@ -283,8 +285,8 @@ internal object UsersListUserBiometricCredentialsOperation {
      *
      * @param userId The ID of the user whose biometric credentials are returned
      */
-    fun listUserBiometricCredentials(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): Users.SchemaSchema {
-        return SdkClient.request<Users.SchemaSchema>(SdkClient.RequestSpec("GET", "/users/${SdkClient.encodePathSegment(userId)}/biometric_credentials", config = clientConfig, operationId = "listUserBiometricCredentials", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
+    fun listUserBiometricCredentials(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): BiometricCredentialList {
+        return SdkClient.request<BiometricCredentialList>(SdkClient.RequestSpec("GET", "/users/${SdkClient.encodePathSegment(userId)}/biometric_credentials", config = clientConfig, operationId = "listUserBiometricCredentials", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
     }
 }
 

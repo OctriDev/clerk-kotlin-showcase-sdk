@@ -9,10 +9,9 @@ import dev.octri.showcase.clerk.CreateBulkInvitationsItemTemplateSlugEnum
 import dev.octri.showcase.clerk.CreateInvitationTemplateSlugEnum
 import dev.octri.showcase.clerk.DeletedObject
 import dev.octri.showcase.clerk.Invitation
-import dev.octri.showcase.clerk.InvitationObjectEnum
+import dev.octri.showcase.clerk.InvitationRevoked
 import dev.octri.showcase.clerk.ListInvitationsParameterEnum
 import dev.octri.showcase.clerk.RequestOptions
-import dev.octri.showcase.clerk.SchemaSchemaVariant1StatusEnum
 import dev.octri.showcase.clerk.SdkClient
 import dev.octri.showcase.clerk.Validation
 
@@ -47,47 +46,6 @@ data class CreateBulkInvitationsItem(
      * The slug of the email template to use for the invitation email.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("template_slug") val templateSlug: CreateBulkInvitationsItemTemplateSlugEnum? = null
-)
-
-
-
-
-
-data class SchemaSchemadd079084(
-    /**
-     * Required enumerated value serialized in the `object` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: InvitationObjectEnum,
-    /**
-     * Required `string` value serialized in the `id` wire field.
-     */
-    val id: String,
-    /**
-     * Required `email`-formatted value serialized in the `email_address` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("email_address") val emailAddress: String,
-    /**
-     * Required object value serialized in the `public_metadata` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("public_metadata") val publicMetadata: Map<String, Any>,
-    val status: SchemaSchemaVariant1StatusEnum,
-    /**
-     * Unix timestamp of creation.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Unix timestamp of last update.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
-    val revoked: Boolean? = null,
-    /**
-     * Optional `string` value serialized in the `url` wire field.
-     */
-    val url: String? = null,
-    /**
-     * Unix timestamp of expiration.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long? = null
 )
 
 
@@ -243,8 +201,8 @@ if (expiresInDaysValue != null) {
      *
      * @param invitationId The ID of the invitation to be revoked
      */
-    fun revokeInvitation(clientConfig: ClientConfig, invitationId: String, options: RequestOptions? = null): SchemaSchemadd079084 {
-        return SdkClient.request<SchemaSchemadd079084>(SdkClient.RequestSpec("POST", "/invitations/${SdkClient.encodePathSegment(invitationId)}/revoke", config = clientConfig, operationId = "revokeInvitation", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
+    fun revokeInvitation(clientConfig: ClientConfig, invitationId: String, options: RequestOptions? = null): InvitationRevoked {
+        return SdkClient.request<InvitationRevoked>(SdkClient.RequestSpec("POST", "/invitations/${SdkClient.encodePathSegment(invitationId)}/revoke", config = clientConfig, operationId = "revokeInvitation", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
     }
 
 

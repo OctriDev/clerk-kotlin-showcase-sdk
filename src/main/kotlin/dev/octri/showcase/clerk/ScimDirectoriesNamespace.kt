@@ -8,7 +8,7 @@ class ScimDirectoriesNamespace(private val clientConfig: ClientConfig) {
     /**
      * Returns a list of all directories for the instance.
      */
-    fun list(limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.SchemaSchemaa0ee7c0b {
+    fun list(limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): SCIMDirectoryList {
         return dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.listScimDirectories(clientConfig, limit, offset, options)
     }
 
@@ -56,7 +56,7 @@ class ScimDirectoriesNamespace(private val clientConfig: ClientConfig) {
     /**
      * Returns the list of SCIM group to organization role mappings for a directory, ordered by precedence.
      */
-    fun listScimGroupRoleMappings(scimDirectoryId: String, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.SchemaSchemac6c780d9 {
+    fun listScimGroupRoleMappings(scimDirectoryId: String, options: RequestOptions? = null): SCIMGroupRoleMappingList {
         return dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.listScimGroupRoleMappings(clientConfig, scimDirectoryId, options)
     }
 
@@ -70,14 +70,14 @@ class ScimDirectoriesNamespace(private val clientConfig: ClientConfig) {
     /**
      * Replaces the entire set of SCIM group role mappings for a directory. The position of each item in the `mappings` array determines its precedence (the first item gets precedence 1). Passing an empty array removes all mappings. Mappings can be replaced while group role mapping is disabled on the directory, but they only take effect once it is enabled.
      */
-    fun replaceScimGroupRoleMappings(scimDirectoryId: String, mappings: List<dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.ReplaceSCIMGroupRoleMappingsMappingsItem>, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.SchemaSchemac6c780d9 {
+    fun replaceScimGroupRoleMappings(scimDirectoryId: String, mappings: List<dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.ReplaceSCIMGroupRoleMappingsMappingsItem>, options: RequestOptions? = null): SCIMGroupRoleMappingList {
         return dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.replaceScimGroupRoleMappings(clientConfig, scimDirectoryId, mappings, options)
     }
 
     /**
      * Deletes a single SCIM group role mapping. Mappings can be deleted while group role mapping is disabled on the directory, but the change only takes effect once it is enabled.
      */
-    fun deleteScimGroupRoleMapping(scimDirectoryId: String, mappingId: String, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.SchemaSchemab78302a9 {
+    fun deleteScimGroupRoleMapping(scimDirectoryId: String, mappingId: String, options: RequestOptions? = null): SCIMGroupRoleMappingDeleted {
         return dev.octri.showcase.clerk.methods.ScimDirectoriesMethods.deleteScimGroupRoleMapping(clientConfig, scimDirectoryId, mappingId, options)
     }
 

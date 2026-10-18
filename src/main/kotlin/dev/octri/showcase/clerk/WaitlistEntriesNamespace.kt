@@ -8,15 +8,15 @@ class WaitlistEntriesNamespace(private val clientConfig: ClientConfig) {
     /**
      * Retrieve a list of waitlist entries for the instance. Entries are ordered by creation date in descending order by default. Supports filtering by email address or status and pagination with limit and offset parameters.
      */
-    fun list(limit: Long? = null, offset: Long? = null, query: String? = null, status: ListWaitlistEntriesParameterEnum? = null, orderBy: String? = null, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.WaitlistEntries.SchemaSchema45ad91e0 {
-        return dev.octri.showcase.clerk.methods.WaitlistEntries.listWaitlistEntries(clientConfig, limit, offset, query, status, orderBy, options)
+    fun list(limit: Long? = null, offset: Long? = null, query: String? = null, status: ListWaitlistEntriesParameterEnum? = null, orderBy: String? = null, options: RequestOptions? = null): WaitlistEntries {
+        return dev.octri.showcase.clerk.methods.WaitlistEntriesMethods.listWaitlistEntries(clientConfig, limit, offset, query, status, orderBy, options)
     }
 
     /**
      * Creates a new waitlist entry for the given email address. If the email address is already on the waitlist, no new entry will be created and the existing waitlist entry will be returned.
      */
     fun create(emailAddress: String, notify: SdkClient.SdkOptional<Boolean?>? = null, options: RequestOptions? = null): WaitlistEntry {
-        return dev.octri.showcase.clerk.methods.WaitlistEntries.createWaitlistEntry(clientConfig, emailAddress, notify, options)
+        return dev.octri.showcase.clerk.methods.WaitlistEntriesMethods.createWaitlistEntry(clientConfig, emailAddress, notify, options)
     }
 
     /**
@@ -24,8 +24,8 @@ class WaitlistEntriesNamespace(private val clientConfig: ClientConfig) {
      *
      * Creates multiple waitlist entries for the provided email addresses. You can choose whether to send confirmation emails by setting the `notify` parameter to `true` or `false` for each entry. If the `notify` parameter is omitted, it defaults to `true`. If an email address is already on the waitlist, no new entry will be created and the existing waitlist entry will be returned. Duplicate email addresses within the same request are not allowed. This endpoint is limited to a…
      */
-    fun createBulk(body: List<dev.octri.showcase.clerk.methods.WaitlistEntries.CreateBulkWaitlistEntriesItem>? = null, options: RequestOptions? = null): List<WaitlistEntry> {
-        return dev.octri.showcase.clerk.methods.WaitlistEntries.createBulkWaitlistEntries(clientConfig, body, options)
+    fun createBulk(body: List<dev.octri.showcase.clerk.methods.WaitlistEntriesMethods.CreateBulkWaitlistEntriesItem>? = null, options: RequestOptions? = null): List<WaitlistEntry> {
+        return dev.octri.showcase.clerk.methods.WaitlistEntriesMethods.createBulkWaitlistEntries(clientConfig, body, options)
     }
 
     /**
@@ -34,14 +34,14 @@ class WaitlistEntriesNamespace(private val clientConfig: ClientConfig) {
      * Delete a pending waitlist entry.
      */
     fun delete(waitlistEntryId: String, options: RequestOptions? = null): DeletedObject {
-        return dev.octri.showcase.clerk.methods.WaitlistEntries.deleteWaitlistEntry(clientConfig, waitlistEntryId, options)
+        return dev.octri.showcase.clerk.methods.WaitlistEntriesMethods.deleteWaitlistEntry(clientConfig, waitlistEntryId, options)
     }
 
     /**
      * Send an invite to the email address in a waitlist entry.
      */
     fun invite(waitlistEntryId: String, ignoreExisting: SdkClient.SdkOptional<Boolean?>? = null, options: RequestOptions? = null): WaitlistEntry {
-        return dev.octri.showcase.clerk.methods.WaitlistEntries.inviteWaitlistEntry(clientConfig, waitlistEntryId, ignoreExisting, options)
+        return dev.octri.showcase.clerk.methods.WaitlistEntriesMethods.inviteWaitlistEntry(clientConfig, waitlistEntryId, ignoreExisting, options)
     }
 
     /**
@@ -50,7 +50,7 @@ class WaitlistEntriesNamespace(private val clientConfig: ClientConfig) {
      * Reject a waitlist entry.
      */
     fun reject(waitlistEntryId: String, options: RequestOptions? = null): WaitlistEntry {
-        return dev.octri.showcase.clerk.methods.WaitlistEntries.rejectWaitlistEntry(clientConfig, waitlistEntryId, options)
+        return dev.octri.showcase.clerk.methods.WaitlistEntriesMethods.rejectWaitlistEntry(clientConfig, waitlistEntryId, options)
     }
 
 }

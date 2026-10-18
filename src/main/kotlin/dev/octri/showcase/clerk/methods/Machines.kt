@@ -6,109 +6,17 @@ package dev.octri.showcase.clerk.methods
 import dev.octri.showcase.clerk.ClerkErrors
 import dev.octri.showcase.clerk.ClientConfig
 import dev.octri.showcase.clerk.Machine
+import dev.octri.showcase.clerk.MachineCreated
+import dev.octri.showcase.clerk.MachineDeleted
+import dev.octri.showcase.clerk.MachineList
 import dev.octri.showcase.clerk.MachineScope
-import dev.octri.showcase.clerk.MachineWithoutScopedMachines
-import dev.octri.showcase.clerk.MachineWithoutScopedMachinesObjectEnum
+import dev.octri.showcase.clerk.MachineScopeDeleted
+import dev.octri.showcase.clerk.MachineSecretKey
 import dev.octri.showcase.clerk.RequestOptions
-import dev.octri.showcase.clerk.SchemaSchemaObjectEnum384b96ba
-import dev.octri.showcase.clerk.SchemaSchemaObjectEnum47b1d8ed
-import dev.octri.showcase.clerk.SchemaSchemaObjectEnumab22cdb6
 import dev.octri.showcase.clerk.SdkClient
 import dev.octri.showcase.clerk.Validation
 
 object Machines {
-
-data class SchemaSchema11ae8042(
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Machine>,
-    /**
-     * Total number of machines
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long
-)
-
-data class SchemaSchema6ad3d7e4(
-    /**
-     * Required enumerated value serialized in the `object` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: MachineWithoutScopedMachinesObjectEnum,
-    /**
-     * Unique identifier for the machine.
-     */
-    val id: String,
-    /**
-     * The name of the machine.
-     */
-    val name: String,
-    /**
-     * The ID of the instance this machine belongs to.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("instance_id") val instanceId: String,
-    /**
-     * Unix timestamp of creation.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Unix timestamp of last update.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
-    /**
-     * Array of machines this machine has access to.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("scoped_machines") val scopedMachines: List<MachineWithoutScopedMachines>,
-    /**
-     * The secret key for the machine, only returned upon creation.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("secret_key") val secretKey: String,
-    /**
-     * The default time-to-live (TTL) in seconds for tokens created by this machine.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("default_token_ttl") val defaultTokenTtl: Long? = null
-)
-
-data class SchemaSchema7a4a2eaa(
-    /**
-     * String representing the object's type.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: SchemaSchemaObjectEnum384b96ba,
-    /**
-     * The ID of the deleted machine
-     */
-    val id: String,
-    /**
-     * Whether the machine was successfully deleted
-     */
-    val deleted: Boolean
-)
-
-data class SchemaSchema23990ad7(
-    /**
-     * String representing the object's type.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: SchemaSchemaObjectEnumab22cdb6,
-    /**
-     * The secret key for the machine.
-     */
-    val secret: String
-)
-
-data class SchemaSchema5f07b6af(
-    /**
-     * String representing the object's type.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: SchemaSchemaObjectEnum47b1d8ed,
-    /**
-     * The ID of the machine that had access to the target machine
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("from_machine_id") val fromMachineId: String,
-    /**
-     * The ID of the machine that was being accessed
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("to_machine_id") val toMachineId: String,
-    /**
-     * Whether the machine scope was successfully deleted
-     */
-    val deleted: Boolean
-)
 
 
     /**
@@ -127,7 +35,7 @@ data class SchemaSchema5f07b6af(
      *   `-created_at`. If you don't use `+` or `-`, then `+` is implied. Defaults to
      *   `-created_at`.
      */
-    fun listMachines(clientConfig: ClientConfig, limit: Long? = null, offset: Long? = null, query: String? = null, orderBy: String? = null, options: RequestOptions? = null): SchemaSchema11ae8042 {
+    fun listMachines(clientConfig: ClientConfig, limit: Long? = null, offset: Long? = null, query: String? = null, orderBy: String? = null, options: RequestOptions? = null): MachineList {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 500.0))
 }
@@ -136,7 +44,7 @@ data class SchemaSchema5f07b6af(
             Validation.validateRange("offset", offset, Validation.RangeOpts(min = 0.0))
 }
 
-        return SdkClient.request<SchemaSchema11ae8042>(SdkClient.RequestSpec("GET", "/machines", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "offset" to SdkClient.queryValue(offset, "form", true), "query" to SdkClient.queryValue(query, "form", true), "order_by" to SdkClient.queryValue(orderBy, "form", true)), operationId = "listMachines", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
+        return SdkClient.request<MachineList>(SdkClient.RequestSpec("GET", "/machines", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "offset" to SdkClient.queryValue(offset, "form", true), "query" to SdkClient.queryValue(query, "form", true), "order_by" to SdkClient.queryValue(orderBy, "form", true)), operationId = "listMachines", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
 
 
@@ -156,7 +64,7 @@ data class SchemaSchema5f07b6af(
      * @param defaultTokenTtl The default time-to-live (TTL) in seconds for tokens
      *   created by this machine. Must be at least 1 second.
      */
-    fun createMachine(clientConfig: ClientConfig, name: String, scopedMachines: List<String>? = null, defaultTokenTtl: Long? = null, options: RequestOptions? = null): SchemaSchema6ad3d7e4 {
+    fun createMachine(clientConfig: ClientConfig, name: String, scopedMachines: List<String>? = null, defaultTokenTtl: Long? = null, options: RequestOptions? = null): MachineCreated {
         Validation.validateLength("name", name, Validation.LengthOpts(min = 1, max = 255))
 
         if (scopedMachines != null) {
@@ -167,7 +75,7 @@ data class SchemaSchema5f07b6af(
             Validation.validateRange("default_token_ttl", defaultTokenTtl, Validation.RangeOpts(min = 1.0, max = 315360000.0))
 }
 
-        return SdkClient.request<SchemaSchema6ad3d7e4>(SdkClient.RequestSpec("POST", "/machines", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "scoped_machines" to (SdkClient.omitIfNull(scopedMachines)), "default_token_ttl" to
+        return SdkClient.request<MachineCreated>(SdkClient.RequestSpec("POST", "/machines", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "scoped_machines" to (SdkClient.omitIfNull(scopedMachines)), "default_token_ttl" to
     (SdkClient.omitIfNull(defaultTokenTtl))), operationId = "createMachine", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
 
@@ -228,8 +136,8 @@ data class SchemaSchema5f07b6af(
      *
      * @param machineId The ID of the machine to delete
      */
-    fun deleteMachine(clientConfig: ClientConfig, machineId: String, options: RequestOptions? = null): SchemaSchema7a4a2eaa {
-        return SdkClient.request<SchemaSchema7a4a2eaa>(SdkClient.RequestSpec("DELETE", "/machines/${SdkClient.encodePathSegment(machineId)}", config = clientConfig, operationId = "deleteMachine", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
+    fun deleteMachine(clientConfig: ClientConfig, machineId: String, options: RequestOptions? = null): MachineDeleted {
+        return SdkClient.request<MachineDeleted>(SdkClient.RequestSpec("DELETE", "/machines/${SdkClient.encodePathSegment(machineId)}", config = clientConfig, operationId = "deleteMachine", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
 
 
@@ -245,8 +153,8 @@ data class SchemaSchema5f07b6af(
      *
      * @param machineId The ID of the machine to retrieve the secret key for
      */
-    fun getMachineSecretKey(clientConfig: ClientConfig, machineId: String, options: RequestOptions? = null): SchemaSchema23990ad7 {
-        return SdkClient.request<SchemaSchema23990ad7>(SdkClient.RequestSpec("GET", "/machines/${SdkClient.encodePathSegment(machineId)}/secret_key", config = clientConfig, operationId = "getMachineSecretKey", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
+    fun getMachineSecretKey(clientConfig: ClientConfig, machineId: String, options: RequestOptions? = null): MachineSecretKey {
+        return SdkClient.request<MachineSecretKey>(SdkClient.RequestSpec("GET", "/machines/${SdkClient.encodePathSegment(machineId)}/secret_key", config = clientConfig, operationId = "getMachineSecretKey", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
     }
 
 
@@ -264,10 +172,10 @@ data class SchemaSchema5f07b6af(
      *   updating applications with the new secret key. Set to 0 to immediately expire
      *   the previous key. Maximum value is 8 hours (28800 seconds).
      */
-    fun rotateMachineSecretKey(clientConfig: ClientConfig, machineId: String, previousTokenTtl: Long, options: RequestOptions? = null): SchemaSchema23990ad7 {
+    fun rotateMachineSecretKey(clientConfig: ClientConfig, machineId: String, previousTokenTtl: Long, options: RequestOptions? = null): MachineSecretKey {
         Validation.validateRange("previous_token_ttl", previousTokenTtl, Validation.RangeOpts(min = 0.0, max = 28800.0))
 
-        return SdkClient.request<SchemaSchema23990ad7>(SdkClient.RequestSpec("POST", "/machines/${SdkClient.encodePathSegment(machineId)}/secret_key/rotate", config = clientConfig, body = SdkClient.bodyMap("previous_token_ttl" to (previousTokenTtl)), operationId = "rotateMachineSecretKey", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
+        return SdkClient.request<MachineSecretKey>(SdkClient.RequestSpec("POST", "/machines/${SdkClient.encodePathSegment(machineId)}/secret_key/rotate", config = clientConfig, body = SdkClient.bodyMap("previous_token_ttl" to (previousTokenTtl)), operationId = "rotateMachineSecretKey", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
 
 
@@ -300,8 +208,8 @@ data class SchemaSchema5f07b6af(
      * @param machineId The ID of the machine that has access to another machine
      * @param otherMachineId The ID of the machine that is being accessed
      */
-    fun deleteMachineScope(clientConfig: ClientConfig, machineId: String, otherMachineId: String, options: RequestOptions? = null): SchemaSchema5f07b6af {
-        return SdkClient.request<SchemaSchema5f07b6af>(SdkClient.RequestSpec("DELETE", "/machines/${SdkClient.encodePathSegment(machineId)}/scopes/${SdkClient.encodePathSegment(otherMachineId)}", config = clientConfig, operationId = "deleteMachineScope", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
+    fun deleteMachineScope(clientConfig: ClientConfig, machineId: String, otherMachineId: String, options: RequestOptions? = null): MachineScopeDeleted {
+        return SdkClient.request<MachineScopeDeleted>(SdkClient.RequestSpec("DELETE", "/machines/${SdkClient.encodePathSegment(machineId)}/scopes/${SdkClient.encodePathSegment(otherMachineId)}", config = clientConfig, operationId = "deleteMachineScope", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
 
 

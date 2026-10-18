@@ -5,6 +5,7 @@ package dev.octri.showcase.clerk.methods
 
 import dev.octri.showcase.clerk.AdjustCreditBalanceRequestActionEnum
 import dev.octri.showcase.clerk.BiometricCredential
+import dev.octri.showcase.clerk.BiometricCredentialList
 import dev.octri.showcase.clerk.ClientConfig
 import dev.octri.showcase.clerk.CommerceCreditBalanceResponse
 import dev.octri.showcase.clerk.CommerceCreditLedgerResponse
@@ -20,6 +21,7 @@ import dev.octri.showcase.clerk.RequestOptions
 import dev.octri.showcase.clerk.SdkClient
 import dev.octri.showcase.clerk.TotalCount
 import dev.octri.showcase.clerk.TrustedDevice
+import dev.octri.showcase.clerk.TrustedDeviceList
 import dev.octri.showcase.clerk.User
 import dev.octri.showcase.clerk.UsersGetOrganizationInvitationsParameterEnum
 import dev.octri.showcase.clerk.VerifyTOTPResponseCodeTypeEnum
@@ -40,22 +42,6 @@ data class DisableMFAResponse(
 
 data class DeleteBackupCodeResponse(
     @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null
-)
-
-data class SchemaSchema36c20f95(
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<TrustedDevice>,
-    /**
-     * Total number of trusted devices
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long
-)
-
-data class SchemaSchema(
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<BiometricCredential>,
-    /**
-     * Total number of biometric credentials
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long
 )
 
 data class DeleteTOTPResponse(
@@ -500,7 +486,7 @@ data class DeleteTOTPResponse(
      * @deprecated This operation is deprecated and may be removed in a future
      *   release.
      */
-    fun listUserTrustedDevices(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): SchemaSchema36c20f95 =
+    fun listUserTrustedDevices(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): TrustedDeviceList =
         dev.octri.showcase.clerk.methods.UsersListUserTrustedDevicesOperation.listUserTrustedDevices(
             clientConfig,
             userId,
@@ -524,7 +510,7 @@ data class DeleteTOTPResponse(
     /**
      * Returns the active biometric credentials enrolled by the user.
      */
-    fun listUserBiometricCredentials(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): SchemaSchema =
+    fun listUserBiometricCredentials(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): BiometricCredentialList =
         dev.octri.showcase.clerk.methods.UsersListUserBiometricCredentialsOperation.listUserBiometricCredentials(
             clientConfig,
             userId,

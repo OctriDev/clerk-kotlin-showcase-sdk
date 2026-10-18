@@ -8,7 +8,7 @@ class OAuthAccessTokensNamespace(private val clientConfig: ClientConfig) {
     /**
      * Verifies an OAuth access token and returns its token details or active status. Supply the token in `access_token`; the legacy `secret` field is deprecated. Use this endpoint to check whether an access token is active and retrieve its associated client, subject, and scopes when available.
      */
-    fun verify(accessToken: String? = null, secret: String? = null, options: RequestOptions? = null): Map<String, Any> {
+    fun verify(accessToken: String? = null, secret: String? = null, options: RequestOptions? = null): VerifyOAuthAccessTokenResponse {
         return dev.octri.showcase.clerk.methods.OAuthAccessTokens.verifyOAuthAccessToken(clientConfig, accessToken, secret, options)
     }
 

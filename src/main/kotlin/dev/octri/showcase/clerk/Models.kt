@@ -57,6 +57,8 @@ typealias BiometricCredential = dev.octri.showcase.clerk.models.BiometricCredent
 
 typealias BiometricCredentialAlgorithmEnum = dev.octri.showcase.clerk.models.BiometricCredentialAlgorithmEnum
 
+typealias BiometricCredentialList = dev.octri.showcase.clerk.models.BiometricCredentialList
+
 typealias BiometricCredentialObjectEnum = dev.octri.showcase.clerk.models.BiometricCredentialObjectEnum
 
 typealias BiometricCredentialPlatformEnum = dev.octri.showcase.clerk.models.BiometricCredentialPlatformEnum
@@ -251,9 +253,19 @@ typealias DirectoryCustomAttributesItem = dev.octri.showcase.clerk.models.Direct
 
 typealias DirectoryGroupRoleMapping = dev.octri.showcase.clerk.models.DirectoryGroupRoleMapping
 
+typealias DirectoryGroupRoleMappingDeleted = dev.octri.showcase.clerk.models.DirectoryGroupRoleMappingDeleted
+
+typealias DirectoryGroupRoleMappingDeletedDeletedEnum = dev.octri.showcase.clerk.models.DirectoryGroupRoleMappingDeletedDeletedEnum
+
+typealias DirectoryGroupRoleMappingDeletedObjectEnum = dev.octri.showcase.clerk.models.DirectoryGroupRoleMappingDeletedObjectEnum
+
+typealias DirectoryGroupRoleMappingList = dev.octri.showcase.clerk.models.DirectoryGroupRoleMappingList
+
 typealias DirectoryGroupRoleMappingObjectEnum = dev.octri.showcase.clerk.models.DirectoryGroupRoleMappingObjectEnum
 
 typealias DirectoryGroupRoleMappings = dev.octri.showcase.clerk.models.DirectoryGroupRoleMappings
+
+typealias DirectoryList = dev.octri.showcase.clerk.models.DirectoryList
 
 typealias DirectoryObjectEnum = dev.octri.showcase.clerk.models.DirectoryObjectEnum
 
@@ -369,9 +381,19 @@ typealias InstanceRestrictions = dev.octri.showcase.clerk.models.InstanceRestric
 
 typealias InstanceRestrictionsObjectEnum = dev.octri.showcase.clerk.models.InstanceRestrictionsObjectEnum
 
+typealias InstanceSettings = dev.octri.showcase.clerk.models.InstanceSettings
+
+typealias InstanceSettingsObjectEnum = dev.octri.showcase.clerk.models.InstanceSettingsObjectEnum
+
 typealias Invitation = dev.octri.showcase.clerk.models.Invitation
 
 typealias InvitationObjectEnum = dev.octri.showcase.clerk.models.InvitationObjectEnum
+
+typealias InvitationRevoked = dev.octri.showcase.clerk.models.InvitationRevoked
+
+typealias InvitationRevokedVariant1RevokedEnum = dev.octri.showcase.clerk.models.InvitationRevokedVariant1RevokedEnum
+
+typealias InvitationRevokedVariant1StatusEnum = dev.octri.showcase.clerk.models.InvitationRevokedVariant1StatusEnum
 
 typealias InvitationStatusEnum = dev.octri.showcase.clerk.models.InvitationStatusEnum
 
@@ -414,25 +436,3 @@ typealias JWKSSymmetricKeyKtyEnum = dev.octri.showcase.clerk.models.JWKSSymmetri
 typealias JWTTemplate = dev.octri.showcase.clerk.models.JWTTemplate
 
 typealias JWTTemplateObjectEnum = dev.octri.showcase.clerk.models.JWTTemplateObjectEnum
-
-typealias ListAllOrganizationDomainsParameterEnum = dev.octri.showcase.clerk.models.ListAllOrganizationDomainsParameterEnum
-
-typealias ListAllOrganizationDomainsParameterItemEnum = dev.octri.showcase.clerk.models.ListAllOrganizationDomainsParameterItemEnum
-
-typealias ListApiKeysParameterEnum = dev.octri.showcase.clerk.models.ListApiKeysParameterEnum
-
-typealias ListApiKeysResponseDataItemObjectEnum = dev.octri.showcase.clerk.models.ListApiKeysResponseDataItemObjectEnum
-
-typealias ListEnterpriseConnectionTestRunsParameterItemEnum = dev.octri.showcase.clerk.models.ListEnterpriseConnectionTestRunsParameterItemEnum
-
-typealias ListInstanceOrganizationInvitationsParameterEnum = dev.octri.showcase.clerk.models.ListInstanceOrganizationInvitationsParameterEnum
-
-typealias ListInvitationsParameterEnum = dev.octri.showcase.clerk.models.ListInvitationsParameterEnum
-
-typealias ListOrganizationInvitationsParameterEnum = dev.octri.showcase.clerk.models.ListOrganizationInvitationsParameterEnum
-
-typealias ListSessionsParameterEnum = dev.octri.showcase.clerk.models.ListSessionsParameterEnum
-
-typealias ListWaitlistEntriesParameterEnum = dev.octri.showcase.clerk.models.ListWaitlistEntriesParameterEnum
-
-typealias Machine = dev.octri.showcase.clerk.models.Machine

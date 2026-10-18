@@ -198,11 +198,11 @@ data class CommerceTotalsResponse(
      */
     @com.fasterxml.jackson.annotation.JsonProperty("per_unit_totals") val perUnitTotals: List<CommercePerUnitTotal>? = null,
     /**
-     * Optional API value serialized in the `credits` wire field.
+     * Optional object value serialized in the `credits` wire field.
      */
     val credits: CommerceCreditsResponse? = null,
     /**
-     * Optional API value serialized in the `discounts` wire field.
+     * Optional object value serialized in the `discounts` wire field.
      */
     val discounts: CommerceDiscountsResponse? = null
 )
@@ -232,7 +232,7 @@ data class CommerceTotalsResponse2(
      */
     @com.fasterxml.jackson.annotation.JsonProperty("per_unit_totals") val perUnitTotals: List<CommercePerUnitTotal2>? = null,
     /**
-     * Optional API value serialized in the `credits` wire field.
+     * Optional object value serialized in the `credits` wire field.
      */
     val credits: CommerceCreditsResponse? = null,
     /**

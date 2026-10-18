@@ -8,7 +8,7 @@ class DirectoriesNamespace(private val clientConfig: ClientConfig) {
     /**
      * Returns a list of all directories for the instance.
      */
-    fun list(limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.DirectoriesMethods.SchemaSchemadb46323d {
+    fun list(limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): DirectoryList {
         return dev.octri.showcase.clerk.methods.DirectoriesMethods.listDirectories(clientConfig, limit, offset, options)
     }
 
@@ -56,7 +56,7 @@ class DirectoriesNamespace(private val clientConfig: ClientConfig) {
     /**
      * Returns the list of directory group to organization role mappings for a directory, ordered by precedence.
      */
-    fun listGroupRoleMappings(directoryId: String, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.DirectoriesMethods.SchemaSchema1459c10b {
+    fun listGroupRoleMappings(directoryId: String, options: RequestOptions? = null): DirectoryGroupRoleMappingList {
         return dev.octri.showcase.clerk.methods.DirectoriesMethods.listDirectoryGroupRoleMappings(clientConfig, directoryId, options)
     }
 
@@ -70,14 +70,14 @@ class DirectoriesNamespace(private val clientConfig: ClientConfig) {
     /**
      * Replaces the entire set of directory group role mappings for a directory. The position of each item in the `mappings` array determines its precedence (the first item gets precedence 1). Passing an empty array removes all mappings. Mappings can be replaced while group role mapping is disabled on the directory, but they only take effect once it is enabled.
      */
-    fun replaceGroupRoleMappings(directoryId: String, mappings: List<dev.octri.showcase.clerk.methods.DirectoriesMethods.ReplaceDirectoryGroupRoleMappingsMappingsItem>, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.DirectoriesMethods.SchemaSchema1459c10b {
+    fun replaceGroupRoleMappings(directoryId: String, mappings: List<dev.octri.showcase.clerk.methods.DirectoriesMethods.ReplaceDirectoryGroupRoleMappingsMappingsItem>, options: RequestOptions? = null): DirectoryGroupRoleMappingList {
         return dev.octri.showcase.clerk.methods.DirectoriesMethods.replaceDirectoryGroupRoleMappings(clientConfig, directoryId, mappings, options)
     }
 
     /**
      * Deletes a single directory group role mapping. Mappings can be deleted while group role mapping is disabled on the directory, but the change only takes effect once it is enabled.
      */
-    fun deleteGroupRoleMapping(directoryId: String, mappingId: String, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.DirectoriesMethods.SchemaSchema0a4178a1 {
+    fun deleteGroupRoleMapping(directoryId: String, mappingId: String, options: RequestOptions? = null): DirectoryGroupRoleMappingDeleted {
         return dev.octri.showcase.clerk.methods.DirectoriesMethods.deleteDirectoryGroupRoleMapping(clientConfig, directoryId, mappingId, options)
     }
 

@@ -3,6 +3,28 @@
 
 package dev.octri.showcase.clerk.models
 
+class ListSessionsParameterEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is ListSessionsParameterEnum && value == other.value
+    override fun hashCode(): Int = value.hashCode()
+    override fun toString(): String = value
+
+    companion object {
+
+        @JvmField val ABANDONED = ListSessionsParameterEnum("abandoned")
+        @JvmField val ACTIVE = ListSessionsParameterEnum("active")
+        @JvmField val ENDED = ListSessionsParameterEnum("ended")
+        @JvmField val EXPIRED = ListSessionsParameterEnum("expired")
+        @JvmField val REMOVED = ListSessionsParameterEnum("removed")
+        @JvmField val REPLACED = ListSessionsParameterEnum("replaced")
+        @JvmField val REVOKED = ListSessionsParameterEnum("revoked")
+
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = ListSessionsParameterEnum(value)
+    }
+}
+
 /**
  * The format of the response.
  */

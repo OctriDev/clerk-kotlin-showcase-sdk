@@ -11,7 +11,7 @@ class InstanceSettingsNamespace(private val clientConfig: ClientConfig) {
      * Fetches the current instance
      */
     fun getInstance(options: RequestOptions? = null): Instance {
-        return dev.octri.showcase.clerk.methods.InstanceSettings.getInstance(clientConfig, options)
+        return dev.octri.showcase.clerk.methods.InstanceSettingsMethods.getInstance(clientConfig, options)
     }
 
     /**
@@ -19,8 +19,8 @@ class InstanceSettingsNamespace(private val clientConfig: ClientConfig) {
      *
      * Updates the settings of an instance
      */
-    fun updateInstance(request: dev.octri.showcase.clerk.methods.InstanceSettings.UpdateInstanceRequest, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.clerk.methods.InstanceSettings.updateInstance(clientConfig, request, options)
+    fun updateInstance(request: dev.octri.showcase.clerk.methods.InstanceSettingsMethods.UpdateInstanceRequest, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.clerk.methods.InstanceSettingsMethods.updateInstance(clientConfig, request, options)
     }
 
     /**
@@ -29,56 +29,56 @@ class InstanceSettingsNamespace(private val clientConfig: ClientConfig) {
      * Updates the restriction settings of an instance
      */
     fun updateInstanceRestrictions(allowlist: SdkClient.SdkOptional<Boolean?>? = null, blocklist: SdkClient.SdkOptional<Boolean?>? = null, allowlistBlocklistDisabledOnSignIn: SdkClient.SdkOptional<Boolean?>? = null, blockEmailSubaddresses: SdkClient.SdkOptional<Boolean?>? = null, blockDisposableEmailDomains: SdkClient.SdkOptional<Boolean?>? = null, options: RequestOptions? = null): InstanceRestrictions {
-        return dev.octri.showcase.clerk.methods.InstanceSettings.updateInstanceRestrictions(clientConfig, allowlist, blocklist, allowlistBlocklistDisabledOnSignIn, blockEmailSubaddresses, blockDisposableEmailDomains, options)
+        return dev.octri.showcase.clerk.methods.InstanceSettingsMethods.updateInstanceRestrictions(clientConfig, allowlist, blocklist, allowlistBlocklistDisabledOnSignIn, blockEmailSubaddresses, blockDisposableEmailDomains, options)
     }
 
     /**
      * Retrieves the Protect settings for the instance, including rule enforcement and prerequisite check status. Use `rules_enabled` to distinguish active enforcement from shadow evaluation, where rules are scored and recorded without blocking traffic.
      */
     fun getInstanceProtect(options: RequestOptions? = null): InstanceProtect {
-        return dev.octri.showcase.clerk.methods.InstanceSettings.getInstanceProtect(clientConfig, options)
+        return dev.octri.showcase.clerk.methods.InstanceSettingsMethods.getInstanceProtect(clientConfig, options)
     }
 
     /**
      * Updates whether Protect rules are enforced for the instance. Set `rules_enabled` to true to enforce rules or false to return to shadow evaluation, which continues scoring and recording rules without blocking traffic.
      */
     fun updateInstanceProtect(rulesEnabled: SdkClient.SdkOptional<Boolean?>? = null, options: RequestOptions? = null): InstanceProtect {
-        return dev.octri.showcase.clerk.methods.InstanceSettings.updateInstanceProtect(clientConfig, rulesEnabled, options)
+        return dev.octri.showcase.clerk.methods.InstanceSettingsMethods.updateInstanceProtect(clientConfig, rulesEnabled, options)
     }
 
     /**
      * Retrieves the per-instance SMS communication settings, including the SMS country blocklist.
      */
     fun getInstanceCommunication(options: RequestOptions? = null): InstanceCommunication {
-        return dev.octri.showcase.clerk.methods.InstanceSettings.getInstanceCommunication(clientConfig, options)
+        return dev.octri.showcase.clerk.methods.InstanceSettingsMethods.getInstanceCommunication(clientConfig, options)
     }
 
     /**
      * Replaces the SMS country blocklist for this instance. Pass the full set of ISO 3166-1 alpha-2 country codes that should be blocked; codes that aren't recognized as SMS-tier countries are silently dropped from the persisted list. Omitting `blocked_country_codes` is a no-op.
      */
     fun updateInstanceCommunication(blockedCountryCodes: SdkClient.SdkOptional<List<String>?>? = null, options: RequestOptions? = null): InstanceCommunication {
-        return dev.octri.showcase.clerk.methods.InstanceSettings.updateInstanceCommunication(clientConfig, blockedCountryCodes, options)
+        return dev.octri.showcase.clerk.methods.InstanceSettingsMethods.updateInstanceCommunication(clientConfig, blockedCountryCodes, options)
     }
 
     /**
      * Retrieves the settings for OAuth applications for the instance (dynamic client registration, JWT access tokens, etc.).
      */
     fun getInstanceOAuthApplicationSettings(options: RequestOptions? = null): OAuthApplicationSettings {
-        return dev.octri.showcase.clerk.methods.InstanceSettings.getInstanceOAuthApplicationSettings(clientConfig, options)
+        return dev.octri.showcase.clerk.methods.InstanceSettingsMethods.getInstanceOAuthApplicationSettings(clientConfig, options)
     }
 
     /**
      * Updates the OAuth application settings for the instance.
      */
-    fun updateInstanceOAuthApplicationSettings(request: dev.octri.showcase.clerk.methods.InstanceSettings.UpdateInstanceOAuthApplicationSettingsRequest, options: RequestOptions? = null): OAuthApplicationSettings {
-        return dev.octri.showcase.clerk.methods.InstanceSettings.updateInstanceOAuthApplicationSettings(clientConfig, request, options)
+    fun updateInstanceOAuthApplicationSettings(request: dev.octri.showcase.clerk.methods.InstanceSettingsMethods.UpdateInstanceOAuthApplicationSettingsRequest, options: RequestOptions? = null): OAuthApplicationSettings {
+        return dev.octri.showcase.clerk.methods.InstanceSettingsMethods.updateInstanceOAuthApplicationSettings(clientConfig, request, options)
     }
 
     /**
      * Retrieves the organization settings of the instance
      */
     fun getInstanceOrganizationSettings(options: RequestOptions? = null): OrganizationSettings {
-        return dev.octri.showcase.clerk.methods.InstanceSettings.getInstanceOrganizationSettings(clientConfig, options)
+        return dev.octri.showcase.clerk.methods.InstanceSettingsMethods.getInstanceOrganizationSettings(clientConfig, options)
     }
 
     /**
@@ -86,8 +86,8 @@ class InstanceSettingsNamespace(private val clientConfig: ClientConfig) {
      *
      * Updates the organization settings of the instance
      */
-    fun updateInstanceOrganizationSettings(request: dev.octri.showcase.clerk.methods.InstanceSettings.UpdateInstanceOrganizationSettingsRequest, options: RequestOptions? = null): OrganizationSettings {
-        return dev.octri.showcase.clerk.methods.InstanceSettings.updateInstanceOrganizationSettings(clientConfig, request, options)
+    fun updateInstanceOrganizationSettings(request: dev.octri.showcase.clerk.methods.InstanceSettingsMethods.UpdateInstanceOrganizationSettingsRequest, options: RequestOptions? = null): OrganizationSettings {
+        return dev.octri.showcase.clerk.methods.InstanceSettingsMethods.updateInstanceOrganizationSettings(clientConfig, request, options)
     }
 
 }

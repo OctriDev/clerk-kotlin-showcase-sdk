@@ -6,44 +6,6 @@ package dev.octri.showcase.clerk.models
 /**
  * Required enumerated value serialized in the `object` wire field.
  */
-class JWTTemplateObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is JWTTemplateObjectEnum && value == other.value
-    override fun hashCode(): Int = value.hashCode()
-    override fun toString(): String = value
-
-    companion object {
-
-        @JvmField val JWT_TEMPLATE = JWTTemplateObjectEnum("jwt_template")
-
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = JWTTemplateObjectEnum(value)
-    }
-}
-
-/**
- * Required enumerated value serialized in the `object` wire field.
- */
-class MachineScopeObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is MachineScopeObjectEnum && value == other.value
-    override fun hashCode(): Int = value.hashCode()
-    override fun toString(): String = value
-
-    companion object {
-
-        @JvmField val MACHINE_SCOPE = MachineScopeObjectEnum("machine_scope")
-
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = MachineScopeObjectEnum(value)
-    }
-}
-
-/**
- * Required enumerated value serialized in the `object` wire field.
- */
 class MachineWithoutScopedMachinesObjectEnum private constructor(
     @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
 ) {
@@ -579,5 +541,43 @@ class SAMLConnectionLoginHintModeEnum private constructor(
 
         @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
         @JvmStatic fun fromValue(value: String) = SAMLConnectionLoginHintModeEnum(value)
+    }
+}
+
+/**
+ * String representing the object's type. Always "scim_directory".
+ */
+class SCIMDirectoryObjectEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is SCIMDirectoryObjectEnum && value == other.value
+    override fun hashCode(): Int = value.hashCode()
+    override fun toString(): String = value
+
+    companion object {
+
+        @JvmField val SCIM_DIRECTORY = SCIMDirectoryObjectEnum("scim_directory")
+
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = SCIMDirectoryObjectEnum(value)
+    }
+}
+
+/**
+ * String representing the object's type. Always "scim_group_role_mapping".
+ */
+class SCIMGroupRoleMappingObjectEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is SCIMGroupRoleMappingObjectEnum && value == other.value
+    override fun hashCode(): Int = value.hashCode()
+    override fun toString(): String = value
+
+    companion object {
+
+        @JvmField val SCIM_GROUP_ROLE_MAPPING = SCIMGroupRoleMappingObjectEnum("scim_group_role_mapping")
+
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = SCIMGroupRoleMappingObjectEnum(value)
     }
 }

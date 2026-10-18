@@ -4,40 +4,40 @@
 package dev.octri.showcase.clerk.models
 
 /**
- * String representing the object's type. Always "scim_directory".
+ * Whether the SCIM group role mapping was successfully deleted.
  */
-class SCIMDirectoryObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+class SCIMGroupRoleMappingDeletedDeletedEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: Boolean,
 ) {
-    override fun equals(other: Any?): Boolean = other is SCIMDirectoryObjectEnum && value == other.value
+    override fun equals(other: Any?): Boolean = other is SCIMGroupRoleMappingDeletedDeletedEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-    override fun toString(): String = value
+    override fun toString(): String = value.toString()
 
     companion object {
 
-        @JvmField val SCIM_DIRECTORY = SCIMDirectoryObjectEnum("scim_directory")
+        @JvmField val TRUE = SCIMGroupRoleMappingDeletedDeletedEnum(true)
 
         @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = SCIMDirectoryObjectEnum(value)
+        @JvmStatic fun fromValue(value: Boolean) = SCIMGroupRoleMappingDeletedDeletedEnum(value)
     }
 }
 
 /**
- * String representing the object's type. Always "scim_group_role_mapping".
+ * String representing the object's type.
  */
-class SCIMGroupRoleMappingObjectEnum private constructor(
+class SCIMGroupRoleMappingDeletedObjectEnum private constructor(
     @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
 ) {
-    override fun equals(other: Any?): Boolean = other is SCIMGroupRoleMappingObjectEnum && value == other.value
+    override fun equals(other: Any?): Boolean = other is SCIMGroupRoleMappingDeletedObjectEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val SCIM_GROUP_ROLE_MAPPING = SCIMGroupRoleMappingObjectEnum("scim_group_role_mapping")
+        @JvmField val SCIM_GROUP_ROLE_MAPPING = SCIMGroupRoleMappingDeletedObjectEnum("scim_group_role_mapping")
 
         @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = SCIMGroupRoleMappingObjectEnum(value)
+        @JvmStatic fun fromValue(value: String) = SCIMGroupRoleMappingDeletedObjectEnum(value)
     }
 }
 

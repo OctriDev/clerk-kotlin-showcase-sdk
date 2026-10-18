@@ -68,3 +68,232 @@ data class UnknownEmailAddressVerification @com.fasterxml.jackson.annotation.Jso
     /** The tag the server sent. */
     val tag: String get() = raw.path("object").asText()
 }
+
+/**
+ * Typed representation of the `VerificationAdmin` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class VerificationAdmin(
+    /**
+     * Required enumerated value serialized in the `status` wire field.
+     */
+    val status: VerificationAdminStatusEnum,
+    /**
+     * Required enumerated value serialized in the `strategy` wire field.
+     */
+    val strategy: VerificationAdminStrategyEnum,
+    /**
+     * Required `integer` value serialized in the `attempts` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attempts", required = true) val attempts: Long?,
+    /**
+     * Required `integer` value serialized in the `expire_at` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expire_at", required = true) val expireAt: Long?,
+    /**
+     * Optional enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: VerificationAdminObjectEnum? = null,
+    /**
+     * Optional `string` value serialized in the `verified_at_client` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("verified_at_client") val verifiedAtClient: String? = null
+) : EmailAddressVerification, PhoneNumberVerification, Web3WalletVerification
+
+/**
+ * Typed representation of the `VerificationEmailLink` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class VerificationEmailLink(
+    /**
+     * Required enumerated value serialized in the `status` wire field.
+     */
+    val status: VerificationEmailLinkStatusEnum,
+    /**
+     * Required enumerated value serialized in the `strategy` wire field.
+     */
+    val strategy: VerificationEmailLinkStrategyEnum,
+    /**
+     * Required `integer` value serialized in the `attempts` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attempts", required = true) val attempts: Long?,
+    /**
+     * Required `integer` value serialized in the `expire_at` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expire_at", required = true) val expireAt: Long?,
+    /**
+     * Optional enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: VerificationEmailLinkObjectEnum? = null,
+    /**
+     * Optional `string` value serialized in the `verified_at_client` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("verified_at_client") val verifiedAtClient: String? = null
+) : EmailAddressVerification
+
+/**
+ * Typed representation of the `VerificationFromOauth` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class VerificationFromOauth(
+    /**
+     * Required enumerated value serialized in the `status` wire field.
+     */
+    val status: VerificationFromOauthStatusEnum,
+    /**
+     * Required `string` value serialized in the `strategy` wire field.
+     */
+    val strategy: String,
+    /**
+     * Required `integer` value serialized in the `expire_at` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expire_at", required = true) val expireAt: Long?,
+    /**
+     * Required `integer` value serialized in the `attempts` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attempts", required = true) val attempts: Long?,
+    /**
+     * Optional enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: VerificationFromOauthObjectEnum? = null,
+    /**
+     * Optional object value serialized in the `error` wire field.
+     */
+    val error: ClerkError? = null,
+    /**
+     * Optional `string` value serialized in the `verified_at_client` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("verified_at_client") val verifiedAtClient: String? = null
+) : EmailAddressVerification
+
+/**
+ * Typed representation of the `VerificationOtp` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class VerificationOtp(
+    /**
+     * Required enumerated value serialized in the `status` wire field.
+     */
+    val status: VerificationOtpStatusEnum,
+    /**
+     * Required enumerated value serialized in the `strategy` wire field.
+     */
+    val strategy: VerificationOtpStrategyEnum,
+    /**
+     * Required `integer` value serialized in the `attempts` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attempts", required = true) val attempts: Long?,
+    /**
+     * Required `integer` value serialized in the `expire_at` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expire_at", required = true) val expireAt: Long?,
+    /**
+     * Optional enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: VerificationOtpObjectEnum? = null,
+    /**
+     * The delivery channel of the code (phone codes only).
+     */
+    val channel: String? = null,
+    /**
+     * Optional `string` value serialized in the `verified_at_client` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("verified_at_client") val verifiedAtClient: String? = null
+) : EmailAddressVerification, PhoneNumberVerification
+
+/**
+ * Typed representation of the `VerificationSaml` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class VerificationSaml(
+    /**
+     * Required enumerated value serialized in the `status` wire field.
+     */
+    val status: VerificationSamlStatusEnum,
+    /**
+     * Required enumerated value serialized in the `strategy` wire field.
+     */
+    val strategy: VerificationSamlStrategyEnum,
+    /**
+     * Required `integer` value serialized in the `attempts` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attempts", required = true) val attempts: Long?,
+    /**
+     * Optional enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: VerificationSamlObjectEnum? = null,
+    /**
+     * Optional `string` value serialized in the `external_verification_redirect_url` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("external_verification_redirect_url") val externalVerificationRedirectUrl: String? = null,
+    /**
+     * Optional object value serialized in the `error` wire field.
+     */
+    val error: ClerkError? = null,
+    /**
+     * Optional `integer` value serialized in the `expire_at` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expire_at") val expireAt: Long? = null,
+    /**
+     * Optional `string` value serialized in the `verified_at_client` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("verified_at_client") val verifiedAtClient: String? = null
+) : EmailAddressVerification, SAMLAccountVerification, EnterpriseAccountVerification
+
+/**
+ * Typed representation of the `VerificationScim` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class VerificationScim(
+    /**
+     * Required enumerated value serialized in the `status` wire field.
+     */
+    val status: VerificationScimStatusEnum,
+    /**
+     * Required enumerated value serialized in the `strategy` wire field.
+     */
+    val strategy: VerificationScimStrategyEnum,
+    /**
+     * Required `integer` value serialized in the `attempts` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attempts", required = true) val attempts: Long?,
+    /**
+     * Required `integer` value serialized in the `expire_at` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expire_at", required = true) val expireAt: Long?,
+    /**
+     * Optional enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: VerificationScimObjectEnum? = null
+) : EmailAddressVerification
+
+/**
+ * Typed representation of the `VerificationTicket` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class VerificationTicket(
+    /**
+     * Required enumerated value serialized in the `status` wire field.
+     */
+    val status: VerificationTicketStatusEnum,
+    /**
+     * Required enumerated value serialized in the `strategy` wire field.
+     */
+    val strategy: VerificationTicketStrategyEnum,
+    /**
+     * Required `integer` value serialized in the `attempts` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attempts", required = true) val attempts: Long?,
+    /**
+     * Required `integer` value serialized in the `expire_at` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expire_at", required = true) val expireAt: Long?,
+    /**
+     * Optional enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: VerificationTicketObjectEnum? = null,
+    /**
+     * Optional `string` value serialized in the `verified_at_client` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("verified_at_client") val verifiedAtClient: String? = null
+) : EmailAddressVerification, SAMLAccountVerification, EnterpriseAccountVerification

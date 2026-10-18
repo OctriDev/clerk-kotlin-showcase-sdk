@@ -7,23 +7,15 @@ import dev.octri.showcase.clerk.ClerkErrors
 import dev.octri.showcase.clerk.ClientConfig
 import dev.octri.showcase.clerk.DeletedObject
 import dev.octri.showcase.clerk.RequestOptions
-import dev.octri.showcase.clerk.SchemaSchemaObjectEnum3d55986b
-import dev.octri.showcase.clerk.SCIMDirectories
 import dev.octri.showcase.clerk.SCIMDirectory
+import dev.octri.showcase.clerk.SCIMDirectoryList
 import dev.octri.showcase.clerk.SCIMGroupRoleMapping
-import dev.octri.showcase.clerk.SCIMGroupRoleMappings
+import dev.octri.showcase.clerk.SCIMGroupRoleMappingDeleted
+import dev.octri.showcase.clerk.SCIMGroupRoleMappingList
 import dev.octri.showcase.clerk.SdkClient
 import dev.octri.showcase.clerk.Validation
 
 object ScimDirectoriesMethods {
-
-data class SchemaSchemaa0ee7c0b(
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: SCIMDirectories,
-    /**
-     * Total number of directories.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long
-)
 
 data class CreateSCIMDirectoryGroupRoleMappingsItem(
     /**
@@ -44,14 +36,6 @@ data class CreateSCIMDirectoryGroupRoleMappingsItem(
     val precedence: Long? = null
 )
 
-data class SchemaSchemac6c780d9(
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: SCIMGroupRoleMappings,
-    /**
-     * Total number of SCIM group role mappings in the directory.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long
-)
-
 data class ReplaceSCIMGroupRoleMappingsMappingsItem(
     /**
      * The SCIM group ID from the identity provider.
@@ -63,21 +47,6 @@ data class ReplaceSCIMGroupRoleMappingsMappingsItem(
     @com.fasterxml.jackson.annotation.JsonProperty("role_id") val roleId: String
 )
 
-data class SchemaSchemab78302a9(
-    /**
-     * String representing the object's type.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: SchemaSchemaObjectEnum3d55986b,
-    /**
-     * The ID of the deleted SCIM group role mapping.
-     */
-    val id: String,
-    /**
-     * Whether the SCIM group role mapping was successfully deleted.
-     */
-    val deleted: Boolean
-)
-
 
     /**
      * Returns a list of all directories for the instance.
@@ -87,7 +56,7 @@ data class SchemaSchemab78302a9(
      * @param offset Skip the first `offset` results when paginating. Needs to be an
      *   integer greater or equal to zero. To be used in conjunction with `limit`.
      */
-    fun listScimDirectories(clientConfig: ClientConfig, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): SchemaSchemaa0ee7c0b {
+    fun listScimDirectories(clientConfig: ClientConfig, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): SCIMDirectoryList {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 500.0))
 }
@@ -96,7 +65,7 @@ data class SchemaSchemab78302a9(
             Validation.validateRange("offset", offset, Validation.RangeOpts(min = 0.0))
 }
 
-        return SdkClient.request<SchemaSchemaa0ee7c0b>(SdkClient.RequestSpec("GET", "/scim_directories", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "offset" to SdkClient.queryValue(offset, "form", true)), operationId = "listScimDirectories", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java))).data
+        return SdkClient.request<SCIMDirectoryList>(SdkClient.RequestSpec("GET", "/scim_directories", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "offset" to SdkClient.queryValue(offset, "form", true)), operationId = "listScimDirectories", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java))).data
     }
 
 
@@ -217,8 +186,8 @@ data class SchemaSchemab78302a9(
      *
      * @param scimDirectoryId The ID of the directory.
      */
-    fun listScimGroupRoleMappings(clientConfig: ClientConfig, scimDirectoryId: String, options: RequestOptions? = null): SchemaSchemac6c780d9 {
-        return SdkClient.request<SchemaSchemac6c780d9>(SdkClient.RequestSpec("GET", "/scim_directories/${SdkClient.encodePathSegment(scimDirectoryId)}/group_role_mappings", config = clientConfig, operationId = "listScimGroupRoleMappings", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
+    fun listScimGroupRoleMappings(clientConfig: ClientConfig, scimDirectoryId: String, options: RequestOptions? = null): SCIMGroupRoleMappingList {
+        return SdkClient.request<SCIMGroupRoleMappingList>(SdkClient.RequestSpec("GET", "/scim_directories/${SdkClient.encodePathSegment(scimDirectoryId)}/group_role_mappings", config = clientConfig, operationId = "listScimGroupRoleMappings", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
     }
 
 
@@ -259,8 +228,8 @@ data class SchemaSchemab78302a9(
      * @param mappings The desired set of mappings. Array order sets precedence
      *   (1-indexed). An empty array clears all mappings.
      */
-    fun replaceScimGroupRoleMappings(clientConfig: ClientConfig, scimDirectoryId: String, mappings: List<ReplaceSCIMGroupRoleMappingsMappingsItem>, options: RequestOptions? = null): SchemaSchemac6c780d9 {
-        return SdkClient.request<SchemaSchemac6c780d9>(SdkClient.RequestSpec("PUT", "/scim_directories/${SdkClient.encodePathSegment(scimDirectoryId)}/group_role_mappings", config = clientConfig, body = SdkClient.bodyMap("mappings" to (mappings)), operationId = "replaceScimGroupRoleMappings", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
+    fun replaceScimGroupRoleMappings(clientConfig: ClientConfig, scimDirectoryId: String, mappings: List<ReplaceSCIMGroupRoleMappingsMappingsItem>, options: RequestOptions? = null): SCIMGroupRoleMappingList {
+        return SdkClient.request<SCIMGroupRoleMappingList>(SdkClient.RequestSpec("PUT", "/scim_directories/${SdkClient.encodePathSegment(scimDirectoryId)}/group_role_mappings", config = clientConfig, body = SdkClient.bodyMap("mappings" to (mappings)), operationId = "replaceScimGroupRoleMappings", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
 
 
@@ -275,8 +244,8 @@ data class SchemaSchemab78302a9(
      * @param scimDirectoryId The ID of the directory.
      * @param mappingId The ID of the SCIM group role mapping to delete.
      */
-    fun deleteScimGroupRoleMapping(clientConfig: ClientConfig, scimDirectoryId: String, mappingId: String, options: RequestOptions? = null): SchemaSchemab78302a9 {
-        return SdkClient.request<SchemaSchemab78302a9>(SdkClient.RequestSpec("DELETE", "/scim_directories/${SdkClient.encodePathSegment(scimDirectoryId)}/group_role_mappings/${SdkClient.encodePathSegment(mappingId)}", config = clientConfig, operationId = "deleteScimGroupRoleMapping", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
+    fun deleteScimGroupRoleMapping(clientConfig: ClientConfig, scimDirectoryId: String, mappingId: String, options: RequestOptions? = null): SCIMGroupRoleMappingDeleted {
+        return SdkClient.request<SCIMGroupRoleMappingDeleted>(SdkClient.RequestSpec("DELETE", "/scim_directories/${SdkClient.encodePathSegment(scimDirectoryId)}/group_role_mappings/${SdkClient.encodePathSegment(mappingId)}", config = clientConfig, operationId = "deleteScimGroupRoleMapping", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
     }
 
 

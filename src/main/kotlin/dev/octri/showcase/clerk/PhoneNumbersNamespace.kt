@@ -44,14 +44,14 @@ class PhoneNumbersNamespace(private val clientConfig: ClientConfig) {
     /**
      * Sends a one-time code to the given phone number so that a backend can verify the user controls it (for example, in a custom, backend-driven sign-in flow). The code is tracked on its own verification; confirm it with attempt_verification.
      */
-    fun prepareVerification(phoneNumberId: String, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.PhoneNumbers.SchemaSchema3e93ce8e {
+    fun prepareVerification(phoneNumberId: String, options: RequestOptions? = null): VerificationResponse {
         return dev.octri.showcase.clerk.methods.PhoneNumbers.preparePhoneNumberVerification(clientConfig, phoneNumberId, options)
     }
 
     /**
      * Checks a one-time code against the verification identified by verification_id, and returns the verification with its updated status (`verified`, `unverified`, `expired`, or `failed`) and attempt count, so a backend driving its own frontend can react on every attempt — an incorrect or expired code is reported through the status, not as an error. Resubmitting a verification whose code was already accepted is rejected with a `verification_already_verified` error. If the code…
      */
-    fun attemptVerification(phoneNumberId: String, verificationId: String, code: String, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.PhoneNumbers.SchemaSchema3e93ce8e {
+    fun attemptVerification(phoneNumberId: String, verificationId: String, code: String, options: RequestOptions? = null): VerificationResponse {
         return dev.octri.showcase.clerk.methods.PhoneNumbers.attemptPhoneNumberVerification(clientConfig, phoneNumberId, verificationId, code, options)
     }
 

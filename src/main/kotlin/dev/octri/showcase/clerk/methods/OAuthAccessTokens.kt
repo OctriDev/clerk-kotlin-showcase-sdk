@@ -6,6 +6,7 @@ package dev.octri.showcase.clerk.methods
 import dev.octri.showcase.clerk.ClientConfig
 import dev.octri.showcase.clerk.RequestOptions
 import dev.octri.showcase.clerk.SdkClient
+import dev.octri.showcase.clerk.VerifyOAuthAccessTokenResponse
 
 object OAuthAccessTokens {
 
@@ -17,8 +18,8 @@ object OAuthAccessTokens {
      * @param secret The access token to verify. This is deprecated, use
      *   `access_token` instead.
      */
-    fun verifyOAuthAccessToken(clientConfig: ClientConfig, accessToken: String? = null, secret: String? = null, options: RequestOptions? = null): Map<String, Any> {
-        return SdkClient.request<Map<String, Any>>(SdkClient.RequestSpec("POST", "/oauth_applications/access_tokens/verify", config = clientConfig, body = SdkClient.bodyMap("access_token" to (SdkClient.omitIfNull(accessToken)), "secret" to (SdkClient.omitIfNull(secret))), operationId = "verifyOAuthAccessToken", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
+    fun verifyOAuthAccessToken(clientConfig: ClientConfig, accessToken: String? = null, secret: String? = null, options: RequestOptions? = null): VerifyOAuthAccessTokenResponse {
+        return SdkClient.request<VerifyOAuthAccessTokenResponse>(SdkClient.RequestSpec("POST", "/oauth_applications/access_tokens/verify", config = clientConfig, body = SdkClient.bodyMap("access_token" to (SdkClient.omitIfNull(accessToken)), "secret" to (SdkClient.omitIfNull(secret))), operationId = "verifyOAuthAccessToken", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 
 

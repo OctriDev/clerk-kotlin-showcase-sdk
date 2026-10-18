@@ -10,39 +10,9 @@ import dev.octri.showcase.clerk.PhoneNumber
 import dev.octri.showcase.clerk.ReplaceUserPhoneNumberIdentificationStatusEnum
 import dev.octri.showcase.clerk.RequestOptions
 import dev.octri.showcase.clerk.SdkClient
+import dev.octri.showcase.clerk.VerificationResponse
 
 object PhoneNumbers {
-
-data class SchemaSchema3e93ce8e(
-    /**
-     * The type of the verification object.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /**
-     * The ID of the verification. Pass this to attempt_verification.
-     */
-    val id: String? = null,
-    /**
-     * The status of the verification (unverified, verified, expired, or failed).
-     */
-    val status: String? = null,
-    /**
-     * The verification strategy (email_code or phone_code).
-     */
-    val strategy: String? = null,
-    /**
-     * The number of attempts made against this verification.
-     */
-    val attempts: Long? = null,
-    /**
-     * Unix timestamp (milliseconds) at which the code expires.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("expire_at") val expireAt: Long? = null,
-    /**
-     * The channel the code was sent over (phone numbers only).
-     */
-    val channel: String? = null
-)
 
 
     /**
@@ -136,8 +106,8 @@ data class SchemaSchema3e93ce8e(
      * @param phoneNumberId The ID of the phone number to send the verification code
      *   to
      */
-    fun preparePhoneNumberVerification(clientConfig: ClientConfig, phoneNumberId: String, options: RequestOptions? = null): SchemaSchema3e93ce8e {
-        return SdkClient.request<SchemaSchema3e93ce8e>(SdkClient.RequestSpec("POST", "/phone_numbers/${SdkClient.encodePathSegment(phoneNumberId)}/prepare_verification", config = clientConfig, operationId = "preparePhoneNumberVerification", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "429" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
+    fun preparePhoneNumberVerification(clientConfig: ClientConfig, phoneNumberId: String, options: RequestOptions? = null): VerificationResponse {
+        return SdkClient.request<VerificationResponse>(SdkClient.RequestSpec("POST", "/phone_numbers/${SdkClient.encodePathSegment(phoneNumberId)}/prepare_verification", config = clientConfig, operationId = "preparePhoneNumberVerification", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "429" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
     }
 
 
@@ -154,8 +124,8 @@ data class SchemaSchema3e93ce8e(
      *   returned by prepare_verification
      * @param code The verification code that was sent to the phone number
      */
-    fun attemptPhoneNumberVerification(clientConfig: ClientConfig, phoneNumberId: String, verificationId: String, code: String, options: RequestOptions? = null): SchemaSchema3e93ce8e {
-        return SdkClient.request<SchemaSchema3e93ce8e>(SdkClient.RequestSpec("POST", "/phone_numbers/${SdkClient.encodePathSegment(phoneNumberId)}/attempt_verification", config = clientConfig, body = SdkClient.bodyMap("verification_id" to (verificationId), "code" to (code)), operationId = "attemptPhoneNumberVerification", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java, "429" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
+    fun attemptPhoneNumberVerification(clientConfig: ClientConfig, phoneNumberId: String, verificationId: String, code: String, options: RequestOptions? = null): VerificationResponse {
+        return SdkClient.request<VerificationResponse>(SdkClient.RequestSpec("POST", "/phone_numbers/${SdkClient.encodePathSegment(phoneNumberId)}/attempt_verification", config = clientConfig, body = SdkClient.bodyMap("verification_id" to (verificationId), "code" to (code)), operationId = "attemptPhoneNumberVerification", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java, "429" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
     }
 
 
