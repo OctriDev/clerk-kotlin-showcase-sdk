@@ -3,43 +3,27 @@
 
 package dev.octri.showcase.clerk
 
+
 class SsoBypassNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Returns the users who may verify an email code instead of reaching their identity provider
-     * when enterprise SSO is unreachable.
+     * Returns the users who may verify an email code instead of reaching their identity provider when enterprise SSO is unreachable.
      */
-    fun listAllowlistUsers(
-        enterpriseConnectionId: String? = null,
-        options: RequestOptions? = null,
-    ): SSOBypassAllowlistUsers {
-        return dev.octri.showcase.clerk.methods.SsoBypass.listSsoBypassAllowlistUsers(
-            clientConfig,
-            enterpriseConnectionId,
-            options,
-        )
+    fun listAllowlistUsers(enterpriseConnectionId: String? = null, options: RequestOptions? = null): SSOBypassAllowlistUsers {
+        return dev.octri.showcase.clerk.methods.SsoBypass.listSsoBypassAllowlistUsers(clientConfig, enterpriseConnectionId, options)
     }
 
     /**
-     * Puts a user on the allowlist. The request is rejected unless the user holds a verified email
-     * address on a domain one of the instance's enterprise connections serves.
+     * Puts a user on the allowlist. The request is rejected unless the user holds a verified email address on a domain one of the instance's enterprise connections serves.
      */
-    fun createAllowlistUser(
-        userId: String,
-        options: RequestOptions? = null,
-    ): SSOBypassAllowlistUser {
-        return dev.octri.showcase.clerk.methods.SsoBypass.createSsoBypassAllowlistUser(
-            clientConfig,
-            userId,
-            options,
-        )
+    fun createAllowlistUser(userId: String, options: RequestOptions? = null): SSOBypassAllowlistUser {
+        return dev.octri.showcase.clerk.methods.SsoBypass.createSsoBypassAllowlistUser(clientConfig, userId, options)
     }
 
-    /** Removes the user from the allowlist, across every enterprise connection that serves them. */
+    /**
+     * Removes the user from the allowlist, across every enterprise connection that serves them.
+     */
     fun deleteAllowlistUser(userId: String, options: RequestOptions? = null): DeletedObject {
-        return dev.octri.showcase.clerk.methods.SsoBypass.deleteSsoBypassAllowlistUser(
-            clientConfig,
-            userId,
-            options,
-        )
+        return dev.octri.showcase.clerk.methods.SsoBypass.deleteSsoBypassAllowlistUser(clientConfig, userId, options)
     }
+
 }

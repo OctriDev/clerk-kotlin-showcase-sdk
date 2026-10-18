@@ -3,10 +3,16 @@
 
 package dev.octri.showcase.clerk.models
 
-/** Typed representation of the `Permissions` API schema. */
+/**
+ * Typed representation of the `Permissions` API schema.
+ */
 data class Permissions(
-    /** Required array value serialized in the `data` wire field. */
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Permission>,
-    /** Total number of permissions */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long,
+    /**
+     * Total number of permissions
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long
 )

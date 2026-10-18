@@ -3,96 +3,48 @@
 
 package dev.octri.showcase.clerk
 
+
 class OrganizationMembershipsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Adds a user as a member to the given organization. Only users in the same instance as the
-     * organization can be added as members. This organization will be the user's \[active
-     * organization\] (clerk.com) the next time they create a session, presuming they don't
-     * explicitly set a different organization as active before then.
+     * Adds a user as a member to the given organization. Only users in the same instance as the organization can be added as members. This organization will be the user's \[active organization\] (clerk.com) the next time they create a session, presuming they don't explicitly set a different organization as active before then.
      */
-    fun create(
-        organizationId: String,
-        userId: String,
-        role: String,
-        publicMetadata: SdkClient.SdkOptional<Map<String, Any>?>? = null,
-        privateMetadata: SdkClient.SdkOptional<Map<String, Any>?>? = null,
-        options: RequestOptions? = null,
-    ): OrganizationMembership {
-        return dev.octri.showcase.clerk.methods.OrganizationMembershipsMethods
-            .createOrganizationMembership(
-                clientConfig,
-                organizationId,
-                userId,
-                role,
-                publicMetadata,
-                privateMetadata,
-                options,
-            )
-    }
-
-    /** Retrieves all user memberships for the given organization */
-    fun list(
-        request:
-            dev.octri.showcase.clerk.methods.OrganizationMembershipsMethods.ListOrganizationMembershipsRequest,
-        options: RequestOptions? = null,
-    ): OrganizationMemberships {
-        return dev.octri.showcase.clerk.methods.OrganizationMembershipsMethods
-            .listOrganizationMemberships(clientConfig, request, options)
-    }
-
-    /** Updates the properties of an existing organization membership */
-    fun update(
-        organizationId: String,
-        userId: String,
-        role: String,
-        options: RequestOptions? = null,
-    ): OrganizationMembership {
-        return dev.octri.showcase.clerk.methods.OrganizationMembershipsMethods
-            .updateOrganizationMembership(clientConfig, organizationId, userId, role, options)
-    }
-
-    /** Removes the given membership from the organization */
-    fun delete(
-        organizationId: String,
-        userId: String,
-        options: RequestOptions? = null,
-    ): OrganizationMembership {
-        return dev.octri.showcase.clerk.methods.OrganizationMembershipsMethods
-            .deleteOrganizationMembership(clientConfig, organizationId, userId, options)
+    fun create(organizationId: String, userId: String, role: String, publicMetadata: SdkClient.SdkOptional<Map<String, Any>?>? = null, privateMetadata: SdkClient.SdkOptional<Map<String, Any>?>? = null, options: RequestOptions? = null): OrganizationMembership {
+        return dev.octri.showcase.clerk.methods.OrganizationMembershipsMethods.createOrganizationMembership(clientConfig, organizationId, userId, role, publicMetadata, privateMetadata, options)
     }
 
     /**
-     * Update an organization membership's metadata attributes by merging existing values with the
-     * provided parameters. Metadata values will be updated via a deep merge. Deep means that any
-     * nested JSON objects will be merged as well. You can remove metadata keys at any level by
-     * setting their value to `null`.
+     * Retrieves all user memberships for the given organization
      */
-    fun updateMetadata(
-        organizationId: String,
-        userId: String,
-        publicMetadata: Map<String, Any>? = null,
-        privateMetadata: Map<String, Any>? = null,
-        options: RequestOptions? = null,
-    ): OrganizationMembership {
-        return dev.octri.showcase.clerk.methods.OrganizationMembershipsMethods
-            .updateOrganizationMembershipMetadata(
-                clientConfig,
-                organizationId,
-                userId,
-                publicMetadata,
-                privateMetadata,
-                options,
-            )
+    fun list(request: dev.octri.showcase.clerk.methods.OrganizationMembershipsMethods.ListOrganizationMembershipsRequest, options: RequestOptions? = null): OrganizationMemberships {
+        return dev.octri.showcase.clerk.methods.OrganizationMembershipsMethods.listOrganizationMemberships(clientConfig, request, options)
     }
 
-    /** Retrieves all organization user memberships for the given instance. */
-    fun listAll(
-        orderBy: String? = null,
-        limit: Long? = null,
-        offset: Long? = null,
-        options: RequestOptions? = null,
-    ): OrganizationMemberships {
-        return dev.octri.showcase.clerk.methods.OrganizationMembershipsMethods
-            .listOrganizationMembershipsAll(clientConfig, orderBy, limit, offset, options)
+    /**
+     * Updates the properties of an existing organization membership
+     */
+    fun update(organizationId: String, userId: String, role: String, options: RequestOptions? = null): OrganizationMembership {
+        return dev.octri.showcase.clerk.methods.OrganizationMembershipsMethods.updateOrganizationMembership(clientConfig, organizationId, userId, role, options)
     }
+
+    /**
+     * Removes the given membership from the organization
+     */
+    fun delete(organizationId: String, userId: String, options: RequestOptions? = null): OrganizationMembership {
+        return dev.octri.showcase.clerk.methods.OrganizationMembershipsMethods.deleteOrganizationMembership(clientConfig, organizationId, userId, options)
+    }
+
+    /**
+     * Update an organization membership's metadata attributes by merging existing values with the provided parameters. Metadata values will be updated via a deep merge. Deep means that any nested JSON objects will be merged as well. You can remove metadata keys at any level by setting their value to `null`.
+     */
+    fun updateMetadata(organizationId: String, userId: String, publicMetadata: Map<String, Any>? = null, privateMetadata: Map<String, Any>? = null, options: RequestOptions? = null): OrganizationMembership {
+        return dev.octri.showcase.clerk.methods.OrganizationMembershipsMethods.updateOrganizationMembershipMetadata(clientConfig, organizationId, userId, publicMetadata, privateMetadata, options)
+    }
+
+    /**
+     * Retrieves all organization user memberships for the given instance.
+     */
+    fun listAll(orderBy: String? = null, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): OrganizationMemberships {
+        return dev.octri.showcase.clerk.methods.OrganizationMembershipsMethods.listOrganizationMembershipsAll(clientConfig, orderBy, limit, offset, options)
+    }
+
 }

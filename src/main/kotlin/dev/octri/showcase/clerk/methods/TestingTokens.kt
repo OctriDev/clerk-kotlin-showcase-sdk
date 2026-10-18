@@ -10,27 +10,20 @@ import dev.octri.showcase.clerk.TestingToken
 
 object TestingTokens {
 
+
     /**
-     * Creates a testing token for use with Frontend API requests. Pass the returned `token` value
-     * in the `__clerk_testing_token` query parameter; the response includes its expiration time as
-     * `expires_at`.
+     * Creates a testing token for use with Frontend API requests. Pass the returned `token` value in the `__clerk_testing_token` query parameter; the response includes its expiration time as `expires_at`.
      *
      * Retrieve a new testing token.
      */
-    fun createTestingToken(
-        clientConfig: ClientConfig,
-        options: RequestOptions? = null,
-    ): TestingToken {
-        return SdkClient.request<TestingToken>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/testing_tokens",
-                    config = clientConfig,
-                    operationId = "createTestingToken",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+    fun createTestingToken(clientConfig: ClientConfig, options: RequestOptions? = null): TestingToken {
+        return SdkClient.request<TestingToken>(SdkClient.RequestSpec("POST", "/testing_tokens", config = clientConfig, operationId = "createTestingToken", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
+
+
+
+
+
+
+
 }

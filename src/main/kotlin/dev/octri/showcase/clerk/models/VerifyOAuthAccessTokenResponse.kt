@@ -5,79 +5,63 @@ package dev.octri.showcase.clerk.models
 
 data class VerifyOAuthAccessTokenResponseVariant0ActAct(
     val sub: String,
-    val iss: String? = null,
+    val iss: String? = null
 )
 
 /**
- * The actor chain of an access token issued by an OAuth 2.0 Token Exchange (RFC 8693 section 4.1).
- * Omitted for other access tokens.
+ * The actor chain of an access token issued by an OAuth 2.0 Token Exchange (RFC 8693 section 4.1). Omitted for other access tokens.
  */
 data class VerifyOAuthAccessTokenResponseVariant0Act(
     val sub: String,
     val iss: String? = null,
-    val act: VerifyOAuthAccessTokenResponseVariant0ActAct? = null,
+    val act: VerifyOAuthAccessTokenResponseVariant0ActAct? = null
 )
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class VerifyOAuthAccessTokenResponseVariant0(
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: VerifyOAuthAccessTokenResponseVariant0ObjectEnum,
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: VerifyOAuthAccessTokenResponseVariant0ObjectEnum,
     val id: String,
     @com.fasterxml.jackson.annotation.JsonProperty("client_id") val clientId: String,
     val subject: String,
     val scopes: List<String>,
     val revoked: Boolean,
-    @com.fasterxml.jackson.annotation.JsonProperty("revocation_reason", required = true)
-    val revocationReason: String?,
+    @com.fasterxml.jackson.annotation.JsonProperty("revocation_reason", required = true) val revocationReason: String?,
     val expired: Boolean,
-    @com.fasterxml.jackson.annotation.JsonProperty("expiration", required = true)
-    val expiration: Double?,
+    @com.fasterxml.jackson.annotation.JsonProperty("expiration", required = true) val expiration: Double?,
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Double,
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Double,
-    /** The audiences of the access token. Omitted when no audience is set. */
+    /**
+     * The audiences of the access token. Omitted when no audience is set.
+     */
     val aud: List<String>? = null,
     /**
-     * The actor chain of an access token issued by an OAuth 2.0 Token Exchange (RFC 8693 section
-     * 4.1). Omitted for other access tokens.
+     * The actor chain of an access token issued by an OAuth 2.0 Token Exchange (RFC 8693 section 4.1). Omitted for other access tokens.
      */
-    val act: VerifyOAuthAccessTokenResponseVariant0Act? = null,
+    val act: VerifyOAuthAccessTokenResponseVariant0Act? = null
 ) : VerifyOAuthAccessTokenResponse
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class VerifyOAuthAccessTokenResponseVariant1(
-    /** Indicates that a JWT access token is not active (expired) */
+    /**
+     * Indicates that a JWT access token is not active (expired)
+     */
     val active: Boolean
 ) : VerifyOAuthAccessTokenResponse
 
-/** Typed representation of the `VerifyOAuthAccessTokenResponse` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = VerifyOAuthAccessTokenResponse.Deserializer::class
-)
+/**
+ * Typed representation of the `VerifyOAuthAccessTokenResponse` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = VerifyOAuthAccessTokenResponse.Deserializer::class)
 sealed interface VerifyOAuthAccessTokenResponse {
     /** Chooses the branch this payload is shaped like. */
-    class Deserializer :
-        com.fasterxml.jackson.databind.JsonDeserializer<VerifyOAuthAccessTokenResponse>() {
+    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<VerifyOAuthAccessTokenResponse>() {
         override fun deserialize(
             parser: com.fasterxml.jackson.core.JsonParser,
             context: com.fasterxml.jackson.databind.DeserializationContext,
         ): VerifyOAuthAccessTokenResponse {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val ownedType =
-                VerifyOAuthAccessTokenResponseOwnedTypes.firstOrNull { (keys, _) ->
-                        keys.any(node::has)
-                    }
-                    ?.second
+            val ownedType = VerifyOAuthAccessTokenResponseOwnedTypes.firstOrNull { (keys, _) -> keys.any(node::has) }?.second
             if (ownedType != null) {
                 try {
                     return mapper.convertValue(node, ownedType)
@@ -85,43 +69,17 @@ sealed interface VerifyOAuthAccessTokenResponse {
                     // Tried with the other branches below.
                 }
             }
-            val objectTypes: List<Class<out VerifyOAuthAccessTokenResponse>> =
-                listOf(
-                    VerifyOAuthAccessTokenResponseVariant0::class.java,
-                    VerifyOAuthAccessTokenResponseVariant1::class.java,
-                )
-            dev.octri.showcase.clerk.sdkObjectBranch(mapper, node, objectTypes)?.let {
-                return it
-            }
+            val objectTypes: List<Class<out VerifyOAuthAccessTokenResponse>> = listOf(VerifyOAuthAccessTokenResponseVariant0::class.java, VerifyOAuthAccessTokenResponseVariant1::class.java)
+            dev.octri.showcase.clerk.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
             return when {
-                else ->
-                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                        parser,
-                        VerifyOAuthAccessTokenResponse::class.java,
-                        "no VerifyOAuthAccessTokenResponse branch accepts this payload",
-                    )
+                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                    parser, VerifyOAuthAccessTokenResponse::class.java, "no VerifyOAuthAccessTokenResponse branch accepts this payload")
             }
         }
     }
 }
 
-internal val VerifyOAuthAccessTokenResponseOwnedTypes:
-    List<Pair<List<String>, Class<out VerifyOAuthAccessTokenResponse>>> =
-    listOf(
-        listOf(
-            "object",
-            "id",
-            "client_id",
-            "subject",
-            "scopes",
-            "aud",
-            "act",
-            "revoked",
-            "revocation_reason",
-            "expired",
-            "expiration",
-            "created_at",
-            "updated_at",
-        ) to VerifyOAuthAccessTokenResponseVariant0::class.java,
-        listOf("active") to VerifyOAuthAccessTokenResponseVariant1::class.java,
-    )
+internal val VerifyOAuthAccessTokenResponseOwnedTypes: List<Pair<List<String>, Class<out VerifyOAuthAccessTokenResponse>>> = listOf(
+    listOf("object", "id", "client_id", "subject", "scopes", "aud", "act", "revoked", "revocation_reason", "expired", "expiration", "created_at", "updated_at") to VerifyOAuthAccessTokenResponseVariant0::class.java,
+    listOf("active") to VerifyOAuthAccessTokenResponseVariant1::class.java,
+)

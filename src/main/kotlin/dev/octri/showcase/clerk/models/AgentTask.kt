@@ -3,19 +3,28 @@
 
 package dev.octri.showcase.clerk.models
 
-/** Typed representation of the `AgentTask` API schema. */
+/**
+ * Typed representation of the `AgentTask` API schema.
+ */
 data class AgentTask(
-    /** Required enumerated value serialized in the `object` wire field. */
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: AgentTaskObjectEnum,
-    /** A stable identifier for the agent, unique per agent_name within an instance. */
+    /**
+     * A stable identifier for the agent, unique per agent_name within an instance.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("agent_id") val agentId: String,
-    /** A unique identifier for this agent task. */
+    /**
+     * A unique identifier for this agent task.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("agent_task_id") val agentTaskId: String,
-    /** A unique identifier for this agent task. Deprecated: use agent_task_id instead. */
+    /**
+     * A unique identifier for this agent task. Deprecated: use agent_task_id instead.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("task_id") val taskId: String,
     /**
-     * The URL that, when visited, creates a session for the user. Only present in the response to a
-     * create request.
+     * The URL that, when visited, creates a session for the user. Only present in the response to a create request.
      */
-    val url: String? = null,
+    val url: String? = null
 )

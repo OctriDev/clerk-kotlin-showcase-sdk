@@ -3,27 +3,32 @@
 
 package dev.octri.showcase.clerk.models
 
-/** Typed representation of the `InstanceSettings` API schema. */
+/**
+ * Typed representation of the `InstanceSettings` API schema.
+ */
 data class InstanceSettings(
-    /** String representing the object's type. Objects of the same type share the same value. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: InstanceSettingsObjectEnum? = null,
-    /** Optional `string` value serialized in the `id` wire field. */
-    val id: String? = null,
-    /** Optional `boolean` value serialized in the `restricted_to_allowlist` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("restricted_to_allowlist")
-    val restrictedToAllowlist: Boolean? = null,
-    /** Optional `string` value serialized in the `from_email_address` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("from_email_address")
-    val fromEmailAddress: String? = null,
-    /** Optional `boolean` value serialized in the `progressive_sign_up` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("progressive_sign_up")
-    val progressiveSignUp: Boolean? = null,
     /**
-     * Deprecated. This setting is retired and no longer affects email delivery; all email is sent
-     * through the instance's configured email sending domain. The field is preserved for API
-     * compatibility only and will be removed in a future version.
+     * String representing the object's type. Objects of the same type share the same value.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("enhanced_email_deliverability")
-    val enhancedEmailDeliverability: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: InstanceSettingsObjectEnum? = null,
+    /**
+     * Optional `string` value serialized in the `id` wire field.
+     */
+    val id: String? = null,
+    /**
+     * Optional `boolean` value serialized in the `restricted_to_allowlist` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("restricted_to_allowlist") val restrictedToAllowlist: Boolean? = null,
+    /**
+     * Optional `string` value serialized in the `from_email_address` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("from_email_address") val fromEmailAddress: String? = null,
+    /**
+     * Optional `boolean` value serialized in the `progressive_sign_up` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("progressive_sign_up") val progressiveSignUp: Boolean? = null,
+    /**
+     * Deprecated. This setting is retired and no longer affects email delivery; all email is sent through the instance's configured email sending domain. The field is preserved for API compatibility only and will be removed in a future version.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("enhanced_email_deliverability") val enhancedEmailDeliverability: Boolean? = null
 )

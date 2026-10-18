@@ -3,45 +3,64 @@
 
 package dev.octri.showcase.clerk.models
 
-/** The allowlisted user's public data. */
+/**
+ * The allowlisted user's public data.
+ */
 data class SSOBypassAllowlistPublicUserData(
-    /** Required `string` value serialized in the `first_name` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("first_name", required = true)
-    val firstName: String?,
-    /** Required `string` value serialized in the `last_name` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_name", required = true)
-    val lastName: String?,
-    /** Required `boolean` value serialized in the `has_image` wire field. */
+    /**
+     * Required `string` value serialized in the `first_name` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("first_name", required = true) val firstName: String?,
+    /**
+     * Required `string` value serialized in the `last_name` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_name", required = true) val lastName: String?,
+    /**
+     * Required `boolean` value serialized in the `has_image` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("has_image") val hasImage: Boolean,
-    /** Required `string` value serialized in the `identifier` wire field. */
+    /**
+     * Required `string` value serialized in the `identifier` wire field.
+     */
     val identifier: String,
-    /** Required `string` value serialized in the `username` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("username", required = true)
-    val username: String?,
-    /** Use `image_url` instead. */
-    @com.fasterxml.jackson.annotation.JsonProperty("profile_image_url", required = true)
-    val profileImageUrl: String?,
-    /** Optional `string` value serialized in the `image_url` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("image_url") val imageUrl: String? = null,
+    /**
+     * Required `string` value serialized in the `username` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("username", required = true) val username: String?,
+    /**
+     * Use `image_url` instead.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("profile_image_url", required = true) val profileImageUrl: String?,
+    /**
+     * Optional `string` value serialized in the `image_url` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("image_url") val imageUrl: String? = null
 )
 
 /**
- * A user who may verify an email code instead of reaching their identity provider when enterprise
- * SSO is unreachable.
+ * A user who may verify an email code instead of reaching their identity provider when enterprise SSO is unreachable.
  */
 data class SSOBypassAllowlistUser(
-    /** Required enumerated value serialized in the `object` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: SSOBypassAllowlistUserObjectEnum,
-    /** The allowlisted user, and the identifier the delete endpoint takes. */
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: SSOBypassAllowlistUserObjectEnum,
+    /**
+     * The allowlisted user, and the identifier the delete endpoint takes.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String,
-    /** The allowlisted user's public data. */
-    @com.fasterxml.jackson.annotation.JsonProperty("public_user_data")
-    val publicUserData: SSOBypassAllowlistPublicUserData,
-    /** Unix timestamp of creation. */
+    /**
+     * The allowlisted user's public data.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("public_user_data") val publicUserData: SSOBypassAllowlistPublicUserData,
+    /**
+     * Unix timestamp of creation.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** Unix timestamp of last update. */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
+    /**
+     * Unix timestamp of last update.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long
 )
 
 typealias SSOBypassAllowlistUsers = List<SSOBypassAllowlistUser>

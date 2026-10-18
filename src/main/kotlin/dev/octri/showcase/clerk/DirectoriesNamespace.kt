@@ -3,178 +3,82 @@
 
 package dev.octri.showcase.clerk
 
+
 class DirectoriesNamespace(private val clientConfig: ClientConfig) {
-    /** Returns a list of all directories for the instance. */
-    fun list(
-        limit: Long? = null,
-        offset: Long? = null,
-        options: RequestOptions? = null,
-    ): DirectoryList {
-        return dev.octri.showcase.clerk.methods.DirectoriesMethods.listDirectories(
-            clientConfig,
-            limit,
-            offset,
-            options,
-        )
+    /**
+     * Returns a list of all directories for the instance.
+     */
+    fun list(limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): DirectoryList {
+        return dev.octri.showcase.clerk.methods.DirectoriesMethods.listDirectories(clientConfig, limit, offset, options)
     }
 
     /**
-     * Creates a directory for provisioning users from an identity provider and associates it with
-     * an enterprise connection. Supply `enterprise_connection_id` and `provider`; optionally
-     * include a name and group-to-role mappings to create with the directory. The response includes
-     * the directory configuration and its API key.
+     * Creates a directory for provisioning users from an identity provider and associates it with an enterprise connection. Supply `enterprise_connection_id` and `provider`; optionally include a name and group-to-role mappings to create with the directory. The response includes the directory configuration and its API key.
      *
      * Create a new directory for the instance.
      */
-    fun create(
-        enterpriseConnectionId: String,
-        provider: String,
-        name: String? = null,
-        groupRoleMappings:
-            List<
-                dev.octri.showcase.clerk.methods.DirectoriesMethods.CreateDirectoryGroupRoleMappingsItem
-            >? =
-            null,
-        options: RequestOptions? = null,
-    ): Directory {
-        return dev.octri.showcase.clerk.methods.DirectoriesMethods.createDirectory(
-            clientConfig,
-            enterpriseConnectionId,
-            provider,
-            name,
-            groupRoleMappings,
-            options,
-        )
+    fun create(enterpriseConnectionId: String, provider: String, name: String? = null, groupRoleMappings: List<dev.octri.showcase.clerk.methods.DirectoriesMethods.CreateDirectoryGroupRoleMappingsItem>? = null, options: RequestOptions? = null): Directory {
+        return dev.octri.showcase.clerk.methods.DirectoriesMethods.createDirectory(clientConfig, enterpriseConnectionId, provider, name, groupRoleMappings, options)
     }
 
     /**
-     * Retrieves the configuration for a directory used to provision users from an identity
-     * provider. Use `directory_id` to identify the directory whose details you need.
+     * Retrieves the configuration for a directory used to provision users from an identity provider. Use `directory_id` to identify the directory whose details you need.
      *
      * Returns the details of a directory.
      */
     fun get(directoryId: String, options: RequestOptions? = null): Directory {
-        return dev.octri.showcase.clerk.methods.DirectoriesMethods.getDirectory(
-            clientConfig,
-            directoryId,
-            options,
-        )
+        return dev.octri.showcase.clerk.methods.DirectoriesMethods.getDirectory(clientConfig, directoryId, options)
     }
 
     /**
-     * Updates configurable properties of a directory used to provision users from an identity
-     * provider. Supply only the fields you want to change; `attribute_mapping` entries are merged
-     * into the existing mapping, and a key set to `null` is removed.
+     * Updates configurable properties of a directory used to provision users from an identity provider. Supply only the fields you want to change; `attribute_mapping` entries are merged into the existing mapping, and a key set to `null` is removed.
      *
      * Updates a directory.
      */
-    fun update(
-        request: dev.octri.showcase.clerk.methods.DirectoriesMethods.UpdateDirectoryRequest,
-        options: RequestOptions? = null,
-    ): Directory {
-        return dev.octri.showcase.clerk.methods.DirectoriesMethods.updateDirectory(
-            clientConfig,
-            request,
-            options,
-        )
+    fun update(request: dev.octri.showcase.clerk.methods.DirectoriesMethods.UpdateDirectoryRequest, options: RequestOptions? = null): Directory {
+        return dev.octri.showcase.clerk.methods.DirectoriesMethods.updateDirectory(clientConfig, request, options)
     }
 
     /**
-     * Deletes a directory and stops provisioning for it. Provisioning requests authenticated with
-     * the directory's API key are rejected afterwards.
+     * Deletes a directory and stops provisioning for it. Provisioning requests authenticated with the directory's API key are rejected afterwards.
      */
     fun delete(directoryId: String, options: RequestOptions? = null): DeletedObject {
-        return dev.octri.showcase.clerk.methods.DirectoriesMethods.deleteDirectory(
-            clientConfig,
-            directoryId,
-            options,
-        )
+        return dev.octri.showcase.clerk.methods.DirectoriesMethods.deleteDirectory(clientConfig, directoryId, options)
     }
 
     /**
-     * Generates a new API key for the directory and returns it in the `api_key` field. This is the
-     * only way to obtain the key after creation, so make sure to update it in your identity
-     * provider. The previous key remains valid for a short grace period before it expires.
+     * Generates a new API key for the directory and returns it in the `api_key` field. This is the only way to obtain the key after creation, so make sure to update it in your identity provider. The previous key remains valid for a short grace period before it expires.
      */
     fun rotateApiKey(directoryId: String, options: RequestOptions? = null): Directory {
-        return dev.octri.showcase.clerk.methods.DirectoriesMethods.rotateDirectoryApiKey(
-            clientConfig,
-            directoryId,
-            options,
-        )
+        return dev.octri.showcase.clerk.methods.DirectoriesMethods.rotateDirectoryApiKey(clientConfig, directoryId, options)
     }
 
     /**
-     * Returns the list of directory group to organization role mappings for a directory, ordered by
-     * precedence.
+     * Returns the list of directory group to organization role mappings for a directory, ordered by precedence.
      */
-    fun listGroupRoleMappings(
-        directoryId: String,
-        options: RequestOptions? = null,
-    ): DirectoryGroupRoleMappingList {
-        return dev.octri.showcase.clerk.methods.DirectoriesMethods.listDirectoryGroupRoleMappings(
-            clientConfig,
-            directoryId,
-            options,
-        )
+    fun listGroupRoleMappings(directoryId: String, options: RequestOptions? = null): DirectoryGroupRoleMappingList {
+        return dev.octri.showcase.clerk.methods.DirectoriesMethods.listDirectoryGroupRoleMappings(clientConfig, directoryId, options)
     }
 
     /**
-     * Creates a new directory group to organization role mapping for a directory. Mappings can be
-     * created while group role mapping is disabled on the directory, but they only take effect once
-     * it is enabled.
+     * Creates a new directory group to organization role mapping for a directory. Mappings can be created while group role mapping is disabled on the directory, but they only take effect once it is enabled.
      */
-    fun createGroupRoleMapping(
-        directoryId: String,
-        roleId: String,
-        directoryGroupId: String? = null,
-        scimGroupId: String? = null,
-        precedence: Long? = null,
-        options: RequestOptions? = null,
-    ): DirectoryGroupRoleMapping {
-        return dev.octri.showcase.clerk.methods.DirectoriesMethods.createDirectoryGroupRoleMapping(
-            clientConfig,
-            directoryId,
-            roleId,
-            directoryGroupId,
-            scimGroupId,
-            precedence,
-            options,
-        )
+    fun createGroupRoleMapping(directoryId: String, roleId: String, directoryGroupId: String? = null, scimGroupId: String? = null, precedence: Long? = null, options: RequestOptions? = null): DirectoryGroupRoleMapping {
+        return dev.octri.showcase.clerk.methods.DirectoriesMethods.createDirectoryGroupRoleMapping(clientConfig, directoryId, roleId, directoryGroupId, scimGroupId, precedence, options)
     }
 
     /**
-     * Replaces the entire set of directory group role mappings for a directory. The position of
-     * each item in the `mappings` array determines its precedence (the first item gets precedence
-     * 1). Passing an empty array removes all mappings. Mappings can be replaced while group role
-     * mapping is disabled on the directory, but they only take effect once it is enabled.
+     * Replaces the entire set of directory group role mappings for a directory. The position of each item in the `mappings` array determines its precedence (the first item gets precedence 1). Passing an empty array removes all mappings. Mappings can be replaced while group role mapping is disabled on the directory, but they only take effect once it is enabled.
      */
-    fun replaceGroupRoleMappings(
-        directoryId: String,
-        mappings:
-            List<
-                dev.octri.showcase.clerk.methods.DirectoriesMethods.ReplaceDirectoryGroupRoleMappingsMappingsItem
-            >,
-        options: RequestOptions? = null,
-    ): DirectoryGroupRoleMappingList {
-        return dev.octri.showcase.clerk.methods.DirectoriesMethods
-            .replaceDirectoryGroupRoleMappings(clientConfig, directoryId, mappings, options)
+    fun replaceGroupRoleMappings(directoryId: String, mappings: List<dev.octri.showcase.clerk.methods.DirectoriesMethods.ReplaceDirectoryGroupRoleMappingsMappingsItem>, options: RequestOptions? = null): DirectoryGroupRoleMappingList {
+        return dev.octri.showcase.clerk.methods.DirectoriesMethods.replaceDirectoryGroupRoleMappings(clientConfig, directoryId, mappings, options)
     }
 
     /**
-     * Deletes a single directory group role mapping. Mappings can be deleted while group role
-     * mapping is disabled on the directory, but the change only takes effect once it is enabled.
+     * Deletes a single directory group role mapping. Mappings can be deleted while group role mapping is disabled on the directory, but the change only takes effect once it is enabled.
      */
-    fun deleteGroupRoleMapping(
-        directoryId: String,
-        mappingId: String,
-        options: RequestOptions? = null,
-    ): DirectoryGroupRoleMappingDeleted {
-        return dev.octri.showcase.clerk.methods.DirectoriesMethods.deleteDirectoryGroupRoleMapping(
-            clientConfig,
-            directoryId,
-            mappingId,
-            options,
-        )
+    fun deleteGroupRoleMapping(directoryId: String, mappingId: String, options: RequestOptions? = null): DirectoryGroupRoleMappingDeleted {
+        return dev.octri.showcase.clerk.methods.DirectoriesMethods.deleteDirectoryGroupRoleMapping(clientConfig, directoryId, mappingId, options)
     }
+
 }

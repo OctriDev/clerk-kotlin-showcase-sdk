@@ -17,66 +17,41 @@ import dev.octri.showcase.clerk.Validation
 
 object RoleSetsMethods {
 
+
     /**
-     * Returns a list of role sets for the instance. Results can be paginated using the optional
-     * `limit` and `offset` query parameters. The role sets are ordered by descending creation date
-     * by default.
+     * Returns a list of role sets for the instance. Results can be paginated using the optional `limit` and `offset` query parameters. The role sets are ordered by descending creation date by default.
      *
-     * @param query Returns role sets with ID, name, or key that match the given query. Uses exact
-     *   match for role set ID and partial match for name and key.
-     * @param orderBy Allows to return role sets in a particular order. At the moment, you can order
-     *   the returned role sets by their `created_at`, `name`, or `key`. In order to specify the
-     *   direction, you can use the `+/-` symbols prepended in the property to order by. For
-     *   example, if you want role sets to be returned in descending order according to their
-     *   `created_at` property, you can use `-created_at`. If you don't use `+` or `-`, then `+` is
-     *   implied. Defaults to `-created_at`.
-     * @param limit Applies a limit to the number of results returned. Can be used for paginating
-     *   the results together with `offset`.
-     * @param offset Skip the first `offset` results when paginating. Needs to be an integer greater
-     *   or equal to zero. To be used in conjunction with `limit`.
+     * @param query Returns role sets with ID, name, or key that match the given
+     *   query. Uses exact match for role set ID and partial match for name and key.
+     * @param orderBy Allows to return role sets in a particular order. At the
+     *   moment, you can order the returned role sets by their `created_at`, `name`, or
+     *   `key`. In order to specify the direction, you can use the `+/-` symbols
+     *   prepended in the property to order by. For example, if you want role sets to
+     *   be returned in descending order according to their `created_at` property, you
+     *   can use `-created_at`. If you don't use `+` or `-`, then `+` is implied.
+     *   Defaults to `-created_at`.
+     * @param limit Applies a limit to the number of results returned. Can be used
+     *   for paginating the results together with `offset`.
+     * @param offset Skip the first `offset` results when paginating. Needs to be an
+     *   integer greater or equal to zero. To be used in conjunction with `limit`.
      */
-    fun listRoleSets(
-        clientConfig: ClientConfig,
-        query: String? = null,
-        orderBy: String? = null,
-        limit: Long? = null,
-        offset: Long? = null,
-        options: RequestOptions? = null,
-    ): RoleSets {
+    fun listRoleSets(clientConfig: ClientConfig, query: String? = null, orderBy: String? = null, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): RoleSets {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 500.0))
-        }
+}
 
         if (offset != null) {
             Validation.validateRange("offset", offset, Validation.RangeOpts(min = 0.0))
-        }
+}
 
-        return SdkClient.request<RoleSets>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/role_sets",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "query" to SdkClient.queryValue(query, "form", true),
-                            "order_by" to SdkClient.queryValue(orderBy, "form", true),
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "offset" to SdkClient.queryValue(offset, "form", true),
-                        ),
-                    operationId = "listRoleSets",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<RoleSets>(SdkClient.RequestSpec("GET", "/role_sets", config = clientConfig, query = mapOf("query" to SdkClient.queryValue(query, "form", true), "order_by" to SdkClient.queryValue(orderBy, "form", true), "limit" to SdkClient.queryValue(limit, "form", true), "offset" to SdkClient.queryValue(offset, "form", true)), operationId = "listRoleSets", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [createRoleSet]. */
     data class CreateRoleSetRequest(
@@ -86,98 +61,53 @@ object RoleSetsMethods {
         val roles: List<String>,
         val key: String? = null,
         val description: SdkClient.SdkOptional<String?>? = null,
-        val type: CreateRoleSetTypeEnum? = null,
+        val type: CreateRoleSetTypeEnum? = null
     )
 
     /**
-     * Creates a new role set with the given name and roles. The key must be unique for the instance
-     * and start with the 'role_set:' prefix, followed by lowercase alphanumeric characters and
-     * underscores only. You must provide at least one role and specify a default role key and
-     * creator role key.
+     * Creates a new role set with the given name and roles. The key must be unique for the instance and start with the 'role_set:' prefix, followed by lowercase alphanumeric characters and underscores only. You must provide at least one role and specify a default role key and creator role key.
      *
      * @param name The name of the new role set
-     * @param defaultRoleKey The key of the role to use as the default role for new organization
-     *   members. Must be one of the roles in the `roles` array.
-     * @param creatorRoleKey The key of the role to assign to organization creators. Must be one of
-     *   the roles in the `roles` array.
-     * @param roles Array of role keys to include in the role set. Must contain at least one role
-     *   and no more than 10 roles.
-     * @param key A unique key for the role set. Must start with 'role_set:' and contain only
-     *   lowercase alphanumeric characters and underscores. If not provided, a key will be generated
-     *   from the name.
+     * @param defaultRoleKey The key of the role to use as the default role for new
+     *   organization members. Must be one of the roles in the `roles` array.
+     * @param creatorRoleKey The key of the role to assign to organization creators.
+     *   Must be one of the roles in the `roles` array.
+     * @param roles Array of role keys to include in the role set. Must contain at
+     *   least one role and no more than 10 roles.
+     * @param key A unique key for the role set. Must start with 'role_set:' and
+     *   contain only lowercase alphanumeric characters and underscores. If not
+     *   provided, a key will be generated from the name.
      * @param description Optional description for the role set
-     * @param type The type of the role set. "initial" role sets are the default for new
-     *   organizations. Only one role set can be "initial" per instance.
+     * @param type The type of the role set. "initial" role sets are the default for
+     *   new organizations. Only one role set can be "initial" per instance.
      */
-    fun createRoleSet(
-        clientConfig: ClientConfig,
-        request: CreateRoleSetRequest,
-        options: RequestOptions? = null,
-    ): RoleSet {
-        return SdkClient.request<RoleSet>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/role_sets",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (request.name),
-                            "default_role_key" to (request.defaultRoleKey),
-                            "creator_role_key" to (request.creatorRoleKey),
-                            "roles" to (request.roles),
-                            "key" to (SdkClient.omitIfNull(request.key)),
-                            "description" to (request.description ?: SdkClient.SdkOptional.Omitted),
-                            "type" to (SdkClient.omitIfNull(request.type)),
-                        ),
-                    operationId = "createRoleSet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "402" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun createRoleSet(clientConfig: ClientConfig, request: CreateRoleSetRequest, options: RequestOptions? = null): RoleSet {
+        return SdkClient.request<RoleSet>(SdkClient.RequestSpec("POST", "/role_sets", config = clientConfig, body = SdkClient.bodyMap("name" to (request.name), "default_role_key" to (request.defaultRoleKey), "creator_role_key" to (request.creatorRoleKey), "roles" to (request.roles), "key" to (SdkClient.omitIfNull(request.key)), "description" to
+    (request.description ?: SdkClient.SdkOptional.Omitted), "type" to (SdkClient.omitIfNull(request.type))), operationId = "createRoleSet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "402" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieves a role set by its key or ID, including its roles and organization-member defaults.
-     * Use `role_set_key_or_id` to identify the role set; the response also includes its type and
-     * creation and update timestamps.
+     * Retrieves a role set by its key or ID, including its roles and organization-member defaults. Use `role_set_key_or_id` to identify the role set; the response also includes its type and creation and update timestamps.
      *
      * Retrieves an existing role set by its key or ID.
      *
      * @param roleSetKeyOrId The key or ID of the role set
      */
-    fun getRoleSet(
-        clientConfig: ClientConfig,
-        roleSetKeyOrId: String,
-        options: RequestOptions? = null,
-    ): RoleSet {
-        return SdkClient.request<RoleSet>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/role_sets/${SdkClient.encodePathSegment(roleSetKeyOrId)}",
-                    config = clientConfig,
-                    operationId = "getRoleSet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun getRoleSet(clientConfig: ClientConfig, roleSetKeyOrId: String, options: RequestOptions? = null): RoleSet {
+        return SdkClient.request<RoleSet>(SdkClient.RequestSpec("GET", "/role_sets/${SdkClient.encodePathSegment(roleSetKeyOrId)}", config = clientConfig, operationId = "getRoleSet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [updateRoleSet]. */
     data class UpdateRoleSetRequest(
@@ -187,186 +117,93 @@ object RoleSetsMethods {
         val description: SdkClient.SdkOptional<String?>? = null,
         val type: SdkClient.SdkOptional<UpdateRoleSetTypeEnum?>? = null,
         val defaultRoleKey: SdkClient.SdkOptional<String?>? = null,
-        val creatorRoleKey: SdkClient.SdkOptional<String?>? = null,
+        val creatorRoleKey: SdkClient.SdkOptional<String?>? = null
     )
 
     /**
-     * Updates an existing role set. You can update the name, key, description, type, default role,
-     * or creator role. All parameters are optional - you can update only the fields you want to
-     * change.
+     * Updates an existing role set. You can update the name, key, description, type, default role, or creator role. All parameters are optional - you can update only the fields you want to change.
      *
      * @param roleSetKeyOrId The key or ID of the role set to update
      * @param name The new name for the role set
-     * @param key A unique key for the role set. Must start with 'role_set:' and contain only
-     *   lowercase alphanumeric characters and underscores.
+     * @param key A unique key for the role set. Must start with 'role_set:' and
+     *   contain only lowercase alphanumeric characters and underscores.
      * @param description Optional description for the role set
-     * @param type Set to "initial" to make this the default role set for new organizations. Only
-     *   one role set can be "initial" per instance; setting this will change any existing initial
-     *   role set to "custom".
-     * @param defaultRoleKey The key of the role to use as the default role for new organization
-     *   members. Must be an existing role in the role set.
-     * @param creatorRoleKey The key of the role to assign to organization creators. Must be an
-     *   existing role in the role set.
+     * @param type Set to "initial" to make this the default role set for new
+     *   organizations. Only one role set can be "initial" per instance; setting this
+     *   will change any existing initial role set to "custom".
+     * @param defaultRoleKey The key of the role to use as the default role for new
+     *   organization members. Must be an existing role in the role set.
+     * @param creatorRoleKey The key of the role to assign to organization creators.
+     *   Must be an existing role in the role set.
      */
-    fun updateRoleSet(
-        clientConfig: ClientConfig,
-        request: UpdateRoleSetRequest,
-        options: RequestOptions? = null,
-    ): RoleSet {
-        return SdkClient.request<RoleSet>(
-                SdkClient.RequestSpec(
-                    "PATCH",
-                    "/role_sets/${SdkClient.encodePathSegment(request.roleSetKeyOrId)}",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (request.name ?: SdkClient.SdkOptional.Omitted),
-                            "key" to (request.key ?: SdkClient.SdkOptional.Omitted),
-                            "description" to (request.description ?: SdkClient.SdkOptional.Omitted),
-                            "type" to (request.type ?: SdkClient.SdkOptional.Omitted),
-                            "default_role_key" to
-                                (request.defaultRoleKey ?: SdkClient.SdkOptional.Omitted),
-                            "creator_role_key" to
-                                (request.creatorRoleKey ?: SdkClient.SdkOptional.Omitted),
-                        ),
-                    operationId = "updateRoleSet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun updateRoleSet(clientConfig: ClientConfig, request: UpdateRoleSetRequest, options: RequestOptions? = null): RoleSet {
+        return SdkClient.request<RoleSet>(SdkClient.RequestSpec("PATCH", "/role_sets/${SdkClient.encodePathSegment(request.roleSetKeyOrId)}", config = clientConfig, body = SdkClient.bodyMap("name" to (request.name ?: SdkClient.SdkOptional.Omitted), "key" to (request.key ?: SdkClient.SdkOptional.Omitted), "description" to
+    (request.description ?: SdkClient.SdkOptional.Omitted), "type" to (request.type ?: SdkClient.SdkOptional.Omitted), "default_role_key" to
+    (request.defaultRoleKey ?: SdkClient.SdkOptional.Omitted), "creator_role_key" to
+    (request.creatorRoleKey ?: SdkClient.SdkOptional.Omitted)), operationId = "updateRoleSet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Replaces a role set with another role set. This is functionally equivalent to deleting the
-     * role set but allows for atomic replacement with migration support. Organizations using this
-     * role set will be migrated to the destination role set.
+     * Replaces a role set with another role set. This is functionally equivalent to deleting the role set but allows for atomic replacement with migration support. Organizations using this role set will be migrated to the destination role set.
      *
      * @param roleSetKeyOrId The key or ID of the role set to replace
      * @param destRoleSetKey The key of the destination role set
-     * @param reassignmentMappings Mappings from source role keys to destination role keys. Required
-     *   if members have roles that need to be reassigned.
+     * @param reassignmentMappings Mappings from source role keys to destination role
+     *   keys. Required if members have roles that need to be reassigned.
      */
-    fun replaceRoleSet(
-        clientConfig: ClientConfig,
-        roleSetKeyOrId: String,
-        destRoleSetKey: String,
-        reassignmentMappings: ReassignmentMappings? = null,
-        options: RequestOptions? = null,
-    ): DeletedObject {
-        return SdkClient.request<DeletedObject>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/role_sets/${SdkClient.encodePathSegment(roleSetKeyOrId)}/replace",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "dest_role_set_key" to (destRoleSetKey),
-                            "reassignment_mappings" to (SdkClient.omitIfNull(reassignmentMappings)),
-                        ),
-                    operationId = "replaceRoleSet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun replaceRoleSet(clientConfig: ClientConfig, roleSetKeyOrId: String, destRoleSetKey: String, reassignmentMappings: ReassignmentMappings? = null, options: RequestOptions? = null): DeletedObject {
+        return SdkClient.request<DeletedObject>(SdkClient.RequestSpec("POST", "/role_sets/${SdkClient.encodePathSegment(roleSetKeyOrId)}/replace", config = clientConfig, body = SdkClient.bodyMap("dest_role_set_key" to (destRoleSetKey), "reassignment_mappings" to
+    (SdkClient.omitIfNull(reassignmentMappings))), operationId = "replaceRoleSet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Adds one or more roles to an existing role set. You can optionally update the default role or
-     * creator role when adding new roles.
+     * Adds one or more roles to an existing role set. You can optionally update the default role or creator role when adding new roles.
      *
      * @param roleSetKeyOrId The key or ID of the role set
-     * @param roleKeys Array of role keys to add to the role set. Must contain at least one role and
-     *   no more than 10 roles.
-     * @param defaultRoleKey Optionally update the default role to one of the newly added roles.
-     * @param creatorRoleKey Optionally update the creator role to one of the newly added roles.
+     * @param roleKeys Array of role keys to add to the role set. Must contain at
+     *   least one role and no more than 10 roles.
+     * @param defaultRoleKey Optionally update the default role to one of the newly
+     *   added roles.
+     * @param creatorRoleKey Optionally update the creator role to one of the newly
+     *   added roles.
      */
-    fun addRolesToRoleSet(
-        clientConfig: ClientConfig,
-        roleSetKeyOrId: String,
-        roleKeys: List<String>,
-        defaultRoleKey: String? = null,
-        creatorRoleKey: String? = null,
-        options: RequestOptions? = null,
-    ): RoleSet {
-        return SdkClient.request<RoleSet>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/role_sets/${SdkClient.encodePathSegment(roleSetKeyOrId)}/roles",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "role_keys" to (roleKeys),
-                            "default_role_key" to (SdkClient.omitIfNull(defaultRoleKey)),
-                            "creator_role_key" to (SdkClient.omitIfNull(creatorRoleKey)),
-                        ),
-                    operationId = "addRolesToRoleSet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun addRolesToRoleSet(clientConfig: ClientConfig, roleSetKeyOrId: String, roleKeys: List<String>, defaultRoleKey: String? = null, creatorRoleKey: String? = null, options: RequestOptions? = null): RoleSet {
+        return SdkClient.request<RoleSet>(SdkClient.RequestSpec("POST", "/role_sets/${SdkClient.encodePathSegment(roleSetKeyOrId)}/roles", config = clientConfig, body = SdkClient.bodyMap("role_keys" to (roleKeys), "default_role_key" to (SdkClient.omitIfNull(defaultRoleKey)), "creator_role_key" to (SdkClient.omitIfNull(creatorRoleKey))), operationId = "addRolesToRoleSet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Replaces a role in a role set with another role. This atomically removes the source role and
-     * reassigns any members to the destination role.
+     * Replaces a role in a role set with another role. This atomically removes the source role and reassigns any members to the destination role.
      *
      * @param roleSetKeyOrId The key or ID of the role set
      * @param roleKey The key of the role to remove from the role set
      * @param toRoleKey The key of the role to reassign members to
      */
-    fun replaceRoleInRoleSet(
-        clientConfig: ClientConfig,
-        roleSetKeyOrId: String,
-        roleKey: String,
-        toRoleKey: String,
-        options: RequestOptions? = null,
-    ): RoleSet {
-        return SdkClient.request<RoleSet>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/role_sets/${SdkClient.encodePathSegment(roleSetKeyOrId)}/roles/replace",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("role_key" to (roleKey), "to_role_key" to (toRoleKey)),
-                    operationId = "replaceRoleInRoleSet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun replaceRoleInRoleSet(clientConfig: ClientConfig, roleSetKeyOrId: String, roleKey: String, toRoleKey: String, options: RequestOptions? = null): RoleSet {
+        return SdkClient.request<RoleSet>(SdkClient.RequestSpec("POST", "/role_sets/${SdkClient.encodePathSegment(roleSetKeyOrId)}/roles/replace", config = clientConfig, body = SdkClient.bodyMap("role_key" to (roleKey), "to_role_key" to (toRoleKey)), operationId = "replaceRoleInRoleSet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
+
+
+
+
+
+
+
 }

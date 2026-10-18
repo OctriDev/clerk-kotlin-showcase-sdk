@@ -17,44 +17,37 @@ import dev.octri.showcase.clerk.Validation
 
 object Invitations {
 
-    data class CreateBulkInvitationsItem(
-        /** The email address the invitation will be sent to */
-        @com.fasterxml.jackson.annotation.JsonProperty("email_address") val emailAddress: String,
-        /**
-         * Metadata that will be attached to the newly created invitation. The value of this
-         * property should be a well-formed JSON object. Once the user accepts the invitation and
-         * signs up, these metadata will end up in the user's public metadata.
-         */
-        @com.fasterxml.jackson.annotation.JsonProperty("public_metadata")
-        val publicMetadata: Map<String, Any>? = null,
-        /**
-         * The URL where the user is redirected upon visiting the invitation link, where they can
-         * accept the invitation. Required if you have implemented a custom flow for handling
-         * application invitations.
-         */
-        @com.fasterxml.jackson.annotation.JsonProperty("redirect_url")
-        val redirectUrl: String? = null,
-        /**
-         * Optional flag which denotes whether an email invitation should be sent to the given email
-         * address. Defaults to true.
-         */
-        val notify: Boolean? = null,
-        /**
-         * Whether an invitation should be created if there is already an existing invitation for
-         * this email address, or it's claimed by another user.
-         */
-        @com.fasterxml.jackson.annotation.JsonProperty("ignore_existing")
-        val ignoreExisting: Boolean? = null,
-        /**
-         * The number of days the invitation will be valid for. By default, the invitation expires
-         * after 30 days.
-         */
-        @com.fasterxml.jackson.annotation.JsonProperty("expires_in_days")
-        val expiresInDays: Long? = null,
-        /** The slug of the email template to use for the invitation email. */
-        @com.fasterxml.jackson.annotation.JsonProperty("template_slug")
-        val templateSlug: CreateBulkInvitationsItemTemplateSlugEnum? = null,
-    )
+data class CreateBulkInvitationsItem(
+    /**
+     * The email address the invitation will be sent to
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("email_address") val emailAddress: String,
+    /**
+     * Metadata that will be attached to the newly created invitation. The value of this property should be a well-formed JSON object. Once the user accepts the invitation and signs up, these metadata will end up in the user's public metadata.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("public_metadata") val publicMetadata: Map<String, Any>? = null,
+    /**
+     * The URL where the user is redirected upon visiting the invitation link, where they can accept the invitation. Required if you have implemented a custom flow for handling application invitations.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("redirect_url") val redirectUrl: String? = null,
+    /**
+     * Optional flag which denotes whether an email invitation should be sent to the given email address. Defaults to true.
+     */
+    val notify: Boolean? = null,
+    /**
+     * Whether an invitation should be created if there is already an existing invitation for this email address, or it's claimed by another user.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ignore_existing") val ignoreExisting: Boolean? = null,
+    /**
+     * The number of days the invitation will be valid for. By default, the invitation expires after 30 days.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_in_days") val expiresInDays: Long? = null,
+    /**
+     * The slug of the email template to use for the invitation email.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("template_slug") val templateSlug: CreateBulkInvitationsItemTemplateSlugEnum? = null
+)
+
 
     /** Parameters for [createInvitation]. */
     data class CreateInvitationRequest(
@@ -64,74 +57,55 @@ object Invitations {
         val notify: SdkClient.SdkOptional<Boolean?>? = null,
         val ignoreExisting: SdkClient.SdkOptional<Boolean?>? = null,
         val expiresInDays: SdkClient.SdkOptional<Long?>? = null,
-        val templateSlug: CreateInvitationTemplateSlugEnum? = null,
+        val templateSlug: CreateInvitationTemplateSlugEnum? = null
     )
 
     /**
-     * Creates a new invitation for the given email address and sends the invitation email. Keep in
-     * mind that you cannot create an invitation if there is already one for the given email
-     * address. Also, trying to create an invitation for an email address that already exists in
-     * your application will result to an error.
+     * Creates a new invitation for the given email address and sends the invitation email. Keep in mind that you cannot create an invitation if there is already one for the given email address. Also, trying to create an invitation for an email address that already exists in your application will result to an error.
      *
      * @param emailAddress The email address the invitation will be sent to
-     * @param publicMetadata Metadata that will be attached to the newly created invitation. The
-     *   value of this property should be a well-formed JSON object. Once the user accepts the
-     *   invitation and signs up, these metadata will end up in the user's public metadata.
-     * @param redirectUrl Optional URL which specifies where to redirect the user once they click
-     *   the invitation link. This is only required if you have implemented a custom flow and you're
-     *   not using Clerk Hosted Pages or Clerk Components.
-     * @param notify Optional flag which denotes whether an email invitation should be sent to the
-     *   given email address. Defaults to `true`.
-     * @param ignoreExisting Whether an invitation should be created if there is already an existing
-     *   invitation for this email address, or it's claimed by another user.
-     * @param expiresInDays The number of days the invitation will be valid for. By default, the
-     *   invitation expires after 30 days.
-     * @param templateSlug The slug of the email template to use for the invitation email.
+     * @param publicMetadata Metadata that will be attached to the newly created
+     *   invitation. The value of this property should be a well-formed JSON object.
+     *   Once the user accepts the invitation and signs up, these metadata will end up
+     *   in the user's public metadata.
+     * @param redirectUrl Optional URL which specifies where to redirect the user
+     *   once they click the invitation link. This is only required if you have
+     *   implemented a custom flow and you're not using Clerk Hosted Pages or Clerk
+     *   Components.
+     * @param notify Optional flag which denotes whether an email invitation should
+     *   be sent to the given email address. Defaults to `true`.
+     * @param ignoreExisting Whether an invitation should be created if there is
+     *   already an existing invitation for this email address, or it's claimed by
+     *   another user.
+     * @param expiresInDays The number of days the invitation will be valid for. By
+     *   default, the invitation expires after 30 days.
+     * @param templateSlug The slug of the email template to use for the invitation
+     *   email.
      */
-    fun createInvitation(
-        clientConfig: ClientConfig,
-        request: CreateInvitationRequest,
-        options: RequestOptions? = null,
-    ): Invitation {
+    fun createInvitation(clientConfig: ClientConfig, request: CreateInvitationRequest, options: RequestOptions? = null): Invitation {
         validateCreateInvitationRequest(request)
 
-        return SdkClient.request<Invitation>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/invitations",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "email_address" to (request.emailAddress),
-                            "public_metadata" to (SdkClient.omitIfNull(request.publicMetadata)),
-                            "redirect_url" to (SdkClient.omitIfNull(request.redirectUrl)),
-                            "notify" to (request.notify ?: SdkClient.SdkOptional.Omitted),
-                            "ignore_existing" to
-                                (request.ignoreExisting ?: SdkClient.SdkOptional.Omitted),
-                            "expires_in_days" to
-                                (request.expiresInDays ?: SdkClient.SdkOptional.Omitted),
-                            "template_slug" to (SdkClient.omitIfNull(request.templateSlug)),
-                        ),
-                    operationId = "createInvitation",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf("400" to ClerkErrors::class.java, "422" to ClerkErrors::class.java),
-                )
-            )
-            .data
+        return SdkClient.request<Invitation>(SdkClient.RequestSpec("POST", "/invitations", config = clientConfig, body = SdkClient.bodyMap("email_address" to (request.emailAddress), "public_metadata" to
+    (SdkClient.omitIfNull(request.publicMetadata)), "redirect_url" to
+    (SdkClient.omitIfNull(request.redirectUrl)), "notify" to
+    (request.notify ?: SdkClient.SdkOptional.Omitted), "ignore_existing" to
+    (request.ignoreExisting ?: SdkClient.SdkOptional.Omitted), "expires_in_days" to
+    (request.expiresInDays ?: SdkClient.SdkOptional.Omitted), "template_slug" to
+    (SdkClient.omitIfNull(request.templateSlug))), operationId = "createInvitation", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
+
 
     private fun validateCreateInvitationRequest(request: CreateInvitationRequest) {
         val expiresInDaysValue = request.expiresInDays?.getOrNull()
-        if (expiresInDaysValue != null) {
-            Validation.validateRange(
-                "expires_in_days",
-                expiresInDaysValue,
-                Validation.RangeOpts(min = 1.0, max = 365.0),
-            )
-        }
+if (expiresInDaysValue != null) {
+            Validation.validateRange("expires_in_days", expiresInDaysValue, Validation.RangeOpts(min = 1.0, max = 365.0))
+}
     }
+
+
+
+
+
 
     /** Parameters for [listInvitations]. */
     data class ListInvitationsRequest(
@@ -140,7 +114,7 @@ object Invitations {
         val orderBy: String? = null,
         val paginated: Boolean? = null,
         val limit: Long? = null,
-        val offset: Long? = null,
+        val offset: Long? = null
     )
 
     /**
@@ -148,152 +122,93 @@ object Invitations {
      *
      * @param status Filter invitations based on their status
      * @param query Filter invitations based on their `email_address` or `id`
-     * @param orderBy Allows to return invitations in a particular order. At the moment, you can
-     *   order the returned invitations either by their `created_at`, `email_address` or
-     *   `expires_at`. In order to specify the direction, you can use the `+/-` symbols prepended in
-     *   the property to order by. For example, if you want invitations to be returned in descending
-     *   order according to their `created_at` property, you can use `-created_at`. If you don't use
-     *   `+` or `-`, then `+` is implied. Defaults to…
-     * @param paginated Whether to paginate the results. If true, the results will be paginated. If
-     *   false, the results will not be paginated.
-     * @param limit Applies a limit to the number of results returned. Can be used for paginating
-     *   the results together with `offset`.
-     * @param offset Skip the first `offset` results when paginating. Needs to be an integer greater
-     *   or equal to zero. To be used in conjunction with `limit`.
+     * @param orderBy Allows to return invitations in a particular order. At the
+     *   moment, you can order the returned invitations either by their `created_at`,
+     *   `email_address` or `expires_at`. In order to specify the direction, you can
+     *   use the `+/-` symbols prepended in the property to order by. For example, if
+     *   you want invitations to be returned in descending order according to their
+     *   `created_at` property, you can use `-created_at`. If you don't use `+` or `-`,
+     *   then `+` is implied. Defaults to…
+     * @param paginated Whether to paginate the results. If true, the results will be
+     *   paginated. If false, the results will not be paginated.
+     * @param limit Applies a limit to the number of results returned. Can be used
+     *   for paginating the results together with `offset`.
+     * @param offset Skip the first `offset` results when paginating. Needs to be an
+     *   integer greater or equal to zero. To be used in conjunction with `limit`.
      */
-    fun listInvitations(
-        clientConfig: ClientConfig,
-        request: ListInvitationsRequest,
-        options: RequestOptions? = null,
-    ): List<Invitation> {
+    fun listInvitations(clientConfig: ClientConfig, request: ListInvitationsRequest, options: RequestOptions? = null): List<Invitation> {
         validateListInvitationsRequest(request)
 
-        return SdkClient.request<List<Invitation>>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/invitations",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "status" to SdkClient.queryValue(request.status, "form", true),
-                            "query" to SdkClient.queryValue(request.query, "form", true),
-                            "order_by" to SdkClient.queryValue(request.orderBy, "form", true),
-                            "paginated" to SdkClient.queryValue(request.paginated, "form", true),
-                            "limit" to SdkClient.queryValue(request.limit, "form", true),
-                            "offset" to SdkClient.queryValue(request.offset, "form", true),
-                        ),
-                    operationId = "listInvitations",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<List<Invitation>>(SdkClient.RequestSpec("GET", "/invitations", config = clientConfig, query = mapOf("status" to
+    SdkClient.queryValue(request.status, "form", true), "query" to SdkClient.queryValue(request.query, "form", true), "order_by" to
+    SdkClient.queryValue(request.orderBy, "form", true), "paginated" to
+    SdkClient.queryValue(request.paginated, "form", true), "limit" to SdkClient.queryValue(request.limit, "form", true), "offset" to
+    SdkClient.queryValue(request.offset, "form", true)), operationId = "listInvitations", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
+
 
     private fun validateListInvitationsRequest(request: ListInvitationsRequest) {
         if (request.limit != null) {
-            Validation.validateRange(
-                "limit",
-                request.limit,
-                Validation.RangeOpts(min = 1.0, max = 500.0),
-            )
-        }
+            Validation.validateRange("limit", request.limit, Validation.RangeOpts(min = 1.0, max = 500.0))
+}
 
         if (request.offset != null) {
             Validation.validateRange("offset", request.offset, Validation.RangeOpts(min = 0.0))
-        }
+}
     }
 
+
+
+
+
+
     /**
-     * Creates multiple invitations for the supplied email addresses. Include an `email_address` in
-     * each item; set `ignore_existing` to allow an existing invitation, but you cannot invite an
-     * address associated with an existing user. Send at most 10 invitations per request, and use
-     * `notify` to control whether invitation emails are sent.
+     * Creates multiple invitations for the supplied email addresses. Include an `email_address` in each item; set `ignore_existing` to allow an existing invitation, but you cannot invite an address associated with an existing user. Send at most 10 invitations per request, and use `notify` to control whether invitation emails are sent.
      *
-     * Use this API operation to create multiple invitations for the provided email addresses. You
-     * can choose to send the invitations as emails by setting the `notify` parameter to `true`.
-     * There cannot be an existing invitation for any of the email addresses you provide unless you
-     * set `ignore_existing` to `true` for specific email addresses. Please note that there must be
-     * no existing user for any of the email addresses you provide, and this rule cannot be
-     * bypassed. This endpoint is…
+     * Use this API operation to create multiple invitations for the provided email addresses. You can choose to send the invitations as emails by setting the `notify` parameter to `true`. There cannot be an existing invitation for any of the email addresses you provide unless you set `ignore_existing` to `true` for specific email addresses. Please note that there must be no existing user for any of the email addresses you provide, and this rule cannot be bypassed. This endpoint is…
      */
-    fun createBulkInvitations(
-        clientConfig: ClientConfig,
-        body: List<CreateBulkInvitationsItem>? = null,
-        options: RequestOptions? = null,
-    ): List<Invitation> {
+    fun createBulkInvitations(clientConfig: ClientConfig, body: List<CreateBulkInvitationsItem>? = null, options: RequestOptions? = null): List<Invitation> {
         if (body != null) {
             Validation.validateItems("body", body, Validation.LengthOpts(min = 1, max = 10))
-        }
+}
 
-        return SdkClient.request<List<Invitation>>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/invitations/bulk",
-                    config = clientConfig,
-                    body = body,
-                    operationId = "createBulkInvitations",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf("400" to ClerkErrors::class.java, "422" to ClerkErrors::class.java),
-                )
-            )
-            .data
+        return SdkClient.request<List<Invitation>>(SdkClient.RequestSpec("POST", "/invitations/bulk", config = clientConfig, body = body, operationId = "createBulkInvitations", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Permanently deletes the given invitation and the copies of the invitation email Clerk stored
-     * for its recipient. Unlike revoking, deleting removes the invitation record itself, which
-     * helps honor a data erasure request from someone who was invited but never signed up. Other
-     * records that contain the same email address, such as users or organization invitations, are
-     * not affected. Invitations of any status can be deleted.
+     * Permanently deletes the given invitation and the copies of the invitation email Clerk stored for its recipient. Unlike revoking, deleting removes the invitation record itself, which helps honor a data erasure request from someone who was invited but never signed up. Other records that contain the same email address, such as users or organization invitations, are not affected. Invitations of any status can be deleted.
      *
      * @param invitationId The ID of the invitation to delete
      */
-    fun deleteInvitation(
-        clientConfig: ClientConfig,
-        invitationId: String,
-        options: RequestOptions? = null,
-    ): DeletedObject {
-        return SdkClient.request<DeletedObject>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/invitations/${SdkClient.encodePathSegment(invitationId)}",
-                    config = clientConfig,
-                    operationId = "deleteInvitation",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors = mapOf("404" to ClerkErrors::class.java),
-                )
-            )
-            .data
+    fun deleteInvitation(clientConfig: ClientConfig, invitationId: String, options: RequestOptions? = null): DeletedObject {
+        return SdkClient.request<DeletedObject>(SdkClient.RequestSpec("DELETE", "/invitations/${SdkClient.encodePathSegment(invitationId)}", config = clientConfig, operationId = "deleteInvitation", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("404" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Revokes the given invitation. Revoking an invitation will prevent the user from using the
-     * invitation link that was sent to them. However, it doesn't prevent the user from signing up
-     * if they follow the sign up flow. Only active (i.e. non-revoked) invitations can be revoked.
+     * Revokes the given invitation. Revoking an invitation will prevent the user from using the invitation link that was sent to them. However, it doesn't prevent the user from signing up if they follow the sign up flow. Only active (i.e. non-revoked) invitations can be revoked.
      *
      * @param invitationId The ID of the invitation to be revoked
      */
-    fun revokeInvitation(
-        clientConfig: ClientConfig,
-        invitationId: String,
-        options: RequestOptions? = null,
-    ): InvitationRevoked {
-        return SdkClient.request<InvitationRevoked>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/invitations/${SdkClient.encodePathSegment(invitationId)}/revoke",
-                    config = clientConfig,
-                    operationId = "revokeInvitation",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf("400" to ClerkErrors::class.java, "404" to ClerkErrors::class.java),
-                )
-            )
-            .data
+    fun revokeInvitation(clientConfig: ClientConfig, invitationId: String, options: RequestOptions? = null): InvitationRevoked {
+        return SdkClient.request<InvitationRevoked>(SdkClient.RequestSpec("POST", "/invitations/${SdkClient.encodePathSegment(invitationId)}/revoke", config = clientConfig, operationId = "revokeInvitation", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
     }
+
+
+
+
+
+
+
 }

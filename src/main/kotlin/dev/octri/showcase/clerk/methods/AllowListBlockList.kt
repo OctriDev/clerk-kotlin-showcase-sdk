@@ -15,195 +15,115 @@ import dev.octri.showcase.clerk.Validation
 
 object AllowListBlockList {
 
+
     /**
      * Get a list of all identifiers allowed to sign up to an instance
      *
-     * @param paginated Whether to paginate the results. If true, the results will be paginated. If
-     *   false, the results will not be paginated.
-     * @param limit Applies a limit to the number of results returned. Can be used for paginating
-     *   the results together with `offset`.
-     * @param offset Skip the first `offset` results when paginating. Needs to be an integer greater
-     *   or equal to zero. To be used in conjunction with `limit`.
+     * @param paginated Whether to paginate the results. If true, the results will be
+     *   paginated. If false, the results will not be paginated.
+     * @param limit Applies a limit to the number of results returned. Can be used
+     *   for paginating the results together with `offset`.
+     * @param offset Skip the first `offset` results when paginating. Needs to be an
+     *   integer greater or equal to zero. To be used in conjunction with `limit`.
      */
-    fun listAllowlistIdentifiers(
-        clientConfig: ClientConfig,
-        paginated: Boolean? = null,
-        limit: Long? = null,
-        offset: Long? = null,
-        options: RequestOptions? = null,
-    ): List<AllowlistIdentifier> {
+    fun listAllowlistIdentifiers(clientConfig: ClientConfig, paginated: Boolean? = null, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): List<AllowlistIdentifier> {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 500.0))
-        }
+}
 
         if (offset != null) {
             Validation.validateRange("offset", offset, Validation.RangeOpts(min = 0.0))
-        }
+}
 
-        return SdkClient.request<List<AllowlistIdentifier>>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/allowlist_identifiers",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "paginated" to SdkClient.queryValue(paginated, "form", true),
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "offset" to SdkClient.queryValue(offset, "form", true),
-                        ),
-                    operationId = "listAllowlistIdentifiers",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf("401" to ClerkErrors::class.java, "402" to ClerkErrors::class.java),
-                )
-            )
-            .data
+        return SdkClient.request<List<AllowlistIdentifier>>(SdkClient.RequestSpec("GET", "/allowlist_identifiers", config = clientConfig, query = mapOf("paginated" to SdkClient.queryValue(paginated, "form", true), "limit" to SdkClient.queryValue(limit, "form", true), "offset" to SdkClient.queryValue(offset, "form", true)), operationId = "listAllowlistIdentifiers", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "402" to ClerkErrors::class.java))).data
     }
+
+
+
+
+
+
 
     /**
      * Create an identifier allowed to sign up to an instance
      *
-     * @param identifier The identifier to be added in the allow-list. This can be an email address,
-     *   a phone number, or a web3 wallet.
-     * @param notify This flag denotes whether the given identifier will receive an invitation to
-     *   join the application. Note that this only works for email address and phone number
-     *   identifiers.
+     * @param identifier The identifier to be added in the allow-list. This can be an
+     *   email address, a phone number, or a web3 wallet.
+     * @param notify This flag denotes whether the given identifier will receive an
+     *   invitation to join the application. Note that this only works for email
+     *   address and phone number identifiers.
      */
-    fun createAllowlistIdentifier(
-        clientConfig: ClientConfig,
-        identifier: String,
-        notify: Boolean? = null,
-        options: RequestOptions? = null,
-    ): AllowlistIdentifier {
-        return SdkClient.request<AllowlistIdentifier>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/allowlist_identifiers",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "identifier" to (identifier),
-                            "notify" to (SdkClient.omitIfNull(notify)),
-                        ),
-                    operationId = "createAllowlistIdentifier",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "402" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun createAllowlistIdentifier(clientConfig: ClientConfig, identifier: String, notify: Boolean? = null, options: RequestOptions? = null): AllowlistIdentifier {
+        return SdkClient.request<AllowlistIdentifier>(SdkClient.RequestSpec("POST", "/allowlist_identifiers", config = clientConfig, body = SdkClient.bodyMap("identifier" to (identifier), "notify" to (SdkClient.omitIfNull(notify))), operationId = "createAllowlistIdentifier", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "402" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Deletes an identifier from the instance allow-list. Use the `identifier_id` path parameter to
-     * select the entry to remove. The response confirms whether the object was deleted.
+     * Deletes an identifier from the instance allow-list. Use the `identifier_id` path parameter to select the entry to remove. The response confirms whether the object was deleted.
      *
      * Delete an identifier from the instance allow-list
      *
      * @param identifierId The ID of the identifier to delete from the allow-list
      */
-    fun deleteAllowlistIdentifier(
-        clientConfig: ClientConfig,
-        identifierId: String,
-        options: RequestOptions? = null,
-    ): DeletedObject {
-        return SdkClient.request<DeletedObject>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/allowlist_identifiers/${SdkClient.encodePathSegment(identifierId)}",
-                    config = clientConfig,
-                    operationId = "deleteAllowlistIdentifier",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf("402" to ClerkErrors::class.java, "404" to ClerkErrors::class.java),
-                )
-            )
-            .data
+    fun deleteAllowlistIdentifier(clientConfig: ClientConfig, identifierId: String, options: RequestOptions? = null): DeletedObject {
+        return SdkClient.request<DeletedObject>(SdkClient.RequestSpec("DELETE", "/allowlist_identifiers/${SdkClient.encodePathSegment(identifierId)}", config = clientConfig, operationId = "deleteAllowlistIdentifier", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("402" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
     }
 
-    /** Get a list of all identifiers which are not allowed to access an instance */
-    fun listBlocklistIdentifiers(
-        clientConfig: ClientConfig,
-        options: RequestOptions? = null,
-    ): BlocklistIdentifiers {
-        return SdkClient.request<BlocklistIdentifiers>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/blocklist_identifiers",
-                    config = clientConfig,
-                    operationId = "listBlocklistIdentifiers",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf("401" to ClerkErrors::class.java, "402" to ClerkErrors::class.java),
-                )
-            )
-            .data
+
+
+
+
+
+
+    /**
+     * Get a list of all identifiers which are not allowed to access an instance
+     */
+    fun listBlocklistIdentifiers(clientConfig: ClientConfig, options: RequestOptions? = null): BlocklistIdentifiers {
+        return SdkClient.request<BlocklistIdentifiers>(SdkClient.RequestSpec("GET", "/blocklist_identifiers", config = clientConfig, operationId = "listBlocklistIdentifiers", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "402" to ClerkErrors::class.java))).data
     }
+
+
+
+
+
+
 
     /**
      * Create an identifier that is blocked from accessing an instance
      *
-     * @param identifier The identifier to be added in the block-list. This can be an email address,
-     *   a phone number, or a web3 wallet.
+     * @param identifier The identifier to be added in the block-list. This can be an
+     *   email address, a phone number, or a web3 wallet.
      */
-    fun createBlocklistIdentifier(
-        clientConfig: ClientConfig,
-        identifier: String,
-        options: RequestOptions? = null,
-    ): BlocklistIdentifier {
-        return SdkClient.request<BlocklistIdentifier>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/blocklist_identifiers",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("identifier" to (identifier)),
-                    operationId = "createBlocklistIdentifier",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "402" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun createBlocklistIdentifier(clientConfig: ClientConfig, identifier: String, options: RequestOptions? = null): BlocklistIdentifier {
+        return SdkClient.request<BlocklistIdentifier>(SdkClient.RequestSpec("POST", "/blocklist_identifiers", config = clientConfig, body = SdkClient.bodyMap("identifier" to (identifier)), operationId = "createBlocklistIdentifier", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "402" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Deletes an identifier from the instance block-list. Supply `identifier_id` to select the
-     * block-list identifier; a successful response indicates whether the object was deleted.
+     * Deletes an identifier from the instance block-list. Supply `identifier_id` to select the block-list identifier; a successful response indicates whether the object was deleted.
      *
      * Delete an identifier from the instance block-list
      *
      * @param identifierId The ID of the identifier to delete from the block-list
      */
-    fun deleteBlocklistIdentifier(
-        clientConfig: ClientConfig,
-        identifierId: String,
-        options: RequestOptions? = null,
-    ): DeletedObject {
-        return SdkClient.request<DeletedObject>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/blocklist_identifiers/${SdkClient.encodePathSegment(identifierId)}",
-                    config = clientConfig,
-                    operationId = "deleteBlocklistIdentifier",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf("402" to ClerkErrors::class.java, "404" to ClerkErrors::class.java),
-                )
-            )
-            .data
+    fun deleteBlocklistIdentifier(clientConfig: ClientConfig, identifierId: String, options: RequestOptions? = null): DeletedObject {
+        return SdkClient.request<DeletedObject>(SdkClient.RequestSpec("DELETE", "/blocklist_identifiers/${SdkClient.encodePathSegment(identifierId)}", config = clientConfig, operationId = "deleteBlocklistIdentifier", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("402" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
     }
+
+
+
+
+
+
+
 }

@@ -11,62 +11,43 @@ import dev.octri.showcase.clerk.SignUp
 
 object SignUps {
 
+
     /**
      * Retrieve the details of the sign-up with the given ID
      *
      * @param id The ID of the sign-up to retrieve
      */
     fun getSignUp(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): SignUp {
-        return SdkClient.request<SignUp>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/sign_ups/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    operationId = "getSignUp",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors = mapOf("403" to ClerkErrors::class.java),
-                )
-            )
-            .data
+        return SdkClient.request<SignUp>(SdkClient.RequestSpec("GET", "/sign_ups/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "getSignUp", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Updates an existing sign-up with the fields you provide. Use `external_id` to associate the
-     * sign-up with an identifier from your external system, or set `custom_action` to mark it as a
-     * custom action. The response includes the sign-up's current status and verification details.
+     * Updates an existing sign-up with the fields you provide. Use `external_id` to associate the sign-up with an identifier from your external system, or set `custom_action` to mark it as a custom action. The response includes the sign-up's current status and verification details.
      *
      * Update the sign-up with the given ID
      *
      * @param id The ID of the sign-up to update
-     * @param externalId The ID of the guest attempting to sign up as used in your external systems
-     *   or your previous authentication solution. This will be copied to the resulting user when
-     *   the sign-up is completed.
+     * @param externalId The ID of the guest attempting to sign up as used in your
+     *   external systems or your previous authentication solution. This will be copied
+     *   to the resulting user when the sign-up is completed.
      * @param customAction If true, the sign-up will be marked as a custom action.
      */
-    fun updateSignUp(
-        clientConfig: ClientConfig,
-        id: String,
-        externalId: SdkClient.SdkOptional<String?>? = null,
-        customAction: SdkClient.SdkOptional<Boolean?>? = null,
-        options: RequestOptions? = null,
-    ): SignUp {
-        return SdkClient.request<SignUp>(
-                SdkClient.RequestSpec(
-                    "PATCH",
-                    "/sign_ups/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "external_id" to (externalId ?: SdkClient.SdkOptional.Omitted),
-                            "custom_action" to (customAction ?: SdkClient.SdkOptional.Omitted),
-                        ),
-                    operationId = "updateSignUp",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors = mapOf("403" to ClerkErrors::class.java),
-                )
-            )
-            .data
+    fun updateSignUp(clientConfig: ClientConfig, id: String, externalId: SdkClient.SdkOptional<String?>? = null, customAction: SdkClient.SdkOptional<Boolean?>? = null, options: RequestOptions? = null): SignUp {
+        return SdkClient.request<SignUp>(SdkClient.RequestSpec("PATCH", "/sign_ups/${SdkClient.encodePathSegment(id)}", config = clientConfig, body = SdkClient.bodyMap("external_id" to
+    (externalId ?: SdkClient.SdkOptional.Omitted), "custom_action" to
+    (customAction ?: SdkClient.SdkOptional.Omitted)), operationId = "updateSignUp", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to ClerkErrors::class.java))).data
     }
+
+
+
+
+
+
+
 }

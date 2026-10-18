@@ -3,107 +3,42 @@
 
 package dev.octri.showcase.clerk
 
+
 class M2MTokensNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates a new M2M token for the machine associated with the Machine Secret Key used to
-     * authenticate the request. Use `token_format` to choose opaque or JWT format and
-     * `seconds_until_expiration` to set the token lifetime. Set `min_remaining_ttl_seconds` to
-     * reuse an eligible existing opaque token instead of minting a new one.
+     * Creates a new M2M token for the machine associated with the Machine Secret Key used to authenticate the request. Use `token_format` to choose opaque or JWT format and `seconds_until_expiration` to set the token lifetime. Set `min_remaining_ttl_seconds` to reuse an eligible existing opaque token instead of minting a new one.
      *
      * Creates a new M2M Token. Must be authenticated via a Machine Secret Key.
      */
-    fun create(
-        tokenFormat: CreateM2MTokenTokenFormatEnum? = null,
-        secondsUntilExpiration: SdkClient.SdkOptional<Double?>? = null,
-        claims: SdkClient.SdkOptional<Any?>? = null,
-        minRemainingTtlSeconds: Long? = null,
-        options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.M2MTokens.CreateM2MTokenResponse {
-        return dev.octri.showcase.clerk.methods.M2MTokens.createM2MToken(
-            clientConfig,
-            tokenFormat,
-            secondsUntilExpiration,
-            claims,
-            minRemainingTtlSeconds,
-            options,
-        )
+    fun create(tokenFormat: CreateM2MTokenTokenFormatEnum? = null, secondsUntilExpiration: SdkClient.SdkOptional<Double?>? = null, claims: SdkClient.SdkOptional<Any?>? = null, minRemainingTtlSeconds: Long? = null, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.M2MTokens.CreateM2MTokenResponse {
+        return dev.octri.showcase.clerk.methods.M2MTokens.createM2MToken(clientConfig, tokenFormat, secondsUntilExpiration, claims, minRemainingTtlSeconds, options)
     }
 
     /**
-     * Lists stored opaque-format M2M tokens for a specific machine; stateless JWT-format tokens are
-     * not included. Use `revoked` and `expired` to filter the results, and `limit` and `offset` to
-     * control pagination. Authenticate with a Machine Secret Key to retrieve tokens for its
-     * machine, or a Clerk Secret Key to retrieve tokens for any machine in the instance.
+     * Lists stored opaque-format M2M tokens for a specific machine; stateless JWT-format tokens are not included. Use `revoked` and `expired` to filter the results, and `limit` and `offset` to control pagination. Authenticate with a Machine Secret Key to retrieve tokens for its machine, or a Clerk Secret Key to retrieve tokens for any machine in the instance.
      *
-     * Fetches M2M tokens for a specific machine. Only tokens created with the opaque token format
-     * are returned by this endpoint. JWT-format M2M tokens are stateless and are not stored. This
-     * endpoint can be authenticated by either a Machine Secret Key or by a Clerk Secret Key. - When
-     * fetching M2M tokens with a Machine Secret Key, only tokens associated with the authenticated
-     * machine can be retrieved. - When fetching M2M tokens with a Clerk Secret Key, tokens for any
-     * machine in the…
+     * Fetches M2M tokens for a specific machine. Only tokens created with the opaque token format are returned by this endpoint. JWT-format M2M tokens are stateless and are not stored. This endpoint can be authenticated by either a Machine Secret Key or by a Clerk Secret Key. - When fetching M2M tokens with a Machine Secret Key, only tokens associated with the authenticated machine can be retrieved. - When fetching M2M tokens with a Clerk Secret Key, tokens for any machine in the…
      */
-    fun get(
-        subject: String,
-        revoked: SdkClient.SdkOptional<Boolean?>? = null,
-        expired: SdkClient.SdkOptional<Boolean?>? = null,
-        limit: Double? = null,
-        offset: SdkClient.SdkOptional<Double?>? = null,
-        options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.M2MTokens.GetM2MTokensResponse {
-        return dev.octri.showcase.clerk.methods.M2MTokens.getM2MTokens(
-            clientConfig,
-            subject,
-            revoked,
-            expired,
-            limit,
-            offset,
-            options,
-        )
+    fun get(subject: String, revoked: SdkClient.SdkOptional<Boolean?>? = null, expired: SdkClient.SdkOptional<Boolean?>? = null, limit: Double? = null, offset: SdkClient.SdkOptional<Double?>? = null, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.M2MTokens.GetM2MTokensResponse {
+        return dev.octri.showcase.clerk.methods.M2MTokens.getM2MTokens(clientConfig, subject, revoked, expired, limit, offset, options)
     }
 
     /**
-     * Revokes a stored opaque-format M2M token. Use `m2m_token_id` to identify the token and
-     * optionally provide a `revocation_reason`. JWT-format M2M tokens are stateless and cannot be
-     * revoked; a Machine Secret Key can revoke only tokens managed by its machine, while a Clerk
-     * Secret Key can revoke any token in the instance.
+     * Revokes a stored opaque-format M2M token. Use `m2m_token_id` to identify the token and optionally provide a `revocation_reason`. JWT-format M2M tokens are stateless and cannot be revoked; a Machine Secret Key can revoke only tokens managed by its machine, while a Clerk Secret Key can revoke any token in the instance.
      *
-     * Revokes a M2M Token. This endpoint only revokes stored opaque-format M2M tokens. JWT-format
-     * M2M tokens are stateless and cannot be revoked. This endpoint can be authenticated by either
-     * a Machine Secret Key or by a Clerk Secret Key. - When revoking a M2M Token with a Machine
-     * Secret Key, the token must managed by the Machine associated with the Machine Secret Key. -
-     * When revoking a M2M Token with a Clerk Secret Key, any token on the Instance can be revoked.
+     * Revokes a M2M Token. This endpoint only revokes stored opaque-format M2M tokens. JWT-format M2M tokens are stateless and cannot be revoked. This endpoint can be authenticated by either a Machine Secret Key or by a Clerk Secret Key. - When revoking a M2M Token with a Machine Secret Key, the token must managed by the Machine associated with the Machine Secret Key. - When revoking a M2M Token with a Clerk Secret Key, any token on the Instance can be revoked.
      */
-    fun revoke(
-        m2mTokenId: String,
-        revocationReason: SdkClient.SdkOptional<String?>? = null,
-        options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.M2MTokens.RevokeM2MTokenResponse {
-        return dev.octri.showcase.clerk.methods.M2MTokens.revokeM2MToken(
-            clientConfig,
-            m2mTokenId,
-            revocationReason,
-            options,
-        )
+    fun revoke(m2mTokenId: String, revocationReason: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.M2MTokens.RevokeM2MTokenResponse {
+        return dev.octri.showcase.clerk.methods.M2MTokens.revokeM2MToken(clientConfig, m2mTokenId, revocationReason, options)
     }
 
     /**
-     * Verifies an M2M token and returns its token details when valid. Supply the token in the
-     * `token` field. A Machine Secret Key can verify a token only when it grants access to that
-     * machine, while a Clerk Secret Key can verify any token in the instance.
+     * Verifies an M2M token and returns its token details when valid. Supply the token in the `token` field. A Machine Secret Key can verify a token only when it grants access to that machine, while a Clerk Secret Key can verify any token in the instance.
      *
-     * Verifies a M2M Token. This endpoint can be authenticated by either a Machine Secret Key or by
-     * a Clerk Secret Key. - When verifying a M2M Token with a Machine Secret Key, the token must be
-     * granted access to the Machine associated with the Machine Secret Key. - When verifying a M2M
-     * Token with a Clerk Secret Key, any token on the Instance can be verified.
+     * Verifies a M2M Token. This endpoint can be authenticated by either a Machine Secret Key or by a Clerk Secret Key. - When verifying a M2M Token with a Machine Secret Key, the token must be granted access to the Machine associated with the Machine Secret Key. - When verifying a M2M Token with a Clerk Secret Key, any token on the Instance can be verified.
      */
-    fun verify(
-        token: String,
-        options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.M2MTokens.VerifyM2MTokenResponse {
-        return dev.octri.showcase.clerk.methods.M2MTokens.verifyM2MToken(
-            clientConfig,
-            token,
-            options,
-        )
+    fun verify(token: String, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.M2MTokens.VerifyM2MTokenResponse {
+        return dev.octri.showcase.clerk.methods.M2MTokens.verifyM2MToken(clientConfig, token, options)
     }
+
 }

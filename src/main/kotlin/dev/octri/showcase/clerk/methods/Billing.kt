@@ -27,118 +27,65 @@ import java.time.OffsetDateTime
 
 object Billing {
 
+
     /**
-     * Returns a list of all billing plans for the instance. The plans are returned sorted by
-     * creation date, with the newest plans appearing first. This includes both free and paid plans.
-     * Pagination is supported.
+     * Returns a list of all billing plans for the instance. The plans are returned sorted by creation date, with the newest plans appearing first. This includes both free and paid plans. Pagination is supported.
      *
-     * @param paginated Whether to paginate the results. If true, the results will be paginated. If
-     *   false, the results will not be paginated.
-     * @param limit Applies a limit to the number of results returned. Can be used for paginating
-     *   the results together with `offset`.
-     * @param offset Skip the first `offset` results when paginating. Needs to be an integer greater
-     *   or equal to zero. To be used in conjunction with `limit`.
+     * @param paginated Whether to paginate the results. If true, the results will be
+     *   paginated. If false, the results will not be paginated.
+     * @param limit Applies a limit to the number of results returned. Can be used
+     *   for paginating the results together with `offset`.
+     * @param offset Skip the first `offset` results when paginating. Needs to be an
+     *   integer greater or equal to zero. To be used in conjunction with `limit`.
      * @param payerType Filter plans by payer type
      */
-    fun getCommercePlanList(
-        clientConfig: ClientConfig,
-        paginated: Boolean? = null,
-        limit: Long? = null,
-        offset: Long? = null,
-        payerType: GetCommercePlanListParameterEnum? = null,
-        options: RequestOptions? = null,
-    ): PaginatedCommercePlanResponse {
+    fun getCommercePlanList(clientConfig: ClientConfig, paginated: Boolean? = null, limit: Long? = null, offset: Long? = null, payerType: GetCommercePlanListParameterEnum? = null, options: RequestOptions? = null): PaginatedCommercePlanResponse {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 500.0))
-        }
+}
 
         if (offset != null) {
             Validation.validateRange("offset", offset, Validation.RangeOpts(min = 0.0))
-        }
+}
 
-        return SdkClient.request<PaginatedCommercePlanResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/billing/plans",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "paginated" to SdkClient.queryValue(paginated, "form", true),
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "offset" to SdkClient.queryValue(offset, "form", true),
-                            "payer_type" to SdkClient.queryValue(payerType, "form", true),
-                        ),
-                    operationId = "getCommercePlanList",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                            "500" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<PaginatedCommercePlanResponse>(SdkClient.RequestSpec("GET", "/billing/plans", config = clientConfig, query = mapOf("paginated" to SdkClient.queryValue(paginated, "form", true), "limit" to SdkClient.queryValue(limit, "form", true), "offset" to SdkClient.queryValue(offset, "form", true), "payer_type" to
+    SdkClient.queryValue(payerType, "form", true)), operationId = "getCommercePlanList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "422" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
     }
+
+
+
+
+
+
 
     /**
-     * Returns a list of all prices for the instance. The prices are returned sorted by amount
-     * ascending, then by creation date descending. This includes both default and custom prices.
-     * Pagination is supported.
+     * Returns a list of all prices for the instance. The prices are returned sorted by amount ascending, then by creation date descending. This includes both default and custom prices. Pagination is supported.
      *
-     * @param paginated Whether to paginate the results. If true, the results will be paginated. If
-     *   false, the results will not be paginated.
-     * @param limit Applies a limit to the number of results returned. Can be used for paginating
-     *   the results together with `offset`.
-     * @param offset Skip the first `offset` results when paginating. Needs to be an integer greater
-     *   or equal to zero. To be used in conjunction with `limit`.
+     * @param paginated Whether to paginate the results. If true, the results will be
+     *   paginated. If false, the results will not be paginated.
+     * @param limit Applies a limit to the number of results returned. Can be used
+     *   for paginating the results together with `offset`.
+     * @param offset Skip the first `offset` results when paginating. Needs to be an
+     *   integer greater or equal to zero. To be used in conjunction with `limit`.
      * @param planId Filter prices by plan ID
      */
-    fun getBillingPriceList(
-        clientConfig: ClientConfig,
-        paginated: Boolean? = null,
-        limit: Long? = null,
-        offset: Long? = null,
-        planId: String? = null,
-        options: RequestOptions? = null,
-    ): PaginatedBillingPriceResponse {
+    fun getBillingPriceList(clientConfig: ClientConfig, paginated: Boolean? = null, limit: Long? = null, offset: Long? = null, planId: String? = null, options: RequestOptions? = null): PaginatedBillingPriceResponse {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 500.0))
-        }
+}
 
         if (offset != null) {
             Validation.validateRange("offset", offset, Validation.RangeOpts(min = 0.0))
-        }
+}
 
-        return SdkClient.request<PaginatedBillingPriceResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/billing/prices",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "paginated" to SdkClient.queryValue(paginated, "form", true),
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "offset" to SdkClient.queryValue(offset, "form", true),
-                            "plan_id" to SdkClient.queryValue(planId, "form", true),
-                        ),
-                    operationId = "getBillingPriceList",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                            "500" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<PaginatedBillingPriceResponse>(SdkClient.RequestSpec("GET", "/billing/prices", config = clientConfig, query = mapOf("paginated" to SdkClient.queryValue(paginated, "form", true), "limit" to SdkClient.queryValue(limit, "form", true), "offset" to SdkClient.queryValue(offset, "form", true), "plan_id" to SdkClient.queryValue(planId, "form", true)), operationId = "getBillingPriceList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [createBillingPrice]. */
     data class CreateBillingPriceParams(
@@ -147,59 +94,34 @@ object Billing {
         val currency: String? = null,
         val annualMonthlyAmount: SdkClient.SdkOptional<Long?>? = null,
         val description: String? = null,
-        val supportedBillingPeriods: CreateBillingPriceRequestSupportedBillingPeriodsEnum? = null,
+        val supportedBillingPeriods: CreateBillingPriceRequestSupportedBillingPeriodsEnum? = null
     )
 
     /**
-     * Creates a custom price for a billing plan. Custom prices allow you to offer different pricing
-     * to specific customers while maintaining the same plan structure.
+     * Creates a custom price for a billing plan. Custom prices allow you to offer different pricing to specific customers while maintaining the same plan structure.
      *
      * @param planId The ID of the plan this price belongs to.
-     * @param amount The monthly amount in cents. Use `0` for a complimentary price. Positive
-     *   amounts must be at least $1 (100 cents).
+     * @param amount The monthly amount in cents. Use `0` for a complimentary price.
+     *   Positive amounts must be at least $1 (100 cents).
      * @param currency The currency code (e.g., "USD"). Defaults to USD.
-     * @param annualMonthlyAmount The monthly amount in cents when billed annually. Use `0` for a
-     *   complimentary price. Positive amounts must be at least $1 (100 cents).
+     * @param annualMonthlyAmount The monthly amount in cents when billed annually.
+     *   Use `0` for a complimentary price. Positive amounts must be at least $1 (100
+     *   cents).
      * @param description An optional description for this custom price.
-     * @param supportedBillingPeriods Which billing periods this price supports. Inferred from
-     *   amounts if omitted.
+     * @param supportedBillingPeriods Which billing periods this price supports.
+     *   Inferred from amounts if omitted.
      */
-    fun createBillingPrice(
-        clientConfig: ClientConfig,
-        request: CreateBillingPriceParams,
-        options: RequestOptions? = null,
-    ): BillingPriceResponse {
-        return SdkClient.request<BillingPriceResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/billing/prices",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "plan_id" to (request.planId),
-                            "amount" to (request.amount),
-                            "currency" to (SdkClient.omitIfNull(request.currency)),
-                            "annual_monthly_amount" to
-                                (request.annualMonthlyAmount ?: SdkClient.SdkOptional.Omitted),
-                            "description" to (SdkClient.omitIfNull(request.description)),
-                            "supported_billing_periods" to
-                                (SdkClient.omitIfNull(request.supportedBillingPeriods)),
-                        ),
-                    operationId = "createBillingPrice",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                            "500" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun createBillingPrice(clientConfig: ClientConfig, request: CreateBillingPriceParams, options: RequestOptions? = null): BillingPriceResponse {
+        return SdkClient.request<BillingPriceResponse>(SdkClient.RequestSpec("POST", "/billing/prices", config = clientConfig, body = SdkClient.bodyMap("plan_id" to (request.planId), "amount" to (request.amount), "currency" to (SdkClient.omitIfNull(request.currency)), "annual_monthly_amount" to
+    (request.annualMonthlyAmount ?: SdkClient.SdkOptional.Omitted), "description" to (SdkClient.omitIfNull(request.description)), "supported_billing_periods" to
+    (SdkClient.omitIfNull(request.supportedBillingPeriods))), operationId = "createBillingPrice", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [getCommerceSubscriptionItemList]. */
     data class GetCommerceSubscriptionItemListRequest(
@@ -210,417 +132,212 @@ object Billing {
         val payerType: GetCommerceSubscriptionItemListParameterEnumb777ef14? = null,
         val planId: String? = null,
         val includeFree: Boolean? = null,
-        val query: String? = null,
+        val query: String? = null
     )
 
     /**
-     * Returns a list of all subscription items for the instance. The subscription items are
-     * returned sorted by creation date, with the newest appearing first. This includes
-     * subscriptions for both users and organizations. Pagination is supported.
+     * Returns a list of all subscription items for the instance. The subscription items are returned sorted by creation date, with the newest appearing first. This includes subscriptions for both users and organizations. Pagination is supported.
      *
-     * @param paginated Whether to paginate the results. If true, the results will be paginated. If
-     *   false, the results will not be paginated.
-     * @param limit Applies a limit to the number of results returned. Can be used for paginating
-     *   the results together with `offset`.
-     * @param offset Skip the first `offset` results when paginating. Needs to be an integer greater
-     *   or equal to zero. To be used in conjunction with `limit`.
+     * @param paginated Whether to paginate the results. If true, the results will be
+     *   paginated. If false, the results will not be paginated.
+     * @param limit Applies a limit to the number of results returned. Can be used
+     *   for paginating the results together with `offset`.
+     * @param offset Skip the first `offset` results when paginating. Needs to be an
+     *   integer greater or equal to zero. To be used in conjunction with `limit`.
      * @param status Filter subscription items by status
      * @param payerType Filter subscription items by payer type
      * @param planId Filter subscription items by plan ID
      * @param includeFree Whether to include free plan subscription items
      * @param query Search query to filter subscription items
      */
-    fun getCommerceSubscriptionItemList(
-        clientConfig: ClientConfig,
-        request: GetCommerceSubscriptionItemListRequest,
-        options: RequestOptions? = null,
-    ): PaginatedCommerceSubscriptionItemResponse {
+    fun getCommerceSubscriptionItemList(clientConfig: ClientConfig, request: GetCommerceSubscriptionItemListRequest, options: RequestOptions? = null): PaginatedCommerceSubscriptionItemResponse {
         validateGetCommerceSubscriptionItemListRequest(request)
 
-        return SdkClient.request<PaginatedCommerceSubscriptionItemResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/billing/subscription_items",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "paginated" to SdkClient.queryValue(request.paginated, "form", true),
-                            "limit" to SdkClient.queryValue(request.limit, "form", true),
-                            "offset" to SdkClient.queryValue(request.offset, "form", true),
-                            "status" to SdkClient.queryValue(request.status, "form", true),
-                            "payer_type" to SdkClient.queryValue(request.payerType, "form", true),
-                            "plan_id" to SdkClient.queryValue(request.planId, "form", true),
-                            "include_free" to
-                                SdkClient.queryValue(request.includeFree, "form", true),
-                            "query" to SdkClient.queryValue(request.query, "form", true),
-                        ),
-                    operationId = "getCommerceSubscriptionItemList",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                            "500" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<PaginatedCommerceSubscriptionItemResponse>(SdkClient.RequestSpec("GET", "/billing/subscription_items", config = clientConfig, query = mapOf("paginated" to
+    SdkClient.queryValue(request.paginated, "form", true), "limit" to SdkClient.queryValue(request.limit, "form", true), "offset" to
+    SdkClient.queryValue(request.offset, "form", true), "status" to
+    SdkClient.queryValue(request.status, "form", true), "payer_type" to
+    SdkClient.queryValue(request.payerType, "form", true), "plan_id" to
+    SdkClient.queryValue(request.planId, "form", true), "include_free" to
+    SdkClient.queryValue(request.includeFree, "form", true), "query" to SdkClient.queryValue(request.query, "form", true)), operationId = "getCommerceSubscriptionItemList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "422" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
     }
 
-    private fun validateGetCommerceSubscriptionItemListRequest(
-        request: GetCommerceSubscriptionItemListRequest
-    ) {
+
+    private fun validateGetCommerceSubscriptionItemListRequest(request: GetCommerceSubscriptionItemListRequest) {
         if (request.limit != null) {
-            Validation.validateRange(
-                "limit",
-                request.limit,
-                Validation.RangeOpts(min = 1.0, max = 500.0),
-            )
-        }
+            Validation.validateRange("limit", request.limit, Validation.RangeOpts(min = 1.0, max = 500.0))
+}
 
         if (request.offset != null) {
             Validation.validateRange("offset", request.offset, Validation.RangeOpts(min = 0.0))
-        }
+}
     }
 
+
+
+
+
+
     /**
-     * Cancel a specific subscription item. The subscription item can be canceled immediately or at
-     * the end of the current billing period.
+     * Cancel a specific subscription item. The subscription item can be canceled immediately or at the end of the current billing period.
      *
      * @param subscriptionItemId The ID of the subscription item to cancel
-     * @param endNow Whether to cancel the subscription immediately (true) or at the end of the
-     *   current billing period (false, default)
+     * @param endNow Whether to cancel the subscription immediately (true) or at the
+     *   end of the current billing period (false, default)
      */
-    fun cancelCommerceSubscriptionItem(
-        clientConfig: ClientConfig,
-        subscriptionItemId: String,
-        endNow: Boolean? = null,
-        options: RequestOptions? = null,
-    ): CommerceSubscriptionItem {
-        return SdkClient.request<CommerceSubscriptionItem>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/billing/subscription_items/${SdkClient.encodePathSegment(subscriptionItemId)}",
-                    config = clientConfig,
-                    query = mapOf("end_now" to SdkClient.queryValue(endNow, "form", true)),
-                    operationId = "cancelCommerceSubscriptionItem",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                            "500" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun cancelCommerceSubscriptionItem(clientConfig: ClientConfig, subscriptionItemId: String, endNow: Boolean? = null, options: RequestOptions? = null): CommerceSubscriptionItem {
+        return SdkClient.request<CommerceSubscriptionItem>(SdkClient.RequestSpec("DELETE", "/billing/subscription_items/${SdkClient.encodePathSegment(subscriptionItemId)}", config = clientConfig, query = mapOf("end_now" to SdkClient.queryValue(endNow, "form", true)), operationId = "cancelCommerceSubscriptionItem", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Extends the free trial period for a specific subscription item to the specified timestamp.
-     * The subscription item must be currently in a free trial period, and the plan must support
-     * free trials. The timestamp must be in the future and not more than 365 days from the end of
-     * the current trial period This operation is idempotent - repeated requests with the same
-     * timestamp will not change the trial period.
+     * Extends the free trial period for a specific subscription item to the specified timestamp. The subscription item must be currently in a free trial period, and the plan must support free trials. The timestamp must be in the future and not more than 365 days from the end of the current trial period This operation is idempotent - repeated requests with the same timestamp will not change the trial period.
      *
-     * @param subscriptionItemId The ID of the subscription item to extend the free trial for
-     * @param extendTo RFC3339 timestamp to extend the free trial to. Must be in the future and not
-     *   more than 365 days from now.
+     * @param subscriptionItemId The ID of the subscription item to extend the free
+     *   trial for
+     * @param extendTo RFC3339 timestamp to extend the free trial to. Must be in the
+     *   future and not more than 365 days from now.
      */
-    fun extendBillingSubscriptionItemFreeTrial(
-        clientConfig: ClientConfig,
-        subscriptionItemId: String,
-        extendTo: OffsetDateTime,
-        options: RequestOptions? = null,
-    ): CommerceSubscriptionItem2 {
+    fun extendBillingSubscriptionItemFreeTrial(clientConfig: ClientConfig, subscriptionItemId: String, extendTo: OffsetDateTime, options: RequestOptions? = null): CommerceSubscriptionItem2 {
         Validation.validateDateTime("extend_to", extendTo)
 
-        return SdkClient.request<CommerceSubscriptionItem2>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/billing/subscription_items/${SdkClient.encodePathSegment(subscriptionItemId)}/extend_free_trial",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("extend_to" to (extendTo)),
-                    operationId = "extendBillingSubscriptionItemFreeTrial",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                            "500" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<CommerceSubscriptionItem2>(SdkClient.RequestSpec("POST", "/billing/subscription_items/${SdkClient.encodePathSegment(subscriptionItemId)}/extend_free_trial", config = clientConfig, body = SdkClient.bodyMap("extend_to" to (extendTo)), operationId = "extendBillingSubscriptionItemFreeTrial", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Creates a price transition for the specified subscription item. This may create an upcoming
-     * subscription item or activate immediately depending on plan and payer rules.
+     * Creates a price transition for the specified subscription item. This may create an upcoming subscription item or activate immediately depending on plan and payer rules.
      *
      * @param subscriptionItemId The ID of the subscription item to transition
      * @param fromPriceId The current price ID of the subscription item.
      * @param toPriceId The target price ID to transition to.
      */
-    fun createBillingPriceTransition(
-        clientConfig: ClientConfig,
-        subscriptionItemId: String,
-        fromPriceId: String,
-        toPriceId: String,
-        options: RequestOptions? = null,
-    ): CommercePriceTransitionResponse {
-        return SdkClient.request<CommercePriceTransitionResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/billing/subscription_items/${SdkClient.encodePathSegment(subscriptionItemId)}/price_transition",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "from_price_id" to (fromPriceId),
-                            "to_price_id" to (toPriceId),
-                        ),
-                    operationId = "createBillingPriceTransition",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "409" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                            "500" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun createBillingPriceTransition(clientConfig: ClientConfig, subscriptionItemId: String, fromPriceId: String, toPriceId: String, options: RequestOptions? = null): CommercePriceTransitionResponse {
+        return SdkClient.request<CommercePriceTransitionResponse>(SdkClient.RequestSpec("POST", "/billing/subscription_items/${SdkClient.encodePathSegment(subscriptionItemId)}/price_transition", config = clientConfig, body = SdkClient.bodyMap("from_price_id" to (fromPriceId), "to_price_id" to (toPriceId)), operationId = "createBillingPriceTransition", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "409" to ClerkErrors::class.java, "422" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Applies an existing discount to a subscription item. Manual application is an override path:
-     * self-serve distribution rules are not enforced. At most one active discount is allowed per
-     * subscription item; applying a different discount replaces the currently active one.
-     * Re-applying the same active discount returns a conflict.
+     * Applies an existing discount to a subscription item. Manual application is an override path: self-serve distribution rules are not enforced. At most one active discount is allowed per subscription item; applying a different discount replaces the currently active one. Re-applying the same active discount returns a conflict.
      *
-     * @param subscriptionItemId The ID of the subscription item to apply the discount to
+     * @param subscriptionItemId The ID of the subscription item to apply the
+     *   discount to
      * @param discountId The ID of the discount to apply to the subscription item.
      */
-    fun applyBillingSubscriptionItemDiscount(
-        clientConfig: ClientConfig,
-        subscriptionItemId: String,
-        discountId: String,
-        options: RequestOptions? = null,
-    ): CommerceDiscountRedemptionResponse {
-        return SdkClient.request<CommerceDiscountRedemptionResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/billing/subscription_items/${SdkClient.encodePathSegment(subscriptionItemId)}/discounts",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("discount_id" to (discountId)),
-                    operationId = "applyBillingSubscriptionItemDiscount",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "409" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                            "500" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun applyBillingSubscriptionItemDiscount(clientConfig: ClientConfig, subscriptionItemId: String, discountId: String, options: RequestOptions? = null): CommerceDiscountRedemptionResponse {
+        return SdkClient.request<CommerceDiscountRedemptionResponse>(SdkClient.RequestSpec("POST", "/billing/subscription_items/${SdkClient.encodePathSegment(subscriptionItemId)}/discounts", config = clientConfig, body = SdkClient.bodyMap("discount_id" to (discountId)), operationId = "applyBillingSubscriptionItemDiscount", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "409" to ClerkErrors::class.java, "422" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Removes the active discount from a subscription item. The discount_id must match the
-     * subscription item's currently active discount.
+     * Removes the active discount from a subscription item. The discount_id must match the subscription item's currently active discount.
      *
-     * @param subscriptionItemId The ID of the subscription item to remove the discount from
+     * @param subscriptionItemId The ID of the subscription item to remove the
+     *   discount from
      * @param discountId The ID of the discount to remove
      */
-    fun removeBillingSubscriptionItemDiscount(
-        clientConfig: ClientConfig,
-        subscriptionItemId: String,
-        discountId: String,
-        options: RequestOptions? = null,
-    ): CommerceDiscountRedemptionResponse {
-        return SdkClient.request<CommerceDiscountRedemptionResponse>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/billing/subscription_items/${SdkClient.encodePathSegment(subscriptionItemId)}/discounts/${SdkClient.encodePathSegment(discountId)}",
-                    config = clientConfig,
-                    operationId = "removeBillingSubscriptionItemDiscount",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "409" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                            "500" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun removeBillingSubscriptionItemDiscount(clientConfig: ClientConfig, subscriptionItemId: String, discountId: String, options: RequestOptions? = null): CommerceDiscountRedemptionResponse {
+        return SdkClient.request<CommerceDiscountRedemptionResponse>(SdkClient.RequestSpec("DELETE", "/billing/subscription_items/${SdkClient.encodePathSegment(subscriptionItemId)}/discounts/${SdkClient.encodePathSegment(discountId)}", config = clientConfig, operationId = "removeBillingSubscriptionItemDiscount", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "409" to ClerkErrors::class.java, "422" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Returns a list of all billing statements for the instance. The statements are returned sorted
-     * by creation date, with the newest statements appearing first. Pagination is supported.
+     * Returns a list of all billing statements for the instance. The statements are returned sorted by creation date, with the newest statements appearing first. Pagination is supported.
      *
-     * @param paginated Whether to paginate the results. If true, the results will be paginated. If
-     *   false, the results will not be paginated.
-     * @param limit Applies a limit to the number of results returned. Can be used for paginating
-     *   the results together with `offset`.
-     * @param offset Skip the first `offset` results when paginating. Needs to be an integer greater
-     *   or equal to zero. To be used in conjunction with `limit`.
+     * @param paginated Whether to paginate the results. If true, the results will be
+     *   paginated. If false, the results will not be paginated.
+     * @param limit Applies a limit to the number of results returned. Can be used
+     *   for paginating the results together with `offset`.
+     * @param offset Skip the first `offset` results when paginating. Needs to be an
+     *   integer greater or equal to zero. To be used in conjunction with `limit`.
      */
-    fun getBillingStatementList(
-        clientConfig: ClientConfig,
-        paginated: Boolean? = null,
-        limit: Long? = null,
-        offset: Long? = null,
-        options: RequestOptions? = null,
-    ): PaginatedBillingStatementResponse {
+    fun getBillingStatementList(clientConfig: ClientConfig, paginated: Boolean? = null, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): PaginatedBillingStatementResponse {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 500.0))
-        }
+}
 
         if (offset != null) {
             Validation.validateRange("offset", offset, Validation.RangeOpts(min = 0.0))
-        }
+}
 
-        return SdkClient.request<PaginatedBillingStatementResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/billing/statements",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "paginated" to SdkClient.queryValue(paginated, "form", true),
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "offset" to SdkClient.queryValue(offset, "form", true),
-                        ),
-                    operationId = "getBillingStatementList",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                            "500" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<PaginatedBillingStatementResponse>(SdkClient.RequestSpec("GET", "/billing/statements", config = clientConfig, query = mapOf("paginated" to SdkClient.queryValue(paginated, "form", true), "limit" to SdkClient.queryValue(limit, "form", true), "offset" to SdkClient.queryValue(offset, "form", true)), operationId = "getBillingStatementList", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "422" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieves a billing statement by its unique identifier. Use `statementID` to inspect the
-     * statement’s payer, current status, totals, and grouped items.
+     * Retrieves a billing statement by its unique identifier. Use `statementID` to inspect the statement’s payer, current status, totals, and grouped items.
      *
      * Retrieves the details of a billing statement.
      *
      * @param statementId The ID of the statement to retrieve.
      */
-    fun getBillingStatement(
-        clientConfig: ClientConfig,
-        statementId: String,
-        options: RequestOptions? = null,
-    ): BillingStatement {
-        return SdkClient.request<BillingStatement>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/billing/statements/${SdkClient.encodePathSegment(statementId)}",
-                    config = clientConfig,
-                    operationId = "getBillingStatement",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                            "500" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun getBillingStatement(clientConfig: ClientConfig, statementId: String, options: RequestOptions? = null): BillingStatement {
+        return SdkClient.request<BillingStatement>(SdkClient.RequestSpec("GET", "/billing/statements/${SdkClient.encodePathSegment(statementId)}", config = clientConfig, operationId = "getBillingStatement", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Returns a list of all payment attempts for a specific billing statement. The payment attempts
-     * are returned sorted by creation date, with the newest payment attempts appearing first.
-     * Pagination is supported.
+     * Returns a list of all payment attempts for a specific billing statement. The payment attempts are returned sorted by creation date, with the newest payment attempts appearing first. Pagination is supported.
      *
      * @param statementId The ID of the statement to retrieve payment attempts for.
-     * @param paginated Whether to paginate the results. If true, the results will be paginated. If
-     *   false, the results will not be paginated.
-     * @param limit Applies a limit to the number of results returned. Can be used for paginating
-     *   the results together with `offset`.
-     * @param offset Skip the first `offset` results when paginating. Needs to be an integer greater
-     *   or equal to zero. To be used in conjunction with `limit`.
+     * @param paginated Whether to paginate the results. If true, the results will be
+     *   paginated. If false, the results will not be paginated.
+     * @param limit Applies a limit to the number of results returned. Can be used
+     *   for paginating the results together with `offset`.
+     * @param offset Skip the first `offset` results when paginating. Needs to be an
+     *   integer greater or equal to zero. To be used in conjunction with `limit`.
      */
-    fun getBillingStatementPaymentAttempts(
-        clientConfig: ClientConfig,
-        statementId: String,
-        paginated: Boolean? = null,
-        limit: Long? = null,
-        offset: Long? = null,
-        options: RequestOptions? = null,
-    ): PaginatedBillingPaymentAttemptResponse {
+    fun getBillingStatementPaymentAttempts(clientConfig: ClientConfig, statementId: String, paginated: Boolean? = null, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): PaginatedBillingPaymentAttemptResponse {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 500.0))
-        }
+}
 
         if (offset != null) {
             Validation.validateRange("offset", offset, Validation.RangeOpts(min = 0.0))
-        }
+}
 
-        return SdkClient.request<PaginatedBillingPaymentAttemptResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/billing/statements/${SdkClient.encodePathSegment(statementId)}/payment_attempts",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "paginated" to SdkClient.queryValue(paginated, "form", true),
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "offset" to SdkClient.queryValue(offset, "form", true),
-                        ),
-                    operationId = "getBillingStatementPaymentAttempts",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                            "500" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<PaginatedBillingPaymentAttemptResponse>(SdkClient.RequestSpec("GET", "/billing/statements/${SdkClient.encodePathSegment(statementId)}/payment_attempts", config = clientConfig, query = mapOf("paginated" to SdkClient.queryValue(paginated, "form", true), "limit" to SdkClient.queryValue(limit, "form", true), "offset" to SdkClient.queryValue(offset, "form", true)), operationId = "getBillingStatementPaymentAttempts", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
     }
+
+
+
+
+
+
+
 }
