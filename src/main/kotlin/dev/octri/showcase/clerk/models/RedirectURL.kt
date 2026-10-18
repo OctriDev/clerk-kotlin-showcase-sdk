@@ -3,28 +3,16 @@
 
 package dev.octri.showcase.clerk.models
 
-/**
- * Typed representation of the `RedirectURL` API schema.
- */
+/** Typed representation of the `RedirectURL` API schema. */
 data class RedirectURL(
-    /**
-     * Required enumerated value serialized in the `object` wire field.
-     */
+    /** Required enumerated value serialized in the `object` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: RedirectURLObjectEnum,
-    /**
-     * Required `string` value serialized in the `id` wire field.
-     */
+    /** Required `string` value serialized in the `id` wire field. */
     val id: String,
-    /**
-     * Required `string` value serialized in the `url` wire field.
-     */
+    /** Required `string` value serialized in the `url` wire field. */
     val url: String,
-    /**
-     * Unix timestamp of creation.
-     */
+    /** Unix timestamp of creation. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Unix timestamp of last update.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long
+    /** Unix timestamp of last update. */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
 )

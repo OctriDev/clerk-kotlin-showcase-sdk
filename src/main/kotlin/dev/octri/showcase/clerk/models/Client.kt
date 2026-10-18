@@ -3,48 +3,30 @@
 
 package dev.octri.showcase.clerk.models
 
-/**
- * Typed representation of the `Client` API schema.
- */
+/** Typed representation of the `Client` API schema. */
 data class Client(
-    /**
-     * String representing the object's type. Objects of the same type share the same value.
-     */
+    /** String representing the object's type. Objects of the same type share the same value. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ClientObjectEnum,
-    /**
-     * String representing the identifier of the session.
-     */
+    /** String representing the identifier of the session. */
     val id: String,
-    /**
-     * Required array value serialized in the `session_ids` wire field.
-     */
+    /** Required array value serialized in the `session_ids` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("session_ids") val sessionIds: List<String>,
-    /**
-     * Required array value serialized in the `sessions` wire field.
-     */
+    /** Required array value serialized in the `sessions` wire field. */
     val sessions: List<Session>,
-    /**
-     * Required `string` value serialized in the `sign_in_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sign_in_id", required = true) val signInId: String?,
-    /**
-     * Required `string` value serialized in the `sign_up_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sign_up_id", required = true) val signUpId: String?,
-    /**
-     * Last active session_id.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_active_session_id", required = true) val lastActiveSessionId: String?,
-    /**
-     * The authentication strategy that was last used to authenticate the user on this client.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_authentication_strategy", required = true) val lastAuthenticationStrategy: String?,
-    /**
-     * Unix timestamp of last update.
-     */
+    /** Required `string` value serialized in the `sign_in_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sign_in_id", required = true)
+    val signInId: String?,
+    /** Required `string` value serialized in the `sign_up_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sign_up_id", required = true)
+    val signUpId: String?,
+    /** Last active session_id. */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_active_session_id", required = true)
+    val lastActiveSessionId: String?,
+    /** The authentication strategy that was last used to authenticate the user on this client. */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_authentication_strategy", required = true)
+    val lastAuthenticationStrategy: String?,
+    /** Unix timestamp of last update. */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
-    /**
-     * Unix timestamp of creation.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long
+    /** Unix timestamp of creation. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
 )

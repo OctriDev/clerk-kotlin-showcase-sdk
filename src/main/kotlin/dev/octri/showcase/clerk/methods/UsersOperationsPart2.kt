@@ -24,108 +24,286 @@ import dev.octri.showcase.clerk.Validation
 
 internal object UsersUpdateUserMetadataOperation {
     /**
-     * Update a user's metadata attributes by merging existing values with the provided parameters. This endpoint behaves differently than the *Update a user* endpoint. Metadata values will not be replaced entirely. Instead, a deep merge will be performed. Deep means that any nested JSON objects will be merged as well. You can remove metadata keys at any level by setting their value to `null`.
+     * Update a user's metadata attributes by merging existing values with the provided parameters.
+     * This endpoint behaves differently than the *Update a user* endpoint. Metadata values will not
+     * be replaced entirely. Instead, a deep merge will be performed. Deep means that any nested
+     * JSON objects will be merged as well. You can remove metadata keys at any level by setting
+     * their value to `null`.
      *
      * @param userId The ID of the user whose metadata will be updated and merged
-     * @param publicMetadata Metadata saved on the user, that is visible to both your
-     *   frontend and backend. The new object will be merged with the existing value.
-     * @param privateMetadata Metadata saved on the user that is only visible to your
+     * @param publicMetadata Metadata saved on the user, that is visible to both your frontend and
      *   backend. The new object will be merged with the existing value.
-     * @param unsafeMetadata Metadata saved on the user, that can be updated from
-     *   both the Frontend and Backend APIs. The new object will be merged with the
-     *   existing value. Note: Since this data can be modified from the frontend, it is
-     *   not guaranteed to be safe.
+     * @param privateMetadata Metadata saved on the user that is only visible to your backend. The
+     *   new object will be merged with the existing value.
+     * @param unsafeMetadata Metadata saved on the user, that can be updated from both the Frontend
+     *   and Backend APIs. The new object will be merged with the existing value. Note: Since this
+     *   data can be modified from the frontend, it is not guaranteed to be safe.
      */
-    fun updateUserMetadata(clientConfig: ClientConfig, userId: String, publicMetadata: Map<String, Any>? = null, privateMetadata: Map<String, Any>? = null, unsafeMetadata: Map<String, Any>? = null, options: RequestOptions? = null): User {
-        return SdkClient.request<User>(SdkClient.RequestSpec("PATCH", "/users/${SdkClient.encodePathSegment(userId)}/metadata", config = clientConfig, body = SdkClient.bodyMap("public_metadata" to (SdkClient.omitIfNull(publicMetadata)), "private_metadata" to
-    (SdkClient.omitIfNull(privateMetadata)), "unsafe_metadata" to (SdkClient.omitIfNull(unsafeMetadata))), operationId = "updateUserMetadata", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
+    fun updateUserMetadata(
+        clientConfig: ClientConfig,
+        userId: String,
+        publicMetadata: Map<String, Any>? = null,
+        privateMetadata: Map<String, Any>? = null,
+        unsafeMetadata: Map<String, Any>? = null,
+        options: RequestOptions? = null,
+    ): User {
+        return SdkClient.request<User>(
+                SdkClient.RequestSpec(
+                    "PATCH",
+                    "/users/${SdkClient.encodePathSegment(userId)}/metadata",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "public_metadata" to (SdkClient.omitIfNull(publicMetadata)),
+                            "private_metadata" to (SdkClient.omitIfNull(privateMetadata)),
+                            "unsafe_metadata" to (SdkClient.omitIfNull(unsafeMetadata)),
+                        ),
+                    operationId = "updateUserMetadata",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ClerkErrors::class.java,
+                            "401" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                            "422" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object UsersReplaceUserMetadataOperation {
     /**
-     * Replace a user's metadata attributes with the provided values. Unlike `PATCH /v1/users/{user_id}/metadata` (merge semantics), this endpoint replaces the supplied metadata fields entirely — the prior contents of each supplied field are discarded. Fields omitted from the request body are left unchanged. Prefer the `PATCH` endpoint for partial updates. Use `PUT` only when you explicitly intend to overwrite a metadata field wholesale.
+     * Replace a user's metadata attributes with the provided values. Unlike `PATCH
+     * /v1/users/{user_id}/metadata` (merge semantics), this endpoint replaces the supplied metadata
+     * fields entirely — the prior contents of each supplied field are discarded. Fields omitted
+     * from the request body are left unchanged. Prefer the `PATCH` endpoint for partial updates.
+     * Use `PUT` only when you explicitly intend to overwrite a metadata field wholesale.
      *
      * @param userId The ID of the user whose metadata will be replaced
-     * @param publicMetadata Metadata saved on the user, that is visible to both your
-     *   frontend and backend. The existing value will be replaced entirely with the
-     *   new object.
-     * @param privateMetadata Metadata saved on the user that is only visible to your
+     * @param publicMetadata Metadata saved on the user, that is visible to both your frontend and
      *   backend. The existing value will be replaced entirely with the new object.
-     * @param unsafeMetadata Metadata saved on the user, that can be updated from
-     *   both the Frontend and Backend APIs. The existing value will be replaced
-     *   entirely with the new object. Note: Since this data can be modified from the
-     *   frontend, it is not guaranteed to be safe.
+     * @param privateMetadata Metadata saved on the user that is only visible to your backend. The
+     *   existing value will be replaced entirely with the new object.
+     * @param unsafeMetadata Metadata saved on the user, that can be updated from both the Frontend
+     *   and Backend APIs. The existing value will be replaced entirely with the new object. Note:
+     *   Since this data can be modified from the frontend, it is not guaranteed to be safe.
      */
-    fun replaceUserMetadata(clientConfig: ClientConfig, userId: String, publicMetadata: Map<String, Any>? = null, privateMetadata: Map<String, Any>? = null, unsafeMetadata: Map<String, Any>? = null, options: RequestOptions? = null): User {
-        return SdkClient.request<User>(SdkClient.RequestSpec("PUT", "/users/${SdkClient.encodePathSegment(userId)}/metadata", config = clientConfig, body = SdkClient.bodyMap("public_metadata" to (SdkClient.omitIfNull(publicMetadata)), "private_metadata" to
-    (SdkClient.omitIfNull(privateMetadata)), "unsafe_metadata" to (SdkClient.omitIfNull(unsafeMetadata))), operationId = "replaceUserMetadata", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
+    fun replaceUserMetadata(
+        clientConfig: ClientConfig,
+        userId: String,
+        publicMetadata: Map<String, Any>? = null,
+        privateMetadata: Map<String, Any>? = null,
+        unsafeMetadata: Map<String, Any>? = null,
+        options: RequestOptions? = null,
+    ): User {
+        return SdkClient.request<User>(
+                SdkClient.RequestSpec(
+                    "PUT",
+                    "/users/${SdkClient.encodePathSegment(userId)}/metadata",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "public_metadata" to (SdkClient.omitIfNull(publicMetadata)),
+                            "private_metadata" to (SdkClient.omitIfNull(privateMetadata)),
+                            "unsafe_metadata" to (SdkClient.omitIfNull(unsafeMetadata)),
+                        ),
+                    operationId = "replaceUserMetadata",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ClerkErrors::class.java,
+                            "401" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                            "422" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object UsersGetUserBillingSubscriptionOperation {
     /**
-     * Retrieves the billing subscription for the specified user. This includes subscription details, active plans, billing information, and payment status. The subscription contains subscription items which represent the individual plans the user is subscribed to.
+     * Retrieves the billing subscription for the specified user. This includes subscription
+     * details, active plans, billing information, and payment status. The subscription contains
+     * subscription items which represent the individual plans the user is subscribed to.
      *
      * @param userId The ID of the user whose subscription to retrieve
      */
-    fun getUserBillingSubscription(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): CommerceSubscription {
-        return SdkClient.request<CommerceSubscription>(SdkClient.RequestSpec("GET", "/users/${SdkClient.encodePathSegment(userId)}/billing/subscription", config = clientConfig, operationId = "getUserBillingSubscription", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
+    fun getUserBillingSubscription(
+        clientConfig: ClientConfig,
+        userId: String,
+        options: RequestOptions? = null,
+    ): CommerceSubscription {
+        return SdkClient.request<CommerceSubscription>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/users/${SdkClient.encodePathSegment(userId)}/billing/subscription",
+                    config = clientConfig,
+                    operationId = "getUserBillingSubscription",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ClerkErrors::class.java,
+                            "401" to ClerkErrors::class.java,
+                            "403" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                            "422" to ClerkErrors::class.java,
+                            "500" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object UsersGetUserBillingCreditBalanceOperation {
     /**
-     * Retrieves the current credit balance for the specified user. Credits can be applied during checkout to reduce the charge or automatically applied to upcoming recurring charges
+     * Retrieves the current credit balance for the specified user. Credits can be applied during
+     * checkout to reduce the charge or automatically applied to upcoming recurring charges
      *
      * @param userId The ID of the user whose credit balance to retrieve
      */
-    fun getUserBillingCreditBalance(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): CommerceCreditBalanceResponse {
-        return SdkClient.request<CommerceCreditBalanceResponse>(SdkClient.RequestSpec("GET", "/users/${SdkClient.encodePathSegment(userId)}/billing/credits", config = clientConfig, operationId = "getUserBillingCreditBalance", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
+    fun getUserBillingCreditBalance(
+        clientConfig: ClientConfig,
+        userId: String,
+        options: RequestOptions? = null,
+    ): CommerceCreditBalanceResponse {
+        return SdkClient.request<CommerceCreditBalanceResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/users/${SdkClient.encodePathSegment(userId)}/billing/credits",
+                    config = clientConfig,
+                    operationId = "getUserBillingCreditBalance",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ClerkErrors::class.java,
+                            "401" to ClerkErrors::class.java,
+                            "403" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                            "422" to ClerkErrors::class.java,
+                            "500" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object UsersAdjustUserBillingCreditBalanceOperation {
     /**
-     * Increases or decreases the credit balance for the specified user. Each adjustment is recorded as a ledger entry. The idempotency_key parameter ensures that duplicate requests are safely handled.
+     * Increases or decreases the credit balance for the specified user. Each adjustment is recorded
+     * as a ledger entry. The idempotency_key parameter ensures that duplicate requests are safely
+     * handled.
      *
      * @param userId The ID of the user whose credit balance to adjust
      * @param amount The credit amount in cents. Must be greater than zero.
      * @param action Whether to increase or decrease the credit balance.
-     * @param idempotencyKey A unique key to ensure the adjustment is applied only
-     *   once. Repeated requests with the same key return the original ledger entry.
-     * @param currency The currency code (e.g. "USD"). Defaults to USD if not
-     *   provided.
+     * @param idempotencyKey A unique key to ensure the adjustment is applied only once. Repeated
+     *   requests with the same key return the original ledger entry.
+     * @param currency The currency code (e.g. "USD"). Defaults to USD if not provided.
      * @param note An optional note to attach to the ledger entry.
      */
-    fun adjustUserBillingCreditBalance(clientConfig: ClientConfig, request: Users.AdjustUserBillingCreditBalanceRequest, options: RequestOptions? = null): CommerceCreditLedgerResponse {
-        return SdkClient.request<CommerceCreditLedgerResponse>(SdkClient.RequestSpec("POST", "/users/${SdkClient.encodePathSegment(request.userId)}/billing/credits", config = clientConfig, body = SdkClient.bodyMap("amount" to (request.amount), "action" to (request.action), "idempotency_key" to (request.idempotencyKey), "currency" to (SdkClient.omitIfNull(request.currency)), "note" to (SdkClient.omitIfNull(request.note))), operationId = "adjustUserBillingCreditBalance", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "409" to ClerkErrors::class.java, "422" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
+    fun adjustUserBillingCreditBalance(
+        clientConfig: ClientConfig,
+        request: Users.AdjustUserBillingCreditBalanceRequest,
+        options: RequestOptions? = null,
+    ): CommerceCreditLedgerResponse {
+        return SdkClient.request<CommerceCreditLedgerResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/users/${SdkClient.encodePathSegment(request.userId)}/billing/credits",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "amount" to (request.amount),
+                            "action" to (request.action),
+                            "idempotency_key" to (request.idempotencyKey),
+                            "currency" to (SdkClient.omitIfNull(request.currency)),
+                            "note" to (SdkClient.omitIfNull(request.note)),
+                        ),
+                    operationId = "adjustUserBillingCreditBalance",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ClerkErrors::class.java,
+                            "401" to ClerkErrors::class.java,
+                            "403" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                            "409" to ClerkErrors::class.java,
+                            "422" to ClerkErrors::class.java,
+                            "500" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object UsersGetOAuthAccessTokenOperation {
     /**
-     * Fetch the corresponding OAuth access token for a user that has previously authenticated with a particular OAuth provider. For OAuth 2.0, if the access token has expired and we have a corresponding refresh token, the access token will be refreshed transparently the new one will be returned.
+     * Fetch the corresponding OAuth access token for a user that has previously authenticated with
+     * a particular OAuth provider. For OAuth 2.0, if the access token has expired and we have a
+     * corresponding refresh token, the access token will be refreshed transparently the new one
+     * will be returned.
      *
      * @param userId The ID of the user for which to retrieve the OAuth access token
      * @param provider The ID of the OAuth provider (e.g. `oauth_google`)
-     * @param paginated Whether to paginate the results. If true, the results will be
-     *   paginated. If false, the results will not be paginated.
-     * @param limit Applies a limit to the number of results returned. Can be used
-     *   for paginating the results together with `offset`.
-     * @param offset Skip the first `offset` results when paginating. Needs to be an
-     *   integer greater or equal to zero. To be used in conjunction with `limit`.
+     * @param paginated Whether to paginate the results. If true, the results will be paginated. If
+     *   false, the results will not be paginated.
+     * @param limit Applies a limit to the number of results returned. Can be used for paginating
+     *   the results together with `offset`.
+     * @param offset Skip the first `offset` results when paginating. Needs to be an integer greater
+     *   or equal to zero. To be used in conjunction with `limit`.
      */
-    fun getOAuthAccessToken(clientConfig: ClientConfig, userId: String, provider: String, paginated: Boolean? = null, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): OAuthAccessToken {
+    fun getOAuthAccessToken(
+        clientConfig: ClientConfig,
+        userId: String,
+        provider: String,
+        paginated: Boolean? = null,
+        limit: Long? = null,
+        offset: Long? = null,
+        options: RequestOptions? = null,
+    ): OAuthAccessToken {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 500.0))
-}
+        }
 
         if (offset != null) {
             Validation.validateRange("offset", offset, Validation.RangeOpts(min = 0.0))
-}
+        }
 
-        return SdkClient.request<OAuthAccessToken>(SdkClient.RequestSpec("GET", "/users/${SdkClient.encodePathSegment(userId)}/oauth_access_tokens/${SdkClient.encodePathSegment(provider)}", config = clientConfig, query = mapOf("paginated" to SdkClient.queryValue(paginated, "form", true), "limit" to SdkClient.queryValue(limit, "form", true), "offset" to SdkClient.queryValue(offset, "form", true)), operationId = "getOAuthAccessToken", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
+        return SdkClient.request<OAuthAccessToken>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/users/${SdkClient.encodePathSegment(userId)}/oauth_access_tokens/${SdkClient.encodePathSegment(provider)}",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "paginated" to SdkClient.queryValue(paginated, "form", true),
+                            "limit" to SdkClient.queryValue(limit, "form", true),
+                            "offset" to SdkClient.queryValue(offset, "form", true),
+                        ),
+                    operationId = "getOAuthAccessToken",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                            "422" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
@@ -133,23 +311,44 @@ internal object UsersGetOrganizationMembershipsOperation {
     /**
      * Retrieve a paginated list of the user's organization memberships
      *
-     * @param userId The ID of the user whose organization memberships we want to
-     *   retrieve
-     * @param limit Applies a limit to the number of results returned. Can be used
-     *   for paginating the results together with `offset`.
-     * @param offset Skip the first `offset` results when paginating. Needs to be an
-     *   integer greater or equal to zero. To be used in conjunction with `limit`.
+     * @param userId The ID of the user whose organization memberships we want to retrieve
+     * @param limit Applies a limit to the number of results returned. Can be used for paginating
+     *   the results together with `offset`.
+     * @param offset Skip the first `offset` results when paginating. Needs to be an integer greater
+     *   or equal to zero. To be used in conjunction with `limit`.
      */
-    fun usersGetOrganizationMemberships(clientConfig: ClientConfig, userId: String, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): OrganizationMemberships {
+    fun usersGetOrganizationMemberships(
+        clientConfig: ClientConfig,
+        userId: String,
+        limit: Long? = null,
+        offset: Long? = null,
+        options: RequestOptions? = null,
+    ): OrganizationMemberships {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 500.0))
-}
+        }
 
         if (offset != null) {
             Validation.validateRange("offset", offset, Validation.RangeOpts(min = 0.0))
-}
+        }
 
-        return SdkClient.request<OrganizationMemberships>(SdkClient.RequestSpec("GET", "/users/${SdkClient.encodePathSegment(userId)}/organization_memberships", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "offset" to SdkClient.queryValue(offset, "form", true)), operationId = "usersGetOrganizationMemberships", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to ClerkErrors::class.java))).data
+        return SdkClient.request<OrganizationMemberships>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/users/${SdkClient.encodePathSegment(userId)}/organization_memberships",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "limit" to SdkClient.queryValue(limit, "form", true),
+                            "offset" to SdkClient.queryValue(offset, "form", true),
+                        ),
+                    operationId = "usersGetOrganizationMemberships",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors = mapOf("403" to ClerkErrors::class.java),
+                )
+            )
+            .data
     }
 }
 
@@ -157,98 +356,251 @@ internal object UsersGetOrganizationInvitationsOperation {
     /**
      * Retrieve a paginated list of the user's organization invitations
      *
-     * @param userId The ID of the user whose organization invitations we want to
-     *   retrieve
-     * @param limit Applies a limit to the number of results returned. Can be used
-     *   for paginating the results together with `offset`.
-     * @param offset Skip the first `offset` results when paginating. Needs to be an
-     *   integer greater or equal to zero. To be used in conjunction with `limit`.
+     * @param userId The ID of the user whose organization invitations we want to retrieve
+     * @param limit Applies a limit to the number of results returned. Can be used for paginating
+     *   the results together with `offset`.
+     * @param offset Skip the first `offset` results when paginating. Needs to be an integer greater
+     *   or equal to zero. To be used in conjunction with `limit`.
      * @param status Filter organization invitations based on their status
      */
-    fun usersGetOrganizationInvitations(clientConfig: ClientConfig, userId: String, limit: Long? = null, offset: Long? = null, status: UsersGetOrganizationInvitationsParameterEnum? = null, options: RequestOptions? = null): OrganizationInvitationsWithPublicOrganizationData {
+    fun usersGetOrganizationInvitations(
+        clientConfig: ClientConfig,
+        userId: String,
+        limit: Long? = null,
+        offset: Long? = null,
+        status: UsersGetOrganizationInvitationsParameterEnum? = null,
+        options: RequestOptions? = null,
+    ): OrganizationInvitationsWithPublicOrganizationData {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 500.0))
-}
+        }
 
         if (offset != null) {
             Validation.validateRange("offset", offset, Validation.RangeOpts(min = 0.0))
-}
+        }
 
-        return SdkClient.request<OrganizationInvitationsWithPublicOrganizationData>(SdkClient.RequestSpec("GET", "/users/${SdkClient.encodePathSegment(userId)}/organization_invitations", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "offset" to SdkClient.queryValue(offset, "form", true), "status" to SdkClient.queryValue(status, "form", true)), operationId = "usersGetOrganizationInvitations", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
+        return SdkClient.request<OrganizationInvitationsWithPublicOrganizationData>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/users/${SdkClient.encodePathSegment(userId)}/organization_invitations",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "limit" to SdkClient.queryValue(limit, "form", true),
+                            "offset" to SdkClient.queryValue(offset, "form", true),
+                            "status" to SdkClient.queryValue(status, "form", true),
+                        ),
+                    operationId = "usersGetOrganizationInvitations",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ClerkErrors::class.java,
+                            "403" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object UsersRemoveUserPasswordOperation {
     /**
-     * Removes the password credential from the given user. This is a privileged operation and does not require the user's current password. Password removal is allowed even when the user has no other sign-in method configured. If the user does not have a password, the user is returned unchanged and no password-deletion or user-update event is emitted. By default, existing sessions remain active. Set `sign_out_of_other_sessions` to `true` to revoke sessions active when the request…
+     * Removes the password credential from the given user. This is a privileged operation and does
+     * not require the user's current password. Password removal is allowed even when the user has
+     * no other sign-in method configured. If the user does not have a password, the user is
+     * returned unchanged and no password-deletion or user-update event is emitted. By default,
+     * existing sessions remain active. Set `sign_out_of_other_sessions` to `true` to revoke
+     * sessions active when the request…
      *
      * @param userId The ID of the user whose password to remove
-     * @param signOutOfOtherSessions Set to `true` to revoke all of the user's active
-     *   sessions after removing the password.
+     * @param signOutOfOtherSessions Set to `true` to revoke all of the user's active sessions after
+     *   removing the password.
      */
-    fun removeUserPassword(clientConfig: ClientConfig, userId: String, signOutOfOtherSessions: Boolean? = null, options: RequestOptions? = null): User {
-        return SdkClient.request<User>(SdkClient.RequestSpec("POST", "/users/${SdkClient.encodePathSegment(userId)}/remove_password", config = clientConfig, body = SdkClient.bodyMap("sign_out_of_other_sessions" to
-    (SdkClient.omitIfNull(signOutOfOtherSessions))), operationId = "removeUserPassword", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
+    fun removeUserPassword(
+        clientConfig: ClientConfig,
+        userId: String,
+        signOutOfOtherSessions: Boolean? = null,
+        options: RequestOptions? = null,
+    ): User {
+        return SdkClient.request<User>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/users/${SdkClient.encodePathSegment(userId)}/remove_password",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "sign_out_of_other_sessions" to
+                                (SdkClient.omitIfNull(signOutOfOtherSessions))
+                        ),
+                    operationId = "removeUserPassword",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ClerkErrors::class.java,
+                            "401" to ClerkErrors::class.java,
+                            "403" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                            "500" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object UsersVerifyPasswordOperation {
     /**
-     * Check that the user's password matches the supplied input. Useful for custom auth flows and re-verification.
+     * Check that the user's password matches the supplied input. Useful for custom auth flows and
+     * re-verification.
      *
      * @param userId The ID of the user for whom to verify the password
      * @param password The user password to verify
      */
-    fun verifyPassword(clientConfig: ClientConfig, userId: String, password: String, options: RequestOptions? = null): Users.VerifyPasswordResponse {
-        return SdkClient.request<Users.VerifyPasswordResponse>(SdkClient.RequestSpec("POST", "/users/${SdkClient.encodePathSegment(userId)}/verify_password", config = clientConfig, body = SdkClient.bodyMap("password" to (password)), operationId = "verifyPassword", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("500" to ClerkErrors::class.java))).data
+    fun verifyPassword(
+        clientConfig: ClientConfig,
+        userId: String,
+        password: String,
+        options: RequestOptions? = null,
+    ): Users.VerifyPasswordResponse {
+        return SdkClient.request<Users.VerifyPasswordResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/users/${SdkClient.encodePathSegment(userId)}/verify_password",
+                    config = clientConfig,
+                    body = SdkClient.bodyMap("password" to (password)),
+                    operationId = "verifyPassword",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors = mapOf("500" to ClerkErrors::class.java),
+                )
+            )
+            .data
     }
 }
 
 internal object UsersVerifyTOTPOperation {
     /**
-     * Verify that the provided TOTP or backup code is valid for the user. Verifying a backup code will result it in being consumed (i.e. it will become invalid). Useful for custom auth flows and re-verification.
+     * Verify that the provided TOTP or backup code is valid for the user. Verifying a backup code
+     * will result it in being consumed (i.e. it will become invalid). Useful for custom auth flows
+     * and re-verification.
      *
      * @param userId The ID of the user for whom to verify the TOTP
      * @param code The TOTP or backup code to verify
      */
-    fun verifyTotp(clientConfig: ClientConfig, userId: String, code: String, options: RequestOptions? = null): Users.VerifyTOTPResponse {
-        return SdkClient.request<Users.VerifyTOTPResponse>(SdkClient.RequestSpec("POST", "/users/${SdkClient.encodePathSegment(userId)}/verify_totp", config = clientConfig, body = SdkClient.bodyMap("code" to (code)), operationId = "verifyTotp", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("500" to ClerkErrors::class.java))).data
+    fun verifyTotp(
+        clientConfig: ClientConfig,
+        userId: String,
+        code: String,
+        options: RequestOptions? = null,
+    ): Users.VerifyTOTPResponse {
+        return SdkClient.request<Users.VerifyTOTPResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/users/${SdkClient.encodePathSegment(userId)}/verify_totp",
+                    config = clientConfig,
+                    body = SdkClient.bodyMap("code" to (code)),
+                    operationId = "verifyTotp",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors = mapOf("500" to ClerkErrors::class.java),
+                )
+            )
+            .data
     }
 }
 
 internal object UsersDisableMFAOperation {
     /**
-     * Disable all of a user's MFA methods (e.g. OTP sent via SMS, TOTP on their authenticator app) at once.
+     * Disable all of a user's MFA methods (e.g. OTP sent via SMS, TOTP on their authenticator app)
+     * at once.
      *
      * @param userId The ID of the user whose MFA methods are to be disabled
      */
-    fun disableMfa(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): Users.DisableMFAResponse {
-        return SdkClient.request<Users.DisableMFAResponse>(SdkClient.RequestSpec("DELETE", "/users/${SdkClient.encodePathSegment(userId)}/mfa", config = clientConfig, operationId = "disableMfa", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
+    fun disableMfa(
+        clientConfig: ClientConfig,
+        userId: String,
+        options: RequestOptions? = null,
+    ): Users.DisableMFAResponse {
+        return SdkClient.request<Users.DisableMFAResponse>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/users/${SdkClient.encodePathSegment(userId)}/mfa",
+                    config = clientConfig,
+                    operationId = "disableMfa",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf("404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java),
+                )
+            )
+            .data
     }
 }
 
 internal object UsersDeleteBackupCodeOperation {
     /**
-     * Deletes all backup codes for a user, disabling them for future use. Supply `user_id` to identify the user whose backup codes you want to disable.
+     * Deletes all backup codes for a user, disabling them for future use. Supply `user_id` to
+     * identify the user whose backup codes you want to disable.
      *
      * Disable all of a user's backup codes.
      *
      * @param userId The ID of the user whose backup codes are to be deleted.
      */
-    fun deleteBackupCode(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): Users.DeleteBackupCodeResponse {
-        return SdkClient.request<Users.DeleteBackupCodeResponse>(SdkClient.RequestSpec("DELETE", "/users/${SdkClient.encodePathSegment(userId)}/backup_code", config = clientConfig, operationId = "deleteBackupCode", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
+    fun deleteBackupCode(
+        clientConfig: ClientConfig,
+        userId: String,
+        options: RequestOptions? = null,
+    ): Users.DeleteBackupCodeResponse {
+        return SdkClient.request<Users.DeleteBackupCodeResponse>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/users/${SdkClient.encodePathSegment(userId)}/backup_code",
+                    config = clientConfig,
+                    operationId = "deleteBackupCode",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf("404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java),
+                )
+            )
+            .data
     }
 }
 
 internal object UsersDeleteUsersPasskeyOperation {
     /**
-     * Delete the passkey identification for a given user. The user is notified through email or SMS unless the passkey registration was never completed.
+     * Delete the passkey identification for a given user. The user is notified through email or SMS
+     * unless the passkey registration was never completed.
      *
      * @param userId The ID of the user that owns the passkey identity
      * @param passkeyIdentificationId The ID of the passkey identity to be deleted
      */
-    fun deleteUsersPasskey(clientConfig: ClientConfig, userId: String, passkeyIdentificationId: String, options: RequestOptions? = null): DeletedObject {
-        return SdkClient.request<DeletedObject>(SdkClient.RequestSpec("DELETE", "/users/${SdkClient.encodePathSegment(userId)}/passkeys/${SdkClient.encodePathSegment(passkeyIdentificationId)}", config = clientConfig, operationId = "deleteUsersPasskey", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
+    fun deleteUsersPasskey(
+        clientConfig: ClientConfig,
+        userId: String,
+        passkeyIdentificationId: String,
+        options: RequestOptions? = null,
+    ): DeletedObject {
+        return SdkClient.request<DeletedObject>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/users/${SdkClient.encodePathSegment(userId)}/passkeys/${SdkClient.encodePathSegment(passkeyIdentificationId)}",
+                    config = clientConfig,
+                    operationId = "deleteUsersPasskey",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "403" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                            "500" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
@@ -257,11 +609,30 @@ internal object UsersListUserTrustedDevicesOperation {
      * Returns the active trusted devices enrolled by the user.
      *
      * @param userId The ID of the user whose trusted devices are returned
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
-    fun listUserTrustedDevices(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): TrustedDeviceList {
-        return SdkClient.request<TrustedDeviceList>(SdkClient.RequestSpec("GET", "/users/${SdkClient.encodePathSegment(userId)}/trusted_devices", config = clientConfig, operationId = "listUserTrustedDevices", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
+    fun listUserTrustedDevices(
+        clientConfig: ClientConfig,
+        userId: String,
+        options: RequestOptions? = null,
+    ): TrustedDeviceList {
+        return SdkClient.request<TrustedDeviceList>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/users/${SdkClient.encodePathSegment(userId)}/trusted_devices",
+                    config = clientConfig,
+                    operationId = "listUserTrustedDevices",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "403" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                            "500" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
@@ -271,11 +642,31 @@ internal object UsersRevokeUserTrustedDeviceOperation {
      *
      * @param userId The ID of the user that owns the trusted device
      * @param trustedDeviceId The ID of the trusted device to revoke
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
-    fun revokeUserTrustedDevice(clientConfig: ClientConfig, userId: String, trustedDeviceId: String, options: RequestOptions? = null): TrustedDevice {
-        return SdkClient.request<TrustedDevice>(SdkClient.RequestSpec("DELETE", "/users/${SdkClient.encodePathSegment(userId)}/trusted_devices/${SdkClient.encodePathSegment(trustedDeviceId)}", config = clientConfig, operationId = "revokeUserTrustedDevice", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
+    fun revokeUserTrustedDevice(
+        clientConfig: ClientConfig,
+        userId: String,
+        trustedDeviceId: String,
+        options: RequestOptions? = null,
+    ): TrustedDevice {
+        return SdkClient.request<TrustedDevice>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/users/${SdkClient.encodePathSegment(userId)}/trusted_devices/${SdkClient.encodePathSegment(trustedDeviceId)}",
+                    config = clientConfig,
+                    operationId = "revokeUserTrustedDevice",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "403" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                            "500" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
@@ -285,8 +676,28 @@ internal object UsersListUserBiometricCredentialsOperation {
      *
      * @param userId The ID of the user whose biometric credentials are returned
      */
-    fun listUserBiometricCredentials(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): BiometricCredentialList {
-        return SdkClient.request<BiometricCredentialList>(SdkClient.RequestSpec("GET", "/users/${SdkClient.encodePathSegment(userId)}/biometric_credentials", config = clientConfig, operationId = "listUserBiometricCredentials", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
+    fun listUserBiometricCredentials(
+        clientConfig: ClientConfig,
+        userId: String,
+        options: RequestOptions? = null,
+    ): BiometricCredentialList {
+        return SdkClient.request<BiometricCredentialList>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/users/${SdkClient.encodePathSegment(userId)}/biometric_credentials",
+                    config = clientConfig,
+                    operationId = "listUserBiometricCredentials",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "403" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                            "500" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
@@ -297,8 +708,29 @@ internal object UsersRevokeUserBiometricCredentialOperation {
      * @param userId The ID of the user that owns the biometric credential
      * @param biometricCredentialId The ID of the biometric credential to revoke
      */
-    fun revokeUserBiometricCredential(clientConfig: ClientConfig, userId: String, biometricCredentialId: String, options: RequestOptions? = null): BiometricCredential {
-        return SdkClient.request<BiometricCredential>(SdkClient.RequestSpec("DELETE", "/users/${SdkClient.encodePathSegment(userId)}/biometric_credentials/${SdkClient.encodePathSegment(biometricCredentialId)}", config = clientConfig, operationId = "revokeUserBiometricCredential", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
+    fun revokeUserBiometricCredential(
+        clientConfig: ClientConfig,
+        userId: String,
+        biometricCredentialId: String,
+        options: RequestOptions? = null,
+    ): BiometricCredential {
+        return SdkClient.request<BiometricCredential>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/users/${SdkClient.encodePathSegment(userId)}/biometric_credentials/${SdkClient.encodePathSegment(biometricCredentialId)}",
+                    config = clientConfig,
+                    operationId = "revokeUserBiometricCredential",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "403" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                            "500" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
@@ -307,62 +739,179 @@ internal object UsersDeleteUsersWeb3WalletOperation {
      * Delete the web3 wallet identification for a given user.
      *
      * @param userId The ID of the user that owns the web3 wallet
-     * @param web3WalletIdentificationId The ID of the web3 wallet identity to be
-     *   deleted
+     * @param web3WalletIdentificationId The ID of the web3 wallet identity to be deleted
      */
-    fun deleteUsersWeb3Wallet(clientConfig: ClientConfig, userId: String, web3WalletIdentificationId: String, options: RequestOptions? = null): DeletedObject {
-        return SdkClient.request<DeletedObject>(SdkClient.RequestSpec("DELETE", "/users/${SdkClient.encodePathSegment(userId)}/web3_wallets/${SdkClient.encodePathSegment(web3WalletIdentificationId)}", config = clientConfig, operationId = "deleteUsersWeb3Wallet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
+    fun deleteUsersWeb3Wallet(
+        clientConfig: ClientConfig,
+        userId: String,
+        web3WalletIdentificationId: String,
+        options: RequestOptions? = null,
+    ): DeletedObject {
+        return SdkClient.request<DeletedObject>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/users/${SdkClient.encodePathSegment(userId)}/web3_wallets/${SdkClient.encodePathSegment(web3WalletIdentificationId)}",
+                    config = clientConfig,
+                    operationId = "deleteUsersWeb3Wallet",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ClerkErrors::class.java,
+                            "403" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                            "500" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object UsersDeleteTOTPOperation {
     /**
-     * Deletes all TOTP credentials associated with a user. Supply the `user_id` of the user whose TOTPs you want to delete; the operation removes all of that user's TOTPs.
+     * Deletes all TOTP credentials associated with a user. Supply the `user_id` of the user whose
+     * TOTPs you want to delete; the operation removes all of that user's TOTPs.
      *
      * Deletes all of the user's TOTPs.
      *
      * @param userId The ID of the user whose TOTPs are to be deleted
      */
-    fun deleteTotp(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): Users.DeleteTOTPResponse {
-        return SdkClient.request<Users.DeleteTOTPResponse>(SdkClient.RequestSpec("DELETE", "/users/${SdkClient.encodePathSegment(userId)}/totp", config = clientConfig, operationId = "deleteTotp", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
+    fun deleteTotp(
+        clientConfig: ClientConfig,
+        userId: String,
+        options: RequestOptions? = null,
+    ): Users.DeleteTOTPResponse {
+        return SdkClient.request<Users.DeleteTOTPResponse>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/users/${SdkClient.encodePathSegment(userId)}/totp",
+                    config = clientConfig,
+                    operationId = "deleteTotp",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf("404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java),
+                )
+            )
+            .data
     }
 }
 
 internal object UsersDeleteExternalAccountOperation {
     /**
-     * Deletes an external account associated with a user. Supply the `user_id` and `external_account_id` for the account you want to remove.
+     * Deletes an external account associated with a user. Supply the `user_id` and
+     * `external_account_id` for the account you want to remove.
      *
      * Delete an external account by ID.
      *
      * @param userId The ID of the user's external account
      * @param externalAccountId The ID of the external account to delete
      */
-    fun deleteExternalAccount(clientConfig: ClientConfig, userId: String, externalAccountId: String, options: RequestOptions? = null): DeletedObject {
-        return SdkClient.request<DeletedObject>(SdkClient.RequestSpec("DELETE", "/users/${SdkClient.encodePathSegment(userId)}/external_accounts/${SdkClient.encodePathSegment(externalAccountId)}", config = clientConfig, operationId = "deleteExternalAccount", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
+    fun deleteExternalAccount(
+        clientConfig: ClientConfig,
+        userId: String,
+        externalAccountId: String,
+        options: RequestOptions? = null,
+    ): DeletedObject {
+        return SdkClient.request<DeletedObject>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/users/${SdkClient.encodePathSegment(userId)}/external_accounts/${SdkClient.encodePathSegment(externalAccountId)}",
+                    config = clientConfig,
+                    operationId = "deleteExternalAccount",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ClerkErrors::class.java,
+                            "403" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                            "500" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object UsersSetUserPasswordCompromisedOperation {
     /**
-     * Marks a user's password as compromised so the user is prompted to reset it at their next sign-in. Supply the `user_id` of the user whose password you want to flag. You can optionally set `revoke_all_sessions` to revoke the user's sessions as part of the operation.
+     * Marks a user's password as compromised so the user is prompted to reset it at their next
+     * sign-in. Supply the `user_id` of the user whose password you want to flag. You can optionally
+     * set `revoke_all_sessions` to revoke the user's sessions as part of the operation.
      *
-     * Sets the given user's password as compromised. The user will be prompted to reset their password on their next sign-in.
+     * Sets the given user's password as compromised. The user will be prompted to reset their
+     * password on their next sign-in.
      *
      * @param userId The ID of the user to set the password as compromised
      */
-    fun setUserPasswordCompromised(clientConfig: ClientConfig, userId: String, revokeAllSessions: SdkClient.SdkOptional<Boolean?>? = null, options: RequestOptions? = null): User {
-        return SdkClient.request<User>(SdkClient.RequestSpec("POST", "/users/${SdkClient.encodePathSegment(userId)}/password/set_compromised", config = clientConfig, body = SdkClient.bodyMap("revoke_all_sessions" to
-    (revokeAllSessions ?: SdkClient.SdkOptional.Omitted)), operationId = "setUserPasswordCompromised", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
+    fun setUserPasswordCompromised(
+        clientConfig: ClientConfig,
+        userId: String,
+        revokeAllSessions: SdkClient.SdkOptional<Boolean?>? = null,
+        options: RequestOptions? = null,
+    ): User {
+        return SdkClient.request<User>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/users/${SdkClient.encodePathSegment(userId)}/password/set_compromised",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "revoke_all_sessions" to
+                                (revokeAllSessions ?: SdkClient.SdkOptional.Omitted)
+                        ),
+                    operationId = "setUserPasswordCompromised",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ClerkErrors::class.java,
+                            "401" to ClerkErrors::class.java,
+                            "403" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                            "422" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }
 
 internal object UsersUnsetUserPasswordCompromisedOperation {
     /**
-     * Sets the given user's password as no longer compromised. The user will no longer be prompted to reset their password on their next sign-in. If the user is in reserved-email password quarantine, the quarantine is preserved and the returned user will still have `requires_password_reset` set to `true`. Reserved-email password quarantine can only be cleared by completing a password reset or changing/removing the password.
+     * Sets the given user's password as no longer compromised. The user will no longer be prompted
+     * to reset their password on their next sign-in. If the user is in reserved-email password
+     * quarantine, the quarantine is preserved and the returned user will still have
+     * `requires_password_reset` set to `true`. Reserved-email password quarantine can only be
+     * cleared by completing a password reset or changing/removing the password.
      *
      * @param userId The ID of the user to unset the compromised status for
      */
-    fun unsetUserPasswordCompromised(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): User {
-        return SdkClient.request<User>(SdkClient.RequestSpec("POST", "/users/${SdkClient.encodePathSegment(userId)}/password/unset_compromised", config = clientConfig, operationId = "unsetUserPasswordCompromised", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
+    fun unsetUserPasswordCompromised(
+        clientConfig: ClientConfig,
+        userId: String,
+        options: RequestOptions? = null,
+    ): User {
+        return SdkClient.request<User>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/users/${SdkClient.encodePathSegment(userId)}/password/unset_compromised",
+                    config = clientConfig,
+                    operationId = "unsetUserPasswordCompromised",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ClerkErrors::class.java,
+                            "401" to ClerkErrors::class.java,
+                            "403" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                            "422" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }

@@ -3,222 +3,216 @@
 
 package dev.octri.showcase.clerk.models
 
-/**
- * Typed representation of the `Instance` API schema.
- */
+/** Typed representation of the `Instance` API schema. */
 data class Instance(
-    /**
-     * String representing the object's type. Objects of the same type share the same value.
-     */
+    /** String representing the object's type. Objects of the same type share the same value. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: InstanceObjectEnum,
-    /**
-     * Required `string` value serialized in the `id` wire field.
-     */
+    /** Required `string` value serialized in the `id` wire field. */
     val id: String,
-    /**
-     * Required `string` value serialized in the `environment_type` wire field.
-     */
+    /** Required `string` value serialized in the `environment_type` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("environment_type") val environmentType: String,
+    /** Required array value serialized in the `allowed_origins` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_origins", required = true)
+    val allowedOrigins: List<String>?,
     /**
-     * Required array value serialized in the `allowed_origins` wire field.
+     * Subdomains of the instance's own domains that may originate requests, when the subdomain
+     * allowlist is enabled. Production instances only; always empty on a development instance.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_origins", required = true) val allowedOrigins: List<String>?,
+    @com.fasterxml.jackson.annotation.JsonProperty("allowed_subdomains")
+    val allowedSubdomains: List<String>,
     /**
-     * Subdomains of the instance's own domains that may originate requests, when the subdomain allowlist is enabled. Production instances only; always empty on a development instance.
+     * Whether requests from subdomains of the instance's own domains are restricted to
+     * `allowed_subdomains`. When false, every subdomain of the instance's domain is accepted.
+     * Production instances only; always false on a development instance.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowed_subdomains") val allowedSubdomains: List<String>,
+    @com.fasterxml.jackson.annotation.JsonProperty("subdomain_allowlist_enabled")
+    val subdomainAllowlistEnabled: Boolean,
     /**
-     * Whether requests from subdomains of the instance's own domains are restricted to `allowed_subdomains`. When false, every subdomain of the instance's domain is accepted. Production instances only; always false on a development instance.
+     * The ID of the Clerk workspace that owns the instance's application. It is null when the
+     * application has no owner.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("subdomain_allowlist_enabled") val subdomainAllowlistEnabled: Boolean,
-    /**
-     * The ID of the Clerk workspace that owns the instance's application. It is null when the application has no owner.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("workspace_id", required = true) val workspaceId: String?
+    @com.fasterxml.jackson.annotation.JsonProperty("workspace_id", required = true)
+    val workspaceId: String?,
 )
 
-/**
- * Per-instance SMS communication settings, including the SMS country blocklist.
- */
+/** Per-instance SMS communication settings, including the SMS country blocklist. */
 data class InstanceCommunication(
+    /** Required enumerated value serialized in the `object` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: InstanceCommunicationObjectEnum,
     /**
-     * Required enumerated value serialized in the `object` wire field.
+     * ISO 3166-1 alpha-2 country codes that are blocked for SMS delivery on this instance. Codes
+     * that aren't recognized are silently dropped.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: InstanceCommunicationObjectEnum,
-    /**
-     * ISO 3166-1 alpha-2 country codes that are blocked for SMS delivery on this instance. Codes that aren't recognized are silently dropped.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("blocked_country_codes") val blockedCountryCodes: List<String>
+    @com.fasterxml.jackson.annotation.JsonProperty("blocked_country_codes")
+    val blockedCountryCodes: List<String>,
 )
 
-/**
- * Typed representation of the `InstanceProtect` API schema.
- */
+/** Typed representation of the `InstanceProtect` API schema. */
 data class InstanceProtect(
+    /** Required enumerated value serialized in the `object` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: InstanceProtectObjectEnum,
     /**
-     * Required enumerated value serialized in the `object` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: InstanceProtectObjectEnum,
-    /**
-     * Whether Protect rules are enforced on this instance. False does not mean the instance is outside Protect — by default it is still evaluated in shadow, where rules are scored and recorded but never block.
+     * Whether Protect rules are enforced on this instance. False does not mean the instance is
+     * outside Protect — by default it is still evaluated in shadow, where rules are scored and
+     * recorded but never block.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("rules_enabled") val rulesEnabled: Boolean,
-    /**
-     * Whether Device Intelligence is enabled. Managed automatically or by Clerk support.
-     */
+    /** Whether Device Intelligence is enabled. Managed automatically or by Clerk support. */
     @com.fasterxml.jackson.annotation.JsonProperty("specter_enabled") val specterEnabled: Boolean,
     /**
-     * Whether the instance has opted out of the Protect prerequisite checks, asserting its setup already meets the requirements.
+     * Whether the instance has opted out of the Protect prerequisite checks, asserting its setup
+     * already meets the requirements.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("checks_bypassed") val checksBypassed: Boolean,
     /**
-     * Whether the Protect system has verified the instance's prerequisite checks. Protect rules are gated on checks being verified, bypassed or exempt.
+     * Whether the Protect system has verified the instance's prerequisite checks. Protect rules are
+     * gated on checks being verified, bypassed or exempt.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("checks_verified") val checksVerified: Boolean,
     /**
-     * Whether the instance was created into Protect and so was never subject to the prerequisite checks at all.
+     * Whether the instance was created into Protect and so was never subject to the prerequisite
+     * checks at all.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("checks_exempt") val checksExempt: Boolean
+    @com.fasterxml.jackson.annotation.JsonProperty("checks_exempt") val checksExempt: Boolean,
 )
 
-/**
- * Typed representation of the `InstanceRestrictions` API schema.
- */
+/** Typed representation of the `InstanceRestrictions` API schema. */
 data class InstanceRestrictions(
-    /**
-     * String representing the object's type. Objects of the same type share the same value.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: InstanceRestrictionsObjectEnum,
-    /**
-     * Required `boolean` value serialized in the `allowlist` wire field.
-     */
+    /** String representing the object's type. Objects of the same type share the same value. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: InstanceRestrictionsObjectEnum,
+    /** Required `boolean` value serialized in the `allowlist` wire field. */
     val allowlist: Boolean,
-    /**
-     * Required `boolean` value serialized in the `blocklist` wire field.
-     */
+    /** Required `boolean` value serialized in the `blocklist` wire field. */
     val blocklist: Boolean,
     /**
-     * Required `boolean` value serialized in the `allowlist_blocklist_disabled_on_sign_in` wire field.
+     * Required `boolean` value serialized in the `allowlist_blocklist_disabled_on_sign_in` wire
+     * field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("allowlist_blocklist_disabled_on_sign_in") val allowlistBlocklistDisabledOnSignIn: Boolean,
-    /**
-     * Required `boolean` value serialized in the `block_email_subaddresses` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("block_email_subaddresses") val blockEmailSubaddresses: Boolean,
-    /**
-     * Required `boolean` value serialized in the `block_disposable_email_domains` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("block_disposable_email_domains") val blockDisposableEmailDomains: Boolean
+    @com.fasterxml.jackson.annotation.JsonProperty("allowlist_blocklist_disabled_on_sign_in")
+    val allowlistBlocklistDisabledOnSignIn: Boolean,
+    /** Required `boolean` value serialized in the `block_email_subaddresses` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("block_email_subaddresses")
+    val blockEmailSubaddresses: Boolean,
+    /** Required `boolean` value serialized in the `block_disposable_email_domains` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("block_disposable_email_domains")
+    val blockDisposableEmailDomains: Boolean,
 )
 
-/**
- * Typed representation of the `OAuthApplicationSettings` API schema.
- */
+/** Typed representation of the `OAuthApplicationSettings` API schema. */
 data class OAuthApplicationSettings(
+    /** String representing the object's type. Objects of the same type share the same value. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: OAuthApplicationSettingsObjectEnum,
+    /** Whether dynamic OAuth client registration is enabled for the instance (RFC 7591). */
+    @com.fasterxml.jackson.annotation.JsonProperty("dynamic_oauth_client_registration")
+    val dynamicOauthClientRegistration: Boolean,
     /**
-     * String representing the object's type. Objects of the same type share the same value.
+     * Default scopes assigned when a dynamically registered or first-contact CIMD client omits
+     * `scope`. Contains built-in keys and custom catalog keys. Null means Clerk-provided defaults.
+     * `advertised` does not affect eligibility. An empty input array is stored and returned as
+     * null.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: OAuthApplicationSettingsObjectEnum,
+    @com.fasterxml.jackson.annotation.JsonProperty("default_scopes", required = true)
+    val defaultScopes: List<String>?,
     /**
-     * Whether dynamic OAuth client registration is enabled for the instance (RFC 7591).
+     * Whether OAuth JWT access tokens are enabled for the instance (disabled indicates opaque
+     * access tokens).
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("dynamic_oauth_client_registration") val dynamicOauthClientRegistration: Boolean,
+    @com.fasterxml.jackson.annotation.JsonProperty("oauth_jwt_access_tokens")
+    val oauthJwtAccessTokens: Boolean,
     /**
-     * Default scopes assigned when a dynamically registered or first-contact CIMD client omits `scope`. Contains built-in keys and custom catalog keys. Null means Clerk-provided defaults. `advertised` does not affect eligibility. An empty input array is stored and returned as null.
+     * Whether OAuth access tokens can include an aud claim derived from the RFC 8707 resource
+     * parameter.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("default_scopes", required = true) val defaultScopes: List<String>?,
+    @com.fasterxml.jackson.annotation.JsonProperty("aud_claim_enabled")
+    val audClaimEnabled: Boolean,
     /**
-     * Whether OAuth JWT access tokens are enabled for the instance (disabled indicates opaque access tokens).
+     * Whether refresh grants without a resource can adopt the requested resource when audience
+     * claims are enabled.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("oauth_jwt_access_tokens") val oauthJwtAccessTokens: Boolean,
+    @com.fasterxml.jackson.annotation.JsonProperty("aud_claim_refresh_backfill_enabled")
+    val audClaimRefreshBackfillEnabled: Boolean,
     /**
-     * Whether OAuth access tokens can include an aud claim derived from the RFC 8707 resource parameter.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("aud_claim_enabled") val audClaimEnabled: Boolean,
-    /**
-     * Whether refresh grants without a resource can adopt the requested resource when audience claims are enabled.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("aud_claim_refresh_backfill_enabled") val audClaimRefreshBackfillEnabled: Boolean,
-    /**
-     * Whether all new OAuth authorization-code requests must use PKCE with the S256 challenge method.
+     * Whether all new OAuth authorization-code requests must use PKCE with the S256 challenge
+     * method.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("pkce_required") val pkceRequired: Boolean,
     /**
-     * Whether the instance advertises support for Client ID Metadata Documents in its OAuth authorization server metadata.
+     * Whether the instance advertises support for Client ID Metadata Documents in its OAuth
+     * authorization server metadata.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("client_id_metadata_documents_advertised") val clientIdMetadataDocumentsAdvertised: Boolean,
+    @com.fasterxml.jackson.annotation.JsonProperty("client_id_metadata_documents_advertised")
+    val clientIdMetadataDocumentsAdvertised: Boolean,
     /**
-     * When true, new unknown CIMD clients are rejected. Previously auto-connected and pre-registered clients remain admitted; deleting a client makes it unknown again.
+     * When true, new unknown CIMD clients are rejected. Previously auto-connected and
+     * pre-registered clients remain admitted; deleting a client makes it unknown again.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("client_id_metadata_documents_only_allow_pre_registered_clients") val clientIdMetadataDocumentsOnlyAllowPreRegisteredClients: Boolean,
+    @com.fasterxml.jackson.annotation.JsonProperty(
+        "client_id_metadata_documents_only_allow_pre_registered_clients"
+    )
+    val clientIdMetadataDocumentsOnlyAllowPreRegisteredClients: Boolean,
     /**
-     * When true, recorded implicitly allowed CIMD clients are rejected on future client lookups. Explicitly allowed clients remain accepted. This does not revoke previously issued access tokens.
+     * When true, recorded implicitly allowed CIMD clients are rejected on future client lookups.
+     * Explicitly allowed clients remain accepted. This does not revoke previously issued access
+     * tokens.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("client_id_metadata_documents_block_implicitly_allowed_clients") val clientIdMetadataDocumentsBlockImplicitlyAllowedClients: Boolean,
+    @com.fasterxml.jackson.annotation.JsonProperty(
+        "client_id_metadata_documents_block_implicitly_allowed_clients"
+    )
+    val clientIdMetadataDocumentsBlockImplicitlyAllowedClients: Boolean,
     /**
-     * Administrator-selected scope ceiling for dynamically registered and automatically admitted CIMD clients. Null preserves registered client limits; defaults must be a subset. Fresh user consent is required for expansion.
+     * Administrator-selected scope ceiling for dynamically registered and automatically admitted
+     * CIMD clients. Null preserves registered client limits; defaults must be a subset. Fresh user
+     * consent is required for expansion.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("dynamic_client_allowed_scopes") val dynamicClientAllowedScopes: List<String>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("dynamic_client_allowed_scopes")
+    val dynamicClientAllowedScopes: List<String>? = null,
 )
 
-/**
- * Typed representation of the `OrganizationSettings` API schema.
- */
+/** Typed representation of the `OrganizationSettings` API schema. */
 data class OrganizationSettings(
-    /**
-     * String representing the object's type. Objects of the same type share the same value.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: OrganizationSettingsObjectEnum,
-    /**
-     * Required `boolean` value serialized in the `enabled` wire field.
-     */
+    /** String representing the object's type. Objects of the same type share the same value. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: OrganizationSettingsObjectEnum,
+    /** Required `boolean` value serialized in the `enabled` wire field. */
     val enabled: Boolean,
-    /**
-     * Required `integer` value serialized in the `max_allowed_memberships` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_allowed_memberships") val maxAllowedMemberships: Long,
-    /**
-     * Required `integer` value serialized in the `max_allowed_roles` wire field.
-     */
+    /** Required `integer` value serialized in the `max_allowed_memberships` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_allowed_memberships")
+    val maxAllowedMemberships: Long,
+    /** Required `integer` value serialized in the `max_allowed_roles` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("max_allowed_roles") val maxAllowedRoles: Long,
-    /**
-     * Required `integer` value serialized in the `max_allowed_domains` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_allowed_domains") val maxAllowedDomains: Long,
-    /**
-     * The role key that a user will be assigned after creating an organization.
-     */
+    /** Required `integer` value serialized in the `max_allowed_domains` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_allowed_domains")
+    val maxAllowedDomains: Long,
+    /** The role key that a user will be assigned after creating an organization. */
     @com.fasterxml.jackson.annotation.JsonProperty("creator_role") val creatorRole: String,
-    /**
-     * The default for whether an admin can delete an organization with the Frontend API.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("admin_delete_enabled") val adminDeleteEnabled: Boolean,
-    /**
-     * Required `boolean` value serialized in the `domains_enabled` wire field.
-     */
+    /** The default for whether an admin can delete an organization with the Frontend API. */
+    @com.fasterxml.jackson.annotation.JsonProperty("admin_delete_enabled")
+    val adminDeleteEnabled: Boolean,
+    /** Required `boolean` value serialized in the `domains_enabled` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("domains_enabled") val domainsEnabled: Boolean,
+    /** Required array value serialized in the `domains_enrollment_modes` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("domains_enrollment_modes")
+    val domainsEnrollmentModes: List<OrganizationSettingsDomainsEnrollmentModesItemEnum>,
     /**
-     * Required array value serialized in the `domains_enrollment_modes` wire field.
+     * The role key that it will be used in order to create an organization invitation or
+     * suggestion.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("domains_enrollment_modes") val domainsEnrollmentModes: List<OrganizationSettingsDomainsEnrollmentModesItemEnum>,
-    /**
-     * The role key that it will be used in order to create an organization invitation or suggestion.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("domains_default_role") val domainsDefaultRole: String,
-    /**
-     * Optional `integer` value serialized in the `max_role_sets_allowed` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_role_sets_allowed") val maxRoleSetsAllowed: Long? = null,
-    /**
-     * max_allowed_permissions is now a no-op, as permissions are now unlimited
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("max_allowed_permissions") val maxAllowedPermissions: Long? = null,
-    /**
-     * Optional `boolean` value serialized in the `slug_disabled` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("slug_disabled") val slugDisabled: Boolean? = null,
-    /**
-     * The role set key that it will be used to create new organizations.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("initial_role_set_key") val initialRoleSetKey: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("domains_default_role")
+    val domainsDefaultRole: String,
+    /** Optional `integer` value serialized in the `max_role_sets_allowed` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_role_sets_allowed")
+    val maxRoleSetsAllowed: Long? = null,
+    /** max_allowed_permissions is now a no-op, as permissions are now unlimited */
+    @com.fasterxml.jackson.annotation.JsonProperty("max_allowed_permissions")
+    val maxAllowedPermissions: Long? = null,
+    /** Optional `boolean` value serialized in the `slug_disabled` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("slug_disabled")
+    val slugDisabled: Boolean? = null,
+    /** The role set key that it will be used to create new organizations. */
+    @com.fasterxml.jackson.annotation.JsonProperty("initial_role_set_key")
+    val initialRoleSetKey: String? = null,
 )

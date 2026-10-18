@@ -3,15 +3,14 @@
 
 package dev.octri.showcase.clerk
 
-
 class JwksNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Retrieves the instance's JSON Web Key Set. Use the returned keys when you need the public key material associated with the instance.
+     * Retrieves the instance's JSON Web Key Set. Use the returned keys when you need the public key
+     * material associated with the instance.
      *
      * Retrieve the JSON Web Key Set of the instance
      */
     fun get(options: RequestOptions? = null): JWKS {
         return dev.octri.showcase.clerk.methods.JwksMethods.getJwks(clientConfig, options)
     }
-
 }
