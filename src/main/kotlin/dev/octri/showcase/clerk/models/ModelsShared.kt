@@ -3,226 +3,131 @@
 
 package dev.octri.showcase.clerk.models
 
-/**
- * Typed representation of the `AdjustCreditBalanceRequest` API schema.
- */
+/** Typed representation of the `AdjustCreditBalanceRequest` API schema. */
 data class AdjustCreditBalanceRequest(
-    /**
-     * The credit amount in cents. Must be greater than zero.
-     */
+    /** The credit amount in cents. Must be greater than zero. */
     val amount: Long,
-    /**
-     * Whether to increase or decrease the credit balance.
-     */
+    /** Whether to increase or decrease the credit balance. */
     val action: AdjustCreditBalanceRequestActionEnum,
     /**
-     * A unique key to ensure the adjustment is applied only once. Repeated requests with the same key return the original ledger entry.
+     * A unique key to ensure the adjustment is applied only once. Repeated requests with the same
+     * key return the original ledger entry.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("idempotency_key") val idempotencyKey: String,
-    /**
-     * The currency code (e.g. "USD"). Defaults to USD if not provided.
-     */
+    /** The currency code (e.g. "USD"). Defaults to USD if not provided. */
     val currency: String? = null,
-    /**
-     * An optional note to attach to the ledger entry.
-     */
-    val note: String? = null
+    /** An optional note to attach to the ledger entry. */
+    val note: String? = null,
 )
 
-/**
- * Typed representation of the `DeletedObject` API schema.
- */
+/** Typed representation of the `DeletedObject` API schema. */
 data class DeletedObject(
-    /**
-     * Required `string` value serialized in the `object` wire field.
-     */
+    /** Required `string` value serialized in the `object` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
-    /**
-     * Required `boolean` value serialized in the `deleted` wire field.
-     */
+    /** Required `boolean` value serialized in the `deleted` wire field. */
     val deleted: Boolean,
-    /**
-     * Optional `string` value serialized in the `id` wire field.
-     */
+    /** Optional `string` value serialized in the `id` wire field. */
     val id: String? = null,
-    /**
-     * Optional `string` value serialized in the `slug` wire field.
-     */
+    /** Optional `string` value serialized in the `slug` wire field. */
     val slug: String? = null,
-    /**
-     * Optional `string` value serialized in the `external_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("external_id") val externalId: String? = null
+    /** Optional `string` value serialized in the `external_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("external_id") val externalId: String? = null,
 )
 
-/**
- * Typed representation of the `FeatureResponse` API schema.
- */
+/** Typed representation of the `FeatureResponse` API schema. */
 data class FeatureResponse(
-    /**
-     * String representing the object's type. Objects of the same type share the same value.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: FeatureResponseObjectEnum,
-    /**
-     * Unique identifier for the feature.
-     */
+    /** String representing the object's type. Objects of the same type share the same value. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: FeatureResponseObjectEnum,
+    /** Unique identifier for the feature. */
     val id: String,
-    /**
-     * The name of the feature.
-     */
+    /** The name of the feature. */
     val name: String,
-    /**
-     * The description of the feature.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("description", required = true) val description: String?,
-    /**
-     * The URL-friendly slug for the feature.
-     */
+    /** The description of the feature. */
+    @com.fasterxml.jackson.annotation.JsonProperty("description", required = true)
+    val description: String?,
+    /** The URL-friendly slug for the feature. */
     val slug: String,
-    /**
-     * The URL of the feature's avatar image.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("avatar_url", required = true) val avatarUrl: String?
+    /** The URL of the feature's avatar image. */
+    @com.fasterxml.jackson.annotation.JsonProperty("avatar_url", required = true)
+    val avatarUrl: String?,
 )
 
-/**
- * Typed representation of the `IdentificationLink` API schema.
- */
+/** Typed representation of the `IdentificationLink` API schema. */
 data class IdentificationLink(
-    /**
-     * Required `string` value serialized in the `type` wire field.
-     */
+    /** Required `string` value serialized in the `type` wire field. */
     val type: String,
-    /**
-     * Required `string` value serialized in the `id` wire field.
-     */
-    val id: String
+    /** Required `string` value serialized in the `id` wire field. */
+    val id: String,
 )
 
-/**
- * Typed representation of the `Invitation` API schema.
- */
+/** Typed representation of the `Invitation` API schema. */
 data class Invitation(
-    /**
-     * Required enumerated value serialized in the `object` wire field.
-     */
+    /** Required enumerated value serialized in the `object` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: InvitationObjectEnum,
-    /**
-     * Required `string` value serialized in the `id` wire field.
-     */
+    /** Required `string` value serialized in the `id` wire field. */
     val id: String,
-    /**
-     * Required `email`-formatted value serialized in the `email_address` wire field.
-     */
+    /** Required `email`-formatted value serialized in the `email_address` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("email_address") val emailAddress: String,
-    /**
-     * Required object value serialized in the `public_metadata` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("public_metadata") val publicMetadata: Map<String, Any>,
-    /**
-     * Required enumerated value serialized in the `status` wire field.
-     */
+    /** Required object value serialized in the `public_metadata` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("public_metadata")
+    val publicMetadata: Map<String, Any>,
+    /** Required enumerated value serialized in the `status` wire field. */
     val status: InvitationStatusEnum,
-    /**
-     * Unix timestamp of creation.
-     */
+    /** Unix timestamp of creation. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Unix timestamp of last update.
-     */
+    /** Unix timestamp of last update. */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
-    /**
-     * Optional `boolean` value serialized in the `revoked` wire field.
-     */
+    /** Optional `boolean` value serialized in the `revoked` wire field. */
     val revoked: Boolean? = null,
-    /**
-     * Optional `string` value serialized in the `url` wire field.
-     */
+    /** Optional `string` value serialized in the `url` wire field. */
     val url: String? = null,
-    /**
-     * Unix timestamp of expiration.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long? = null
+    /** Unix timestamp of expiration. */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long? = null,
 )
 
-/**
- * Typed representation of the `Permission` API schema.
- */
+/** Typed representation of the `Permission` API schema. */
 data class Permission(
-    /**
-     * Required enumerated value serialized in the `object` wire field.
-     */
+    /** Required enumerated value serialized in the `object` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: PermissionObjectEnum,
-    /**
-     * Required `string` value serialized in the `id` wire field.
-     */
+    /** Required `string` value serialized in the `id` wire field. */
     val id: String,
-    /**
-     * Required `string` value serialized in the `name` wire field.
-     */
+    /** Required `string` value serialized in the `name` wire field. */
     val name: String,
-    /**
-     * Required `string` value serialized in the `key` wire field.
-     */
+    /** Required `string` value serialized in the `key` wire field. */
     val key: String,
-    /**
-     * Required `string` value serialized in the `description` wire field.
-     */
+    /** Required `string` value serialized in the `description` wire field. */
     val description: String,
-    /**
-     * Required `string` value serialized in the `type` wire field.
-     */
+    /** Required `string` value serialized in the `type` wire field. */
     val type: String,
-    /**
-     * Unix timestamp of creation.
-     */
+    /** Unix timestamp of creation. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Unix timestamp of last update.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long
+    /** Unix timestamp of last update. */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
 )
 
 typealias ReassignmentMappings = Map<String, String>
 
-/**
- * Typed representation of the `Role` API schema.
- */
+/** Typed representation of the `Role` API schema. */
 data class Role(
-    /**
-     * Required enumerated value serialized in the `object` wire field.
-     */
+    /** Required enumerated value serialized in the `object` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: RoleObjectEnum,
-    /**
-     * Required `string` value serialized in the `id` wire field.
-     */
+    /** Required `string` value serialized in the `id` wire field. */
     val id: String,
-    /**
-     * Required `string` value serialized in the `name` wire field.
-     */
+    /** Required `string` value serialized in the `name` wire field. */
     val name: String,
-    /**
-     * Required `string` value serialized in the `key` wire field.
-     */
+    /** Required `string` value serialized in the `key` wire field. */
     val key: String,
-    /**
-     * Required `string` value serialized in the `description` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("description", required = true) val description: String?,
-    /**
-     * Whether this role is eligible to be an organization creator role
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("is_creator_eligible") val isCreatorEligible: Boolean,
-    /**
-     * Required array value serialized in the `permissions` wire field.
-     */
+    /** Required `string` value serialized in the `description` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("description", required = true)
+    val description: String?,
+    /** Whether this role is eligible to be an organization creator role */
+    @com.fasterxml.jackson.annotation.JsonProperty("is_creator_eligible")
+    val isCreatorEligible: Boolean,
+    /** Required array value serialized in the `permissions` wire field. */
     val permissions: List<Permission>,
-    /**
-     * Unix timestamp of creation.
-     */
+    /** Unix timestamp of creation. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Unix timestamp of last update.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long
+    /** Unix timestamp of last update. */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
 )

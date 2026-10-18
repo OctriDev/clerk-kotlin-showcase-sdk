@@ -3,634 +3,379 @@
 
 package dev.octri.showcase.clerk.models
 
-/**
- * Typed representation of the `ApplyCommerceDiscountRequest` API schema.
- */
+/** Typed representation of the `ApplyCommerceDiscountRequest` API schema. */
 data class ApplyCommerceDiscountRequest(
-    /**
-     * The ID of the discount to apply to the subscription item.
-     */
+    /** The ID of the discount to apply to the subscription item. */
     @com.fasterxml.jackson.annotation.JsonProperty("discount_id") val discountId: String
 )
 
-/**
- * Typed representation of the `BillingPaymentAttempt` API schema.
- */
+/** Typed representation of the `BillingPaymentAttempt` API schema. */
 data class BillingPaymentAttempt(
-    /**
-     * String representing the object's type. Objects of the same type share the same value.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: BillingPaymentAttemptObjectEnum,
-    /**
-     * Unique identifier for the payment attempt.
-     */
+    /** String representing the object's type. Objects of the same type share the same value. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: BillingPaymentAttemptObjectEnum,
+    /** Unique identifier for the payment attempt. */
     val id: String,
-    /**
-     * Unique identifier for the associated payment.
-     */
+    /** Unique identifier for the associated payment. */
     @com.fasterxml.jackson.annotation.JsonProperty("payment_id") val paymentId: String,
-    /**
-     * The ID of the instance this payment attempt belongs to.
-     */
+    /** The ID of the instance this payment attempt belongs to. */
     @com.fasterxml.jackson.annotation.JsonProperty("instance_id") val instanceId: String,
-    /**
-     * Type of charge for this payment attempt.
-     */
+    /** Type of charge for this payment attempt. */
     @com.fasterxml.jackson.annotation.JsonProperty("charge_type") val chargeType: String,
-    /**
-     * Unique identifier for the payee.
-     */
+    /** Unique identifier for the payee. */
     @com.fasterxml.jackson.annotation.JsonProperty("payee_id") val payeeId: String,
-    /**
-     * The payee associated with this payment attempt.
-     */
+    /** The payee associated with this payment attempt. */
     val payee: Map<String, Any>,
-    /**
-     * Unique identifier for the payer.
-     */
+    /** Unique identifier for the payer. */
     @com.fasterxml.jackson.annotation.JsonProperty("payer_id") val payerId: String,
-    /**
-     * The payer associated with this payment attempt.
-     */
+    /** The payer associated with this payment attempt. */
     val payer: CommercePayerResponse,
-    /**
-     * The amount for this payment attempt.
-     */
+    /** The amount for this payment attempt. */
     val amount: CommerceMoneyResponse,
-    /**
-     * Unique identifier for the payment method.
-     */
+    /** Unique identifier for the payment method. */
     @com.fasterxml.jackson.annotation.JsonProperty("payment_method_id") val paymentMethodId: String,
-    /**
-     * The payment method used for this payment attempt.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("payment_method") val paymentMethod: CommercePaymentMethodResponse,
-    /**
-     * Unique identifier for the associated statement.
-     */
+    /** The payment method used for this payment attempt. */
+    @com.fasterxml.jackson.annotation.JsonProperty("payment_method")
+    val paymentMethod: CommercePaymentMethodResponse,
+    /** Unique identifier for the associated statement. */
     @com.fasterxml.jackson.annotation.JsonProperty("statement_id") val statementId: String,
-    /**
-     * External identifier from the payment gateway.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("gateway_external_id", required = true) val gatewayExternalId: String?,
-    /**
-     * External URL from the payment gateway.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("gateway_external_url", required = true) val gatewayExternalUrl: String?,
-    /**
-     * The current status of the payment attempt.
-     */
+    /** External identifier from the payment gateway. */
+    @com.fasterxml.jackson.annotation.JsonProperty("gateway_external_id", required = true)
+    val gatewayExternalId: String?,
+    /** External URL from the payment gateway. */
+    @com.fasterxml.jackson.annotation.JsonProperty("gateway_external_url", required = true)
+    val gatewayExternalUrl: String?,
+    /** The current status of the payment attempt. */
     val status: BillingPaymentAttemptStatusEnum,
-    /**
-     * Unix timestamp (in milliseconds) when the payment was completed.
-     */
+    /** Unix timestamp (in milliseconds) when the payment was completed. */
     @com.fasterxml.jackson.annotation.JsonProperty("paid_at", required = true) val paidAt: Long?,
-    /**
-     * Unix timestamp (in milliseconds) when the payment failed to be processed.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("failed_at", required = true) val failedAt: Long?,
-    /**
-     * Unix timestamp (in milliseconds) when the payment attempt was created.
-     */
+    /** Unix timestamp (in milliseconds) when the payment failed to be processed. */
+    @com.fasterxml.jackson.annotation.JsonProperty("failed_at", required = true)
+    val failedAt: Long?,
+    /** Unix timestamp (in milliseconds) when the payment attempt was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Unix timestamp (in milliseconds) when the payment attempt was last updated.
-     */
+    /** Unix timestamp (in milliseconds) when the payment attempt was last updated. */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
-    /**
-     * Unique identifier for the associated subscription item.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("subscription_item_id") val subscriptionItemId: String? = null,
-    /**
-     * The subscription item associated with this payment attempt.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("subscription_item") val subscriptionItem: Map<String, Any>? = null,
-    /**
-     * Totals breakdown for this payment attempt.
-     */
-    val totals: CommerceTotalsResponse2? = null
+    /** Unique identifier for the associated subscription item. */
+    @com.fasterxml.jackson.annotation.JsonProperty("subscription_item_id")
+    val subscriptionItemId: String? = null,
+    /** The subscription item associated with this payment attempt. */
+    @com.fasterxml.jackson.annotation.JsonProperty("subscription_item")
+    val subscriptionItem: Map<String, Any>? = null,
+    /** Totals breakdown for this payment attempt. */
+    val totals: CommerceTotalsResponse2? = null,
 )
 
-/**
- * Typed representation of the `BillingPriceResponse` API schema.
- */
+/** Typed representation of the `BillingPriceResponse` API schema. */
 data class BillingPriceResponse(
-    /**
-     * String representing the object's type. Objects of the same type share the same value.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: BillingPriceResponseObjectEnum,
-    /**
-     * Unique identifier for the price.
-     */
+    /** String representing the object's type. Objects of the same type share the same value. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: BillingPriceResponseObjectEnum,
+    /** Unique identifier for the price. */
     val id: String,
-    /**
-     * Unique identifier for the associated plan.
-     */
+    /** Unique identifier for the associated plan. */
     @com.fasterxml.jackson.annotation.JsonProperty("plan_id") val planId: String,
-    /**
-     * Unique identifier for the instance.
-     */
+    /** Unique identifier for the instance. */
     @com.fasterxml.jackson.annotation.JsonProperty("instance_id") val instanceId: String,
-    /**
-     * The currency code (e.g., "USD").
-     */
+    /** The currency code (e.g., "USD"). */
     val currency: String,
-    /**
-     * The currency symbol (e.g., "$").
-     */
+    /** The currency symbol (e.g., "$"). */
     @com.fasterxml.jackson.annotation.JsonProperty("currency_symbol") val currencySymbol: String,
-    /**
-     * The amount in cents for the price.
-     */
+    /** The amount in cents for the price. */
     val amount: Long,
-    /**
-     * The monthly amount in cents when billed annually.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("annual_monthly_amount") val annualMonthlyAmount: Long,
-    /**
-     * Required object value serialized in the `fee` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("fee", required = true) val fee: CommerceMoneyResponse?,
-    /**
-     * Required object value serialized in the `annual_monthly_fee` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("annual_monthly_fee", required = true) val annualMonthlyFee: CommerceMoneyResponse?,
-    /**
-     * Whether this price is the default price for its plan.
-     */
+    /** The monthly amount in cents when billed annually. */
+    @com.fasterxml.jackson.annotation.JsonProperty("annual_monthly_amount")
+    val annualMonthlyAmount: Long,
+    /** Required object value serialized in the `fee` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("fee", required = true)
+    val fee: CommerceMoneyResponse?,
+    /** Required object value serialized in the `annual_monthly_fee` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("annual_monthly_fee", required = true)
+    val annualMonthlyFee: CommerceMoneyResponse?,
+    /** Whether this price is the default price for its plan. */
     @com.fasterxml.jackson.annotation.JsonProperty("is_default") val isDefault: Boolean,
-    /**
-     * Unix timestamp (milliseconds) of creation.
-     */
+    /** Unix timestamp (milliseconds) of creation. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Which billing periods this price supports.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("supported_billing_periods") val supportedBillingPeriods: BillingPriceResponseSupportedBillingPeriodsEnum,
-    /**
-     * The description of the price.
-     */
-    val description: String? = null
+    /** Which billing periods this price supports. */
+    @com.fasterxml.jackson.annotation.JsonProperty("supported_billing_periods")
+    val supportedBillingPeriods: BillingPriceResponseSupportedBillingPeriodsEnum,
+    /** The description of the price. */
+    val description: String? = null,
 )
 
-/**
- * Totals for the statement.
- */
+/** Totals for the statement. */
 data class BillingStatementTotals(
-    /**
-     * The grand total amount for the statement.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("grand_total") val grandTotal: CommerceMoneyResponse,
-    /**
-     * The subtotal amount for the statement (base fee + unit price totals).
-     */
+    /** The grand total amount for the statement. */
+    @com.fasterxml.jackson.annotation.JsonProperty("grand_total")
+    val grandTotal: CommerceMoneyResponse,
+    /** The subtotal amount for the statement (base fee + unit price totals). */
     val subtotal: CommerceMoneyResponse,
-    /**
-     * The base plan fee before unit pricing.
-     */
+    /** The base plan fee before unit pricing. */
     @com.fasterxml.jackson.annotation.JsonProperty("base_fee") val baseFee: CommerceMoneyResponse,
-    /**
-     * The tax total amount for the statement.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("tax_total") val taxTotal: CommerceMoneyResponse
+    /** The tax total amount for the statement. */
+    @com.fasterxml.jackson.annotation.JsonProperty("tax_total") val taxTotal: CommerceMoneyResponse,
 )
 
-/**
- * A statement group.
- */
+/** A statement group. */
 data class BillingStatementGroupsItem(
-    /**
-     * String representing the object's type. Objects of the same type share the same value.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: BillingStatementGroupsItemObjectEnum,
-    /**
-     * Unix timestamp (in milliseconds) of the date the group's payment attempts were created
-     */
+    /** String representing the object's type. Objects of the same type share the same value. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: BillingStatementGroupsItemObjectEnum,
+    /** Unix timestamp (in milliseconds) of the date the group's payment attempts were created */
     val timestamp: Long,
-    /**
-     * The payment attempts included in the group
-     */
-    val items: List<BillingPaymentAttempt>
+    /** The payment attempts included in the group */
+    val items: List<BillingPaymentAttempt>,
 )
 
-/**
- * Typed representation of the `BillingStatement` API schema.
- */
+/** Typed representation of the `BillingStatement` API schema. */
 data class BillingStatement(
-    /**
-     * String representing the object's type. Objects of the same type share the same value.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: BillingStatementObjectEnum,
-    /**
-     * Unique identifier for the billing statement.
-     */
+    /** String representing the object's type. Objects of the same type share the same value. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: BillingStatementObjectEnum,
+    /** Unique identifier for the billing statement. */
     val id: String,
-    /**
-     * The ID of the instance this statement belongs to.
-     */
+    /** The ID of the instance this statement belongs to. */
     @com.fasterxml.jackson.annotation.JsonProperty("instance_id") val instanceId: String,
-    /**
-     * Unix timestamp (in milliseconds) when the statement was created.
-     */
+    /** Unix timestamp (in milliseconds) when the statement was created. */
     val timestamp: Long,
-    /**
-     * The payer associated with this statement.
-     */
+    /** The payer associated with this statement. */
     val payer: CommercePayerResponse,
-    /**
-     * The current status of the statement.
-     */
+    /** The current status of the statement. */
     val status: BillingStatementStatusEnum,
-    /**
-     * Totals for the statement.
-     */
+    /** Totals for the statement. */
     val totals: BillingStatementTotals,
-    /**
-     * Array of statement groups.
-     */
-    val groups: List<BillingStatementGroupsItem>
+    /** Array of statement groups. */
+    val groups: List<BillingStatementGroupsItem>,
 )
 
-/**
- * Typed representation of the `CommerceDiscountRedemptionResponse` API schema.
- */
+/** Typed representation of the `CommerceDiscountRedemptionResponse` API schema. */
 data class CommerceDiscountRedemptionResponse(
-    /**
-     * String representing the object's type. Objects of the same type share the same value.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: CommerceDiscountRedemptionResponseObjectEnum,
-    /**
-     * Unique identifier for the discount redemption.
-     */
+    /** String representing the object's type. Objects of the same type share the same value. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: CommerceDiscountRedemptionResponseObjectEnum,
+    /** Unique identifier for the discount redemption. */
     val id: String,
-    /**
-     * Unique identifier for the subscription item the discount was applied to.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("subscription_item_id") val subscriptionItemId: String,
-    /**
-     * Unique identifier for the discount that was applied.
-     */
+    /** Unique identifier for the subscription item the discount was applied to. */
+    @com.fasterxml.jackson.annotation.JsonProperty("subscription_item_id")
+    val subscriptionItemId: String,
+    /** Unique identifier for the discount that was applied. */
     @com.fasterxml.jackson.annotation.JsonProperty("discount_id") val discountId: String,
-    /**
-     * How the discount was applied to the subscription item.
-     */
+    /** How the discount was applied to the subscription item. */
     val source: CommerceDiscountRedemptionResponseSourceEnum,
-    /**
-     * Remaining billing cycles the discount applies to. Null means the discount lasts forever.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("cycles_remaining", required = true) val cyclesRemaining: Int?,
-    /**
-     * Number of billing cycles the discount has already been applied to.
-     */
+    /** Remaining billing cycles the discount applies to. Null means the discount lasts forever. */
+    @com.fasterxml.jackson.annotation.JsonProperty("cycles_remaining", required = true)
+    val cyclesRemaining: Int?,
+    /** Number of billing cycles the discount has already been applied to. */
     @com.fasterxml.jackson.annotation.JsonProperty("cycles_applied") val cyclesApplied: Int,
-    /**
-     * Unix timestamp (in milliseconds) when the discount was redeemed.
-     */
+    /** Unix timestamp (in milliseconds) when the discount was redeemed. */
     @com.fasterxml.jackson.annotation.JsonProperty("redeemed_at") val redeemedAt: Long,
-    /**
-     * Identifier of the actor that redeemed the discount, when available.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("redeemed_by", required = true) val redeemedBy: String?,
-    /**
-     * The display name of the discount.
-     */
+    /** Identifier of the actor that redeemed the discount, when available. */
+    @com.fasterxml.jackson.annotation.JsonProperty("redeemed_by", required = true)
+    val redeemedBy: String?,
+    /** The display name of the discount. */
     val name: String? = null,
-    /**
-     * The promo code used to redeem the discount, when applicable.
-     */
+    /** The promo code used to redeem the discount, when applicable. */
     @com.fasterxml.jackson.annotation.JsonProperty("promo_code") val promoCode: String? = null,
-    /**
-     * The snapshotted discount effect.
-     */
+    /** The snapshotted discount effect. */
     val effect: CommerceDiscountRedemptionResponseEffectEnum? = null,
-    /**
-     * Percent off when the effect is percentage.
-     */
+    /** Percent off when the effect is percentage. */
     @com.fasterxml.jackson.annotation.JsonProperty("percent_off") val percentOff: Double? = null,
+    /** Fixed amount off when the effect is fixed_amount. */
+    @com.fasterxml.jackson.annotation.JsonProperty("amount_off")
+    val amountOff: CommerceMoneyResponse? = null,
     /**
-     * Fixed amount off when the effect is fixed_amount.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("amount_off") val amountOff: CommerceMoneyResponse? = null,
-    /**
-     * How much this discount takes off the subscription item's next renewal charge. Present for either effect when next-payment data is available.
+     * How much this discount takes off the subscription item's next renewal charge. Present for
+     * either effect when next-payment data is available.
      */
     val amount: CommerceMoneyResponse? = null,
-    /**
-     * Current status of the discount redemption.
-     */
-    val status: CommerceDiscountRedemptionResponseStatusEnum? = null
+    /** Current status of the discount redemption. */
+    val status: CommerceDiscountRedemptionResponseStatusEnum? = null,
 )
 
-/**
- * Typed representation of the `CommercePayerResponse2` API schema.
- */
+/** Typed representation of the `CommercePayerResponse2` API schema. */
 data class CommercePayerResponse2(
-    /**
-     * String representing the object's type. Objects of the same type share the same value.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: CommercePayerResponse2ObjectEnum,
-    /**
-     * Unique identifier for the payer.
-     */
+    /** String representing the object's type. Objects of the same type share the same value. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: CommercePayerResponse2ObjectEnum,
+    /** Unique identifier for the payer. */
     val id: String,
-    /**
-     * Unique identifier for the Clerk instance.
-     */
+    /** Unique identifier for the Clerk instance. */
     @com.fasterxml.jackson.annotation.JsonProperty("instance_id") val instanceId: String,
-    /**
-     * First name of the payer.
-     */
+    /** First name of the payer. */
     @com.fasterxml.jackson.annotation.JsonProperty("first_name") val firstName: String,
-    /**
-     * Last name of the payer.
-     */
+    /** Last name of the payer. */
     @com.fasterxml.jackson.annotation.JsonProperty("last_name") val lastName: String,
-    /**
-     * Email address of the payer.
-     */
+    /** Email address of the payer. */
     val email: String,
-    /**
-     * URL of the payer's image/avatar.
-     */
+    /** URL of the payer's image/avatar. */
     @com.fasterxml.jackson.annotation.JsonProperty("image_url") val imageUrl: String,
-    /**
-     * Unix timestamp (in milliseconds) when the payer was created.
-     */
+    /** Unix timestamp (in milliseconds) when the payer was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Unix timestamp (in milliseconds) when the payer was last updated.
-     */
+    /** Unix timestamp (in milliseconds) when the payer was last updated. */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
-    /**
-     * User ID for user-type payers.
-     */
+    /** User ID for user-type payers. */
     @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
-    /**
-     * Organization ID for org-type payers.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("organization_id") val organizationId: String? = null,
-    /**
-     * Organization name for org-type payers.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("organization_name") val organizationName: String? = null,
-    /**
-     * Current credits balance for the payer.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("credits_balance") val creditsBalance: CommerceMoneyResponse? = null
+    /** Organization ID for org-type payers. */
+    @com.fasterxml.jackson.annotation.JsonProperty("organization_id")
+    val organizationId: String? = null,
+    /** Organization name for org-type payers. */
+    @com.fasterxml.jackson.annotation.JsonProperty("organization_name")
+    val organizationName: String? = null,
+    /** Current credits balance for the payer. */
+    @com.fasterxml.jackson.annotation.JsonProperty("credits_balance")
+    val creditsBalance: CommerceMoneyResponse? = null,
 )
 
-/**
- * Typed representation of the `CommercePaymentSourceResponse` API schema.
- */
+/** Typed representation of the `CommercePaymentSourceResponse` API schema. */
 data class CommercePaymentSourceResponse(
-    /**
-     * String representing the object's type. Objects of the same type share the same value.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: CommercePaymentSourceResponseObjectEnum,
-    /**
-     * Unique identifier for the payment source.
-     */
+    /** String representing the object's type. Objects of the same type share the same value. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: CommercePaymentSourceResponseObjectEnum,
+    /** Unique identifier for the payment source. */
     val id: String,
-    /**
-     * Unique identifier for the payer.
-     */
+    /** Unique identifier for the payer. */
     @com.fasterxml.jackson.annotation.JsonProperty("payer_id") val payerId: String,
-    /**
-     * The payment method type.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("payment_method") val paymentMethod: CommercePaymentSourceResponsePaymentMethodEnum,
-    /**
-     * The payment gateway.
-     */
+    /** The payment method type. */
+    @com.fasterxml.jackson.annotation.JsonProperty("payment_method")
+    val paymentMethod: CommercePaymentSourceResponsePaymentMethodEnum,
+    /** The payment gateway. */
     val gateway: String,
-    /**
-     * External ID in the payment gateway.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("gateway_external_id") val gatewayExternalId: String,
-    /**
-     * Last 4 digits of the card (for card payment sources).
-     */
+    /** External ID in the payment gateway. */
+    @com.fasterxml.jackson.annotation.JsonProperty("gateway_external_id")
+    val gatewayExternalId: String,
+    /** Last 4 digits of the card (for card payment sources). */
     val last4: String,
-    /**
-     * Status of the payment source.
-     */
+    /** Status of the payment source. */
     val status: CommercePaymentSourceResponseStatusEnum,
-    /**
-     * Type of wallet (if applicable).
-     */
+    /** Type of wallet (if applicable). */
     @com.fasterxml.jackson.annotation.JsonProperty("wallet_type") val walletType: String,
-    /**
-     * Type of card (if applicable).
-     */
+    /** Type of card (if applicable). */
     @com.fasterxml.jackson.annotation.JsonProperty("card_type") val cardType: String,
-    /**
-     * Unix timestamp (in milliseconds) when the payment source was created.
-     */
+    /** Unix timestamp (in milliseconds) when the payment source was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Unix timestamp (in milliseconds) when the payment source was last updated.
-     */
+    /** Unix timestamp (in milliseconds) when the payment source was last updated. */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
-    /**
-     * Whether this is the default payment source for the payer.
-     */
+    /** Whether this is the default payment source for the payer. */
     @com.fasterxml.jackson.annotation.JsonProperty("is_default") val isDefault: Boolean? = null,
-    /**
-     * External account ID in the payment gateway.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("gateway_external_account_id") val gatewayExternalAccountId: String? = null,
-    /**
-     * Card expiration year (for card payment sources).
-     */
+    /** External account ID in the payment gateway. */
+    @com.fasterxml.jackson.annotation.JsonProperty("gateway_external_account_id")
+    val gatewayExternalAccountId: String? = null,
+    /** Card expiration year (for card payment sources). */
     @com.fasterxml.jackson.annotation.JsonProperty("expiry_year") val expiryYear: Long? = null,
-    /**
-     * Card expiration month (for card payment sources).
-     */
+    /** Card expiration month (for card payment sources). */
     @com.fasterxml.jackson.annotation.JsonProperty("expiry_month") val expiryMonth: Long? = null,
-    /**
-     * Whether this payment source can be removed.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("is_removable") val isRemovable: Boolean? = null
+    /** Whether this payment source can be removed. */
+    @com.fasterxml.jackson.annotation.JsonProperty("is_removable") val isRemovable: Boolean? = null,
 )
 
-/**
- * Typed representation of the `CommercePlan2` API schema.
- */
+/** Typed representation of the `CommercePlan2` API schema. */
 data class CommercePlan2(
-    /**
-     * String representing the object's type. Objects of the same type share the same value.
-     */
+    /** String representing the object's type. Objects of the same type share the same value. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: CommercePlan2ObjectEnum,
-    /**
-     * Unique identifier for the commerce plan.
-     */
+    /** Unique identifier for the commerce plan. */
     val id: String,
-    /**
-     * The name of the commerce plan.
-     */
+    /** The name of the commerce plan. */
     val name: String,
-    /**
-     * Required object value serialized in the `fee` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("fee", required = true) val fee: CommerceMoneyResponse?,
-    /**
-     * Required object value serialized in the `annual_monthly_fee` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("annual_monthly_fee", required = true) val annualMonthlyFee: CommerceMoneyResponse?,
-    /**
-     * Required object value serialized in the `annual_fee` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("annual_fee", required = true) val annualFee: CommerceMoneyResponse?,
-    /**
-     * The amount in cents for the plan.
-     */
+    /** Required object value serialized in the `fee` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("fee", required = true)
+    val fee: CommerceMoneyResponse?,
+    /** Required object value serialized in the `annual_monthly_fee` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("annual_monthly_fee", required = true)
+    val annualMonthlyFee: CommerceMoneyResponse?,
+    /** Required object value serialized in the `annual_fee` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("annual_fee", required = true)
+    val annualFee: CommerceMoneyResponse?,
+    /** The amount in cents for the plan. */
     val amount: Long,
-    /**
-     * The formatted amount as a string (e.g., "$49.99").
-     */
+    /** The formatted amount as a string (e.g., "$49.99"). */
     @com.fasterxml.jackson.annotation.JsonProperty("amount_formatted") val amountFormatted: String,
-    /**
-     * The monthly amount in cents when billed annually.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("annual_monthly_amount") val annualMonthlyAmount: Long,
-    /**
-     * The formatted annual monthly amount as a string.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("annual_monthly_amount_formatted") val annualMonthlyAmountFormatted: String,
-    /**
-     * The total annual amount in cents.
-     */
+    /** The monthly amount in cents when billed annually. */
+    @com.fasterxml.jackson.annotation.JsonProperty("annual_monthly_amount")
+    val annualMonthlyAmount: Long,
+    /** The formatted annual monthly amount as a string. */
+    @com.fasterxml.jackson.annotation.JsonProperty("annual_monthly_amount_formatted")
+    val annualMonthlyAmountFormatted: String,
+    /** The total annual amount in cents. */
     @com.fasterxml.jackson.annotation.JsonProperty("annual_amount") val annualAmount: Long,
-    /**
-     * The formatted annual amount as a string.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("annual_amount_formatted") val annualAmountFormatted: String,
-    /**
-     * The currency symbol (e.g., "$").
-     */
+    /** The formatted annual amount as a string. */
+    @com.fasterxml.jackson.annotation.JsonProperty("annual_amount_formatted")
+    val annualAmountFormatted: String,
+    /** The currency symbol (e.g., "$"). */
     @com.fasterxml.jackson.annotation.JsonProperty("currency_symbol") val currencySymbol: String,
-    /**
-     * The currency code (e.g., "USD").
-     */
+    /** The currency code (e.g., "USD"). */
     val currency: String,
-    /**
-     * The description of the commerce plan.
-     */
+    /** The description of the commerce plan. */
     val description: String,
-    /**
-     * The ID of the product this plan belongs to.
-     */
+    /** The ID of the product this plan belongs to. */
     @com.fasterxml.jackson.annotation.JsonProperty("product_id") val productId: String,
-    /**
-     * Whether this is the default plan.
-     */
+    /** Whether this is the default plan. */
     @com.fasterxml.jackson.annotation.JsonProperty("is_default") val isDefault: Boolean,
-    /**
-     * Whether this is a recurring plan.
-     */
+    /** Whether this is a recurring plan. */
     @com.fasterxml.jackson.annotation.JsonProperty("is_recurring") val isRecurring: Boolean,
-    /**
-     * Whether this plan is publicly visible.
-     */
+    /** Whether this plan is publicly visible. */
     @com.fasterxml.jackson.annotation.JsonProperty("publicly_visible") val publiclyVisible: Boolean,
-    /**
-     * Whether this plan has a base fee.
-     */
+    /** Whether this plan has a base fee. */
     @com.fasterxml.jackson.annotation.JsonProperty("has_base_fee") val hasBaseFee: Boolean,
-    /**
-     * The types of payers that can use this plan.
-     */
+    /** The types of payers that can use this plan. */
     @com.fasterxml.jackson.annotation.JsonProperty("payer_type") val payerType: List<String>,
-    /**
-     * The payer type this plan is designed for.
-     */
+    /** The payer type this plan is designed for. */
     @com.fasterxml.jackson.annotation.JsonProperty("for_payer_type") val forPayerType: String,
-    /**
-     * The URL-friendly slug for the plan.
-     */
+    /** The URL-friendly slug for the plan. */
     val slug: String,
-    /**
-     * The URL of the plan's avatar image.
-     */
+    /** The URL of the plan's avatar image. */
     @com.fasterxml.jackson.annotation.JsonProperty("avatar_url") val avatarUrl: String,
-    /**
-     * The features included in this plan.
-     */
+    /** The features included in this plan. */
     val features: List<FeatureResponse2>,
-    /**
-     * The billing period for the plan.
-     */
+    /** The billing period for the plan. */
     val period: String? = null,
-    /**
-     * The billing interval.
-     */
+    /** The billing interval. */
     val interval: Long? = null,
-    /**
-     * Whether free trial is enabled for this plan.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("free_trial_enabled") val freeTrialEnabled: Boolean? = null,
-    /**
-     * Number of free trial days for this plan.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("free_trial_days") val freeTrialDays: Long? = null
+    /** Whether free trial is enabled for this plan. */
+    @com.fasterxml.jackson.annotation.JsonProperty("free_trial_enabled")
+    val freeTrialEnabled: Boolean? = null,
+    /** Number of free trial days for this plan. */
+    @com.fasterxml.jackson.annotation.JsonProperty("free_trial_days")
+    val freeTrialDays: Long? = null,
 )
 
-/**
- * Typed representation of the `CommercePriceTransitionDetails` API schema.
- */
+/** Typed representation of the `CommercePriceTransitionDetails` API schema. */
 data class CommercePriceTransitionDetails(
-    /**
-     * Required object value serialized in the `previous_plan` wire field.
-     */
+    /** Required object value serialized in the `previous_plan` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("previous_plan") val previousPlan: CommercePlan2,
-    /**
-     * Required object value serialized in the `previous_price` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("previous_price") val previousPrice: BillingPriceResponse,
-    /**
-     * Unix timestamp (milliseconds) when the new price takes effect.
-     */
+    /** Required object value serialized in the `previous_price` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("previous_price")
+    val previousPrice: BillingPriceResponse,
+    /** Unix timestamp (milliseconds) when the new price takes effect. */
     @com.fasterxml.jackson.annotation.JsonProperty("effective_at") val effectiveAt: Long,
-    /**
-     * When the new price takes effect.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("effective_mode") val effectiveMode: CommercePriceTransitionDetailsEffectiveModeEnum,
-    /**
-     * Whether an immediate charge was made.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("charged_immediately") val chargedImmediately: Boolean,
-    /**
-     * The status of the previous subscription item after transition.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("previous_subscription_item_status") val previousSubscriptionItemStatus: CommercePriceTransitionDetailsPreviousSubscriptionItemStatusEnum,
-    /**
-     * The ID of the previous subscription item.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("previous_subscription_item_id") val previousSubscriptionItemId: String,
-    /**
-     * Unix timestamp (milliseconds) for the next billing date.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("next_billing_date") val nextBillingDate: Long? = null,
-    /**
-     * Amount charged immediately, if any.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("immediate_charge") val immediateCharge: CommerceMoneyResponse? = null
+    /** When the new price takes effect. */
+    @com.fasterxml.jackson.annotation.JsonProperty("effective_mode")
+    val effectiveMode: CommercePriceTransitionDetailsEffectiveModeEnum,
+    /** Whether an immediate charge was made. */
+    @com.fasterxml.jackson.annotation.JsonProperty("charged_immediately")
+    val chargedImmediately: Boolean,
+    /** The status of the previous subscription item after transition. */
+    @com.fasterxml.jackson.annotation.JsonProperty("previous_subscription_item_status")
+    val previousSubscriptionItemStatus:
+        CommercePriceTransitionDetailsPreviousSubscriptionItemStatusEnum,
+    /** The ID of the previous subscription item. */
+    @com.fasterxml.jackson.annotation.JsonProperty("previous_subscription_item_id")
+    val previousSubscriptionItemId: String,
+    /** Unix timestamp (milliseconds) for the next billing date. */
+    @com.fasterxml.jackson.annotation.JsonProperty("next_billing_date")
+    val nextBillingDate: Long? = null,
+    /** Amount charged immediately, if any. */
+    @com.fasterxml.jackson.annotation.JsonProperty("immediate_charge")
+    val immediateCharge: CommerceMoneyResponse? = null,
 )
 
-/**
- * Typed representation of the `CommercePriceTransitionResponse` API schema.
- */
+/** Typed representation of the `CommercePriceTransitionResponse` API schema. */
 data class CommercePriceTransitionResponse(
-    /**
-     * String representing the object's type. Objects of the same type share the same value.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: CommercePriceTransitionResponseObjectEnum,
-    /**
-     * Required object value serialized in the `subscription_item` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("subscription_item") val subscriptionItem: CommerceSubscriptionItem2,
-    /**
-     * Required object value serialized in the `transition` wire field.
-     */
-    val transition: CommercePriceTransitionDetails
+    /** String representing the object's type. Objects of the same type share the same value. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: CommercePriceTransitionResponseObjectEnum,
+    /** Required object value serialized in the `subscription_item` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("subscription_item")
+    val subscriptionItem: CommerceSubscriptionItem2,
+    /** Required object value serialized in the `transition` wire field. */
+    val transition: CommercePriceTransitionDetails,
 )
