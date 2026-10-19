@@ -3,22 +3,41 @@
 
 package dev.octri.showcase.clerk
 
-
 class ActorTokensNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Create an actor token that can be used to impersonate the given user. The `actor` parameter needs to include at least a "sub" key whose value is the ID of the actor (impersonating) user.
+     * Create an actor token that can be used to impersonate the given user. The `actor` parameter
+     * needs to include at least a "sub" key whose value is the ID of the actor (impersonating)
+     * user.
      */
-    fun create(userId: String, actor: dev.octri.showcase.clerk.methods.ActorTokens.CreateActorTokenActor, expiresInSeconds: Long? = null, sessionMaxDurationInSeconds: Long? = null, options: RequestOptions? = null): ActorToken {
-        return dev.octri.showcase.clerk.methods.ActorTokens.createActorToken(clientConfig, userId, actor, expiresInSeconds, sessionMaxDurationInSeconds, options)
+    fun create(
+        userId: String,
+        actor: dev.octri.showcase.clerk.methods.ActorTokens.CreateActorTokenActor,
+        expiresInSeconds: Long? = null,
+        sessionMaxDurationInSeconds: Long? = null,
+        options: RequestOptions? = null,
+    ): ActorToken {
+        return dev.octri.showcase.clerk.methods.ActorTokens.createActorToken(
+            clientConfig,
+            userId,
+            actor,
+            expiresInSeconds,
+            sessionMaxDurationInSeconds,
+            options,
+        )
     }
 
     /**
-     * Revokes a pending actor token, changing its status to revoked. Use `actor_token_id` to identify the token; the response includes its resulting status and associated actor and user details.
+     * Revokes a pending actor token, changing its status to revoked. Use `actor_token_id` to
+     * identify the token; the response includes its resulting status and associated actor and user
+     * details.
      *
      * Revokes a pending actor token.
      */
     fun revoke(actorTokenId: String, options: RequestOptions? = null): ActorToken {
-        return dev.octri.showcase.clerk.methods.ActorTokens.revokeActorToken(clientConfig, actorTokenId, options)
+        return dev.octri.showcase.clerk.methods.ActorTokens.revokeActorToken(
+            clientConfig,
+            actorTokenId,
+            options,
+        )
     }
-
 }

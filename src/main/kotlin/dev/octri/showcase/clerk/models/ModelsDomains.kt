@@ -3,106 +3,73 @@
 
 package dev.octri.showcase.clerk.models
 
-/**
- * Typed representation of the `CNameTarget` API schema.
- */
+/** Typed representation of the `CNameTarget` API schema. */
 data class CNameTarget(
-    /**
-     * Required `string` value serialized in the `host` wire field.
-     */
+    /** Required `string` value serialized in the `host` wire field. */
     val host: String,
-    /**
-     * Required `string` value serialized in the `value` wire field.
-     */
+    /** Required `string` value serialized in the `value` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String,
     /**
-     * Denotes whether this CNAME target is required to be set in order for the domain to be considered deployed.
-     */
-    val required: Boolean
-)
-
-/**
- * Typed representation of the `DNSTarget` API schema.
- */
-data class DNSTarget(
-    /**
-     * Required `string` value serialized in the `host` wire field.
-     */
-    val host: String,
-    /**
-     * Required `string` value serialized in the `value` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String,
-    /**
-     * Required enumerated value serialized in the `record_type` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("record_type") val recordType: DNSTargetRecordTypeEnum,
-    /**
-     * Denotes whether this DNS target is required to be set in order for the domain to be considered deployed.
+     * Denotes whether this CNAME target is required to be set in order for the domain to be
+     * considered deployed.
      */
     val required: Boolean,
-    /**
-     * Optional enumerated value serialized in the `automation_disposition` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("automation_disposition") val automationDisposition: DNSTargetAutomationDispositionEnum? = null
 )
 
-/**
- * Typed representation of the `Domain` API schema.
- */
+/** Typed representation of the `DNSTarget` API schema. */
+data class DNSTarget(
+    /** Required `string` value serialized in the `host` wire field. */
+    val host: String,
+    /** Required `string` value serialized in the `value` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String,
+    /** Required enumerated value serialized in the `record_type` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("record_type")
+    val recordType: DNSTargetRecordTypeEnum,
+    /**
+     * Denotes whether this DNS target is required to be set in order for the domain to be
+     * considered deployed.
+     */
+    val required: Boolean,
+    /** Optional enumerated value serialized in the `automation_disposition` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("automation_disposition")
+    val automationDisposition: DNSTargetAutomationDispositionEnum? = null,
+)
+
+/** Typed representation of the `Domain` API schema. */
 data class Domain(
-    /**
-     * Required enumerated value serialized in the `object` wire field.
-     */
+    /** Required enumerated value serialized in the `object` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: DomainObjectEnum,
-    /**
-     * Required `string` value serialized in the `id` wire field.
-     */
+    /** Required `string` value serialized in the `id` wire field. */
     val id: String,
-    /**
-     * Required `string` value serialized in the `name` wire field.
-     */
+    /** Required `string` value serialized in the `name` wire field. */
     val name: String,
-    /**
-     * Required `boolean` value serialized in the `is_satellite` wire field.
-     */
+    /** Required `boolean` value serialized in the `is_satellite` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("is_satellite") val isSatellite: Boolean,
-    /**
-     * Required `string` value serialized in the `frontend_api_url` wire field.
-     */
+    /** Required `string` value serialized in the `frontend_api_url` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("frontend_api_url") val frontendApiUrl: String,
-    /**
-     * Required `string` value serialized in the `development_origin` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("development_origin") val developmentOrigin: String,
-    /**
-     * Null for satellite domains.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("accounts_portal_url") val accountsPortalUrl: String? = null,
-    /**
-     * Optional `string` value serialized in the `proxy_url` wire field.
-     */
+    /** Required `string` value serialized in the `development_origin` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("development_origin")
+    val developmentOrigin: String,
+    /** Null for satellite domains. */
+    @com.fasterxml.jackson.annotation.JsonProperty("accounts_portal_url")
+    val accountsPortalUrl: String? = null,
+    /** Optional `string` value serialized in the `proxy_url` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("proxy_url") val proxyUrl: String? = null,
+    /** Legacy CNAME-only DNS targets. Prefer `dns_targets` when present. */
+    @com.fasterxml.jackson.annotation.JsonProperty("cname_targets")
+    val cnameTargets: List<CNameTarget>? = null,
     /**
-     * Legacy CNAME-only DNS targets. Prefer `dns_targets` when present.
+     * The complete typed DNS contract. Consumers should use this field instead of merging it with
+     * `cname_targets`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("cname_targets") val cnameTargets: List<CNameTarget>? = null,
-    /**
-     * The complete typed DNS contract. Consumers should use this field instead of merging it with `cname_targets`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("dns_targets") val dnsTargets: List<DNSTarget>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("dns_targets")
+    val dnsTargets: List<DNSTarget>? = null,
 )
 
-/**
- * Typed representation of the `Domains` API schema.
- */
+/** Typed representation of the `Domains` API schema. */
 data class Domains(
-    /**
-     * Required array value serialized in the `data` wire field.
-     */
+    /** Required array value serialized in the `data` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Domain>,
-    /**
-     * Total number of domains
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long
+    /** Total number of domains */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long,
 )

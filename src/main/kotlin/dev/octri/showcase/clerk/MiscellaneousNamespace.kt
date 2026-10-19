@@ -3,13 +3,20 @@
 
 package dev.octri.showcase.clerk
 
-
 class MiscellaneousNamespace(private val clientConfig: ClientConfig) {
     /**
-     * The Clerk interstitial endpoint serves an html page that loads clerk.js in order to check the user's authentication state. It is used by Clerk SDKs when the user's authentication state cannot be immediately determined.
+     * The Clerk interstitial endpoint serves an html page that loads clerk.js in order to check the
+     * user's authentication state. It is used by Clerk SDKs when the user's authentication state
+     * cannot be immediately determined.
      */
-    fun getPublicInterstitial(request: dev.octri.showcase.clerk.methods.Miscellaneous.GetPublicInterstitialRequest, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.clerk.methods.Miscellaneous.getPublicInterstitial(clientConfig, request, options)
+    fun getPublicInterstitial(
+        request: dev.octri.showcase.clerk.methods.Miscellaneous.GetPublicInterstitialRequest,
+        options: RequestOptions? = null,
+    ): Unit {
+        return dev.octri.showcase.clerk.methods.Miscellaneous.getPublicInterstitial(
+            clientConfig,
+            request,
+            options,
+        )
     }
-
 }
