@@ -7,38 +7,27 @@ typealias VerificationWeb3ObjectEnum = dev.octri.showcase.clerk.models.Verificat
 
 typealias VerificationWeb3StatusEnum = dev.octri.showcase.clerk.models.VerificationWeb3StatusEnum
 
-typealias VerificationWeb3StrategyEnum =
-    dev.octri.showcase.clerk.models.VerificationWeb3StrategyEnum
+typealias VerificationWeb3StrategyEnum = dev.octri.showcase.clerk.models.VerificationWeb3StrategyEnum
 
-typealias VerifyApiKeyResponseObjectEnum =
-    dev.octri.showcase.clerk.models.VerifyApiKeyResponseObjectEnum
+typealias VerifyApiKeyResponseObjectEnum = dev.octri.showcase.clerk.models.VerifyApiKeyResponseObjectEnum
 
-typealias VerifyM2MTokenResponseObjectEnum =
-    dev.octri.showcase.clerk.models.VerifyM2MTokenResponseObjectEnum
+typealias VerifyM2MTokenResponseObjectEnum = dev.octri.showcase.clerk.models.VerifyM2MTokenResponseObjectEnum
 
-typealias VerifyOAuthAccessTokenResponse =
-    dev.octri.showcase.clerk.models.VerifyOAuthAccessTokenResponse
+typealias VerifyOAuthAccessTokenResponse = dev.octri.showcase.clerk.models.VerifyOAuthAccessTokenResponse
 
-typealias VerifyOAuthAccessTokenResponseVariant0 =
-    dev.octri.showcase.clerk.models.VerifyOAuthAccessTokenResponseVariant0
+typealias VerifyOAuthAccessTokenResponseVariant0 = dev.octri.showcase.clerk.models.VerifyOAuthAccessTokenResponseVariant0
 
-typealias VerifyOAuthAccessTokenResponseVariant0Act =
-    dev.octri.showcase.clerk.models.VerifyOAuthAccessTokenResponseVariant0Act
+typealias VerifyOAuthAccessTokenResponseVariant0Act = dev.octri.showcase.clerk.models.VerifyOAuthAccessTokenResponseVariant0Act
 
-typealias VerifyOAuthAccessTokenResponseVariant0ActAct =
-    dev.octri.showcase.clerk.models.VerifyOAuthAccessTokenResponseVariant0ActAct
+typealias VerifyOAuthAccessTokenResponseVariant0ActAct = dev.octri.showcase.clerk.models.VerifyOAuthAccessTokenResponseVariant0ActAct
 
-typealias VerifyOAuthAccessTokenResponseVariant0ObjectEnum =
-    dev.octri.showcase.clerk.models.VerifyOAuthAccessTokenResponseVariant0ObjectEnum
+typealias VerifyOAuthAccessTokenResponseVariant0ObjectEnum = dev.octri.showcase.clerk.models.VerifyOAuthAccessTokenResponseVariant0ObjectEnum
 
-typealias VerifyOAuthAccessTokenResponseVariant1 =
-    dev.octri.showcase.clerk.models.VerifyOAuthAccessTokenResponseVariant1
+typealias VerifyOAuthAccessTokenResponseVariant1 = dev.octri.showcase.clerk.models.VerifyOAuthAccessTokenResponseVariant1
 
-typealias VerifyOAuthAccessTokenResponseVariant1ActiveEnum =
-    dev.octri.showcase.clerk.models.VerifyOAuthAccessTokenResponseVariant1ActiveEnum
+typealias VerifyOAuthAccessTokenResponseVariant1ActiveEnum = dev.octri.showcase.clerk.models.VerifyOAuthAccessTokenResponseVariant1ActiveEnum
 
-typealias VerifyTOTPResponseCodeTypeEnum =
-    dev.octri.showcase.clerk.models.VerifyTOTPResponseCodeTypeEnum
+typealias VerifyTOTPResponseCodeTypeEnum = dev.octri.showcase.clerk.models.VerifyTOTPResponseCodeTypeEnum
 
 typealias WaitlistEntries = dev.octri.showcase.clerk.models.WaitlistEntries
 

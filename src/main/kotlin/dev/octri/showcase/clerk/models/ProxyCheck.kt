@@ -3,23 +3,40 @@
 
 package dev.octri.showcase.clerk.models
 
-/** Typed representation of the `ProxyCheck` API schema. */
+/**
+ * Typed representation of the `ProxyCheck` API schema.
+ */
 data class ProxyCheck(
-    /** Required enumerated value serialized in the `object` wire field. */
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ProxyCheckObjectEnum,
-    /** Required `string` value serialized in the `id` wire field. */
+    /**
+     * Required `string` value serialized in the `id` wire field.
+     */
     val id: String,
-    /** Required `string` value serialized in the `domain_id` wire field. */
+    /**
+     * Required `string` value serialized in the `domain_id` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("domain_id") val domainId: String,
-    /** Unix timestamp of last run. */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_run_at", required = true)
-    val lastRunAt: Long?,
-    /** Required `string` value serialized in the `proxy_url` wire field. */
+    /**
+     * Unix timestamp of last run.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_run_at", required = true) val lastRunAt: Long?,
+    /**
+     * Required `string` value serialized in the `proxy_url` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("proxy_url") val proxyUrl: String,
-    /** Required `boolean` value serialized in the `successful` wire field. */
+    /**
+     * Required `boolean` value serialized in the `successful` wire field.
+     */
     val successful: Boolean,
-    /** Unix timestamp of creation. */
+    /**
+     * Unix timestamp of creation.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** Unix timestamp of last update. */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
+    /**
+     * Unix timestamp of last update.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long
 )

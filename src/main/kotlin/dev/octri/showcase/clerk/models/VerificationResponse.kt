@@ -3,20 +3,36 @@
 
 package dev.octri.showcase.clerk.models
 
-/** Typed representation of the `VerificationResponse` API schema. */
+/**
+ * Typed representation of the `VerificationResponse` API schema.
+ */
 data class VerificationResponse(
-    /** The type of the verification object. */
+    /**
+     * The type of the verification object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** The ID of the verification. Pass this to attempt_verification. */
+    /**
+     * The ID of the verification. Pass this to attempt_verification.
+     */
     val id: String? = null,
-    /** The status of the verification (unverified, verified, expired, or failed). */
+    /**
+     * The status of the verification (unverified, verified, expired, or failed).
+     */
     val status: String? = null,
-    /** The verification strategy (email_code or phone_code). */
+    /**
+     * The verification strategy (email_code or phone_code).
+     */
     val strategy: String? = null,
-    /** The number of attempts made against this verification. */
+    /**
+     * The number of attempts made against this verification.
+     */
     val attempts: Long? = null,
-    /** Unix timestamp (milliseconds) at which the code expires. */
+    /**
+     * Unix timestamp (milliseconds) at which the code expires.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("expire_at") val expireAt: Long? = null,
-    /** The channel the code was sent over (phone numbers only). */
-    val channel: String? = null,
+    /**
+     * The channel the code was sent over (phone numbers only).
+     */
+    val channel: String? = null
 )

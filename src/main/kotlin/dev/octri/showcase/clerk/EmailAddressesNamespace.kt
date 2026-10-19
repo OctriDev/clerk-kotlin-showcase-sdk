@@ -3,147 +3,63 @@
 
 package dev.octri.showcase.clerk
 
+
 class EmailAddressesNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates a new email address for a user. Supply `user_id` and an RFC 5322-formatted
-     * `email_address`; optionally set `verified` or `primary` when creating it. If omitted,
-     * `primary` defaults to false unless this is the user's first email address.
+     * Creates a new email address for a user. Supply `user_id` and an RFC 5322-formatted `email_address`; optionally set `verified` or `primary` when creating it. If omitted, `primary` defaults to false unless this is the user's first email address.
      *
      * Create a new email address
      */
-    fun createEmailAddress(
-        userId: String,
-        emailAddress: String,
-        verified: SdkClient.SdkOptional<Boolean?>? = null,
-        primary: SdkClient.SdkOptional<Boolean?>? = null,
-        notifyPrimaryEmailAddressChanged: SdkClient.SdkOptional<Boolean?>? = null,
-        options: RequestOptions? = null,
-    ): EmailAddress {
-        return dev.octri.showcase.clerk.methods.EmailAddresses.createEmailAddress(
-            clientConfig,
-            userId,
-            emailAddress,
-            verified,
-            primary,
-            notifyPrimaryEmailAddressChanged,
-            options,
-        )
+    fun createEmailAddress(userId: String, emailAddress: String, verified: SdkClient.SdkOptional<Boolean?>? = null, primary: SdkClient.SdkOptional<Boolean?>? = null, notifyPrimaryEmailAddressChanged: SdkClient.SdkOptional<Boolean?>? = null, options: RequestOptions? = null): EmailAddress {
+        return dev.octri.showcase.clerk.methods.EmailAddresses.createEmailAddress(clientConfig, userId, emailAddress, verified, primary, notifyPrimaryEmailAddressChanged, options)
     }
 
     /**
-     * Retrieves an email address and its verification and association details. Use
-     * `email_address_id` to identify the address to inspect.
+     * Retrieves an email address and its verification and association details. Use `email_address_id` to identify the address to inspect.
      *
      * Returns the details of an email address.
      */
     fun getEmailAddress(emailAddressId: String, options: RequestOptions? = null): EmailAddress {
-        return dev.octri.showcase.clerk.methods.EmailAddresses.getEmailAddress(
-            clientConfig,
-            emailAddressId,
-            options,
-        )
+        return dev.octri.showcase.clerk.methods.EmailAddresses.getEmailAddress(clientConfig, emailAddressId, options)
     }
 
     /**
-     * Deletes an email address by its identifier. Use `email_address_id` to select the address to
-     * remove. The response confirms the deletion and identifies the deleted object.
+     * Deletes an email address by its identifier. Use `email_address_id` to select the address to remove. The response confirms the deletion and identifies the deleted object.
      *
      * Delete the email address with the given ID
      */
     fun deleteEmailAddress(emailAddressId: String, options: RequestOptions? = null): DeletedObject {
-        return dev.octri.showcase.clerk.methods.EmailAddresses.deleteEmailAddress(
-            clientConfig,
-            emailAddressId,
-            options,
-        )
+        return dev.octri.showcase.clerk.methods.EmailAddresses.deleteEmailAddress(clientConfig, emailAddressId, options)
     }
 
     /**
-     * Updates an existing email address's verification or primary status, or its notification
-     * behavior. Supply any of `verified`, `primary`, or `notify_primary_email_address_changed` to
-     * change that setting. The notification option applies when the update makes this address the
-     * user's new primary address.
+     * Updates an existing email address's verification or primary status, or its notification behavior. Supply any of `verified`, `primary`, or `notify_primary_email_address_changed` to change that setting. The notification option applies when the update makes this address the user's new primary address.
      *
      * Updates an email address.
      */
-    fun updateEmailAddress(
-        emailAddressId: String,
-        verified: SdkClient.SdkOptional<Boolean?>? = null,
-        primary: SdkClient.SdkOptional<Boolean?>? = null,
-        notifyPrimaryEmailAddressChanged: SdkClient.SdkOptional<Boolean?>? = null,
-        options: RequestOptions? = null,
-    ): EmailAddress {
-        return dev.octri.showcase.clerk.methods.EmailAddresses.updateEmailAddress(
-            clientConfig,
-            emailAddressId,
-            verified,
-            primary,
-            notifyPrimaryEmailAddressChanged,
-            options,
-        )
+    fun updateEmailAddress(emailAddressId: String, verified: SdkClient.SdkOptional<Boolean?>? = null, primary: SdkClient.SdkOptional<Boolean?>? = null, notifyPrimaryEmailAddressChanged: SdkClient.SdkOptional<Boolean?>? = null, options: RequestOptions? = null): EmailAddress {
+        return dev.octri.showcase.clerk.methods.EmailAddresses.updateEmailAddress(clientConfig, emailAddressId, verified, primary, notifyPrimaryEmailAddressChanged, options)
     }
 
     /**
-     * Sends a one-time code to the given email address so that a backend can verify the user
-     * controls it (for example, in a custom, backend-driven sign-in flow). The code is tracked on
-     * its own verification; confirm it with attempt_verification.
+     * Sends a one-time code to the given email address so that a backend can verify the user controls it (for example, in a custom, backend-driven sign-in flow). The code is tracked on its own verification; confirm it with attempt_verification.
      */
-    fun prepareEmailAddressVerification(
-        emailAddressId: String,
-        options: RequestOptions? = null,
-    ): VerificationResponse {
-        return dev.octri.showcase.clerk.methods.EmailAddresses.prepareEmailAddressVerification(
-            clientConfig,
-            emailAddressId,
-            options,
-        )
+    fun prepareEmailAddressVerification(emailAddressId: String, options: RequestOptions? = null): VerificationResponse {
+        return dev.octri.showcase.clerk.methods.EmailAddresses.prepareEmailAddressVerification(clientConfig, emailAddressId, options)
     }
 
     /**
-     * Checks a one-time code against the verification identified by verification_id, and returns
-     * the verification with its updated status (`verified`, `unverified`, `expired`, or `failed`)
-     * and attempt count, so a backend driving its own frontend can react on every attempt — an
-     * incorrect or expired code is reported through the status, not as an error. Resubmitting a
-     * verification whose code was already accepted is rejected with a
-     * `verification_already_verified` error. If the code is…
+     * Checks a one-time code against the verification identified by verification_id, and returns the verification with its updated status (`verified`, `unverified`, `expired`, or `failed`) and attempt count, so a backend driving its own frontend can react on every attempt — an incorrect or expired code is reported through the status, not as an error. Resubmitting a verification whose code was already accepted is rejected with a `verification_already_verified` error. If the code is…
      */
-    fun attemptEmailAddressVerification(
-        emailAddressId: String,
-        verificationId: String,
-        code: String,
-        options: RequestOptions? = null,
-    ): VerificationResponse {
-        return dev.octri.showcase.clerk.methods.EmailAddresses.attemptEmailAddressVerification(
-            clientConfig,
-            emailAddressId,
-            verificationId,
-            code,
-            options,
-        )
+    fun attemptEmailAddressVerification(emailAddressId: String, verificationId: String, code: String, options: RequestOptions? = null): VerificationResponse {
+        return dev.octri.showcase.clerk.methods.EmailAddresses.attemptEmailAddressVerification(clientConfig, emailAddressId, verificationId, code, options)
     }
 
     /**
-     * Replaces all of the user's email addresses with a single primary email address. By default
-     * the new email address is created verified, with the admin verification strategy. When
-     * `identification_status` is `reserved` it is created reserved instead: unverified but usable
-     * for sign-in and locked so no other user can claim it. When it is `unverified` the address is
-     * neither usable for sign-in nor locked. Any existing email addresses are deleted. If an
-     * existing email address is…
+     * Replaces all of the user's email addresses with a single primary email address. By default the new email address is created verified, with the admin verification strategy. When `identification_status` is `reserved` it is created reserved instead: unverified but usable for sign-in and locked so no other user can claim it. When it is `unverified` the address is neither usable for sign-in nor locked. Any existing email addresses are deleted. If an existing email address is…
      */
-    fun replaceUserEmailAddress(
-        userId: String,
-        emailAddress: String,
-        identificationStatus: ReplaceUserEmailAddressIdentificationStatusEnum? = null,
-        notifyPrimaryEmailAddressChanged: SdkClient.SdkOptional<Boolean?>? = null,
-        options: RequestOptions? = null,
-    ): EmailAddress {
-        return dev.octri.showcase.clerk.methods.EmailAddresses.replaceUserEmailAddress(
-            clientConfig,
-            userId,
-            emailAddress,
-            identificationStatus,
-            notifyPrimaryEmailAddressChanged,
-            options,
-        )
+    fun replaceUserEmailAddress(userId: String, emailAddress: String, identificationStatus: ReplaceUserEmailAddressIdentificationStatusEnum? = null, notifyPrimaryEmailAddressChanged: SdkClient.SdkOptional<Boolean?>? = null, options: RequestOptions? = null): EmailAddress {
+        return dev.octri.showcase.clerk.methods.EmailAddresses.replaceUserEmailAddress(clientConfig, userId, emailAddress, identificationStatus, notifyPrimaryEmailAddressChanged, options)
     }
+
 }

@@ -3,6 +3,7 @@
 
 package dev.octri.showcase.clerk
 
+
 class ClerkBackend(private val clientConfig: ClientConfig) {
     val miscellaneous: MiscellaneousNamespace
     val jwks: JwksNamespace
@@ -46,7 +47,6 @@ class ClerkBackend(private val clientConfig: ClientConfig) {
     val apiKeys: ApiKeysNamespace
     val m2MTokens: M2MTokensNamespace
     val oAuthAccessTokens: OAuthAccessTokensNamespace
-
     init {
         miscellaneous = MiscellaneousNamespace(clientConfig)
         jwks = JwksNamespace(clientConfig)
@@ -91,16 +91,17 @@ class ClerkBackend(private val clientConfig: ClientConfig) {
         m2MTokens = M2MTokensNamespace(clientConfig)
         oAuthAccessTokens = OAuthAccessTokensNamespace(clientConfig)
     }
-
     /**
-     * Turns SDK logging on and configures it. Logging is OFF by default — this SDK reports nothing
-     * until you call this (or construct the client with logging enabled). Reports go to the
-     * endpoint this build was generated with, or to the endpoint you set; with neither, nothing is
-     * sent. Set enabled = false in the block to turn it off.
+     * Turns SDK logging on and configures it. Logging is OFF by default — this
+     * SDK reports nothing until you call this (or construct the client with
+     * logging enabled). Reports go to the endpoint this build was generated with,
+     * or to the endpoint you set; with neither, nothing is sent. Set
+     * enabled = false in the block to turn it off.
      */
     fun setLoggingConfig(block: LoggingConfig.() -> Unit = {}): LoggingConfig {
         clientConfig.logging.enabled = true
         clientConfig.logging.block()
         return clientConfig.logging
     }
+
 }

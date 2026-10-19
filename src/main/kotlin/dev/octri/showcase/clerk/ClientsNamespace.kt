@@ -3,32 +3,20 @@
 
 package dev.octri.showcase.clerk
 
+
 class ClientsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Returns a list of all clients. The clients are returned sorted by creation date, with the
-     * newest clients appearing first. Warning: the endpoint is being deprecated and will be removed
-     * in future versions.
+     * Returns a list of all clients. The clients are returned sorted by creation date, with the newest clients appearing first. Warning: the endpoint is being deprecated and will be removed in future versions.
      *
-     * @deprecated This operation is deprecated and may be removed in a future release.
+     * @deprecated This operation is deprecated and may be removed in a future
+     *   release.
      */
-    fun list(
-        paginated: Boolean? = null,
-        limit: Long? = null,
-        offset: Long? = null,
-        options: RequestOptions? = null,
-    ): List<Client> {
-        return dev.octri.showcase.clerk.methods.Clients.listClients(
-            clientConfig,
-            paginated,
-            limit,
-            offset,
-            options,
-        )
+    fun list(paginated: Boolean? = null, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): List<Client> {
+        return dev.octri.showcase.clerk.methods.Clients.listClients(clientConfig, paginated, limit, offset, options)
     }
 
     /**
-     * Verifies a client by validating the JWT supplied in the request body. Send the token for the
-     * active client to retrieve the associated client and session details.
+     * Verifies a client by validating the JWT supplied in the request body. Send the token for the active client to retrieve the associated client and session details.
      *
      * Verifies the client in the provided token
      */
@@ -37,12 +25,12 @@ class ClientsNamespace(private val clientConfig: ClientConfig) {
     }
 
     /**
-     * Retrieves the details of a client and its associated session information. Use `client_id` to
-     * look up the client whose sessions and authentication state you need to inspect.
+     * Retrieves the details of a client and its associated session information. Use `client_id` to look up the client whose sessions and authentication state you need to inspect.
      *
      * Returns the details of a client.
      */
     fun get(clientId: String, options: RequestOptions? = null): Client {
         return dev.octri.showcase.clerk.methods.Clients.getClient(clientConfig, clientId, options)
     }
+
 }

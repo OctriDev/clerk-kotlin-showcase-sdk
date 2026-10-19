@@ -3,25 +3,13 @@
 
 package dev.octri.showcase.clerk
 
+
 class ProxyChecksNamespace(private val clientConfig: ClientConfig) {
     /**
-     * This endpoint can be used to validate that a proxy-enabled domain is operational. It tries to
-     * verify that the proxy URL provided in the parameters maps to a functional proxy that can
-     * reach the Clerk Frontend API. You can use this endpoint before you set a proxy URL for a
-     * domain. This way you can ensure that switching to proxy-based configuration will not lead to
-     * downtime for your instance. The `proxy_url` parameter allows for testing proxy configurations
-     * for domains that…
+     * This endpoint can be used to validate that a proxy-enabled domain is operational. It tries to verify that the proxy URL provided in the parameters maps to a functional proxy that can reach the Clerk Frontend API. You can use this endpoint before you set a proxy URL for a domain. This way you can ensure that switching to proxy-based configuration will not lead to downtime for your instance. The `proxy_url` parameter allows for testing proxy configurations for domains that…
      */
-    fun verifyDomainProxy(
-        domainId: String? = null,
-        proxyUrl: String? = null,
-        options: RequestOptions? = null,
-    ): ProxyCheck {
-        return dev.octri.showcase.clerk.methods.ProxyChecks.verifyDomainProxy(
-            clientConfig,
-            domainId,
-            proxyUrl,
-            options,
-        )
+    fun verifyDomainProxy(domainId: String? = null, proxyUrl: String? = null, options: RequestOptions? = null): ProxyCheck {
+        return dev.octri.showcase.clerk.methods.ProxyChecks.verifyDomainProxy(clientConfig, domainId, proxyUrl, options)
     }
+
 }

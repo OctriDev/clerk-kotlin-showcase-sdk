@@ -3,24 +3,38 @@
 
 package dev.octri.showcase.clerk.models
 
-/** Typed representation of the `BillingDiscountsResponse` API schema. */
+/**
+ * Typed representation of the `BillingDiscountsResponse` API schema.
+ */
 data class BillingDiscountsResponse(
-    /** Proration details from passed subscription time */
-    @com.fasterxml.jackson.annotation.JsonProperty("proration", required = true)
-    val proration: BillingProrationDiscountDetail?,
-    /** Total discounts applied */
-    val total: CommerceMoneyResponse,
+    /**
+     * Proration details from passed subscription time
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("proration", required = true) val proration: BillingProrationDiscountDetail?,
+    /**
+     * Total discounts applied
+     */
+    val total: CommerceMoneyResponse
 )
 
-/** Typed representation of the `BillingProrationDiscountDetail` API schema. */
+/**
+ * Typed representation of the `BillingProrationDiscountDetail` API schema.
+ */
 data class BillingProrationDiscountDetail(
-    /** Credit amount with formatting */
+    /**
+     * Credit amount with formatting
+     */
     val amount: CommerceMoneyResponse,
-    /** Number of days that have passed in the billing cycle */
+    /**
+     * Number of days that have passed in the billing cycle
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("cycle_days_passed") val cycleDaysPassed: Long,
-    /** Total number of days in the billing cycle */
+    /**
+     * Total number of days in the billing cycle
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("cycle_days_total") val cycleDaysTotal: Long,
-    /** Percentage of the billing cycle that has passed */
-    @com.fasterxml.jackson.annotation.JsonProperty("cycle_passed_percent")
-    val cyclePassedPercent: Double,
+    /**
+     * Percentage of the billing cycle that has passed
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("cycle_passed_percent") val cyclePassedPercent: Double
 )

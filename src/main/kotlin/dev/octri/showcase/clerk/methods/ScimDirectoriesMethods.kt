@@ -17,148 +17,102 @@ import dev.octri.showcase.clerk.Validation
 
 object ScimDirectoriesMethods {
 
-    data class CreateSCIMDirectoryGroupRoleMappingsItem(
-        /** The SCIM group ID from the identity provider. */
-        @com.fasterxml.jackson.annotation.JsonProperty("scim_group_id") val scimGroupId: String,
-        /** The organization role ID to assign to members of the SCIM group. */
-        @com.fasterxml.jackson.annotation.JsonProperty("role_id") val roleId: String,
-        /** Optional display name for the SCIM group. */
-        @com.fasterxml.jackson.annotation.JsonProperty("scim_group_display_name")
-        val scimGroupDisplayName: String? = null,
-        /** The precedence for this mapping. If omitted, precedence is assigned by array order. */
-        val precedence: Long? = null,
-    )
+data class CreateSCIMDirectoryGroupRoleMappingsItem(
+    /**
+     * The SCIM group ID from the identity provider.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("scim_group_id") val scimGroupId: String,
+    /**
+     * The organization role ID to assign to members of the SCIM group.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("role_id") val roleId: String,
+    /**
+     * Optional display name for the SCIM group.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("scim_group_display_name") val scimGroupDisplayName: String? = null,
+    /**
+     * The precedence for this mapping. If omitted, precedence is assigned by array order.
+     */
+    val precedence: Long? = null
+)
 
-    data class ReplaceSCIMGroupRoleMappingsMappingsItem(
-        /** The SCIM group ID from the identity provider. */
-        @com.fasterxml.jackson.annotation.JsonProperty("scim_group_id") val scimGroupId: String,
-        /** The ID of the organization role to assign to members of the SCIM group. */
-        @com.fasterxml.jackson.annotation.JsonProperty("role_id") val roleId: String,
-    )
+data class ReplaceSCIMGroupRoleMappingsMappingsItem(
+    /**
+     * The SCIM group ID from the identity provider.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("scim_group_id") val scimGroupId: String,
+    /**
+     * The ID of the organization role to assign to members of the SCIM group.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("role_id") val roleId: String
+)
+
 
     /**
      * Returns a list of all directories for the instance.
      *
-     * @param limit Applies a limit to the number of results returned. Can be used for paginating
-     *   the results together with `offset`.
-     * @param offset Skip the first `offset` results when paginating. Needs to be an integer greater
-     *   or equal to zero. To be used in conjunction with `limit`.
+     * @param limit Applies a limit to the number of results returned. Can be used
+     *   for paginating the results together with `offset`.
+     * @param offset Skip the first `offset` results when paginating. Needs to be an
+     *   integer greater or equal to zero. To be used in conjunction with `limit`.
      */
-    fun listScimDirectories(
-        clientConfig: ClientConfig,
-        limit: Long? = null,
-        offset: Long? = null,
-        options: RequestOptions? = null,
-    ): SCIMDirectoryList {
+    fun listScimDirectories(clientConfig: ClientConfig, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): SCIMDirectoryList {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 500.0))
-        }
+}
 
         if (offset != null) {
             Validation.validateRange("offset", offset, Validation.RangeOpts(min = 0.0))
-        }
+}
 
-        return SdkClient.request<SCIMDirectoryList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/scim_directories",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "offset" to SdkClient.queryValue(offset, "form", true),
-                        ),
-                    operationId = "listScimDirectories",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf("401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java),
-                )
-            )
-            .data
+        return SdkClient.request<SCIMDirectoryList>(SdkClient.RequestSpec("GET", "/scim_directories", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "offset" to SdkClient.queryValue(offset, "form", true)), operationId = "listScimDirectories", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Creates a SCIM directory for the instance and associates it with an enterprise connection.
-     * Supply `enterprise_connection_id` and `provider`; you can also include group-to-role mappings
-     * to create with the directory. The created directory response includes its SCIM endpoint URL
-     * and API key.
+     * Creates a SCIM directory for the instance and associates it with an enterprise connection. Supply `enterprise_connection_id` and `provider`; you can also include group-to-role mappings to create with the directory. The created directory response includes its SCIM endpoint URL and API key.
      *
      * Create a new directory for the instance.
      *
-     * @param enterpriseConnectionId The ID of the enterprise connection to associate with this
-     *   directory.
+     * @param enterpriseConnectionId The ID of the enterprise connection to associate
+     *   with this directory.
      * @param provider The identity provider for this directory.
      * @param name A human-friendly name for the directory.
-     * @param groupRoleMappings Optional SCIM group to organization role mappings to create with the
-     *   directory.
+     * @param groupRoleMappings Optional SCIM group to organization role mappings to
+     *   create with the directory.
      */
-    fun createScimDirectory(
-        clientConfig: ClientConfig,
-        enterpriseConnectionId: String,
-        provider: String,
-        name: String? = null,
-        groupRoleMappings: List<CreateSCIMDirectoryGroupRoleMappingsItem>? = null,
-        options: RequestOptions? = null,
-    ): SCIMDirectory {
-        return SdkClient.request<SCIMDirectory>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/scim_directories",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "enterprise_connection_id" to (enterpriseConnectionId),
-                            "provider" to (provider),
-                            "name" to (SdkClient.omitIfNull(name)),
-                            "group_role_mappings" to (SdkClient.omitIfNull(groupRoleMappings)),
-                        ),
-                    operationId = "createScimDirectory",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun createScimDirectory(clientConfig: ClientConfig, enterpriseConnectionId: String, provider: String, name: String? = null, groupRoleMappings: List<CreateSCIMDirectoryGroupRoleMappingsItem>? = null, options: RequestOptions? = null): SCIMDirectory {
+        return SdkClient.request<SCIMDirectory>(SdkClient.RequestSpec("POST", "/scim_directories", config = clientConfig, body = SdkClient.bodyMap("enterprise_connection_id" to (enterpriseConnectionId), "provider" to (provider), "name" to (SdkClient.omitIfNull(name)), "group_role_mappings" to
+    (SdkClient.omitIfNull(groupRoleMappings))), operationId = "createScimDirectory", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieves the configuration for a SCIM directory. Use its identifier to look up details such
-     * as its provider, endpoint URL, enabled state, and attribute mappings.
+     * Retrieves the configuration for a SCIM directory. Use its identifier to look up details such as its provider, endpoint URL, enabled state, and attribute mappings.
      *
      * Returns the details of a directory.
      *
      * @param scimDirectoryId The ID of the directory to retrieve
      */
-    fun getScimDirectory(
-        clientConfig: ClientConfig,
-        scimDirectoryId: String,
-        options: RequestOptions? = null,
-    ): SCIMDirectory {
-        return SdkClient.request<SCIMDirectory>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/scim_directories/${SdkClient.encodePathSegment(scimDirectoryId)}",
-                    config = clientConfig,
-                    operationId = "getScimDirectory",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun getScimDirectory(clientConfig: ClientConfig, scimDirectoryId: String, options: RequestOptions? = null): SCIMDirectory {
+        return SdkClient.request<SCIMDirectory>(SdkClient.RequestSpec("GET", "/scim_directories/${SdkClient.encodePathSegment(scimDirectoryId)}", config = clientConfig, operationId = "getScimDirectory", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [updateScimDirectory]. */
     data class UpdateScimDirectoryRequest(
@@ -167,13 +121,11 @@ object ScimDirectoriesMethods {
         val enabled: Boolean? = null,
         val provider: String? = null,
         val attributeMapping: Map<String, String>? = null,
-        val groupRoleMappingEnabled: Boolean? = null,
+        val groupRoleMappingEnabled: Boolean? = null
     )
 
     /**
-     * Updates the configuration of a SCIM directory. Supply only the settings you want to change;
-     * `attribute_mapping` entries are merged, and setting a key to `null` removes it from the
-     * mapping.
+     * Updates the configuration of a SCIM directory. Supply only the settings you want to change; `attribute_mapping` entries are merged, and setting a key to `null` removes it from the mapping.
      *
      * Updates a directory.
      *
@@ -181,256 +133,125 @@ object ScimDirectoriesMethods {
      * @param name A human-friendly name for the directory.
      * @param enabled Whether the directory is enabled.
      * @param provider The identity provider for this directory.
-     * @param attributeMapping Attribute-to-SCIM-path entries to merge into the directory's
-     *   attribute mapping. Set a key to `null` to remove it from the mapping.
-     * @param groupRoleMappingEnabled Whether group-to-role mapping is enabled for this directory.
+     * @param attributeMapping Attribute-to-SCIM-path entries to merge into the
+     *   directory's attribute mapping. Set a key to `null` to remove it from the
+     *   mapping.
+     * @param groupRoleMappingEnabled Whether group-to-role mapping is enabled for
+     *   this directory.
      */
-    fun updateScimDirectory(
-        clientConfig: ClientConfig,
-        request: UpdateScimDirectoryRequest,
-        options: RequestOptions? = null,
-    ): SCIMDirectory {
-        return SdkClient.request<SCIMDirectory>(
-                SdkClient.RequestSpec(
-                    "PATCH",
-                    "/scim_directories/${SdkClient.encodePathSegment(request.scimDirectoryId)}",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (SdkClient.omitIfNull(request.name)),
-                            "enabled" to (SdkClient.omitIfNull(request.enabled)),
-                            "provider" to (SdkClient.omitIfNull(request.provider)),
-                            "attribute_mapping" to (SdkClient.omitIfNull(request.attributeMapping)),
-                            "group_role_mapping_enabled" to
-                                (SdkClient.omitIfNull(request.groupRoleMappingEnabled)),
-                        ),
-                    operationId = "updateScimDirectory",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun updateScimDirectory(clientConfig: ClientConfig, request: UpdateScimDirectoryRequest, options: RequestOptions? = null): SCIMDirectory {
+        return SdkClient.request<SCIMDirectory>(SdkClient.RequestSpec("PATCH", "/scim_directories/${SdkClient.encodePathSegment(request.scimDirectoryId)}", config = clientConfig, body = SdkClient.bodyMap("name" to (SdkClient.omitIfNull(request.name)), "enabled" to (SdkClient.omitIfNull(request.enabled)), "provider" to (SdkClient.omitIfNull(request.provider)), "attribute_mapping" to
+    (SdkClient.omitIfNull(request.attributeMapping)), "group_role_mapping_enabled" to
+    (SdkClient.omitIfNull(request.groupRoleMappingEnabled))), operationId = "updateScimDirectory", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Deletes a directory and stops provisioning for it. SCIM requests authenticated with the
-     * directory's API key are rejected afterwards.
+     * Deletes a directory and stops provisioning for it. SCIM requests authenticated with the directory's API key are rejected afterwards.
      *
      * @param scimDirectoryId The ID of the directory to delete
      */
-    fun deleteScimDirectory(
-        clientConfig: ClientConfig,
-        scimDirectoryId: String,
-        options: RequestOptions? = null,
-    ): DeletedObject {
-        return SdkClient.request<DeletedObject>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/scim_directories/${SdkClient.encodePathSegment(scimDirectoryId)}",
-                    config = clientConfig,
-                    operationId = "deleteScimDirectory",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun deleteScimDirectory(clientConfig: ClientConfig, scimDirectoryId: String, options: RequestOptions? = null): DeletedObject {
+        return SdkClient.request<DeletedObject>(SdkClient.RequestSpec("DELETE", "/scim_directories/${SdkClient.encodePathSegment(scimDirectoryId)}", config = clientConfig, operationId = "deleteScimDirectory", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Generates a new API key for the directory and returns it in the `api_key` field. This is the
-     * only way to obtain the key after creation, so make sure to update it in your identity
-     * provider. The previous key remains valid for a short grace period before it expires.
+     * Generates a new API key for the directory and returns it in the `api_key` field. This is the only way to obtain the key after creation, so make sure to update it in your identity provider. The previous key remains valid for a short grace period before it expires.
      *
      * @param scimDirectoryId The ID of the directory whose API key to rotate
      */
-    fun rotateScimDirectoryApiKey(
-        clientConfig: ClientConfig,
-        scimDirectoryId: String,
-        options: RequestOptions? = null,
-    ): SCIMDirectory {
-        return SdkClient.request<SCIMDirectory>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/scim_directories/${SdkClient.encodePathSegment(scimDirectoryId)}/rotate_api_key",
-                    config = clientConfig,
-                    operationId = "rotateScimDirectoryApiKey",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun rotateScimDirectoryApiKey(clientConfig: ClientConfig, scimDirectoryId: String, options: RequestOptions? = null): SCIMDirectory {
+        return SdkClient.request<SCIMDirectory>(SdkClient.RequestSpec("POST", "/scim_directories/${SdkClient.encodePathSegment(scimDirectoryId)}/rotate_api_key", config = clientConfig, operationId = "rotateScimDirectoryApiKey", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Returns the list of SCIM group to organization role mappings for a directory, ordered by
-     * precedence.
+     * Returns the list of SCIM group to organization role mappings for a directory, ordered by precedence.
      *
      * @param scimDirectoryId The ID of the directory.
      */
-    fun listScimGroupRoleMappings(
-        clientConfig: ClientConfig,
-        scimDirectoryId: String,
-        options: RequestOptions? = null,
-    ): SCIMGroupRoleMappingList {
-        return SdkClient.request<SCIMGroupRoleMappingList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/scim_directories/${SdkClient.encodePathSegment(scimDirectoryId)}/group_role_mappings",
-                    config = clientConfig,
-                    operationId = "listScimGroupRoleMappings",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun listScimGroupRoleMappings(clientConfig: ClientConfig, scimDirectoryId: String, options: RequestOptions? = null): SCIMGroupRoleMappingList {
+        return SdkClient.request<SCIMGroupRoleMappingList>(SdkClient.RequestSpec("GET", "/scim_directories/${SdkClient.encodePathSegment(scimDirectoryId)}/group_role_mappings", config = clientConfig, operationId = "listScimGroupRoleMappings", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Creates a new SCIM group to organization role mapping for a directory. Mappings can be
-     * created while group role mapping is disabled on the directory, but they only take effect once
-     * it is enabled.
+     * Creates a new SCIM group to organization role mapping for a directory. Mappings can be created while group role mapping is disabled on the directory, but they only take effect once it is enabled.
      *
      * @param scimDirectoryId The ID of the directory.
      * @param scimGroupId The SCIM group ID from the identity provider.
-     * @param roleId The ID of the organization role to assign to members of the SCIM group.
-     * @param precedence The precedence for this mapping. Lower values take priority when a user
-     *   belongs to multiple mapped groups. If omitted, the mapping is appended with the
-     *   next-highest precedence.
+     * @param roleId The ID of the organization role to assign to members of the SCIM
+     *   group.
+     * @param precedence The precedence for this mapping. Lower values take priority
+     *   when a user belongs to multiple mapped groups. If omitted, the mapping is
+     *   appended with the next-highest precedence.
      */
-    fun createScimGroupRoleMapping(
-        clientConfig: ClientConfig,
-        scimDirectoryId: String,
-        scimGroupId: String,
-        roleId: String,
-        precedence: Long? = null,
-        options: RequestOptions? = null,
-    ): SCIMGroupRoleMapping {
+    fun createScimGroupRoleMapping(clientConfig: ClientConfig, scimDirectoryId: String, scimGroupId: String, roleId: String, precedence: Long? = null, options: RequestOptions? = null): SCIMGroupRoleMapping {
         if (precedence != null) {
             Validation.validateRange("precedence", precedence, Validation.RangeOpts(min = 1.0))
-        }
+}
 
-        return SdkClient.request<SCIMGroupRoleMapping>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/scim_directories/${SdkClient.encodePathSegment(scimDirectoryId)}/group_role_mappings",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "scim_group_id" to (scimGroupId),
-                            "role_id" to (roleId),
-                            "precedence" to (SdkClient.omitIfNull(precedence)),
-                        ),
-                    operationId = "createScimGroupRoleMapping",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<SCIMGroupRoleMapping>(SdkClient.RequestSpec("POST", "/scim_directories/${SdkClient.encodePathSegment(scimDirectoryId)}/group_role_mappings", config = clientConfig, body = SdkClient.bodyMap("scim_group_id" to (scimGroupId), "role_id" to (roleId), "precedence" to (SdkClient.omitIfNull(precedence))), operationId = "createScimGroupRoleMapping", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Replaces the entire set of SCIM group role mappings for a directory. The position of each
-     * item in the `mappings` array determines its precedence (the first item gets precedence 1).
-     * Passing an empty array removes all mappings. Mappings can be replaced while group role
-     * mapping is disabled on the directory, but they only take effect once it is enabled.
+     * Replaces the entire set of SCIM group role mappings for a directory. The position of each item in the `mappings` array determines its precedence (the first item gets precedence 1). Passing an empty array removes all mappings. Mappings can be replaced while group role mapping is disabled on the directory, but they only take effect once it is enabled.
      *
      * @param scimDirectoryId The ID of the directory.
-     * @param mappings The desired set of mappings. Array order sets precedence (1-indexed). An
-     *   empty array clears all mappings.
+     * @param mappings The desired set of mappings. Array order sets precedence
+     *   (1-indexed). An empty array clears all mappings.
      */
-    fun replaceScimGroupRoleMappings(
-        clientConfig: ClientConfig,
-        scimDirectoryId: String,
-        mappings: List<ReplaceSCIMGroupRoleMappingsMappingsItem>,
-        options: RequestOptions? = null,
-    ): SCIMGroupRoleMappingList {
-        return SdkClient.request<SCIMGroupRoleMappingList>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/scim_directories/${SdkClient.encodePathSegment(scimDirectoryId)}/group_role_mappings",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("mappings" to (mappings)),
-                    operationId = "replaceScimGroupRoleMappings",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun replaceScimGroupRoleMappings(clientConfig: ClientConfig, scimDirectoryId: String, mappings: List<ReplaceSCIMGroupRoleMappingsMappingsItem>, options: RequestOptions? = null): SCIMGroupRoleMappingList {
+        return SdkClient.request<SCIMGroupRoleMappingList>(SdkClient.RequestSpec("PUT", "/scim_directories/${SdkClient.encodePathSegment(scimDirectoryId)}/group_role_mappings", config = clientConfig, body = SdkClient.bodyMap("mappings" to (mappings)), operationId = "replaceScimGroupRoleMappings", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Deletes a single SCIM group role mapping. Mappings can be deleted while group role mapping is
-     * disabled on the directory, but the change only takes effect once it is enabled.
+     * Deletes a single SCIM group role mapping. Mappings can be deleted while group role mapping is disabled on the directory, but the change only takes effect once it is enabled.
      *
      * @param scimDirectoryId The ID of the directory.
      * @param mappingId The ID of the SCIM group role mapping to delete.
      */
-    fun deleteScimGroupRoleMapping(
-        clientConfig: ClientConfig,
-        scimDirectoryId: String,
-        mappingId: String,
-        options: RequestOptions? = null,
-    ): SCIMGroupRoleMappingDeleted {
-        return SdkClient.request<SCIMGroupRoleMappingDeleted>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/scim_directories/${SdkClient.encodePathSegment(scimDirectoryId)}/group_role_mappings/${SdkClient.encodePathSegment(mappingId)}",
-                    config = clientConfig,
-                    operationId = "deleteScimGroupRoleMapping",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun deleteScimGroupRoleMapping(clientConfig: ClientConfig, scimDirectoryId: String, mappingId: String, options: RequestOptions? = null): SCIMGroupRoleMappingDeleted {
+        return SdkClient.request<SCIMGroupRoleMappingDeleted>(SdkClient.RequestSpec("DELETE", "/scim_directories/${SdkClient.encodePathSegment(scimDirectoryId)}/group_role_mappings/${SdkClient.encodePathSegment(mappingId)}", config = clientConfig, operationId = "deleteScimGroupRoleMapping", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
     }
+
+
+
+
+
+
+
 }

@@ -17,110 +17,94 @@ import dev.octri.showcase.clerk.Validation
 
 object SamlConnectionsMethods {
 
-    /** Define the attribute name mapping between Identity Provider and Clerk's user properties */
-    data class CreateSAMLConnectionAttributeMapping(
-        @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
-        @com.fasterxml.jackson.annotation.JsonProperty("email_address")
-        val emailAddress: String? = null,
-        @com.fasterxml.jackson.annotation.JsonProperty("first_name") val firstName: String? = null,
-        @com.fasterxml.jackson.annotation.JsonProperty("last_name") val lastName: String? = null,
-    )
+/**
+ * Define the attribute name mapping between Identity Provider and Clerk's user properties
+ */
+data class CreateSAMLConnectionAttributeMapping(
+    @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("email_address") val emailAddress: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("first_name") val firstName: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("last_name") val lastName: String? = null
+)
 
-    /** Configuration for the login_hint sent to the IdP on SSO sign-in */
-    data class CreateSAMLConnectionLoginHint(
-        /** Controls the login_hint sent to the IdP on SSO sign-in */
-        val mode: CreateSAMLConnectionLoginHintModeEnum,
-        /**
-         * The user public_metadata key whose value is sent as the login_hint when mode is
-         * custom_attribute
-         */
-        val source: String? = null,
-    )
+/**
+ * Configuration for the login_hint sent to the IdP on SSO sign-in
+ */
+data class CreateSAMLConnectionLoginHint(
+    /**
+     * Controls the login_hint sent to the IdP on SSO sign-in
+     */
+    val mode: CreateSAMLConnectionLoginHintModeEnum,
+    /**
+     * The user public_metadata key whose value is sent as the login_hint when mode is custom_attribute
+     */
+    val source: String? = null
+)
 
-    /** Define the attribute name mapping between Identity Provider and Clerk's user properties */
-    data class UpdateSAMLConnectionAttributeMapping(
-        @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
-        @com.fasterxml.jackson.annotation.JsonProperty("email_address")
-        val emailAddress: String? = null,
-        @com.fasterxml.jackson.annotation.JsonProperty("first_name") val firstName: String? = null,
-        @com.fasterxml.jackson.annotation.JsonProperty("last_name") val lastName: String? = null,
-    )
+/**
+ * Define the attribute name mapping between Identity Provider and Clerk's user properties
+ */
+data class UpdateSAMLConnectionAttributeMapping(
+    @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("email_address") val emailAddress: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("first_name") val firstName: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("last_name") val lastName: String? = null
+)
 
-    /** Configuration for the login_hint sent to the IdP on SSO sign-in */
-    data class UpdateSAMLConnectionLoginHint(
-        /** Controls the login_hint sent to the IdP on SSO sign-in */
-        val mode: UpdateSAMLConnectionLoginHintModeEnum,
-        /**
-         * The user public_metadata key whose value is sent as the login_hint when mode is
-         * custom_attribute
-         */
-        val source: String? = null,
-    )
+/**
+ * Configuration for the login_hint sent to the IdP on SSO sign-in
+ */
+data class UpdateSAMLConnectionLoginHint(
+    /**
+     * Controls the login_hint sent to the IdP on SSO sign-in
+     */
+    val mode: UpdateSAMLConnectionLoginHintModeEnum,
+    /**
+     * The user public_metadata key whose value is sent as the login_hint when mode is custom_attribute
+     */
+    val source: String? = null
+)
+
 
     /**
-     * Returns the list of SAML Connections for an instance. Results can be paginated using the
-     * optional `limit` and `offset` query parameters. The SAML Connections are ordered by
-     * descending creation date and the most recent will be returned first. Deprecated: Use the
-     * Enterprise Connections API instead. This endpoint will be removed in future versions.
+     * Returns the list of SAML Connections for an instance. Results can be paginated using the optional `limit` and `offset` query parameters. The SAML Connections are ordered by descending creation date and the most recent will be returned first. Deprecated: Use the Enterprise Connections API instead. This endpoint will be removed in future versions.
      *
-     * @param limit Applies a limit to the number of results returned. Can be used for paginating
-     *   the results together with `offset`.
-     * @param offset Skip the first `offset` results when paginating. Needs to be an integer greater
-     *   or equal to zero. To be used in conjunction with `limit`.
-     * @param query Returns SAML connections that have a name that matches the given query, via
-     *   case-insensitive partial match.
-     * @param orderBy Sorts organizations memberships by phone_number, email_address, created_at,
-     *   first_name, last_name or username. By prepending one of those values with + or -, we can
-     *   choose to sort in ascending (ASC) or descending (DESC) order.
-     * @param organizationId Returns SAML connections that have an associated organization ID to the
-     *   given organizations. For each organization ID, the `+` and `-` can be prepended to the ID,
-     *   which denote whether the respective organization should be included or excluded from the
-     *   result set. Accepts up to 100 organization IDs.
-     * @deprecated This operation is deprecated and may be removed in a future release.
+     * @param limit Applies a limit to the number of results returned. Can be used
+     *   for paginating the results together with `offset`.
+     * @param offset Skip the first `offset` results when paginating. Needs to be an
+     *   integer greater or equal to zero. To be used in conjunction with `limit`.
+     * @param query Returns SAML connections that have a name that matches the given
+     *   query, via case-insensitive partial match.
+     * @param orderBy Sorts organizations memberships by phone_number, email_address,
+     *   created_at, first_name, last_name or username. By prepending one of those
+     *   values with + or -, we can choose to sort in ascending (ASC) or descending
+     *   (DESC) order.
+     * @param organizationId Returns SAML connections that have an associated
+     *   organization ID to the given organizations. For each organization ID, the `+`
+     *   and `-` can be prepended to the ID, which denote whether the respective
+     *   organization should be included or excluded from the result set. Accepts up to
+     *   100 organization IDs.
+     * @deprecated This operation is deprecated and may be removed in a future
+     *   release.
      */
-    fun listSamlConnections(
-        clientConfig: ClientConfig,
-        limit: Long? = null,
-        offset: Long? = null,
-        query: String? = null,
-        orderBy: String? = null,
-        organizationId: List<String>? = null,
-        options: RequestOptions? = null,
-    ): SAMLConnections {
+    fun listSamlConnections(clientConfig: ClientConfig, limit: Long? = null, offset: Long? = null, query: String? = null, orderBy: String? = null, organizationId: List<String>? = null, options: RequestOptions? = null): SAMLConnections {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 500.0))
-        }
+}
 
         if (offset != null) {
             Validation.validateRange("offset", offset, Validation.RangeOpts(min = 0.0))
-        }
+}
 
-        return SdkClient.request<SAMLConnections>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/saml_connections",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "offset" to SdkClient.queryValue(offset, "form", true),
-                            "query" to SdkClient.queryValue(query, "form", true),
-                            "order_by" to SdkClient.queryValue(orderBy, "form", true),
-                            "organization_id" to SdkClient.queryValue(organizationId, "form", true),
-                        ),
-                    operationId = "listSamlConnections",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "402" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<SAMLConnections>(SdkClient.RequestSpec("GET", "/saml_connections", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "offset" to SdkClient.queryValue(offset, "form", true), "query" to SdkClient.queryValue(query, "form", true), "order_by" to SdkClient.queryValue(orderBy, "form", true), "organization_id" to
+    SdkClient.queryValue(organizationId, "form", true)), operationId = "listSamlConnections", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("402" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [createSamlConnection]. */
     data class CreateSamlConnectionRequest(
@@ -137,142 +121,111 @@ object SamlConnectionsMethods {
         val organizationId: SdkClient.SdkOptional<String?>? = null,
         val attributeMapping: SdkClient.SdkOptional<CreateSAMLConnectionAttributeMapping?>? = null,
         val forceAuthn: Boolean? = null,
-        val loginHint: SdkClient.SdkOptional<CreateSAMLConnectionLoginHint?>? = null,
+        val loginHint: SdkClient.SdkOptional<CreateSAMLConnectionLoginHint?>? = null
     )
 
     /**
-     * Create a new SAML Connection. Deprecated: Use the Enterprise Connections API instead. This
-     * endpoint will be removed in future versions.
+     * Create a new SAML Connection. Deprecated: Use the Enterprise Connections API instead. This endpoint will be removed in future versions.
      *
      * @param name The name to use as a label for this SAML Connection
      * @param provider The IdP provider of the connection.
-     * @param domain The domain of your organization. Sign in flows using an email with this domain,
-     *   will use this SAML Connection.
-     * @param domains The domains of your organization. Sign in flows using an email with one of
-     *   these domains, will use this SAML Connection.
+     * @param domain The domain of your organization. Sign in flows using an email
+     *   with this domain, will use this SAML Connection.
+     * @param domains The domains of your organization. Sign in flows using an email
+     *   with one of these domains, will use this SAML Connection.
      * @param idpEntityId The Entity ID as provided by the IdP
      * @param idpSsoUrl The Single-Sign On URL as provided by the IdP
-     * @param idpCertificate Deprecated, use idp_certificates. One X.509 certificate, PEM or bare
-     *   base64, or several concatenated PEM certificates; replaces the connection's whole
-     *   certificate set
-     * @param idpCertificates The IdP X.509 signing certificates the connection trusts, one per
-     *   entry, in PEM or bare base64. Replaces the connection's whole certificate set and takes
-     *   precedence over idp_certificate
-     * @param idpMetadataUrl The URL which serves the IdP metadata. If present, it takes priority
-     *   over the corresponding individual properties
-     * @param idpMetadata The XML content of the IdP metadata file. If present, it takes priority
-     *   over the corresponding individual properties
-     * @param organizationId The ID of the organization to which users of this SAML Connection will
-     *   be added
-     * @param attributeMapping Define the attribute name mapping between Identity Provider and
-     *   Clerk's user properties
+     * @param idpCertificate Deprecated, use idp_certificates. One X.509 certificate,
+     *   PEM or bare base64, or several concatenated PEM certificates; replaces the
+     *   connection's whole certificate set
+     * @param idpCertificates The IdP X.509 signing certificates the connection
+     *   trusts, one per entry, in PEM or bare base64. Replaces the connection's whole
+     *   certificate set and takes precedence over idp_certificate
+     * @param idpMetadataUrl The URL which serves the IdP metadata. If present, it
+     *   takes priority over the corresponding individual properties
+     * @param idpMetadata The XML content of the IdP metadata file. If present, it
+     *   takes priority over the corresponding individual properties
+     * @param organizationId The ID of the organization to which users of this SAML
+     *   Connection will be added
+     * @param attributeMapping Define the attribute name mapping between Identity
+     *   Provider and Clerk's user properties
      * @param forceAuthn Enable or deactivate ForceAuthn
-     * @param loginHint Configuration for the login_hint sent to the IdP on SSO sign-in
-     * @deprecated This operation is deprecated and may be removed in a future release.
+     * @param loginHint Configuration for the login_hint sent to the IdP on SSO
+     *   sign-in
+     * @deprecated This operation is deprecated and may be removed in a future
+     *   release.
      */
-    fun createSamlConnection(
-        clientConfig: ClientConfig,
-        request: CreateSamlConnectionRequest,
-        options: RequestOptions? = null,
-    ): SAMLConnection {
+    fun createSamlConnection(clientConfig: ClientConfig, request: CreateSamlConnectionRequest, options: RequestOptions? = null): SAMLConnection {
         validateCreateSamlConnectionRequest(request)
 
-        return SdkClient.request<SAMLConnection>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/saml_connections",
-                    config = clientConfig,
-                    body = buildCreateSamlConnectionBody(request),
-                    operationId = "createSamlConnection",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "402" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "409" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<SAMLConnection>(SdkClient.RequestSpec("POST", "/saml_connections", config = clientConfig, body = buildCreateSamlConnectionBody(request), operationId = "createSamlConnection", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("402" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "409" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
+
 
     private fun validateCreateSamlConnectionRequest(request: CreateSamlConnectionRequest) {
         if (request.idpCertificates != null) {
-            Validation.validateItems(
-                "idp_certificates",
-                request.idpCertificates,
-                Validation.LengthOpts(min = 1, max = 5),
-            )
+            Validation.validateItems("idp_certificates", request.idpCertificates, Validation.LengthOpts(min = 1, max = 5))
+}
+    }
+
+
+
+    private fun buildCreateSamlConnectionBody(request: CreateSamlConnectionRequest): Map<String, Any?> =
+        buildMap {
+            putAll(buildCreateSamlConnectionBodyPart1(request))
+            putAll(buildCreateSamlConnectionBodyPart2(request))
         }
-    }
 
-    private fun buildCreateSamlConnectionBody(
-        request: CreateSamlConnectionRequest
-    ): Map<String, Any?> = buildMap {
-        putAll(buildCreateSamlConnectionBodyPart1(request))
-        putAll(buildCreateSamlConnectionBodyPart2(request))
-    }
-
-    private fun buildCreateSamlConnectionBodyPart1(
-        request: CreateSamlConnectionRequest
-    ): Map<String, Any?> =
+    private fun buildCreateSamlConnectionBodyPart1(request: CreateSamlConnectionRequest): Map<String, Any?> =
         SdkClient.bodyMap(
             "name" to (request.name),
             "provider" to (request.provider),
             "domain" to (SdkClient.omitIfNull(request.domain)),
             "domains" to (SdkClient.omitIfNull(request.domains)),
-            "idp_entity_id" to (request.idpEntityId ?: SdkClient.SdkOptional.Omitted),
-            "idp_sso_url" to (request.idpSsoUrl ?: SdkClient.SdkOptional.Omitted),
-            "idp_certificate" to (request.idpCertificate ?: SdkClient.SdkOptional.Omitted),
-            "idp_certificates" to (SdkClient.omitIfNull(request.idpCertificates)),
-            "idp_metadata_url" to (request.idpMetadataUrl ?: SdkClient.SdkOptional.Omitted),
-            "idp_metadata" to (request.idpMetadata ?: SdkClient.SdkOptional.Omitted),
-            "organization_id" to (request.organizationId ?: SdkClient.SdkOptional.Omitted),
-            "attribute_mapping" to (request.attributeMapping ?: SdkClient.SdkOptional.Omitted),
+            "idp_entity_id" to
+    (request.idpEntityId ?: SdkClient.SdkOptional.Omitted),
+            "idp_sso_url" to
+    (request.idpSsoUrl ?: SdkClient.SdkOptional.Omitted),
+            "idp_certificate" to
+    (request.idpCertificate ?: SdkClient.SdkOptional.Omitted),
+            "idp_certificates" to
+    (SdkClient.omitIfNull(request.idpCertificates)),
+            "idp_metadata_url" to
+    (request.idpMetadataUrl ?: SdkClient.SdkOptional.Omitted),
+            "idp_metadata" to
+    (request.idpMetadata ?: SdkClient.SdkOptional.Omitted),
+            "organization_id" to
+    (request.organizationId ?: SdkClient.SdkOptional.Omitted),
+            "attribute_mapping" to
+    (request.attributeMapping ?: SdkClient.SdkOptional.Omitted),
         )
 
-    private fun buildCreateSamlConnectionBodyPart2(
-        request: CreateSamlConnectionRequest
-    ): Map<String, Any?> =
+    private fun buildCreateSamlConnectionBodyPart2(request: CreateSamlConnectionRequest): Map<String, Any?> =
         SdkClient.bodyMap(
             "force_authn" to (SdkClient.omitIfNull(request.forceAuthn)),
-            "login_hint" to (request.loginHint ?: SdkClient.SdkOptional.Omitted),
+            "login_hint" to
+    (request.loginHint ?: SdkClient.SdkOptional.Omitted),
         )
 
+
+
+
     /**
-     * Fetches the SAML Connection whose ID matches the provided `saml_connection_id` in the path.
-     * Deprecated: Use the Enterprise Connections API instead. This endpoint will be removed in
-     * future versions.
+     * Fetches the SAML Connection whose ID matches the provided `saml_connection_id` in the path. Deprecated: Use the Enterprise Connections API instead. This endpoint will be removed in future versions.
      *
      * @param samlConnectionId The ID of the SAML Connection
-     * @deprecated This operation is deprecated and may be removed in a future release.
+     * @deprecated This operation is deprecated and may be removed in a future
+     *   release.
      */
-    fun getSamlConnection(
-        clientConfig: ClientConfig,
-        samlConnectionId: String,
-        options: RequestOptions? = null,
-    ): SAMLConnection {
-        return SdkClient.request<SAMLConnection>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/saml_connections/${SdkClient.encodePathSegment(samlConnectionId)}",
-                    config = clientConfig,
-                    operationId = "getSamlConnection",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "402" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun getSamlConnection(clientConfig: ClientConfig, samlConnectionId: String, options: RequestOptions? = null): SAMLConnection {
+        return SdkClient.request<SAMLConnection>(SdkClient.RequestSpec("GET", "/saml_connections/${SdkClient.encodePathSegment(samlConnectionId)}", config = clientConfig, operationId = "getSamlConnection", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("402" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [updateSamlConnection]. */
     data class UpdateSamlConnectionRequest(
@@ -296,12 +249,11 @@ object SamlConnectionsMethods {
         val allowOrganizationAccountLinking: SdkClient.SdkOptional<Boolean?>? = null,
         val forceAuthn: Boolean? = null,
         val loginHint: SdkClient.SdkOptional<UpdateSAMLConnectionLoginHint?>? = null,
-        val consentVerifiedDomainsDeletion: SdkClient.SdkOptional<Boolean?>? = null,
+        val consentVerifiedDomainsDeletion: SdkClient.SdkOptional<Boolean?>? = null
     )
 
     /**
-     * Updates the SAML Connection whose ID matches the provided `id` in the path. Deprecated: Use
-     * the Enterprise Connections API instead. This endpoint will be removed in future versions.
+     * Updates the SAML Connection whose ID matches the provided `id` in the path. Deprecated: Use the Enterprise Connections API instead. This endpoint will be removed in future versions.
      *
      * @param samlConnectionId The ID of the SAML Connection to update
      * @param name The name of the new SAML Connection
@@ -309,146 +261,126 @@ object SamlConnectionsMethods {
      * @param domains A list of the domains on use for the SAML connection
      * @param idpEntityId The Entity ID as provided by the IdP
      * @param idpSsoUrl The SSO URL as provided by the IdP
-     * @param idpCertificate Deprecated, use idp_certificates. One X.509 certificate, PEM or bare
-     *   base64, or several concatenated PEM certificates; replaces the connection's whole
-     *   certificate set
-     * @param idpCertificates The IdP X.509 signing certificates the connection trusts, one per
-     *   entry, in PEM or bare base64. Replaces the connection's whole certificate set and takes
-     *   precedence over idp_certificate
-     * @param idpMetadataUrl The URL which serves the IdP metadata. If present, it takes priority
-     *   over the corresponding individual properties and replaces them
-     * @param idpMetadata The XML content of the IdP metadata file. If present, it takes priority
-     *   over the corresponding individual properties
-     * @param organizationId The ID of the organization to which users of this SAML Connection will
-     *   be added
-     * @param attributeMapping Define the attribute name mapping between Identity Provider and
-     *   Clerk's user properties
+     * @param idpCertificate Deprecated, use idp_certificates. One X.509 certificate,
+     *   PEM or bare base64, or several concatenated PEM certificates; replaces the
+     *   connection's whole certificate set
+     * @param idpCertificates The IdP X.509 signing certificates the connection
+     *   trusts, one per entry, in PEM or bare base64. Replaces the connection's whole
+     *   certificate set and takes precedence over idp_certificate
+     * @param idpMetadataUrl The URL which serves the IdP metadata. If present, it
+     *   takes priority over the corresponding individual properties and replaces them
+     * @param idpMetadata The XML content of the IdP metadata file. If present, it
+     *   takes priority over the corresponding individual properties
+     * @param organizationId The ID of the organization to which users of this SAML
+     *   Connection will be added
+     * @param attributeMapping Define the attribute name mapping between Identity
+     *   Provider and Clerk's user properties
      * @param active Activate or de-activate the SAML Connection
-     * @param syncUserAttributes Controls whether to update the user's attributes in each sign-in
-     * @param allowSubdomains Allow users with an email address subdomain to use this connection in
-     *   order to authenticate
+     * @param syncUserAttributes Controls whether to update the user's attributes in
+     *   each sign-in
+     * @param allowSubdomains Allow users with an email address subdomain to use this
+     *   connection in order to authenticate
      * @param allowIdpInitiated Enable or deactivate IdP-initiated flows
-     * @param disableAdditionalIdentifications Enable or deactivate additional identifications
-     * @param allowOrganizationAccountLinking Whether this connection supports account linking via
-     *   organization membership
+     * @param disableAdditionalIdentifications Enable or deactivate additional
+     *   identifications
+     * @param allowOrganizationAccountLinking Whether this connection supports
+     *   account linking via organization membership
      * @param forceAuthn Enable or deactivate ForceAuthn
-     * @param loginHint Configuration for the login_hint sent to the IdP on SSO sign-in
-     * @param consentVerifiedDomainsDeletion When enabling the connection, controls behavior when
-     *   verified domains used for enrollment modes like automatic invitation or automatic
-     *   suggestion already exist for the same domain. If true, those verified domains are removed
-     *   and the connection is enabled. If false or omitted, the request fails when any such
-     *   verified domain exists.
-     * @deprecated This operation is deprecated and may be removed in a future release.
+     * @param loginHint Configuration for the login_hint sent to the IdP on SSO
+     *   sign-in
+     * @param consentVerifiedDomainsDeletion When enabling the connection, controls
+     *   behavior when verified domains used for enrollment modes like automatic
+     *   invitation or automatic suggestion already exist for the same domain. If true,
+     *   those verified domains are removed and the connection is enabled. If false or
+     *   omitted, the request fails when any such verified domain exists.
+     * @deprecated This operation is deprecated and may be removed in a future
+     *   release.
      */
-    fun updateSamlConnection(
-        clientConfig: ClientConfig,
-        request: UpdateSamlConnectionRequest,
-        options: RequestOptions? = null,
-    ): SAMLConnection {
+    fun updateSamlConnection(clientConfig: ClientConfig, request: UpdateSamlConnectionRequest, options: RequestOptions? = null): SAMLConnection {
         validateUpdateSamlConnectionRequest(request)
 
-        return SdkClient.request<SAMLConnection>(
-                SdkClient.RequestSpec(
-                    "PATCH",
-                    "/saml_connections/${SdkClient.encodePathSegment(request.samlConnectionId)}",
-                    config = clientConfig,
-                    body = buildUpdateSamlConnectionBody(request),
-                    operationId = "updateSamlConnection",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "402" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "409" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<SAMLConnection>(SdkClient.RequestSpec("PATCH", "/saml_connections/${SdkClient.encodePathSegment(request.samlConnectionId)}", config = clientConfig, body = buildUpdateSamlConnectionBody(request), operationId = "updateSamlConnection", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("402" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "409" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
+
 
     private fun validateUpdateSamlConnectionRequest(request: UpdateSamlConnectionRequest) {
         if (request.idpCertificates != null) {
-            Validation.validateItems(
-                "idp_certificates",
-                request.idpCertificates,
-                Validation.LengthOpts(min = 1, max = 5),
-            )
+            Validation.validateItems("idp_certificates", request.idpCertificates, Validation.LengthOpts(min = 1, max = 5))
+}
+    }
+
+
+
+    private fun buildUpdateSamlConnectionBody(request: UpdateSamlConnectionRequest): Map<String, Any?> =
+        buildMap {
+            putAll(buildUpdateSamlConnectionBodyPart1(request))
+            putAll(buildUpdateSamlConnectionBodyPart2(request))
         }
-    }
 
-    private fun buildUpdateSamlConnectionBody(
-        request: UpdateSamlConnectionRequest
-    ): Map<String, Any?> = buildMap {
-        putAll(buildUpdateSamlConnectionBodyPart1(request))
-        putAll(buildUpdateSamlConnectionBodyPart2(request))
-    }
-
-    private fun buildUpdateSamlConnectionBodyPart1(
-        request: UpdateSamlConnectionRequest
-    ): Map<String, Any?> =
+    private fun buildUpdateSamlConnectionBodyPart1(request: UpdateSamlConnectionRequest): Map<String, Any?> =
         SdkClient.bodyMap(
             "name" to (request.name ?: SdkClient.SdkOptional.Omitted),
-            "domain" to (request.domain ?: SdkClient.SdkOptional.Omitted),
-            "domains" to (request.domains ?: SdkClient.SdkOptional.Omitted),
-            "idp_entity_id" to (request.idpEntityId ?: SdkClient.SdkOptional.Omitted),
-            "idp_sso_url" to (request.idpSsoUrl ?: SdkClient.SdkOptional.Omitted),
-            "idp_certificate" to (request.idpCertificate ?: SdkClient.SdkOptional.Omitted),
-            "idp_certificates" to (SdkClient.omitIfNull(request.idpCertificates)),
-            "idp_metadata_url" to (request.idpMetadataUrl ?: SdkClient.SdkOptional.Omitted),
-            "idp_metadata" to (request.idpMetadata ?: SdkClient.SdkOptional.Omitted),
-            "organization_id" to (request.organizationId ?: SdkClient.SdkOptional.Omitted),
-            "attribute_mapping" to (request.attributeMapping ?: SdkClient.SdkOptional.Omitted),
-            "active" to (request.active ?: SdkClient.SdkOptional.Omitted),
+            "domain" to
+    (request.domain ?: SdkClient.SdkOptional.Omitted),
+            "domains" to
+    (request.domains ?: SdkClient.SdkOptional.Omitted),
+            "idp_entity_id" to
+    (request.idpEntityId ?: SdkClient.SdkOptional.Omitted),
+            "idp_sso_url" to
+    (request.idpSsoUrl ?: SdkClient.SdkOptional.Omitted),
+            "idp_certificate" to
+    (request.idpCertificate ?: SdkClient.SdkOptional.Omitted),
+            "idp_certificates" to
+    (SdkClient.omitIfNull(request.idpCertificates)),
+            "idp_metadata_url" to
+    (request.idpMetadataUrl ?: SdkClient.SdkOptional.Omitted),
+            "idp_metadata" to
+    (request.idpMetadata ?: SdkClient.SdkOptional.Omitted),
+            "organization_id" to
+    (request.organizationId ?: SdkClient.SdkOptional.Omitted),
+            "attribute_mapping" to
+    (request.attributeMapping ?: SdkClient.SdkOptional.Omitted),
+            "active" to
+    (request.active ?: SdkClient.SdkOptional.Omitted),
         )
 
-    private fun buildUpdateSamlConnectionBodyPart2(
-        request: UpdateSamlConnectionRequest
-    ): Map<String, Any?> =
+    private fun buildUpdateSamlConnectionBodyPart2(request: UpdateSamlConnectionRequest): Map<String, Any?> =
         SdkClient.bodyMap(
-            "sync_user_attributes" to (request.syncUserAttributes ?: SdkClient.SdkOptional.Omitted),
-            "allow_subdomains" to (request.allowSubdomains ?: SdkClient.SdkOptional.Omitted),
-            "allow_idp_initiated" to (request.allowIdpInitiated ?: SdkClient.SdkOptional.Omitted),
+            "sync_user_attributes" to
+    (request.syncUserAttributes ?: SdkClient.SdkOptional.Omitted),
+            "allow_subdomains" to
+    (request.allowSubdomains ?: SdkClient.SdkOptional.Omitted),
+            "allow_idp_initiated" to
+    (request.allowIdpInitiated ?: SdkClient.SdkOptional.Omitted),
             "disable_additional_identifications" to
-                (request.disableAdditionalIdentifications ?: SdkClient.SdkOptional.Omitted),
+    (request.disableAdditionalIdentifications ?: SdkClient.SdkOptional.Omitted),
             "allow_organization_account_linking" to
-                (request.allowOrganizationAccountLinking ?: SdkClient.SdkOptional.Omitted),
+    (request.allowOrganizationAccountLinking ?: SdkClient.SdkOptional.Omitted),
             "force_authn" to (SdkClient.omitIfNull(request.forceAuthn)),
-            "login_hint" to (request.loginHint ?: SdkClient.SdkOptional.Omitted),
+            "login_hint" to
+    (request.loginHint ?: SdkClient.SdkOptional.Omitted),
             "consent_verified_domains_deletion" to
-                (request.consentVerifiedDomainsDeletion ?: SdkClient.SdkOptional.Omitted),
+    (request.consentVerifiedDomainsDeletion ?: SdkClient.SdkOptional.Omitted),
         )
+
+
+
 
     /**
-     * Deletes the SAML Connection whose ID matches the provided `id` in the path. Deprecated: Use
-     * the Enterprise Connections API instead. This endpoint will be removed in future versions.
+     * Deletes the SAML Connection whose ID matches the provided `id` in the path. Deprecated: Use the Enterprise Connections API instead. This endpoint will be removed in future versions.
      *
      * @param samlConnectionId The ID of the SAML Connection to delete
-     * @deprecated This operation is deprecated and may be removed in a future release.
+     * @deprecated This operation is deprecated and may be removed in a future
+     *   release.
      */
-    fun deleteSamlConnection(
-        clientConfig: ClientConfig,
-        samlConnectionId: String,
-        options: RequestOptions? = null,
-    ): DeletedObject {
-        return SdkClient.request<DeletedObject>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/saml_connections/${SdkClient.encodePathSegment(samlConnectionId)}",
-                    config = clientConfig,
-                    operationId = "deleteSamlConnection",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "402" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun deleteSamlConnection(clientConfig: ClientConfig, samlConnectionId: String, options: RequestOptions? = null): DeletedObject {
+        return SdkClient.request<DeletedObject>(SdkClient.RequestSpec("DELETE", "/saml_connections/${SdkClient.encodePathSegment(samlConnectionId)}", config = clientConfig, operationId = "deleteSamlConnection", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("402" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
     }
+
+
+
+
+
+
+
 }
