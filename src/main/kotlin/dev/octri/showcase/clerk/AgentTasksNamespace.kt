@@ -3,22 +3,34 @@
 
 package dev.octri.showcase.clerk
 
-
 class AgentTasksNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Create an agent task on behalf of a user. The response contains a URL that, when visited, creates a session for the user. The agent_id is stable per agent_name within an instance. The agent_task_id is unique per call.
+     * Create an agent task on behalf of a user. The response contains a URL that, when visited,
+     * creates a session for the user. The agent_id is stable per agent_name within an instance. The
+     * agent_task_id is unique per call.
      */
-    fun create(request: dev.octri.showcase.clerk.methods.AgentTasks.CreateAgentTaskRequest, options: RequestOptions? = null): AgentTask {
-        return dev.octri.showcase.clerk.methods.AgentTasks.createAgentTask(clientConfig, request, options)
+    fun create(
+        request: dev.octri.showcase.clerk.methods.AgentTasks.CreateAgentTaskRequest,
+        options: RequestOptions? = null,
+    ): AgentTask {
+        return dev.octri.showcase.clerk.methods.AgentTasks.createAgentTask(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Revokes a pending agent task. Use `agent_task_id` to identify the task whose pending status you want to revoke.
+     * Revokes a pending agent task. Use `agent_task_id` to identify the task whose pending status
+     * you want to revoke.
      *
      * Revokes a pending agent task.
      */
     fun revoke(agentTaskId: String, options: RequestOptions? = null): AgentTask {
-        return dev.octri.showcase.clerk.methods.AgentTasks.revokeAgentTask(clientConfig, agentTaskId, options)
+        return dev.octri.showcase.clerk.methods.AgentTasks.revokeAgentTask(
+            clientConfig,
+            agentTaskId,
+            options,
+        )
     }
-
 }

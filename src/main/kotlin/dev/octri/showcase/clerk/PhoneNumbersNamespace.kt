@@ -3,63 +3,145 @@
 
 package dev.octri.showcase.clerk
 
-
 class PhoneNumbersNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates a phone number for a user. Provide `user_id` and an E.164-formatted `phone_number`; set `verified` to true before reserving the number for multi-factor authentication. A 200 response returns the created phone number and its verification, linkage, and reservation details.
+     * Creates a phone number for a user. Provide `user_id` and an E.164-formatted `phone_number`;
+     * set `verified` to true before reserving the number for multi-factor authentication. A 200
+     * response returns the created phone number and its verification, linkage, and reservation
+     * details.
      *
      * Create a new phone number
      */
-    fun create(userId: String, phoneNumber: String, verified: SdkClient.SdkOptional<Boolean?>? = null, primary: SdkClient.SdkOptional<Boolean?>? = null, reservedForSecondFactor: SdkClient.SdkOptional<Boolean?>? = null, options: RequestOptions? = null): PhoneNumber {
-        return dev.octri.showcase.clerk.methods.PhoneNumbers.createPhoneNumber(clientConfig, userId, phoneNumber, verified, primary, reservedForSecondFactor, options)
+    fun create(
+        userId: String,
+        phoneNumber: String,
+        verified: SdkClient.SdkOptional<Boolean?>? = null,
+        primary: SdkClient.SdkOptional<Boolean?>? = null,
+        reservedForSecondFactor: SdkClient.SdkOptional<Boolean?>? = null,
+        options: RequestOptions? = null,
+    ): PhoneNumber {
+        return dev.octri.showcase.clerk.methods.PhoneNumbers.createPhoneNumber(
+            clientConfig,
+            userId,
+            phoneNumber,
+            verified,
+            primary,
+            reservedForSecondFactor,
+            options,
+        )
     }
 
     /**
-     * Retrieves the details of a phone number. Use its identifier to get the phone number, verification details, linked resources, and reservation status.
+     * Retrieves the details of a phone number. Use its identifier to get the phone number,
+     * verification details, linked resources, and reservation status.
      *
      * Returns the details of a phone number
      */
     fun get(phoneNumberId: String, options: RequestOptions? = null): PhoneNumber {
-        return dev.octri.showcase.clerk.methods.PhoneNumbers.getPhoneNumber(clientConfig, phoneNumberId, options)
+        return dev.octri.showcase.clerk.methods.PhoneNumbers.getPhoneNumber(
+            clientConfig,
+            phoneNumberId,
+            options,
+        )
     }
 
     /**
-     * Deletes a phone number by its identifier. Use this operation to remove a phone number you no longer need; the response confirms whether it was deleted.
+     * Deletes a phone number by its identifier. Use this operation to remove a phone number you no
+     * longer need; the response confirms whether it was deleted.
      *
      * Delete the phone number with the given ID
      */
     fun delete(phoneNumberId: String, options: RequestOptions? = null): DeletedObject {
-        return dev.octri.showcase.clerk.methods.PhoneNumbers.deletePhoneNumber(clientConfig, phoneNumberId, options)
+        return dev.octri.showcase.clerk.methods.PhoneNumbers.deletePhoneNumber(
+            clientConfig,
+            phoneNumberId,
+            options,
+        )
     }
 
     /**
-     * Updates verification, primary-phone, or multi-factor authentication reservation settings for a phone number. Supply only the fields you want to change; reserving the number for multi-factor authentication requires it to be verified.
+     * Updates verification, primary-phone, or multi-factor authentication reservation settings for
+     * a phone number. Supply only the fields you want to change; reserving the number for
+     * multi-factor authentication requires it to be verified.
      *
      * Updates a phone number
      */
-    fun update(phoneNumberId: String, verified: SdkClient.SdkOptional<Boolean?>? = null, primary: SdkClient.SdkOptional<Boolean?>? = null, reservedForSecondFactor: SdkClient.SdkOptional<Boolean?>? = null, options: RequestOptions? = null): PhoneNumber {
-        return dev.octri.showcase.clerk.methods.PhoneNumbers.updatePhoneNumber(clientConfig, phoneNumberId, verified, primary, reservedForSecondFactor, options)
+    fun update(
+        phoneNumberId: String,
+        verified: SdkClient.SdkOptional<Boolean?>? = null,
+        primary: SdkClient.SdkOptional<Boolean?>? = null,
+        reservedForSecondFactor: SdkClient.SdkOptional<Boolean?>? = null,
+        options: RequestOptions? = null,
+    ): PhoneNumber {
+        return dev.octri.showcase.clerk.methods.PhoneNumbers.updatePhoneNumber(
+            clientConfig,
+            phoneNumberId,
+            verified,
+            primary,
+            reservedForSecondFactor,
+            options,
+        )
     }
 
     /**
-     * Sends a one-time code to the given phone number so that a backend can verify the user controls it (for example, in a custom, backend-driven sign-in flow). The code is tracked on its own verification; confirm it with attempt_verification.
+     * Sends a one-time code to the given phone number so that a backend can verify the user
+     * controls it (for example, in a custom, backend-driven sign-in flow). The code is tracked on
+     * its own verification; confirm it with attempt_verification.
      */
-    fun prepareVerification(phoneNumberId: String, options: RequestOptions? = null): VerificationResponse {
-        return dev.octri.showcase.clerk.methods.PhoneNumbers.preparePhoneNumberVerification(clientConfig, phoneNumberId, options)
+    fun prepareVerification(
+        phoneNumberId: String,
+        options: RequestOptions? = null,
+    ): VerificationResponse {
+        return dev.octri.showcase.clerk.methods.PhoneNumbers.preparePhoneNumberVerification(
+            clientConfig,
+            phoneNumberId,
+            options,
+        )
     }
 
     /**
-     * Checks a one-time code against the verification identified by verification_id, and returns the verification with its updated status (`verified`, `unverified`, `expired`, or `failed`) and attempt count, so a backend driving its own frontend can react on every attempt — an incorrect or expired code is reported through the status, not as an error. Resubmitting a verification whose code was already accepted is rejected with a `verification_already_verified` error. If the code…
+     * Checks a one-time code against the verification identified by verification_id, and returns
+     * the verification with its updated status (`verified`, `unverified`, `expired`, or `failed`)
+     * and attempt count, so a backend driving its own frontend can react on every attempt — an
+     * incorrect or expired code is reported through the status, not as an error. Resubmitting a
+     * verification whose code was already accepted is rejected with a
+     * `verification_already_verified` error. If the code…
      */
-    fun attemptVerification(phoneNumberId: String, verificationId: String, code: String, options: RequestOptions? = null): VerificationResponse {
-        return dev.octri.showcase.clerk.methods.PhoneNumbers.attemptPhoneNumberVerification(clientConfig, phoneNumberId, verificationId, code, options)
+    fun attemptVerification(
+        phoneNumberId: String,
+        verificationId: String,
+        code: String,
+        options: RequestOptions? = null,
+    ): VerificationResponse {
+        return dev.octri.showcase.clerk.methods.PhoneNumbers.attemptPhoneNumberVerification(
+            clientConfig,
+            phoneNumberId,
+            verificationId,
+            code,
+            options,
+        )
     }
 
     /**
-     * Replaces all of the user's phone numbers with a single primary phone number. By default the new phone number is created verified, with the admin verification strategy. When `identification_status` is `reserved` it is created reserved instead: unverified but usable for sign-in and locked so no other user can claim it. When it is `unverified` the phone number is neither usable for sign-in nor locked. The new phone number is never reserved for second factor. Any existing phone…
+     * Replaces all of the user's phone numbers with a single primary phone number. By default the
+     * new phone number is created verified, with the admin verification strategy. When
+     * `identification_status` is `reserved` it is created reserved instead: unverified but usable
+     * for sign-in and locked so no other user can claim it. When it is `unverified` the phone
+     * number is neither usable for sign-in nor locked. The new phone number is never reserved for
+     * second factor. Any existing phone…
      */
-    fun replace(userId: String, phoneNumber: String, identificationStatus: ReplaceUserPhoneNumberIdentificationStatusEnum? = null, options: RequestOptions? = null): PhoneNumber {
-        return dev.octri.showcase.clerk.methods.PhoneNumbers.replaceUserPhoneNumber(clientConfig, userId, phoneNumber, identificationStatus, options)
+    fun replace(
+        userId: String,
+        phoneNumber: String,
+        identificationStatus: ReplaceUserPhoneNumberIdentificationStatusEnum? = null,
+        options: RequestOptions? = null,
+    ): PhoneNumber {
+        return dev.octri.showcase.clerk.methods.PhoneNumbers.replaceUserPhoneNumber(
+            clientConfig,
+            userId,
+            phoneNumber,
+            identificationStatus,
+            options,
+        )
     }
-
 }

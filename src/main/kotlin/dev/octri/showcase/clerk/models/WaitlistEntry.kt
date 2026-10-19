@@ -3,40 +3,25 @@
 
 package dev.octri.showcase.clerk.models
 
-/**
- * Typed representation of the `WaitlistEntry` API schema.
- */
+/** Typed representation of the `WaitlistEntry` API schema. */
 data class WaitlistEntry(
-    /**
-     * Required enumerated value serialized in the `object` wire field.
-     */
+    /** Required enumerated value serialized in the `object` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: WaitlistEntryObjectEnum,
-    /**
-     * Required `string` value serialized in the `id` wire field.
-     */
+    /** Required `string` value serialized in the `id` wire field. */
     val id: String,
-    /**
-     * Required `email`-formatted value serialized in the `email_address` wire field.
-     */
+    /** Required `email`-formatted value serialized in the `email_address` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("email_address") val emailAddress: String,
-    /**
-     * Required enumerated value serialized in the `status` wire field.
-     */
+    /** Required enumerated value serialized in the `status` wire field. */
     val status: WaitlistEntryStatusEnum,
-    /**
-     * Unix timestamp of creation.
-     */
+    /** Unix timestamp of creation. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Unix timestamp of last update.
-     */
+    /** Unix timestamp of last update. */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
     /**
-     * Indicates if the waitlist entry is locked. Locked entries are being processed in a batch action and are unavailable for other actions.
+     * Indicates if the waitlist entry is locked. Locked entries are being processed in a batch
+     * action and are unavailable for other actions.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("is_locked") val isLocked: Boolean? = null,
-    /**
-     * Optional object value serialized in the `invitation` wire field.
-     */
-    val invitation: Invitation? = null
+    /** Optional object value serialized in the `invitation` wire field. */
+    val invitation: Invitation? = null,
 )

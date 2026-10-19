@@ -15,212 +15,285 @@ import dev.octri.showcase.clerk.VerifyM2MTokenResponseObjectEnum
 
 object M2MTokens {
 
-data class CreateM2MTokenResponse(
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: CreateM2MTokenResponseObjectEnum,
-    val id: String,
-    val subject: String,
-    val token: String,
-    val revoked: Boolean,
-    @com.fasterxml.jackson.annotation.JsonProperty("revocation_reason", required = true) val revocationReason: String?,
-    val expired: Boolean,
-    /**
-     * The timestamp for when the token will expire, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("expiration", required = true) val expiration: Double?,
-    /**
-     * The timestamp for when the token was last used, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_used_at", required = true) val lastUsedAt: Double?,
-    /**
-     * The timestamp for when the token was created, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Double,
-    /**
-     * The timestamp for when the token was last updated, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Double,
-    val claims: Any? = null,
-    val scopes: List<String>? = null
-)
+    data class CreateM2MTokenResponse(
+        @com.fasterxml.jackson.annotation.JsonProperty("object")
+        val `object`: CreateM2MTokenResponseObjectEnum,
+        val id: String,
+        val subject: String,
+        val token: String,
+        val revoked: Boolean,
+        @com.fasterxml.jackson.annotation.JsonProperty("revocation_reason", required = true)
+        val revocationReason: String?,
+        val expired: Boolean,
+        /** The timestamp for when the token will expire, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("expiration", required = true)
+        val expiration: Double?,
+        /** The timestamp for when the token was last used, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("last_used_at", required = true)
+        val lastUsedAt: Double?,
+        /** The timestamp for when the token was created, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Double,
+        /** The timestamp for when the token was last updated, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Double,
+        val claims: Any? = null,
+        val scopes: List<String>? = null,
+    )
 
-data class GetM2MTokensResponseM2mTokensItem(
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: GetM2MTokensResponseM2mTokensItemObjectEnum,
-    val id: String,
-    val subject: String,
-    val revoked: Boolean,
-    @com.fasterxml.jackson.annotation.JsonProperty("revocation_reason", required = true) val revocationReason: String?,
-    val expired: Boolean,
-    /**
-     * The timestamp for when the token will expire, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("expiration", required = true) val expiration: Double?,
-    /**
-     * The timestamp for when the token was last used, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_used_at", required = true) val lastUsedAt: Double?,
-    /**
-     * The timestamp for when the token was created, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Double,
-    /**
-     * The timestamp for when the token was last updated, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Double,
-    val claims: Any? = null,
-    val scopes: List<String>? = null
-)
+    data class GetM2MTokensResponseM2mTokensItem(
+        @com.fasterxml.jackson.annotation.JsonProperty("object")
+        val `object`: GetM2MTokensResponseM2mTokensItemObjectEnum,
+        val id: String,
+        val subject: String,
+        val revoked: Boolean,
+        @com.fasterxml.jackson.annotation.JsonProperty("revocation_reason", required = true)
+        val revocationReason: String?,
+        val expired: Boolean,
+        /** The timestamp for when the token will expire, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("expiration", required = true)
+        val expiration: Double?,
+        /** The timestamp for when the token was last used, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("last_used_at", required = true)
+        val lastUsedAt: Double?,
+        /** The timestamp for when the token was created, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Double,
+        /** The timestamp for when the token was last updated, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Double,
+        val claims: Any? = null,
+        val scopes: List<String>? = null,
+    )
 
-data class GetM2MTokensResponse(
-    @com.fasterxml.jackson.annotation.JsonProperty("m2m_tokens") val m2mTokens: List<GetM2MTokensResponseM2mTokensItem>,
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Double
-)
+    data class GetM2MTokensResponse(
+        @com.fasterxml.jackson.annotation.JsonProperty("m2m_tokens")
+        val m2mTokens: List<GetM2MTokensResponseM2mTokensItem>,
+        @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Double,
+    )
 
-data class RevokeM2MTokenResponse(
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: RevokeM2MTokenResponseObjectEnum,
-    val id: String,
-    val subject: String,
-    val revoked: Boolean,
-    @com.fasterxml.jackson.annotation.JsonProperty("revocation_reason", required = true) val revocationReason: String?,
-    val expired: Boolean,
-    /**
-     * The timestamp for when the token will expire, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("expiration", required = true) val expiration: Double?,
-    /**
-     * The timestamp for when the token was last used, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_used_at", required = true) val lastUsedAt: Double?,
-    /**
-     * The timestamp for when the token was created, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Double,
-    /**
-     * The timestamp for when the token was last updated, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Double,
-    val claims: Any? = null,
-    val scopes: List<String>? = null
-)
+    data class RevokeM2MTokenResponse(
+        @com.fasterxml.jackson.annotation.JsonProperty("object")
+        val `object`: RevokeM2MTokenResponseObjectEnum,
+        val id: String,
+        val subject: String,
+        val revoked: Boolean,
+        @com.fasterxml.jackson.annotation.JsonProperty("revocation_reason", required = true)
+        val revocationReason: String?,
+        val expired: Boolean,
+        /** The timestamp for when the token will expire, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("expiration", required = true)
+        val expiration: Double?,
+        /** The timestamp for when the token was last used, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("last_used_at", required = true)
+        val lastUsedAt: Double?,
+        /** The timestamp for when the token was created, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Double,
+        /** The timestamp for when the token was last updated, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Double,
+        val claims: Any? = null,
+        val scopes: List<String>? = null,
+    )
 
-data class VerifyM2MTokenResponse(
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: VerifyM2MTokenResponseObjectEnum,
-    val id: String,
-    val subject: String,
-    val revoked: Boolean,
-    @com.fasterxml.jackson.annotation.JsonProperty("revocation_reason", required = true) val revocationReason: String?,
-    val expired: Boolean,
-    /**
-     * The timestamp for when the token will expire, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("expiration", required = true) val expiration: Double?,
-    /**
-     * The timestamp for when the token was last used, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_used_at", required = true) val lastUsedAt: Double?,
-    /**
-     * The timestamp for when the token was created, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Double,
-    /**
-     * The timestamp for when the token was last updated, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Double,
-    val claims: Any? = null,
-    val scopes: List<String>? = null
-)
-
+    data class VerifyM2MTokenResponse(
+        @com.fasterxml.jackson.annotation.JsonProperty("object")
+        val `object`: VerifyM2MTokenResponseObjectEnum,
+        val id: String,
+        val subject: String,
+        val revoked: Boolean,
+        @com.fasterxml.jackson.annotation.JsonProperty("revocation_reason", required = true)
+        val revocationReason: String?,
+        val expired: Boolean,
+        /** The timestamp for when the token will expire, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("expiration", required = true)
+        val expiration: Double?,
+        /** The timestamp for when the token was last used, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("last_used_at", required = true)
+        val lastUsedAt: Double?,
+        /** The timestamp for when the token was created, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Double,
+        /** The timestamp for when the token was last updated, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Double,
+        val claims: Any? = null,
+        val scopes: List<String>? = null,
+    )
 
     /**
-     * Creates a new M2M token for the machine associated with the Machine Secret Key used to authenticate the request. Use `token_format` to choose opaque or JWT format and `seconds_until_expiration` to set the token lifetime. Set `min_remaining_ttl_seconds` to reuse an eligible existing opaque token instead of minting a new one.
+     * Creates a new M2M token for the machine associated with the Machine Secret Key used to
+     * authenticate the request. Use `token_format` to choose opaque or JWT format and
+     * `seconds_until_expiration` to set the token lifetime. Set `min_remaining_ttl_seconds` to
+     * reuse an eligible existing opaque token instead of minting a new one.
      *
      * Creates a new M2M Token. Must be authenticated via a Machine Secret Key.
      *
-     * @param minRemainingTtlSeconds Enables server-side token reuse for
-     *   opaque-format tokens. When set, if a non-revoked, non-expired M2M token
-     *   already exists for this machine with identical `claims` and `scopes` and at
-     *   least this many seconds of remaining lifetime, that existing token is returned
-     *   and no new token is minted. Use this when caching tokens in application memory
-     *   across requests is impractical — for example, in serverless functions,
-     *   short-lived job workers, or autoscaling containers that churn…
+     * @param minRemainingTtlSeconds Enables server-side token reuse for opaque-format tokens. When
+     *   set, if a non-revoked, non-expired M2M token already exists for this machine with identical
+     *   `claims` and `scopes` and at least this many seconds of remaining lifetime, that existing
+     *   token is returned and no new token is minted. Use this when caching tokens in application
+     *   memory across requests is impractical — for example, in serverless functions, short-lived
+     *   job workers, or autoscaling containers that churn…
      */
-    fun createM2MToken(clientConfig: ClientConfig, tokenFormat: CreateM2MTokenTokenFormatEnum? = null, secondsUntilExpiration: SdkClient.SdkOptional<Double?>? = null, claims: SdkClient.SdkOptional<Any?>? = null, minRemainingTtlSeconds: Long? = null, options: RequestOptions? = null): CreateM2MTokenResponse {
+    fun createM2MToken(
+        clientConfig: ClientConfig,
+        tokenFormat: CreateM2MTokenTokenFormatEnum? = null,
+        secondsUntilExpiration: SdkClient.SdkOptional<Double?>? = null,
+        claims: SdkClient.SdkOptional<Any?>? = null,
+        minRemainingTtlSeconds: Long? = null,
+        options: RequestOptions? = null,
+    ): CreateM2MTokenResponse {
         val secondsUntilExpirationValue = secondsUntilExpiration?.getOrNull()
-if (secondsUntilExpirationValue != null) {
-            Validation.validateRange("seconds_until_expiration", secondsUntilExpirationValue, Validation.RangeOpts(exclusiveMin = 0.0))
-}
+        if (secondsUntilExpirationValue != null) {
+            Validation.validateRange(
+                "seconds_until_expiration",
+                secondsUntilExpirationValue,
+                Validation.RangeOpts(exclusiveMin = 0.0),
+            )
+        }
 
         if (minRemainingTtlSeconds != null) {
-            Validation.validateRange("min_remaining_ttl_seconds", minRemainingTtlSeconds, Validation.RangeOpts(min = 0.0))
-}
+            Validation.validateRange(
+                "min_remaining_ttl_seconds",
+                minRemainingTtlSeconds,
+                Validation.RangeOpts(min = 0.0),
+            )
+        }
 
-        return SdkClient.request<CreateM2MTokenResponse>(SdkClient.RequestSpec("POST", "/m2m_tokens", config = clientConfig, body = SdkClient.bodyMap("token_format" to (SdkClient.omitIfNull(tokenFormat)), "seconds_until_expiration" to
-    (secondsUntilExpiration ?: SdkClient.SdkOptional.Omitted), "claims" to (claims ?: SdkClient.SdkOptional.Omitted), "min_remaining_ttl_seconds" to
-    (SdkClient.omitIfNull(minRemainingTtlSeconds))), operationId = "createM2MToken", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
+        return SdkClient.request<CreateM2MTokenResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/m2m_tokens",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "token_format" to (SdkClient.omitIfNull(tokenFormat)),
+                            "seconds_until_expiration" to
+                                (secondsUntilExpiration ?: SdkClient.SdkOptional.Omitted),
+                            "claims" to (claims ?: SdkClient.SdkOptional.Omitted),
+                            "min_remaining_ttl_seconds" to
+                                (SdkClient.omitIfNull(minRemainingTtlSeconds)),
+                        ),
+                    operationId = "createM2MToken",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Lists stored opaque-format M2M tokens for a specific machine; stateless JWT-format tokens are not included. Use `revoked` and `expired` to filter the results, and `limit` and `offset` to control pagination. Authenticate with a Machine Secret Key to retrieve tokens for its machine, or a Clerk Secret Key to retrieve tokens for any machine in the instance.
+     * Lists stored opaque-format M2M tokens for a specific machine; stateless JWT-format tokens are
+     * not included. Use `revoked` and `expired` to filter the results, and `limit` and `offset` to
+     * control pagination. Authenticate with a Machine Secret Key to retrieve tokens for its
+     * machine, or a Clerk Secret Key to retrieve tokens for any machine in the instance.
      *
-     * Fetches M2M tokens for a specific machine. Only tokens created with the opaque token format are returned by this endpoint. JWT-format M2M tokens are stateless and are not stored. This endpoint can be authenticated by either a Machine Secret Key or by a Clerk Secret Key. - When fetching M2M tokens with a Machine Secret Key, only tokens associated with the authenticated machine can be retrieved. - When fetching M2M tokens with a Clerk Secret Key, tokens for any machine in the…
+     * Fetches M2M tokens for a specific machine. Only tokens created with the opaque token format
+     * are returned by this endpoint. JWT-format M2M tokens are stateless and are not stored. This
+     * endpoint can be authenticated by either a Machine Secret Key or by a Clerk Secret Key. - When
+     * fetching M2M tokens with a Machine Secret Key, only tokens associated with the authenticated
+     * machine can be retrieved. - When fetching M2M tokens with a Clerk Secret Key, tokens for any
+     * machine in the…
      */
-    fun getM2MTokens(clientConfig: ClientConfig, subject: String, revoked: SdkClient.SdkOptional<Boolean?>? = null, expired: SdkClient.SdkOptional<Boolean?>? = null, limit: Double? = null, offset: SdkClient.SdkOptional<Double?>? = null, options: RequestOptions? = null): GetM2MTokensResponse {
+    fun getM2MTokens(
+        clientConfig: ClientConfig,
+        subject: String,
+        revoked: SdkClient.SdkOptional<Boolean?>? = null,
+        expired: SdkClient.SdkOptional<Boolean?>? = null,
+        limit: Double? = null,
+        offset: SdkClient.SdkOptional<Double?>? = null,
+        options: RequestOptions? = null,
+    ): GetM2MTokensResponse {
         Validation.validatePattern("subject", subject, "^mch_\\w{27}$")
 
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-}
+        }
 
         val offsetValue = offset?.getOrNull()
-if (offsetValue != null) {
+        if (offsetValue != null) {
             Validation.validateRange("offset", offsetValue, Validation.RangeOpts(min = 0.0))
-}
+        }
 
-        return SdkClient.request<GetM2MTokensResponse>(SdkClient.RequestSpec("GET", "/m2m_tokens", config = clientConfig, query = mapOf("subject" to SdkClient.queryValue(subject, "form", true), "revoked" to SdkClient.queryValue(revoked, "form", true), "expired" to SdkClient.queryValue(expired, "form", true), "limit" to SdkClient.queryValue(limit, "form", true), "offset" to SdkClient.queryValue(offset, "form", true)), operationId = "getM2MTokens", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
+        return SdkClient.request<GetM2MTokensResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/m2m_tokens",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "subject" to SdkClient.queryValue(subject, "form", true),
+                            "revoked" to SdkClient.queryValue(revoked, "form", true),
+                            "expired" to SdkClient.queryValue(expired, "form", true),
+                            "limit" to SdkClient.queryValue(limit, "form", true),
+                            "offset" to SdkClient.queryValue(offset, "form", true),
+                        ),
+                    operationId = "getM2MTokens",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Revokes a stored opaque-format M2M token. Use `m2m_token_id` to identify the token and optionally provide a `revocation_reason`. JWT-format M2M tokens are stateless and cannot be revoked; a Machine Secret Key can revoke only tokens managed by its machine, while a Clerk Secret Key can revoke any token in the instance.
+     * Revokes a stored opaque-format M2M token. Use `m2m_token_id` to identify the token and
+     * optionally provide a `revocation_reason`. JWT-format M2M tokens are stateless and cannot be
+     * revoked; a Machine Secret Key can revoke only tokens managed by its machine, while a Clerk
+     * Secret Key can revoke any token in the instance.
      *
-     * Revokes a M2M Token. This endpoint only revokes stored opaque-format M2M tokens. JWT-format M2M tokens are stateless and cannot be revoked. This endpoint can be authenticated by either a Machine Secret Key or by a Clerk Secret Key. - When revoking a M2M Token with a Machine Secret Key, the token must managed by the Machine associated with the Machine Secret Key. - When revoking a M2M Token with a Clerk Secret Key, any token on the Instance can be revoked.
+     * Revokes a M2M Token. This endpoint only revokes stored opaque-format M2M tokens. JWT-format
+     * M2M tokens are stateless and cannot be revoked. This endpoint can be authenticated by either
+     * a Machine Secret Key or by a Clerk Secret Key. - When revoking a M2M Token with a Machine
+     * Secret Key, the token must managed by the Machine associated with the Machine Secret Key. -
+     * When revoking a M2M Token with a Clerk Secret Key, any token on the Instance can be revoked.
      */
-    fun revokeM2MToken(clientConfig: ClientConfig, m2mTokenId: String, revocationReason: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): RevokeM2MTokenResponse {
+    fun revokeM2MToken(
+        clientConfig: ClientConfig,
+        m2mTokenId: String,
+        revocationReason: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): RevokeM2MTokenResponse {
         Validation.validatePattern("m2m_token_id", m2mTokenId, "^mt_[0-9A-Fa-f]{32}$")
 
-        return SdkClient.request<RevokeM2MTokenResponse>(SdkClient.RequestSpec("POST", "/m2m_tokens/${SdkClient.encodePathSegment(m2mTokenId)}/revoke", config = clientConfig, body = SdkClient.bodyMap("revocation_reason" to
-    (revocationReason ?: SdkClient.SdkOptional.Omitted)), operationId = "revokeM2MToken", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
+        return SdkClient.request<RevokeM2MTokenResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/m2m_tokens/${SdkClient.encodePathSegment(m2mTokenId)}/revoke",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "revocation_reason" to
+                                (revocationReason ?: SdkClient.SdkOptional.Omitted)
+                        ),
+                    operationId = "revokeM2MToken",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
-     * Verifies an M2M token and returns its token details when valid. Supply the token in the `token` field. A Machine Secret Key can verify a token only when it grants access to that machine, while a Clerk Secret Key can verify any token in the instance.
+     * Verifies an M2M token and returns its token details when valid. Supply the token in the
+     * `token` field. A Machine Secret Key can verify a token only when it grants access to that
+     * machine, while a Clerk Secret Key can verify any token in the instance.
      *
-     * Verifies a M2M Token. This endpoint can be authenticated by either a Machine Secret Key or by a Clerk Secret Key. - When verifying a M2M Token with a Machine Secret Key, the token must be granted access to the Machine associated with the Machine Secret Key. - When verifying a M2M Token with a Clerk Secret Key, any token on the Instance can be verified.
+     * Verifies a M2M Token. This endpoint can be authenticated by either a Machine Secret Key or by
+     * a Clerk Secret Key. - When verifying a M2M Token with a Machine Secret Key, the token must be
+     * granted access to the Machine associated with the Machine Secret Key. - When verifying a M2M
+     * Token with a Clerk Secret Key, any token on the Instance can be verified.
      */
-    fun verifyM2MToken(clientConfig: ClientConfig, token: String, options: RequestOptions? = null): VerifyM2MTokenResponse {
-        return SdkClient.request<VerifyM2MTokenResponse>(SdkClient.RequestSpec("POST", "/m2m_tokens/verify", config = clientConfig, body = SdkClient.bodyMap("token" to (token)), operationId = "verifyM2MToken", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
+    fun verifyM2MToken(
+        clientConfig: ClientConfig,
+        token: String,
+        options: RequestOptions? = null,
+    ): VerifyM2MTokenResponse {
+        return SdkClient.request<VerifyM2MTokenResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/m2m_tokens/verify",
+                    config = clientConfig,
+                    body = SdkClient.bodyMap("token" to (token)),
+                    operationId = "verifyM2MToken",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }

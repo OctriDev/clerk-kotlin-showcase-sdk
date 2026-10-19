@@ -3,16 +3,10 @@
 
 package dev.octri.showcase.clerk.models
 
-/**
- * Typed representation of the `Roles` API schema.
- */
+/** Typed representation of the `Roles` API schema. */
 data class Roles(
-    /**
-     * Required array value serialized in the `data` wire field.
-     */
+    /** Required array value serialized in the `data` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Role>,
-    /**
-     * Total number of roles
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long
+    /** Total number of roles */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long,
 )
