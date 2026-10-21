@@ -10,12 +10,30 @@ import dev.octri.showcase.clerk.SdkClient
 
 internal object UsersVerifyPasswordOperation {
     /**
-     * Check that the user's password matches the supplied input. Useful for custom auth flows and re-verification.
+     * Check that the user's password matches the supplied input. Useful for custom auth flows and
+     * re-verification.
      *
      * @param userId The ID of the user for whom to verify the password
      * @param password The user password to verify
      */
-    fun verifyPassword(clientConfig: ClientConfig, userId: String, password: String, options: RequestOptions? = null): Users.VerifyPasswordResponse {
-        return SdkClient.request<Users.VerifyPasswordResponse>(SdkClient.RequestSpec("POST", "/users/${SdkClient.encodePathSegment(userId)}/verify_password", config = clientConfig, body = SdkClient.bodyMap("password" to (password)), operationId = "verifyPassword", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("500" to ClerkErrors::class.java))).data
+    fun verifyPassword(
+        clientConfig: ClientConfig,
+        userId: String,
+        password: String,
+        options: RequestOptions? = null,
+    ): Users.VerifyPasswordResponse {
+        return SdkClient.request<Users.VerifyPasswordResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/users/${SdkClient.encodePathSegment(userId)}/verify_password",
+                    config = clientConfig,
+                    body = SdkClient.bodyMap("password" to (password)),
+                    operationId = "verifyPassword",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors = mapOf("500" to ClerkErrors::class.java),
+                )
+            )
+            .data
     }
 }

@@ -3,60 +3,149 @@
 
 package dev.octri.showcase.clerk
 
-
 class OrganizationInvitationsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * This request returns the list of organization invitations for the instance. Results can be paginated using the optional `limit` and `offset` query parameters. You can filter them by providing the 'status' query parameter, that accepts multiple values. You can change the order by providing the 'order' query parameter, that accepts multiple values. You can filter by the invited user email address providing the `query` query parameter. The organization invitations are ordered…
+     * This request returns the list of organization invitations for the instance. Results can be
+     * paginated using the optional `limit` and `offset` query parameters. You can filter them by
+     * providing the 'status' query parameter, that accepts multiple values. You can change the
+     * order by providing the 'order' query parameter, that accepts multiple values. You can filter
+     * by the invited user email address providing the `query` query parameter. The organization
+     * invitations are ordered…
      */
-    fun listInstance(orderBy: String? = null, status: ListInstanceOrganizationInvitationsParameterEnum? = null, query: String? = null, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): OrganizationInvitationsWithPublicOrganizationData {
-        return dev.octri.showcase.clerk.methods.OrganizationInvitationsMethods.listInstanceOrganizationInvitations(clientConfig, orderBy, status, query, limit, offset, options)
+    fun listInstance(
+        orderBy: String? = null,
+        status: ListInstanceOrganizationInvitationsParameterEnum? = null,
+        query: String? = null,
+        limit: Long? = null,
+        offset: Long? = null,
+        options: RequestOptions? = null,
+    ): OrganizationInvitationsWithPublicOrganizationData {
+        return dev.octri.showcase.clerk.methods.OrganizationInvitationsMethods
+            .listInstanceOrganizationInvitations(
+                clientConfig,
+                orderBy,
+                status,
+                query,
+                limit,
+                offset,
+                options,
+            )
     }
 
     /**
-     * Creates a new organization invitation and sends an email to the provided `email_address` with a link to accept the invitation and join the organization. You can specify the `role` for the invited organization member. New organization invitations get a "pending" status until they are revoked by an organization administrator or accepted by the invitee. The request body supports passing an optional `redirect_url` parameter. When the invited user clicks the link to accept the…
+     * Creates a new organization invitation and sends an email to the provided `email_address` with
+     * a link to accept the invitation and join the organization. You can specify the `role` for the
+     * invited organization member. New organization invitations get a "pending" status until they
+     * are revoked by an organization administrator or accepted by the invitee. The request body
+     * supports passing an optional `redirect_url` parameter. When the invited user clicks the link
+     * to accept the…
      */
-    fun create(request: dev.octri.showcase.clerk.methods.OrganizationInvitationsMethods.CreateOrganizationInvitationRequest, options: RequestOptions? = null): OrganizationInvitation {
-        return dev.octri.showcase.clerk.methods.OrganizationInvitationsMethods.createOrganizationInvitation(clientConfig, request, options)
+    fun create(
+        request:
+            dev.octri.showcase.clerk.methods.OrganizationInvitationsMethods.CreateOrganizationInvitationRequest,
+        options: RequestOptions? = null,
+    ): OrganizationInvitation {
+        return dev.octri.showcase.clerk.methods.OrganizationInvitationsMethods
+            .createOrganizationInvitation(clientConfig, request, options)
     }
 
     /**
-     * This request returns the list of organization invitations. Results can be paginated using the optional `limit` and `offset` query parameters. You can filter them by providing the 'status' query parameter, that accepts multiple values. The organization invitations are ordered by descending creation date. Most recent invitations will be returned first. Any invitations created as a result of an Organization Domain are not included in the results.
+     * This request returns the list of organization invitations. Results can be paginated using the
+     * optional `limit` and `offset` query parameters. You can filter them by providing the 'status'
+     * query parameter, that accepts multiple values. The organization invitations are ordered by
+     * descending creation date. Most recent invitations will be returned first. Any invitations
+     * created as a result of an Organization Domain are not included in the results.
      */
-    fun list(request: dev.octri.showcase.clerk.methods.OrganizationInvitationsMethods.ListOrganizationInvitationsRequest, options: RequestOptions? = null): OrganizationInvitations {
-        return dev.octri.showcase.clerk.methods.OrganizationInvitationsMethods.listOrganizationInvitations(clientConfig, request, options)
+    fun list(
+        request:
+            dev.octri.showcase.clerk.methods.OrganizationInvitationsMethods.ListOrganizationInvitationsRequest,
+        options: RequestOptions? = null,
+    ): OrganizationInvitations {
+        return dev.octri.showcase.clerk.methods.OrganizationInvitationsMethods
+            .listOrganizationInvitations(clientConfig, request, options)
     }
 
     /**
-     * Creates and sends organization invitations in bulk for a specified organization. Provide 1–10 invitation objects, each with `email_address` and `role`; you can set a different role and inviter for each invitation. Invitations remain pending until accepted or revoked, and `notify` controls whether an invitation email is sent.
+     * Creates and sends organization invitations in bulk for a specified organization. Provide 1–10
+     * invitation objects, each with `email_address` and `role`; you can set a different role and
+     * inviter for each invitation. Invitations remain pending until accepted or revoked, and
+     * `notify` controls whether an invitation email is sent.
      *
-     * Creates new organization invitations in bulk and sends out emails to the provided email addresses with a link to accept the invitation and join the organization. This endpoint is limited to a maximum of 10 invitations per API call. If you need to send more invitations, please make multiple requests. You can specify a different `role` for each invited organization member. New organization invitations get a "pending" status until they are revoked by an organization…
+     * Creates new organization invitations in bulk and sends out emails to the provided email
+     * addresses with a link to accept the invitation and join the organization. This endpoint is
+     * limited to a maximum of 10 invitations per API call. If you need to send more invitations,
+     * please make multiple requests. You can specify a different `role` for each invited
+     * organization member. New organization invitations get a "pending" status until they are
+     * revoked by an organization…
      */
-    fun createBulk(organizationId: String, body: List<dev.octri.showcase.clerk.methods.OrganizationInvitationsMethods.CreateOrganizationInvitationBulkItem>, options: RequestOptions? = null): OrganizationInvitations {
-        return dev.octri.showcase.clerk.methods.OrganizationInvitationsMethods.createOrganizationInvitationBulk(clientConfig, organizationId, body, options)
+    fun createBulk(
+        organizationId: String,
+        body:
+            List<
+                dev.octri.showcase.clerk.methods.OrganizationInvitationsMethods.CreateOrganizationInvitationBulkItem
+            >,
+        options: RequestOptions? = null,
+    ): OrganizationInvitations {
+        return dev.octri.showcase.clerk.methods.OrganizationInvitationsMethods
+            .createOrganizationInvitationBulk(clientConfig, organizationId, body, options)
     }
 
     /**
-     * This request returns the list of organization invitations with "pending" status. These are the organization invitations that can still be used to join the organization, but have not been accepted by the invited user yet. Results can be paginated using the optional `limit` and `offset` query parameters. The organization invitations are ordered by descending creation date. Most recent invitations will be returned first. Any invitations created as a result of an Organization…
+     * This request returns the list of organization invitations with "pending" status. These are
+     * the organization invitations that can still be used to join the organization, but have not
+     * been accepted by the invited user yet. Results can be paginated using the optional `limit`
+     * and `offset` query parameters. The organization invitations are ordered by descending
+     * creation date. Most recent invitations will be returned first. Any invitations created as a
+     * result of an Organization…
      *
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
-    fun listPending(organizationId: String, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): OrganizationInvitations {
-        return dev.octri.showcase.clerk.methods.OrganizationInvitationsMethods.listPendingOrganizationInvitations(clientConfig, organizationId, limit, offset, options)
+    fun listPending(
+        organizationId: String,
+        limit: Long? = null,
+        offset: Long? = null,
+        options: RequestOptions? = null,
+    ): OrganizationInvitations {
+        return dev.octri.showcase.clerk.methods.OrganizationInvitationsMethods
+            .listPendingOrganizationInvitations(
+                clientConfig,
+                organizationId,
+                limit,
+                offset,
+                options,
+            )
+    }
+
+    /** Use this request to get an existing organization invitation by ID. */
+    fun get(
+        organizationId: String,
+        invitationId: String,
+        options: RequestOptions? = null,
+    ): OrganizationInvitation {
+        return dev.octri.showcase.clerk.methods.OrganizationInvitationsMethods
+            .getOrganizationInvitation(clientConfig, organizationId, invitationId, options)
     }
 
     /**
-     * Use this request to get an existing organization invitation by ID.
+     * Use this request to revoke a previously issued organization invitation. Revoking an
+     * organization invitation makes it invalid; the invited user will no longer be able to join the
+     * organization with the revoked invitation. Only organization invitations with "pending" status
+     * can be revoked. The request accepts the `requesting_user_id` parameter to specify the user
+     * which revokes the invitation. Only users with "admin" role can revoke invitations.
      */
-    fun get(organizationId: String, invitationId: String, options: RequestOptions? = null): OrganizationInvitation {
-        return dev.octri.showcase.clerk.methods.OrganizationInvitationsMethods.getOrganizationInvitation(clientConfig, organizationId, invitationId, options)
+    fun revoke(
+        organizationId: String,
+        invitationId: String,
+        requestingUserId: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): OrganizationInvitation {
+        return dev.octri.showcase.clerk.methods.OrganizationInvitationsMethods
+            .revokeOrganizationInvitation(
+                clientConfig,
+                organizationId,
+                invitationId,
+                requestingUserId,
+                options,
+            )
     }
-
-    /**
-     * Use this request to revoke a previously issued organization invitation. Revoking an organization invitation makes it invalid; the invited user will no longer be able to join the organization with the revoked invitation. Only organization invitations with "pending" status can be revoked. The request accepts the `requesting_user_id` parameter to specify the user which revokes the invitation. Only users with "admin" role can revoke invitations.
-     */
-    fun revoke(organizationId: String, invitationId: String, requestingUserId: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): OrganizationInvitation {
-        return dev.octri.showcase.clerk.methods.OrganizationInvitationsMethods.revokeOrganizationInvitation(clientConfig, organizationId, invitationId, requestingUserId, options)
-    }
-
 }

@@ -10,13 +10,30 @@ import dev.octri.showcase.clerk.SdkClient
 
 internal object UsersDeleteBackupCodeOperation {
     /**
-     * Deletes all backup codes for a user, disabling them for future use. Supply `user_id` to identify the user whose backup codes you want to disable.
+     * Deletes all backup codes for a user, disabling them for future use. Supply `user_id` to
+     * identify the user whose backup codes you want to disable.
      *
      * Disable all of a user's backup codes.
      *
      * @param userId The ID of the user whose backup codes are to be deleted.
      */
-    fun deleteBackupCode(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): Users.DeleteBackupCodeResponse {
-        return SdkClient.request<Users.DeleteBackupCodeResponse>(SdkClient.RequestSpec("DELETE", "/users/${SdkClient.encodePathSegment(userId)}/backup_code", config = clientConfig, operationId = "deleteBackupCode", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
+    fun deleteBackupCode(
+        clientConfig: ClientConfig,
+        userId: String,
+        options: RequestOptions? = null,
+    ): Users.DeleteBackupCodeResponse {
+        return SdkClient.request<Users.DeleteBackupCodeResponse>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/users/${SdkClient.encodePathSegment(userId)}/backup_code",
+                    config = clientConfig,
+                    operationId = "deleteBackupCode",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf("404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java),
+                )
+            )
+            .data
     }
 }

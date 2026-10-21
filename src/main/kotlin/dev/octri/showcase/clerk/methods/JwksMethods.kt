@@ -10,20 +10,23 @@ import dev.octri.showcase.clerk.SdkClient
 
 object JwksMethods {
 
-
     /**
-     * Retrieves the instance's JSON Web Key Set. Use the returned keys when you need the public key material associated with the instance.
+     * Retrieves the instance's JSON Web Key Set. Use the returned keys when you need the public key
+     * material associated with the instance.
      *
      * Retrieve the JSON Web Key Set of the instance
      */
     fun getJwks(clientConfig: ClientConfig, options: RequestOptions? = null): JWKS {
-        return SdkClient.request<JWKS>(SdkClient.RequestSpec("GET", "/jwks", config = clientConfig, operationId = "getJwks", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
+        return SdkClient.request<JWKS>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/jwks",
+                    config = clientConfig,
+                    operationId = "getJwks",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }

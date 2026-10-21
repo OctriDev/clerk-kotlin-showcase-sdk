@@ -3,20 +3,15 @@
 
 package dev.octri.showcase.clerk.models
 
-/**
- * Typed representation of the `TestingToken` API schema.
- */
+/** Typed representation of the `TestingToken` API schema. */
 data class TestingToken(
-    /**
-     * Required enumerated value serialized in the `object` wire field.
-     */
+    /** Required enumerated value serialized in the `object` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: TestingTokenObjectEnum,
     /**
-     * The actual token. This value is meant to be passed in the `__clerk_testing_token` query parameter with requests to the Frontend API.
+     * The actual token. This value is meant to be passed in the `__clerk_testing_token` query
+     * parameter with requests to the Frontend API.
      */
     val token: String,
-    /**
-     * Unix timestamp of the token's expiration time.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long
+    /** Unix timestamp of the token's expiration time. */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long,
 )

@@ -10,13 +10,30 @@ import dev.octri.showcase.clerk.SdkClient
 
 internal object UsersDeleteTOTPOperation {
     /**
-     * Deletes all TOTP credentials associated with a user. Supply the `user_id` of the user whose TOTPs you want to delete; the operation removes all of that user's TOTPs.
+     * Deletes all TOTP credentials associated with a user. Supply the `user_id` of the user whose
+     * TOTPs you want to delete; the operation removes all of that user's TOTPs.
      *
      * Deletes all of the user's TOTPs.
      *
      * @param userId The ID of the user whose TOTPs are to be deleted
      */
-    fun deleteTotp(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): Users.DeleteTOTPResponse {
-        return SdkClient.request<Users.DeleteTOTPResponse>(SdkClient.RequestSpec("DELETE", "/users/${SdkClient.encodePathSegment(userId)}/totp", config = clientConfig, operationId = "deleteTotp", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
+    fun deleteTotp(
+        clientConfig: ClientConfig,
+        userId: String,
+        options: RequestOptions? = null,
+    ): Users.DeleteTOTPResponse {
+        return SdkClient.request<Users.DeleteTOTPResponse>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/users/${SdkClient.encodePathSegment(userId)}/totp",
+                    config = clientConfig,
+                    operationId = "deleteTotp",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf("404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java),
+                )
+            )
+            .data
     }
 }

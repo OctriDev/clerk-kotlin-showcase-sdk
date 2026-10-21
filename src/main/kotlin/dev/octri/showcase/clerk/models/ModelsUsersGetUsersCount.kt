@@ -3,16 +3,10 @@
 
 package dev.octri.showcase.clerk.models
 
-/**
- * Typed representation of the `TotalCount` API schema.
- */
+/** Typed representation of the `TotalCount` API schema. */
 data class TotalCount(
-    /**
-     * String representing the object's type. Objects of the same type share the same value.
-     */
+    /** String representing the object's type. Objects of the same type share the same value. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: TotalCountObjectEnum,
-    /**
-     * Required `int64`-formatted value serialized in the `total_count` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long
+    /** Required `int64`-formatted value serialized in the `total_count` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long,
 )

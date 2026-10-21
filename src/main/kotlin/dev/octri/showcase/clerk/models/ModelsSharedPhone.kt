@@ -3,71 +3,71 @@
 
 package dev.octri.showcase.clerk.models
 
-/**
- * Typed representation of the `PhoneNumber` API schema.
- */
+/** Typed representation of the `PhoneNumber` API schema. */
 data class PhoneNumber(
-    /**
-     * String representing the object's type. Objects of the same type share the same value.
-     */
+    /** String representing the object's type. Objects of the same type share the same value. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: PhoneNumberObjectEnum,
-    /**
-     * Required `string` value serialized in the `phone_number` wire field.
-     */
+    /** Required `string` value serialized in the `phone_number` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("phone_number") val phoneNumber: String,
-    /**
-     * Required `boolean` value serialized in the `reserved` wire field.
-     */
+    /** Required `boolean` value serialized in the `reserved` wire field. */
     val reserved: Boolean,
-    /**
-     * Required object value serialized in the `verification` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("verification", required = true) val verification: PhoneNumberVerification?,
-    /**
-     * Required array value serialized in the `linked_to` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("linked_to") val linkedTo: List<IdentificationLink>,
-    /**
-     * Unix timestamp of creation
-     */
+    /** Required object value serialized in the `verification` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("verification", required = true)
+    val verification: PhoneNumberVerification?,
+    /** Required array value serialized in the `linked_to` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("linked_to")
+    val linkedTo: List<IdentificationLink>,
+    /** Unix timestamp of creation */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Unix timestamp of creation
-     */
+    /** Unix timestamp of creation */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
-    /**
-     * Optional `string` value serialized in the `id` wire field.
-     */
+    /** Optional `string` value serialized in the `id` wire field. */
     val id: String? = null,
-    /**
-     * Optional `boolean` value serialized in the `reserved_for_second_factor` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reserved_for_second_factor") val reservedForSecondFactor: Boolean? = null,
-    /**
-     * Optional `boolean` value serialized in the `default_second_factor` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("default_second_factor") val defaultSecondFactor: Boolean? = null,
-    /**
-     * Optional array value serialized in the `backup_codes` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("backup_codes") val backupCodes: List<String>? = null
+    /** Optional `boolean` value serialized in the `reserved_for_second_factor` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("reserved_for_second_factor")
+    val reservedForSecondFactor: Boolean? = null,
+    /** Optional `boolean` value serialized in the `default_second_factor` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("default_second_factor")
+    val defaultSecondFactor: Boolean? = null,
+    /** Optional array value serialized in the `backup_codes` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("backup_codes")
+    val backupCodes: List<String>? = null,
 )
 
-/**
- * Required object value serialized in the `verification` wire field.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "object", visible = true, defaultImpl = UnknownPhoneNumberVerification::class)
+/** Required object value serialized in the `verification` wire field. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "object",
+    visible = true,
+    defaultImpl = UnknownPhoneNumberVerification::class,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = VerificationOtp::class, name = "verification_otp"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = VerificationAdmin::class, name = "verification_admin")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = VerificationOtp::class,
+        name = "verification_otp",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = VerificationAdmin::class,
+        name = "verification_admin",
+    ),
 )
 sealed interface PhoneNumberVerification
 
 /** A [PhoneNumberVerification] whose `object` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class UnknownPhoneNumberVerification @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class UnknownPhoneNumberVerification
+@com.fasterxml.jackson.annotation.JsonCreator(
+    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+)
+constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
 ) : PhoneNumberVerification {
     /** The tag the server sent. */
-    val tag: String get() = raw.path("object").asText()
+    val tag: String
+        get() = raw.path("object").asText()
 }

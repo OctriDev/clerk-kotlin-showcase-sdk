@@ -3,200 +3,139 @@
 
 package dev.octri.showcase.clerk.models
 
-/**
- * Required object value serialized in the `idp_certificates[]` wire field.
- */
+/** Required object value serialized in the `idp_certificates[]` wire field. */
 data class SAMLConnectionIdpCertificatesItem(
-    /**
-     * The X.509 certificate, base64 DER without PEM armor
-     */
+    /** The X.509 certificate, base64 DER without PEM armor */
     val certificate: String,
-    /**
-     * Unix timestamp (milliseconds) of the X.509 NotBefore
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("issued_at", required = true) val issuedAt: Long?,
-    /**
-     * Unix timestamp (milliseconds) of the X.509 NotAfter
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_at", required = true) val expiresAt: Long?
+    /** Unix timestamp (milliseconds) of the X.509 NotBefore */
+    @com.fasterxml.jackson.annotation.JsonProperty("issued_at", required = true)
+    val issuedAt: Long?,
+    /** Unix timestamp (milliseconds) of the X.509 NotAfter */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_at", required = true)
+    val expiresAt: Long?,
 )
 
-/**
- * Typed representation of the `SAMLConnection` API schema.
- */
+/** Typed representation of the `SAMLConnection` API schema. */
 data class SAMLConnection(
-    /**
-     * Required enumerated value serialized in the `object` wire field.
-     */
+    /** Required enumerated value serialized in the `object` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: SAMLConnectionObjectEnum,
-    /**
-     * Required `string` value serialized in the `id` wire field.
-     */
+    /** Required `string` value serialized in the `id` wire field. */
     val id: String,
-    /**
-     * Required `string` value serialized in the `name` wire field.
-     */
+    /** Required `string` value serialized in the `name` wire field. */
     val name: String,
+    /** Required `string` value serialized in the `idp_entity_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("idp_entity_id", required = true)
+    val idpEntityId: String?,
+    /** Required `string` value serialized in the `idp_sso_url` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("idp_sso_url", required = true)
+    val idpSsoUrl: String?,
+    /** Required `string` value serialized in the `idp_certificate` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("idp_certificate", required = true)
+    val idpCertificate: String?,
     /**
-     * Required `string` value serialized in the `idp_entity_id` wire field.
+     * Unix timestamp (milliseconds) of the start of the IdP certificate validity window (X.509
+     * NotBefore). Null when no certificate is configured.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("idp_entity_id", required = true) val idpEntityId: String?,
+    @com.fasterxml.jackson.annotation.JsonProperty("idp_certificate_issued_at", required = true)
+    val idpCertificateIssuedAt: Long?,
     /**
-     * Required `string` value serialized in the `idp_sso_url` wire field.
+     * Unix timestamp (milliseconds) of the end of the IdP certificate validity window (X.509
+     * NotAfter). Null when no certificate is configured.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("idp_sso_url", required = true) val idpSsoUrl: String?,
+    @com.fasterxml.jackson.annotation.JsonProperty("idp_certificate_expires_at", required = true)
+    val idpCertificateExpiresAt: Long?,
     /**
-     * Required `string` value serialized in the `idp_certificate` wire field.
+     * Every IdP signing certificate the connection trusts, primary first. A SAML response verifies
+     * against any of them.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("idp_certificate", required = true) val idpCertificate: String?,
-    /**
-     * Unix timestamp (milliseconds) of the start of the IdP certificate validity window (X.509 NotBefore). Null when no certificate is configured.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("idp_certificate_issued_at", required = true) val idpCertificateIssuedAt: Long?,
-    /**
-     * Unix timestamp (milliseconds) of the end of the IdP certificate validity window (X.509 NotAfter). Null when no certificate is configured.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("idp_certificate_expires_at", required = true) val idpCertificateExpiresAt: Long?,
-    /**
-     * Every IdP signing certificate the connection trusts, primary first. A SAML response verifies against any of them.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("idp_certificates") val idpCertificates: List<SAMLConnectionIdpCertificatesItem>,
-    /**
-     * Required `string` value serialized in the `acs_url` wire field.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("idp_certificates")
+    val idpCertificates: List<SAMLConnectionIdpCertificatesItem>,
+    /** Required `string` value serialized in the `acs_url` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("acs_url") val acsUrl: String,
-    /**
-     * Required `string` value serialized in the `sp_entity_id` wire field.
-     */
+    /** Required `string` value serialized in the `sp_entity_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("sp_entity_id") val spEntityId: String,
-    /**
-     * Required `string` value serialized in the `sp_metadata_url` wire field.
-     */
+    /** Required `string` value serialized in the `sp_metadata_url` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("sp_metadata_url") val spMetadataUrl: String,
-    /**
-     * Required `boolean` value serialized in the `active` wire field.
-     */
+    /** Required `boolean` value serialized in the `active` wire field. */
     val active: Boolean,
-    /**
-     * Required `string` value serialized in the `provider` wire field.
-     */
+    /** Required `string` value serialized in the `provider` wire field. */
     val provider: String,
-    /**
-     * Required `integer` value serialized in the `user_count` wire field.
-     */
+    /** Required `integer` value serialized in the `user_count` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("user_count") val userCount: Long,
-    /**
-     * Required `boolean` value serialized in the `sync_user_attributes` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sync_user_attributes") val syncUserAttributes: Boolean,
-    /**
-     * Required `boolean` value serialized in the `allow_subdomains` wire field.
-     */
+    /** Required `boolean` value serialized in the `sync_user_attributes` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sync_user_attributes")
+    val syncUserAttributes: Boolean,
+    /** Required `boolean` value serialized in the `allow_subdomains` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("allow_subdomains") val allowSubdomains: Boolean,
-    /**
-     * Required `boolean` value serialized in the `allow_idp_initiated` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("allow_idp_initiated") val allowIdpInitiated: Boolean,
+    /** Required `boolean` value serialized in the `allow_idp_initiated` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("allow_idp_initiated")
+    val allowIdpInitiated: Boolean,
     /**
      * Required `boolean` value serialized in the `disable_additional_identifications` wire field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("disable_additional_identifications") val disableAdditionalIdentifications: Boolean,
+    @com.fasterxml.jackson.annotation.JsonProperty("disable_additional_identifications")
+    val disableAdditionalIdentifications: Boolean,
     /**
      * Required `boolean` value serialized in the `allow_organization_account_linking` wire field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("allow_organization_account_linking") val allowOrganizationAccountLinking: Boolean,
-    /**
-     * Enable or deactivate ForceAuthn
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("allow_organization_account_linking")
+    val allowOrganizationAccountLinking: Boolean,
+    /** Enable or deactivate ForceAuthn */
     @com.fasterxml.jackson.annotation.JsonProperty("force_authn") val forceAuthn: Boolean,
-    /**
-     * Configuration for the login_hint sent to the IdP on SSO sign-in
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("login_hint") val loginHint: SAMLConnectionLoginHint,
-    /**
-     * Unix timestamp of creation.
-     */
+    /** Configuration for the login_hint sent to the IdP on SSO sign-in */
+    @com.fasterxml.jackson.annotation.JsonProperty("login_hint")
+    val loginHint: SAMLConnectionLoginHint,
+    /** Unix timestamp of creation. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Unix timestamp of last update.
-     */
+    /** Unix timestamp of last update. */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
-    /**
-     * Optional `string` value serialized in the `domain` wire field.
-     */
+    /** Optional `string` value serialized in the `domain` wire field. */
     val domain: String? = null,
-    /**
-     * Optional array value serialized in the `domains` wire field.
-     */
+    /** Optional array value serialized in the `domains` wire field. */
     val domains: List<String>? = null,
-    /**
-     * Optional `string` value serialized in the `idp_metadata_url` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("idp_metadata_url") val idpMetadataUrl: String? = null,
-    /**
-     * Optional `string` value serialized in the `idp_metadata` wire field.
-     */
+    /** Optional `string` value serialized in the `idp_metadata_url` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("idp_metadata_url")
+    val idpMetadataUrl: String? = null,
+    /** Optional `string` value serialized in the `idp_metadata` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("idp_metadata") val idpMetadata: String? = null,
-    /**
-     * Optional `string` value serialized in the `organization_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("organization_id") val organizationId: String? = null,
-    /**
-     * Optional object value serialized in the `attribute_mapping` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("attribute_mapping") val attributeMapping: SAMLConnectionAttributeMapping? = null,
-    /**
-     * Optional `string` value serialized in the `enterprise_connection_id` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("enterprise_connection_id") val enterpriseConnectionId: String? = null
+    /** Optional `string` value serialized in the `organization_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("organization_id")
+    val organizationId: String? = null,
+    /** Optional object value serialized in the `attribute_mapping` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("attribute_mapping")
+    val attributeMapping: SAMLConnectionAttributeMapping? = null,
+    /** Optional `string` value serialized in the `enterprise_connection_id` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("enterprise_connection_id")
+    val enterpriseConnectionId: String? = null,
 )
 
-/**
- * Typed representation of the `SAMLConnectionAttributeMapping` API schema.
- */
+/** Typed representation of the `SAMLConnectionAttributeMapping` API schema. */
 data class SAMLConnectionAttributeMapping(
-    /**
-     * Required `string` value serialized in the `user_id` wire field.
-     */
+    /** Required `string` value serialized in the `user_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String,
-    /**
-     * Required `string` value serialized in the `email_address` wire field.
-     */
+    /** Required `string` value serialized in the `email_address` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("email_address") val emailAddress: String,
-    /**
-     * Required `string` value serialized in the `first_name` wire field.
-     */
+    /** Required `string` value serialized in the `first_name` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("first_name") val firstName: String,
-    /**
-     * Required `string` value serialized in the `last_name` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_name") val lastName: String
+    /** Required `string` value serialized in the `last_name` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_name") val lastName: String,
 )
 
-/**
- * Configuration for the login_hint sent to the IdP on SSO sign-in
- */
+/** Configuration for the login_hint sent to the IdP on SSO sign-in */
 data class SAMLConnectionLoginHint(
-    /**
-     * Controls the login_hint sent to the IdP on SSO sign-in
-     */
+    /** Controls the login_hint sent to the IdP on SSO sign-in */
     val mode: SAMLConnectionLoginHintModeEnum,
     /**
-     * The user public_metadata key whose value is sent as the login_hint when mode is custom_attribute
+     * The user public_metadata key whose value is sent as the login_hint when mode is
+     * custom_attribute
      */
-    val source: String? = null
+    val source: String? = null,
 )
 
-/**
- * Typed representation of the `SAMLConnections` API schema.
- */
+/** Typed representation of the `SAMLConnections` API schema. */
 data class SAMLConnections(
-    /**
-     * Required array value serialized in the `data` wire field.
-     */
+    /** Required array value serialized in the `data` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<SAMLConnection>,
-    /**
-     * Total number of SAML Connections
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long
+    /** Total number of SAML Connections */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long,
 )

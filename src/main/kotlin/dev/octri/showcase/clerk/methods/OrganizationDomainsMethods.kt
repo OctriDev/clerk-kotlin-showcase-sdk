@@ -16,63 +16,106 @@ import dev.octri.showcase.clerk.Validation
 
 object OrganizationDomainsMethods {
 
-
     /**
-     * Creates a new organization domain. By default the domain is verified, but can be optionally set to unverified.
+     * Creates a new organization domain. By default the domain is verified, but can be optionally
+     * set to unverified.
      *
-     * @param organizationId The ID of the organization where the new domain will be
-     *   created.
+     * @param organizationId The ID of the organization where the new domain will be created.
      * @param name The name of the new domain
      * @param enrollmentMode The enrollment_mode for the new domain. This can be
-     *   `automatic_invitation`, `automatic_suggestion`, `manual_invitation` or
-     *   `enterprise_sso`
+     *   `automatic_invitation`, `automatic_suggestion`, `manual_invitation` or `enterprise_sso`
      * @param verified The status of domain's verification. Defaults to true
      */
-    fun createOrganizationDomain(clientConfig: ClientConfig, organizationId: String, name: String? = null, enrollmentMode: String? = null, verified: SdkClient.SdkOptional<Boolean?>? = null, options: RequestOptions? = null): OrganizationDomain {
-        return SdkClient.request<OrganizationDomain>(SdkClient.RequestSpec("POST", "/organizations/${SdkClient.encodePathSegment(organizationId)}/domains", config = clientConfig, body = SdkClient.bodyMap("name" to (SdkClient.omitIfNull(name)), "enrollment_mode" to (SdkClient.omitIfNull(enrollmentMode)), "verified" to (verified ?: SdkClient.SdkOptional.Omitted)), operationId = "createOrganizationDomain", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
+    fun createOrganizationDomain(
+        clientConfig: ClientConfig,
+        organizationId: String,
+        name: String? = null,
+        enrollmentMode: String? = null,
+        verified: SdkClient.SdkOptional<Boolean?>? = null,
+        options: RequestOptions? = null,
+    ): OrganizationDomain {
+        return SdkClient.request<OrganizationDomain>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/organizations/${SdkClient.encodePathSegment(organizationId)}/domains",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "name" to (SdkClient.omitIfNull(name)),
+                            "enrollment_mode" to (SdkClient.omitIfNull(enrollmentMode)),
+                            "verified" to (verified ?: SdkClient.SdkOptional.Omitted),
+                        ),
+                    operationId = "createOrganizationDomain",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ClerkErrors::class.java,
+                            "403" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                            "422" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Lists domains associated with an organization. Filter the results by verification status or enrollment mode, and use `limit` and `offset` to control the result window. The response includes the matching domains and their total count.
+     * Lists domains associated with an organization. Filter the results by verification status or
+     * enrollment mode, and use `limit` and `offset` to control the result window. The response
+     * includes the matching domains and their total count.
      *
      * Get a list of all domains of an organization.
      *
      * @param organizationId The organization ID.
      * @param verified Filter domains by their verification status. `true` or `false`
      * @param enrollmentMode Filter domains by their enrollment mode. Accepts
-     *   `automatic_invitation`, `automatic_suggestion`, `manual_invitation` or
-     *   `enterprise_sso`. Prefix a value with `-` to exclude it instead (e.g.
-     *   `-enterprise_sso`). Include and exclude filters can be combined and compose as
-     *   AND.
-     * @param limit Applies a limit to the number of results returned. Can be used
-     *   for paginating the results together with `offset`.
-     * @param offset Skip the first `offset` results when paginating. Needs to be an
-     *   integer greater or equal to zero. To be used in conjunction with `limit`.
+     *   `automatic_invitation`, `automatic_suggestion`, `manual_invitation` or `enterprise_sso`.
+     *   Prefix a value with `-` to exclude it instead (e.g. `-enterprise_sso`). Include and exclude
+     *   filters can be combined and compose as AND.
+     * @param limit Applies a limit to the number of results returned. Can be used for paginating
+     *   the results together with `offset`.
+     * @param offset Skip the first `offset` results when paginating. Needs to be an integer greater
+     *   or equal to zero. To be used in conjunction with `limit`.
      */
-    fun listOrganizationDomains(clientConfig: ClientConfig, organizationId: String, verified: String? = null, enrollmentMode: String? = null, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): OrganizationDomains {
+    fun listOrganizationDomains(
+        clientConfig: ClientConfig,
+        organizationId: String,
+        verified: String? = null,
+        enrollmentMode: String? = null,
+        limit: Long? = null,
+        offset: Long? = null,
+        options: RequestOptions? = null,
+    ): OrganizationDomains {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 500.0))
-}
+        }
 
         if (offset != null) {
             Validation.validateRange("offset", offset, Validation.RangeOpts(min = 0.0))
-}
+        }
 
-        return SdkClient.request<OrganizationDomains>(SdkClient.RequestSpec("GET", "/organizations/${SdkClient.encodePathSegment(organizationId)}/domains", config = clientConfig, query = mapOf("verified" to SdkClient.queryValue(verified, "form", true), "enrollment_mode" to
-    SdkClient.queryValue(enrollmentMode, "form", true), "limit" to SdkClient.queryValue(limit, "form", true), "offset" to SdkClient.queryValue(offset, "form", true)), operationId = "listOrganizationDomains", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
+        return SdkClient.request<OrganizationDomains>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/organizations/${SdkClient.encodePathSegment(organizationId)}/domains",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "verified" to SdkClient.queryValue(verified, "form", true),
+                            "enrollment_mode" to SdkClient.queryValue(enrollmentMode, "form", true),
+                            "limit" to SdkClient.queryValue(limit, "form", true),
+                            "offset" to SdkClient.queryValue(offset, "form", true),
+                        ),
+                    operationId = "listOrganizationDomains",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf("401" to ClerkErrors::class.java, "422" to ClerkErrors::class.java),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
      * Updates the properties of an existing organization domain.
@@ -80,54 +123,112 @@ object OrganizationDomainsMethods {
      * @param organizationId The ID of the organization to which the domain belongs
      * @param domainId The ID of the domain
      * @param enrollmentMode The enrollment_mode for the new domain. This can be
-     *   `automatic_invitation`, `automatic_suggestion`, `manual_invitation` or
-     *   `enterprise_sso`
+     *   `automatic_invitation`, `automatic_suggestion`, `manual_invitation` or `enterprise_sso`
      * @param verified The status of the domain's verification
      */
-    fun updateOrganizationDomain(clientConfig: ClientConfig, organizationId: String, domainId: String, enrollmentMode: SdkClient.SdkOptional<String?>? = null, verified: SdkClient.SdkOptional<Boolean?>? = null, options: RequestOptions? = null): OrganizationDomain {
-        return SdkClient.request<OrganizationDomain>(SdkClient.RequestSpec("PATCH", "/organizations/${SdkClient.encodePathSegment(organizationId)}/domains/${SdkClient.encodePathSegment(domainId)}", config = clientConfig, body = SdkClient.bodyMap("enrollment_mode" to
-    (enrollmentMode ?: SdkClient.SdkOptional.Omitted), "verified" to (verified ?: SdkClient.SdkOptional.Omitted)), operationId = "updateOrganizationDomain", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
+    fun updateOrganizationDomain(
+        clientConfig: ClientConfig,
+        organizationId: String,
+        domainId: String,
+        enrollmentMode: SdkClient.SdkOptional<String?>? = null,
+        verified: SdkClient.SdkOptional<Boolean?>? = null,
+        options: RequestOptions? = null,
+    ): OrganizationDomain {
+        return SdkClient.request<OrganizationDomain>(
+                SdkClient.RequestSpec(
+                    "PATCH",
+                    "/organizations/${SdkClient.encodePathSegment(organizationId)}/domains/${SdkClient.encodePathSegment(domainId)}",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "enrollment_mode" to (enrollmentMode ?: SdkClient.SdkOptional.Omitted),
+                            "verified" to (verified ?: SdkClient.SdkOptional.Omitted),
+                        ),
+                    operationId = "updateOrganizationDomain",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ClerkErrors::class.java,
+                            "403" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                            "422" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Deletes a domain from an organization. Use the `organization_id` and `domain_id` path parameters to identify the organization and domain to remove. A successful response indicates that the domain was deleted.
+     * Deletes a domain from an organization. Use the `organization_id` and `domain_id` path
+     * parameters to identify the organization and domain to remove. A successful response indicates
+     * that the domain was deleted.
      *
      * Removes the given domain from the organization.
      *
      * @param organizationId The ID of the organization to which the domain belongs
      * @param domainId The ID of the domain
      */
-    fun deleteOrganizationDomain(clientConfig: ClientConfig, organizationId: String, domainId: String, options: RequestOptions? = null): DeletedObject {
-        return SdkClient.request<DeletedObject>(SdkClient.RequestSpec("DELETE", "/organizations/${SdkClient.encodePathSegment(organizationId)}/domains/${SdkClient.encodePathSegment(domainId)}", config = clientConfig, operationId = "deleteOrganizationDomain", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
+    fun deleteOrganizationDomain(
+        clientConfig: ClientConfig,
+        organizationId: String,
+        domainId: String,
+        options: RequestOptions? = null,
+    ): DeletedObject {
+        return SdkClient.request<DeletedObject>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/organizations/${SdkClient.encodePathSegment(organizationId)}/domains/${SdkClient.encodePathSegment(domainId)}",
+                    config = clientConfig,
+                    operationId = "deleteOrganizationDomain",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ClerkErrors::class.java,
+                            "401" to ClerkErrors::class.java,
+                            "403" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Flips the organization domain's ownership state to verified via the manual override path, bypassing the self-serve TXT DNS challenge. The domain row records strategy=`manual_override` and an `organization_domain.ownership_verified` audit event is emitted with the same strategy. Idempotent: re-calling on an already-verified domain returns the current ownership state without re-emitting the audit event.
+     * Flips the organization domain's ownership state to verified via the manual override path,
+     * bypassing the self-serve TXT DNS challenge. The domain row records strategy=`manual_override`
+     * and an `organization_domain.ownership_verified` audit event is emitted with the same
+     * strategy. Idempotent: re-calling on an already-verified domain returns the current ownership
+     * state without re-emitting the audit event.
      *
      * @param organizationId The ID of the organization to which the domain belongs
      * @param domainId The ID of the domain
      */
-    fun verifyOrganizationDomainOwnership(clientConfig: ClientConfig, organizationId: String, domainId: String, options: RequestOptions? = null): OrganizationDomain {
-        return SdkClient.request<OrganizationDomain>(SdkClient.RequestSpec("POST", "/organizations/${SdkClient.encodePathSegment(organizationId)}/domains/${SdkClient.encodePathSegment(domainId)}/verify_ownership", config = clientConfig, operationId = "verifyOrganizationDomainOwnership", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
+    fun verifyOrganizationDomainOwnership(
+        clientConfig: ClientConfig,
+        organizationId: String,
+        domainId: String,
+        options: RequestOptions? = null,
+    ): OrganizationDomain {
+        return SdkClient.request<OrganizationDomain>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/organizations/${SdkClient.encodePathSegment(organizationId)}/domains/${SdkClient.encodePathSegment(domainId)}/verify_ownership",
+                    config = clientConfig,
+                    operationId = "verifyOrganizationDomainOwnership",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to ClerkErrors::class.java,
+                            "403" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /** Parameters for [listAllOrganizationDomains]. */
     data class ListAllOrganizationDomainsRequest(
@@ -138,62 +239,90 @@ object OrganizationDomainsMethods {
         val domains: List<String>? = null,
         val orderBy: String? = null,
         val offset: Long? = null,
-        val limit: Long? = null
+        val limit: Long? = null,
     )
 
     /**
-     * Retrieves a list of all organization domains within the current instance. This endpoint can be used to list all domains across all organizations or filter domains by organization, verification status, enrollment mode, or search query. The response includes pagination information and details about each domain including its verification status, enrollment mode, and associated counts.
+     * Retrieves a list of all organization domains within the current instance. This endpoint can
+     * be used to list all domains across all organizations or filter domains by organization,
+     * verification status, enrollment mode, or search query. The response includes pagination
+     * information and details about each domain including its verification status, enrollment mode,
+     * and associated counts.
      *
      * @param organizationId The ID of the organization to filter domains by
      * @param verified Filter by verification status
-     * @param enrollmentMode Filter by enrollment mode. Prefix a value with `-` to
-     *   exclude it instead (e.g. `-enterprise_sso`). Include and exclude filters can
-     *   be combined and compose as AND.
-     * @param query Search domains by name or organization ID. If the query starts
-     *   with "org_", it will search by exact organization ID match. Otherwise, it
-     *   performs a case-insensitive partial match on the domain name. Note: An empty
-     *   string or whitespace-only value is not allowed and will result in a validation
-     *   error.
+     * @param enrollmentMode Filter by enrollment mode. Prefix a value with `-` to exclude it
+     *   instead (e.g. `-enterprise_sso`). Include and exclude filters can be combined and compose
+     *   as AND.
+     * @param query Search domains by name or organization ID. If the query starts with "org_", it
+     *   will search by exact organization ID match. Otherwise, it performs a case-insensitive
+     *   partial match on the domain name. Note: An empty string or whitespace-only value is not
+     *   allowed and will result in a validation error.
      * @param domains Filter by exact domain names. Accepts multiple values (e.g.
      *   domains=example.com&domains=test.org).
-     * @param orderBy Allows to return organization domains in a particular order. At
-     *   the moment, you can order the returned domains by their `name` or
-     *   `created_at`. In order to specify the direction, you can use the `+/-` symbols
-     *   prepended to the property to order by. For example, if you want domains to be
-     *   returned in descending order according to their `created_at` property, you can
-     *   use `-created_at`. If you don't use `+` or `-`, then `+` is implied. Defaults
-     *   to `-created_at`.
-     * @param offset Skip the first `offset` results when paginating. Needs to be an
-     *   integer greater or equal to zero. To be used in conjunction with `limit`.
-     * @param limit Applies a limit to the number of results returned. Can be used
-     *   for paginating the results together with `offset`.
+     * @param orderBy Allows to return organization domains in a particular order. At the moment,
+     *   you can order the returned domains by their `name` or `created_at`. In order to specify the
+     *   direction, you can use the `+/-` symbols prepended to the property to order by. For
+     *   example, if you want domains to be returned in descending order according to their
+     *   `created_at` property, you can use `-created_at`. If you don't use `+` or `-`, then `+` is
+     *   implied. Defaults to `-created_at`.
+     * @param offset Skip the first `offset` results when paginating. Needs to be an integer greater
+     *   or equal to zero. To be used in conjunction with `limit`.
+     * @param limit Applies a limit to the number of results returned. Can be used for paginating
+     *   the results together with `offset`.
      */
-    fun listAllOrganizationDomains(clientConfig: ClientConfig, request: ListAllOrganizationDomainsRequest, options: RequestOptions? = null): OrganizationDomains {
+    fun listAllOrganizationDomains(
+        clientConfig: ClientConfig,
+        request: ListAllOrganizationDomainsRequest,
+        options: RequestOptions? = null,
+    ): OrganizationDomains {
         validateListAllOrganizationDomainsRequest(request)
 
-        return SdkClient.request<OrganizationDomains>(SdkClient.RequestSpec("GET", "/organization_domains", config = clientConfig, query = mapOf("organization_id" to
-    SdkClient.queryValue(request.organizationId, "form", true), "verified" to
-    SdkClient.queryValue(request.verified, "form", true), "enrollment_mode" to
-    SdkClient.queryValue(request.enrollmentMode, "form", false), "query" to SdkClient.queryValue(request.query, "form", true), "domains" to
-    SdkClient.queryValue(request.domains, "form", true), "order_by" to
-    SdkClient.queryValue(request.orderBy, "form", true), "offset" to
-    SdkClient.queryValue(request.offset, "form", true), "limit" to SdkClient.queryValue(request.limit, "form", true)), operationId = "listAllOrganizationDomains", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
+        return SdkClient.request<OrganizationDomains>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/organization_domains",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "organization_id" to
+                                SdkClient.queryValue(request.organizationId, "form", true),
+                            "verified" to SdkClient.queryValue(request.verified, "form", true),
+                            "enrollment_mode" to
+                                SdkClient.queryValue(request.enrollmentMode, "form", false),
+                            "query" to SdkClient.queryValue(request.query, "form", true),
+                            "domains" to SdkClient.queryValue(request.domains, "form", true),
+                            "order_by" to SdkClient.queryValue(request.orderBy, "form", true),
+                            "offset" to SdkClient.queryValue(request.offset, "form", true),
+                            "limit" to SdkClient.queryValue(request.limit, "form", true),
+                        ),
+                    operationId = "listAllOrganizationDomains",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to ClerkErrors::class.java,
+                            "403" to ClerkErrors::class.java,
+                            "422" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-    private fun validateListAllOrganizationDomainsRequest(request: ListAllOrganizationDomainsRequest) {
+    private fun validateListAllOrganizationDomainsRequest(
+        request: ListAllOrganizationDomainsRequest
+    ) {
         if (request.offset != null) {
             Validation.validateRange("offset", request.offset, Validation.RangeOpts(min = 0.0))
-}
+        }
 
         if (request.limit != null) {
-            Validation.validateRange("limit", request.limit, Validation.RangeOpts(min = 1.0, max = 500.0))
-}
+            Validation.validateRange(
+                "limit",
+                request.limit,
+                Validation.RangeOpts(min = 1.0, max = 500.0),
+            )
+        }
     }
-
-
-
-
-
-
 }
