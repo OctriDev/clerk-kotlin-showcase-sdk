@@ -15,23 +15,51 @@ internal object UsersGetOrganizationInvitationsOperation {
     /**
      * Retrieve a paginated list of the user's organization invitations
      *
-     * @param userId The ID of the user whose organization invitations we want to
-     *   retrieve
-     * @param limit Applies a limit to the number of results returned. Can be used
-     *   for paginating the results together with `offset`.
-     * @param offset Skip the first `offset` results when paginating. Needs to be an
-     *   integer greater or equal to zero. To be used in conjunction with `limit`.
+     * @param userId The ID of the user whose organization invitations we want to retrieve
+     * @param limit Applies a limit to the number of results returned. Can be used for paginating
+     *   the results together with `offset`.
+     * @param offset Skip the first `offset` results when paginating. Needs to be an integer greater
+     *   or equal to zero. To be used in conjunction with `limit`.
      * @param status Filter organization invitations based on their status
      */
-    fun usersGetOrganizationInvitations(clientConfig: ClientConfig, userId: String, limit: Long? = null, offset: Long? = null, status: UsersGetOrganizationInvitationsParameterEnum? = null, options: RequestOptions? = null): OrganizationInvitationsWithPublicOrganizationData {
+    fun usersGetOrganizationInvitations(
+        clientConfig: ClientConfig,
+        userId: String,
+        limit: Long? = null,
+        offset: Long? = null,
+        status: UsersGetOrganizationInvitationsParameterEnum? = null,
+        options: RequestOptions? = null,
+    ): OrganizationInvitationsWithPublicOrganizationData {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 500.0))
-}
+        }
 
         if (offset != null) {
             Validation.validateRange("offset", offset, Validation.RangeOpts(min = 0.0))
-}
+        }
 
-        return SdkClient.request<OrganizationInvitationsWithPublicOrganizationData>(SdkClient.RequestSpec("GET", "/users/${SdkClient.encodePathSegment(userId)}/organization_invitations", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "offset" to SdkClient.queryValue(offset, "form", true), "status" to SdkClient.queryValue(status, "form", true)), operationId = "usersGetOrganizationInvitations", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
+        return SdkClient.request<OrganizationInvitationsWithPublicOrganizationData>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/users/${SdkClient.encodePathSegment(userId)}/organization_invitations",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "limit" to SdkClient.queryValue(limit, "form", true),
+                            "offset" to SdkClient.queryValue(offset, "form", true),
+                            "status" to SdkClient.queryValue(status, "form", true),
+                        ),
+                    operationId = "usersGetOrganizationInvitations",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ClerkErrors::class.java,
+                            "403" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }

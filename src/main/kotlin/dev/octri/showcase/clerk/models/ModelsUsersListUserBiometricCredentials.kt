@@ -3,16 +3,10 @@
 
 package dev.octri.showcase.clerk.models
 
-/**
- * Typed representation of the `BiometricCredentialList` API schema.
- */
+/** Typed representation of the `BiometricCredentialList` API schema. */
 data class BiometricCredentialList(
-    /**
-     * Required array value serialized in the `data` wire field.
-     */
+    /** Required array value serialized in the `data` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<BiometricCredential>,
-    /**
-     * Total number of biometric credentials
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long
+    /** Total number of biometric credentials */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long,
 )

@@ -3,16 +3,10 @@
 
 package dev.octri.showcase.clerk.models
 
-/**
- * Typed representation of the `PaginatedBillingStatementResponse` API schema.
- */
+/** Typed representation of the `PaginatedBillingStatementResponse` API schema. */
 data class PaginatedBillingStatementResponse(
-    /**
-     * Array of billing statements.
-     */
+    /** Array of billing statements. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<BillingStatement>,
-    /**
-     * Total number of billing statements.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long
+    /** Total number of billing statements. */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long,
 )

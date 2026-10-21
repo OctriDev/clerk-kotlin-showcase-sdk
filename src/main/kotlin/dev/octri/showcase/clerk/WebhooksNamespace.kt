@@ -3,18 +3,13 @@
 
 package dev.octri.showcase.clerk
 
-
 class WebhooksNamespace(private val clientConfig: ClientConfig) {
-    /**
-     * Create a Svix app and associate it with the current instance
-     */
+    /** Create a Svix app and associate it with the current instance */
     fun createSvixApp(options: RequestOptions? = null): SvixURL {
         return dev.octri.showcase.clerk.methods.Webhooks.createSvixApp(clientConfig, options)
     }
 
-    /**
-     * Delete a Svix app and disassociate it from the current instance
-     */
+    /** Delete a Svix app and disassociate it from the current instance */
     fun deleteSvixApp(options: RequestOptions? = null): Unit {
         return dev.octri.showcase.clerk.methods.Webhooks.deleteSvixApp(clientConfig, options)
     }
@@ -25,5 +20,4 @@ class WebhooksNamespace(private val clientConfig: ClientConfig) {
     fun generateSvixAuthUrl(options: RequestOptions? = null): SvixURL {
         return dev.octri.showcase.clerk.methods.Webhooks.generateSvixAuthUrl(clientConfig, options)
     }
-
 }

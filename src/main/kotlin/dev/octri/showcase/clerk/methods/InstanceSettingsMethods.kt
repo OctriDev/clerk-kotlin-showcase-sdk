@@ -18,21 +18,26 @@ import dev.octri.showcase.clerk.Validation
 
 object InstanceSettingsMethods {
 
-
     /**
-     * Retrieves the current instance configuration, including its environment, allowed origins, and subdomain access settings. Use the returned `allowed_subdomains` and `subdomain_allowlist_enabled` values to understand which subdomains may originate requests.
+     * Retrieves the current instance configuration, including its environment, allowed origins, and
+     * subdomain access settings. Use the returned `allowed_subdomains` and
+     * `subdomain_allowlist_enabled` values to understand which subdomains may originate requests.
      *
      * Fetches the current instance
      */
     fun getInstance(clientConfig: ClientConfig, options: RequestOptions? = null): Instance {
-        return SdkClient.request<Instance>(SdkClient.RequestSpec("GET", "/instance", config = clientConfig, operationId = "getInstance", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
+        return SdkClient.request<Instance>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/instance",
+                    config = clientConfig,
+                    operationId = "getInstance",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /** Parameters for [updateInstance]. */
     data class UpdateInstanceRequest(
@@ -46,164 +51,266 @@ object InstanceSettingsMethods {
         val subdomainAllowlistEnabled: SdkClient.SdkOptional<Boolean?>? = null,
         val cookielessDev: SdkClient.SdkOptional<Boolean?>? = null,
         val urlBasedSessionSyncing: SdkClient.SdkOptional<Boolean?>? = null,
-        val preferredSignInStrategyWhenPasswordRequired: SdkClient.SdkOptional<UpdateInstancePreferredSignInStrategyWhenPasswordRequiredEnum?>? = null
+        val preferredSignInStrategyWhenPasswordRequired:
+            SdkClient.SdkOptional<UpdateInstancePreferredSignInStrategyWhenPasswordRequiredEnum?>? =
+            null,
     )
 
     /**
-     * Updates configurable settings for an instance, including browser origins, password breach checks, and sign-in preferences. Supply only the settings you want to change; `preferred_sign_in_strategy_when_password_required` accepts `password`, `otp`, or an empty string.
+     * Updates configurable settings for an instance, including browser origins, password breach
+     * checks, and sign-in preferences. Supply only the settings you want to change;
+     * `preferred_sign_in_strategy_when_password_required` accepts `password`, `otp`, or an empty
+     * string.
      *
      * Updates the settings of an instance
      *
-     * @param testMode Toggles test mode for this instance, allowing the use of test
-     *   email addresses and phone numbers. Defaults to true for development instances.
-     * @param hibp Whether the instance should be using the HIBP service to check
-     *   passwords for breaches
-     * @param allowedOrigins For browser-like stacks such as browser extensions,
-     *   Electron, or Capacitor.js (not officially supported), the instance allowed
-     *   origins need to be updated with the request origin value. For Chrome
-     *   extensions popup, background, or service worker pages, the origin is
-     *   chrome-extension://extension_uuid. For Electron apps using `@clerk/electron`,
-     *   the origins are the custom renderer scheme registered with
+     * @param testMode Toggles test mode for this instance, allowing the use of test email addresses
+     *   and phone numbers. Defaults to true for development instances.
+     * @param hibp Whether the instance should be using the HIBP service to check passwords for
+     *   breaches
+     * @param allowedOrigins For browser-like stacks such as browser extensions, Electron, or
+     *   Capacitor.js (not officially supported), the instance allowed origins need to be updated
+     *   with the request origin value. For Chrome extensions popup, background, or service worker
+     *   pages, the origin is chrome-extension://extension_uuid. For Electron apps using
+     *   `@clerk/electron`, the origins are the custom renderer scheme registered with
      *   `createClerkBridge()`, for example `my-app://renderer`, and, during…
-     * @param allowedSubdomains Subdomains of the instance's own domains that may
-     *   originate requests while `subdomain_allowlist_enabled` is true. Each entry is
-     *   either an exact host (`app.example.com`) or a wildcard anchored on a host
-     *   beneath one of the instance's domains (`*.preview.example.com`), which covers
-     *   every host under that anchor but not the anchor itself. Entries are stored
-     *   folded to lower case with any trailing dot removed, the form the origin check
-     *   compares against, so entries differing only in…
-     * @param subdomainAllowlistEnabled Whether requests from subdomains of the
-     *   instance's own domains are restricted to `allowed_subdomains`. When false,
-     *   every subdomain of the instance's domain is accepted. Production instances
-     *   only.
-     * @param cookielessDev Whether the instance should operate in cookieless
-     *   development mode (i.e. without third-party cookies). Deprecated: Please use
-     *   `url_based_session_syncing` instead.
-     * @param urlBasedSessionSyncing Whether the instance should use URL-based
-     *   session syncing in development mode (i.e. without third-party cookies).
-     * @param preferredSignInStrategyWhenPasswordRequired When password is required
-     *   at the instance level, sets the preferred sign-in strategy surfaced to Clerk
-     *   components. Has no effect when password is not required. Defaults to
-     *   `password`. Set to an empty string to clear the override.
+     * @param allowedSubdomains Subdomains of the instance's own domains that may originate requests
+     *   while `subdomain_allowlist_enabled` is true. Each entry is either an exact host
+     *   (`app.example.com`) or a wildcard anchored on a host beneath one of the instance's domains
+     *   (`*.preview.example.com`), which covers every host under that anchor but not the anchor
+     *   itself. Entries are stored folded to lower case with any trailing dot removed, the form the
+     *   origin check compares against, so entries differing only in…
+     * @param subdomainAllowlistEnabled Whether requests from subdomains of the instance's own
+     *   domains are restricted to `allowed_subdomains`. When false, every subdomain of the
+     *   instance's domain is accepted. Production instances only.
+     * @param cookielessDev Whether the instance should operate in cookieless development mode (i.e.
+     *   without third-party cookies). Deprecated: Please use `url_based_session_syncing` instead.
+     * @param urlBasedSessionSyncing Whether the instance should use URL-based session syncing in
+     *   development mode (i.e. without third-party cookies).
+     * @param preferredSignInStrategyWhenPasswordRequired When password is required at the instance
+     *   level, sets the preferred sign-in strategy surfaced to Clerk components. Has no effect when
+     *   password is not required. Defaults to `password`. Set to an empty string to clear the
+     *   override.
      */
-    fun updateInstance(clientConfig: ClientConfig, request: UpdateInstanceRequest, options: RequestOptions? = null): Unit {
-        SdkClient.request<Unit>(SdkClient.RequestSpec("PATCH", "/instance", config = clientConfig, body = SdkClient.bodyMap("test_mode" to
-    (request.testMode ?: SdkClient.SdkOptional.Omitted), "hibp" to (request.hibp ?: SdkClient.SdkOptional.Omitted), "support_email" to
-    (request.supportEmail ?: SdkClient.SdkOptional.Omitted), "clerk_js_version" to
-    (request.clerkJsVersion ?: SdkClient.SdkOptional.Omitted), "development_origin" to
-    (request.developmentOrigin ?: SdkClient.SdkOptional.Omitted), "allowed_origins" to
-    (request.allowedOrigins ?: SdkClient.SdkOptional.Omitted), "allowed_subdomains" to
-    (request.allowedSubdomains ?: SdkClient.SdkOptional.Omitted), "subdomain_allowlist_enabled" to
-    (request.subdomainAllowlistEnabled ?: SdkClient.SdkOptional.Omitted), "cookieless_dev" to
-    (request.cookielessDev ?: SdkClient.SdkOptional.Omitted), "url_based_session_syncing" to
-    (request.urlBasedSessionSyncing ?: SdkClient.SdkOptional.Omitted), "preferred_sign_in_strategy_when_password_required" to
-    (request.preferredSignInStrategyWhenPasswordRequired ?: SdkClient.SdkOptional.Omitted)), operationId = "updateInstance", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("422" to ClerkErrors::class.java)))
+    fun updateInstance(
+        clientConfig: ClientConfig,
+        request: UpdateInstanceRequest,
+        options: RequestOptions? = null,
+    ): Unit {
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "PATCH",
+                "/instance",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "test_mode" to (request.testMode ?: SdkClient.SdkOptional.Omitted),
+                        "hibp" to (request.hibp ?: SdkClient.SdkOptional.Omitted),
+                        "support_email" to (request.supportEmail ?: SdkClient.SdkOptional.Omitted),
+                        "clerk_js_version" to
+                            (request.clerkJsVersion ?: SdkClient.SdkOptional.Omitted),
+                        "development_origin" to
+                            (request.developmentOrigin ?: SdkClient.SdkOptional.Omitted),
+                        "allowed_origins" to
+                            (request.allowedOrigins ?: SdkClient.SdkOptional.Omitted),
+                        "allowed_subdomains" to
+                            (request.allowedSubdomains ?: SdkClient.SdkOptional.Omitted),
+                        "subdomain_allowlist_enabled" to
+                            (request.subdomainAllowlistEnabled ?: SdkClient.SdkOptional.Omitted),
+                        "cookieless_dev" to
+                            (request.cookielessDev ?: SdkClient.SdkOptional.Omitted),
+                        "url_based_session_syncing" to
+                            (request.urlBasedSessionSyncing ?: SdkClient.SdkOptional.Omitted),
+                        "preferred_sign_in_strategy_when_password_required" to
+                            (request.preferredSignInStrategyWhenPasswordRequired
+                                ?: SdkClient.SdkOptional.Omitted),
+                    ),
+                operationId = "updateInstance",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors = mapOf("422" to ClerkErrors::class.java),
+            )
+        )
     }
 
-
-
-
-
-
-
     /**
-     * Updates the restriction settings that control allowlisting, blocklisting, and email address checks for an instance. Supply the boolean settings you want to change; the response contains the resulting restriction configuration.
+     * Updates the restriction settings that control allowlisting, blocklisting, and email address
+     * checks for an instance. Supply the boolean settings you want to change; the response contains
+     * the resulting restriction configuration.
      *
      * Updates the restriction settings of an instance
      */
-    fun updateInstanceRestrictions(clientConfig: ClientConfig, allowlist: SdkClient.SdkOptional<Boolean?>? = null, blocklist: SdkClient.SdkOptional<Boolean?>? = null, allowlistBlocklistDisabledOnSignIn: SdkClient.SdkOptional<Boolean?>? = null, blockEmailSubaddresses: SdkClient.SdkOptional<Boolean?>? = null, blockDisposableEmailDomains: SdkClient.SdkOptional<Boolean?>? = null, options: RequestOptions? = null): InstanceRestrictions {
-        return SdkClient.request<InstanceRestrictions>(SdkClient.RequestSpec("PATCH", "/instance/restrictions", config = clientConfig, body = SdkClient.bodyMap("allowlist" to (allowlist ?: SdkClient.SdkOptional.Omitted), "blocklist" to (blocklist ?: SdkClient.SdkOptional.Omitted), "allowlist_blocklist_disabled_on_sign_in" to
-    (allowlistBlocklistDisabledOnSignIn ?: SdkClient.SdkOptional.Omitted), "block_email_subaddresses" to
-    (blockEmailSubaddresses ?: SdkClient.SdkOptional.Omitted), "block_disposable_email_domains" to
-    (blockDisposableEmailDomains ?: SdkClient.SdkOptional.Omitted)), operationId = "updateInstanceRestrictions", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("402" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
+    fun updateInstanceRestrictions(
+        clientConfig: ClientConfig,
+        allowlist: SdkClient.SdkOptional<Boolean?>? = null,
+        blocklist: SdkClient.SdkOptional<Boolean?>? = null,
+        allowlistBlocklistDisabledOnSignIn: SdkClient.SdkOptional<Boolean?>? = null,
+        blockEmailSubaddresses: SdkClient.SdkOptional<Boolean?>? = null,
+        blockDisposableEmailDomains: SdkClient.SdkOptional<Boolean?>? = null,
+        options: RequestOptions? = null,
+    ): InstanceRestrictions {
+        return SdkClient.request<InstanceRestrictions>(
+                SdkClient.RequestSpec(
+                    "PATCH",
+                    "/instance/restrictions",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "allowlist" to (allowlist ?: SdkClient.SdkOptional.Omitted),
+                            "blocklist" to (blocklist ?: SdkClient.SdkOptional.Omitted),
+                            "allowlist_blocklist_disabled_on_sign_in" to
+                                (allowlistBlocklistDisabledOnSignIn
+                                    ?: SdkClient.SdkOptional.Omitted),
+                            "block_email_subaddresses" to
+                                (blockEmailSubaddresses ?: SdkClient.SdkOptional.Omitted),
+                            "block_disposable_email_domains" to
+                                (blockDisposableEmailDomains ?: SdkClient.SdkOptional.Omitted),
+                        ),
+                    operationId = "updateInstanceRestrictions",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf("402" to ClerkErrors::class.java, "422" to ClerkErrors::class.java),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Retrieves the Protect settings for the instance, including rule enforcement and prerequisite check status. Use `rules_enabled` to distinguish active enforcement from shadow evaluation, where rules are scored and recorded without blocking traffic.
+     * Retrieves the Protect settings for the instance, including rule enforcement and prerequisite
+     * check status. Use `rules_enabled` to distinguish active enforcement from shadow evaluation,
+     * where rules are scored and recorded without blocking traffic.
      */
-    fun getInstanceProtect(clientConfig: ClientConfig, options: RequestOptions? = null): InstanceProtect {
-        return SdkClient.request<InstanceProtect>(SdkClient.RequestSpec("GET", "/instance/protect", config = clientConfig, operationId = "getInstanceProtect", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
+    fun getInstanceProtect(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): InstanceProtect {
+        return SdkClient.request<InstanceProtect>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/instance/protect",
+                    config = clientConfig,
+                    operationId = "getInstanceProtect",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Updates whether Protect rules are enforced for the instance. Set `rules_enabled` to true to enforce rules or false to return to shadow evaluation, which continues scoring and recording rules without blocking traffic.
+     * Updates whether Protect rules are enforced for the instance. Set `rules_enabled` to true to
+     * enforce rules or false to return to shadow evaluation, which continues scoring and recording
+     * rules without blocking traffic.
      *
-     * @param rulesEnabled Set true to enforce Protect rules on this instance. Set
-     *   false to stop enforcing and return the instance to its default posture, where
-     *   traffic is still evaluated in shadow but nothing is blocked. This does not
-     *   remove the instance from Protect.
+     * @param rulesEnabled Set true to enforce Protect rules on this instance. Set false to stop
+     *   enforcing and return the instance to its default posture, where traffic is still evaluated
+     *   in shadow but nothing is blocked. This does not remove the instance from Protect.
      */
-    fun updateInstanceProtect(clientConfig: ClientConfig, rulesEnabled: SdkClient.SdkOptional<Boolean?>? = null, options: RequestOptions? = null): InstanceProtect {
-        return SdkClient.request<InstanceProtect>(SdkClient.RequestSpec("PATCH", "/instance/protect", config = clientConfig, body = SdkClient.bodyMap("rules_enabled" to
-    (rulesEnabled ?: SdkClient.SdkOptional.Omitted)), operationId = "updateInstanceProtect", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("422" to ClerkErrors::class.java))).data
+    fun updateInstanceProtect(
+        clientConfig: ClientConfig,
+        rulesEnabled: SdkClient.SdkOptional<Boolean?>? = null,
+        options: RequestOptions? = null,
+    ): InstanceProtect {
+        return SdkClient.request<InstanceProtect>(
+                SdkClient.RequestSpec(
+                    "PATCH",
+                    "/instance/protect",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "rules_enabled" to (rulesEnabled ?: SdkClient.SdkOptional.Omitted)
+                        ),
+                    operationId = "updateInstanceProtect",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors = mapOf("422" to ClerkErrors::class.java),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
      * Retrieves the per-instance SMS communication settings, including the SMS country blocklist.
      */
-    fun getInstanceCommunication(clientConfig: ClientConfig, options: RequestOptions? = null): InstanceCommunication {
-        return SdkClient.request<InstanceCommunication>(SdkClient.RequestSpec("GET", "/instance/communication", config = clientConfig, operationId = "getInstanceCommunication", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
+    fun getInstanceCommunication(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): InstanceCommunication {
+        return SdkClient.request<InstanceCommunication>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/instance/communication",
+                    config = clientConfig,
+                    operationId = "getInstanceCommunication",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Replaces the SMS country blocklist for this instance. Pass the full set of ISO 3166-1 alpha-2 country codes that should be blocked; codes that aren't recognized as SMS-tier countries are silently dropped from the persisted list. Omitting `blocked_country_codes` is a no-op.
+     * Replaces the SMS country blocklist for this instance. Pass the full set of ISO 3166-1 alpha-2
+     * country codes that should be blocked; codes that aren't recognized as SMS-tier countries are
+     * silently dropped from the persisted list. Omitting `blocked_country_codes` is a no-op.
      *
-     * @param blockedCountryCodes ISO 3166-1 alpha-2 country codes to block for SMS
-     *   delivery. Whole-list replacement. Codes must be uppercase, 2-letter, and
-     *   unique within the array.
+     * @param blockedCountryCodes ISO 3166-1 alpha-2 country codes to block for SMS delivery.
+     *   Whole-list replacement. Codes must be uppercase, 2-letter, and unique within the array.
      */
-    fun updateInstanceCommunication(clientConfig: ClientConfig, blockedCountryCodes: SdkClient.SdkOptional<List<String>?>? = null, options: RequestOptions? = null): InstanceCommunication {
+    fun updateInstanceCommunication(
+        clientConfig: ClientConfig,
+        blockedCountryCodes: SdkClient.SdkOptional<List<String>?>? = null,
+        options: RequestOptions? = null,
+    ): InstanceCommunication {
         val blockedCountryCodesValue = blockedCountryCodes?.getOrNull()
-if (blockedCountryCodesValue != null) {
-            Validation.validateItems("blocked_country_codes", blockedCountryCodesValue, Validation.LengthOpts(max = 250))
-}
+        if (blockedCountryCodesValue != null) {
+            Validation.validateItems(
+                "blocked_country_codes",
+                blockedCountryCodesValue,
+                Validation.LengthOpts(max = 250),
+            )
+        }
 
-        return SdkClient.request<InstanceCommunication>(SdkClient.RequestSpec("PATCH", "/instance/communication", config = clientConfig, body = SdkClient.bodyMap("blocked_country_codes" to
-    (blockedCountryCodes ?: SdkClient.SdkOptional.Omitted)), operationId = "updateInstanceCommunication", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("422" to ClerkErrors::class.java))).data
+        return SdkClient.request<InstanceCommunication>(
+                SdkClient.RequestSpec(
+                    "PATCH",
+                    "/instance/communication",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "blocked_country_codes" to
+                                (blockedCountryCodes ?: SdkClient.SdkOptional.Omitted)
+                        ),
+                    operationId = "updateInstanceCommunication",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors = mapOf("422" to ClerkErrors::class.java),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
-     * Retrieves the settings for OAuth applications for the instance (dynamic client registration, JWT access tokens, etc.).
+     * Retrieves the settings for OAuth applications for the instance (dynamic client registration,
+     * JWT access tokens, etc.).
      */
-    fun getInstanceOAuthApplicationSettings(clientConfig: ClientConfig, options: RequestOptions? = null): OAuthApplicationSettings {
-        return SdkClient.request<OAuthApplicationSettings>(SdkClient.RequestSpec("GET", "/instance/oauth_application_settings", config = clientConfig, operationId = "getInstanceOAuthApplicationSettings", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
+    fun getInstanceOAuthApplicationSettings(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): OAuthApplicationSettings {
+        return SdkClient.request<OAuthApplicationSettings>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/instance/oauth_application_settings",
+                    config = clientConfig,
+                    operationId = "getInstanceOAuthApplicationSettings",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /** Parameters for [updateInstanceOAuthApplicationSettings]. */
     data class UpdateInstanceOAuthApplicationSettingsRequest(
@@ -215,76 +322,114 @@ if (blockedCountryCodesValue != null) {
         val audClaimRefreshBackfillEnabled: SdkClient.SdkOptional<Boolean?>? = null,
         val pkceRequired: SdkClient.SdkOptional<Boolean?>? = null,
         val clientIdMetadataDocumentsAdvertised: SdkClient.SdkOptional<Boolean?>? = null,
-        val clientIdMetadataDocumentsOnlyAllowPreRegisteredClients: SdkClient.SdkOptional<Boolean?>? = null,
-        val clientIdMetadataDocumentsBlockImplicitlyAllowedClients: SdkClient.SdkOptional<Boolean?>? = null
+        val clientIdMetadataDocumentsOnlyAllowPreRegisteredClients:
+            SdkClient.SdkOptional<Boolean?>? =
+            null,
+        val clientIdMetadataDocumentsBlockImplicitlyAllowedClients:
+            SdkClient.SdkOptional<Boolean?>? =
+            null,
     )
 
     /**
      * Updates the OAuth application settings for the instance.
      *
-     * @param dynamicOauthClientRegistration Whether dynamic OAuth client
-     *   registration is enabled for the instance (RFC 7591).
-     * @param dynamicClientAllowedScopes Administrator-selected scope ceiling for
-     *   dynamically registered and automatically admitted CIMD clients. Null preserves
-     *   registered client limits; defaults must be a subset. Fresh user consent is
-     *   required for expansion.
-     * @param defaultScopes Default scopes assigned when a dynamically registered or
-     *   first-contact CIMD client omits `scope`. Accepts built-in keys and current
-     *   custom catalog keys. `advertised` does not affect eligibility. Duplicate keys,
-     *   unknown keys, and `offline_access` are rejected. An empty array or null resets
-     *   to Clerk-provided defaults.
-     * @param oauthJwtAccessTokens Whether OAuth JWT access tokens are enabled for
-     *   the instance (disabled indicates opaque access tokens).
-     * @param audClaimEnabled Whether OAuth access tokens can include an aud claim
-     *   derived from the RFC 8707 resource parameter.
-     * @param audClaimRefreshBackfillEnabled Whether refresh grants without a
-     *   resource can adopt the requested resource when audience claims are enabled.
-     * @param pkceRequired Whether all new OAuth authorization-code requests must use
-     *   PKCE with the S256 challenge method.
-     * @param clientIdMetadataDocumentsAdvertised Whether the instance advertises
-     *   support for Client ID Metadata Documents in its OAuth authorization server
-     *   metadata.
-     * @param clientIdMetadataDocumentsOnlyAllowPreRegisteredClients When true, new
-     *   unknown CIMD clients are rejected. Previously auto-connected and
-     *   pre-registered clients remain admitted; deleting a client makes it unknown
-     *   again.
-     * @param clientIdMetadataDocumentsBlockImplicitlyAllowedClients When true,
-     *   recorded implicitly allowed CIMD clients are rejected on future client
-     *   lookups. Explicitly allowed clients remain accepted. This does not revoke
-     *   previously issued access tokens.
+     * @param dynamicOauthClientRegistration Whether dynamic OAuth client registration is enabled
+     *   for the instance (RFC 7591).
+     * @param dynamicClientAllowedScopes Administrator-selected scope ceiling for dynamically
+     *   registered and automatically admitted CIMD clients. Null preserves registered client
+     *   limits; defaults must be a subset. Fresh user consent is required for expansion.
+     * @param defaultScopes Default scopes assigned when a dynamically registered or first-contact
+     *   CIMD client omits `scope`. Accepts built-in keys and current custom catalog keys.
+     *   `advertised` does not affect eligibility. Duplicate keys, unknown keys, and
+     *   `offline_access` are rejected. An empty array or null resets to Clerk-provided defaults.
+     * @param oauthJwtAccessTokens Whether OAuth JWT access tokens are enabled for the instance
+     *   (disabled indicates opaque access tokens).
+     * @param audClaimEnabled Whether OAuth access tokens can include an aud claim derived from the
+     *   RFC 8707 resource parameter.
+     * @param audClaimRefreshBackfillEnabled Whether refresh grants without a resource can adopt the
+     *   requested resource when audience claims are enabled.
+     * @param pkceRequired Whether all new OAuth authorization-code requests must use PKCE with the
+     *   S256 challenge method.
+     * @param clientIdMetadataDocumentsAdvertised Whether the instance advertises support for Client
+     *   ID Metadata Documents in its OAuth authorization server metadata.
+     * @param clientIdMetadataDocumentsOnlyAllowPreRegisteredClients When true, new unknown CIMD
+     *   clients are rejected. Previously auto-connected and pre-registered clients remain admitted;
+     *   deleting a client makes it unknown again.
+     * @param clientIdMetadataDocumentsBlockImplicitlyAllowedClients When true, recorded implicitly
+     *   allowed CIMD clients are rejected on future client lookups. Explicitly allowed clients
+     *   remain accepted. This does not revoke previously issued access tokens.
      */
-    fun updateInstanceOAuthApplicationSettings(clientConfig: ClientConfig, request: UpdateInstanceOAuthApplicationSettingsRequest, options: RequestOptions? = null): OAuthApplicationSettings {
-        return SdkClient.request<OAuthApplicationSettings>(SdkClient.RequestSpec("PATCH", "/instance/oauth_application_settings", config = clientConfig, body = SdkClient.bodyMap("dynamic_oauth_client_registration" to
-    (request.dynamicOauthClientRegistration ?: SdkClient.SdkOptional.Omitted), "dynamic_client_allowed_scopes" to
-    (request.dynamicClientAllowedScopes ?: SdkClient.SdkOptional.Omitted), "default_scopes" to
-    (request.defaultScopes ?: SdkClient.SdkOptional.Omitted), "oauth_jwt_access_tokens" to
-    (request.oauthJwtAccessTokens ?: SdkClient.SdkOptional.Omitted), "aud_claim_enabled" to
-    (request.audClaimEnabled ?: SdkClient.SdkOptional.Omitted), "aud_claim_refresh_backfill_enabled" to
-    (request.audClaimRefreshBackfillEnabled ?: SdkClient.SdkOptional.Omitted), "pkce_required" to
-    (request.pkceRequired ?: SdkClient.SdkOptional.Omitted), "client_id_metadata_documents_advertised" to
-    (request.clientIdMetadataDocumentsAdvertised ?: SdkClient.SdkOptional.Omitted), "client_id_metadata_documents_only_allow_pre_registered_clients" to
-    (request.clientIdMetadataDocumentsOnlyAllowPreRegisteredClients ?: SdkClient.SdkOptional.Omitted), "client_id_metadata_documents_block_implicitly_allowed_clients" to
-    (request.clientIdMetadataDocumentsBlockImplicitlyAllowedClients ?: SdkClient.SdkOptional.Omitted)), operationId = "updateInstanceOAuthApplicationSettings", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("422" to ClerkErrors::class.java))).data
+    fun updateInstanceOAuthApplicationSettings(
+        clientConfig: ClientConfig,
+        request: UpdateInstanceOAuthApplicationSettingsRequest,
+        options: RequestOptions? = null,
+    ): OAuthApplicationSettings {
+        return SdkClient.request<OAuthApplicationSettings>(
+                SdkClient.RequestSpec(
+                    "PATCH",
+                    "/instance/oauth_application_settings",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "dynamic_oauth_client_registration" to
+                                (request.dynamicOauthClientRegistration
+                                    ?: SdkClient.SdkOptional.Omitted),
+                            "dynamic_client_allowed_scopes" to
+                                (request.dynamicClientAllowedScopes
+                                    ?: SdkClient.SdkOptional.Omitted),
+                            "default_scopes" to
+                                (request.defaultScopes ?: SdkClient.SdkOptional.Omitted),
+                            "oauth_jwt_access_tokens" to
+                                (request.oauthJwtAccessTokens ?: SdkClient.SdkOptional.Omitted),
+                            "aud_claim_enabled" to
+                                (request.audClaimEnabled ?: SdkClient.SdkOptional.Omitted),
+                            "aud_claim_refresh_backfill_enabled" to
+                                (request.audClaimRefreshBackfillEnabled
+                                    ?: SdkClient.SdkOptional.Omitted),
+                            "pkce_required" to
+                                (request.pkceRequired ?: SdkClient.SdkOptional.Omitted),
+                            "client_id_metadata_documents_advertised" to
+                                (request.clientIdMetadataDocumentsAdvertised
+                                    ?: SdkClient.SdkOptional.Omitted),
+                            "client_id_metadata_documents_only_allow_pre_registered_clients" to
+                                (request.clientIdMetadataDocumentsOnlyAllowPreRegisteredClients
+                                    ?: SdkClient.SdkOptional.Omitted),
+                            "client_id_metadata_documents_block_implicitly_allowed_clients" to
+                                (request.clientIdMetadataDocumentsBlockImplicitlyAllowedClients
+                                    ?: SdkClient.SdkOptional.Omitted),
+                        ),
+                    operationId = "updateInstanceOAuthApplicationSettings",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors = mapOf("422" to ClerkErrors::class.java),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
-    /**
-     * Retrieves the organization settings of the instance
-     */
-    fun getInstanceOrganizationSettings(clientConfig: ClientConfig, options: RequestOptions? = null): OrganizationSettings {
-        return SdkClient.request<OrganizationSettings>(SdkClient.RequestSpec("GET", "/instance/organization_settings", config = clientConfig, operationId = "getInstanceOrganizationSettings", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("402" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
+    /** Retrieves the organization settings of the instance */
+    fun getInstanceOrganizationSettings(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): OrganizationSettings {
+        return SdkClient.request<OrganizationSettings>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/instance/organization_settings",
+                    config = clientConfig,
+                    operationId = "getInstanceOrganizationSettings",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "402" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                            "422" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /** Parameters for [updateInstanceOrganizationSettings]. */
     data class UpdateInstanceOrganizationSettingsRequest(
@@ -295,38 +440,65 @@ if (blockedCountryCodesValue != null) {
         val slugDisabled: SdkClient.SdkOptional<Boolean?>? = null,
         val domainsEnrollmentModes: List<String>? = null,
         val creatorRoleId: SdkClient.SdkOptional<String?>? = null,
-        val domainsDefaultRoleId: SdkClient.SdkOptional<String?>? = null
+        val domainsDefaultRoleId: SdkClient.SdkOptional<String?>? = null,
     )
 
     /**
-     * Updates the organization settings for the instance. Use the available fields to configure organization creation, membership limits, deletion, and domain enrollment; `domains_enrollment_modes` supports automatic invitations and suggestions. The response returns the updated organization settings.
+     * Updates the organization settings for the instance. Use the available fields to configure
+     * organization creation, membership limits, deletion, and domain enrollment;
+     * `domains_enrollment_modes` supports automatic invitations and suggestions. The response
+     * returns the updated organization settings.
      *
      * Updates the organization settings of the instance
      *
-     * @param domainsEnrollmentModes Specify which enrollment modes to enable for
-     *   your Organization Domains. Supported modes are 'automatic_invitation' &
-     *   'automatic_suggestion'.
-     * @param creatorRoleId Specify what the default organization role is for an
-     *   organization creator.
-     * @param domainsDefaultRoleId Specify what the default organization role is for
-     *   the organization domains.
+     * @param domainsEnrollmentModes Specify which enrollment modes to enable for your Organization
+     *   Domains. Supported modes are 'automatic_invitation' & 'automatic_suggestion'.
+     * @param creatorRoleId Specify what the default organization role is for an organization
+     *   creator.
+     * @param domainsDefaultRoleId Specify what the default organization role is for the
+     *   organization domains.
      */
-    fun updateInstanceOrganizationSettings(clientConfig: ClientConfig, request: UpdateInstanceOrganizationSettingsRequest, options: RequestOptions? = null): OrganizationSettings {
-        return SdkClient.request<OrganizationSettings>(SdkClient.RequestSpec("PATCH", "/instance/organization_settings", config = clientConfig, body = SdkClient.bodyMap("enabled" to
-    (request.enabled ?: SdkClient.SdkOptional.Omitted), "max_allowed_memberships" to
-    (request.maxAllowedMemberships ?: SdkClient.SdkOptional.Omitted), "admin_delete_enabled" to
-    (request.adminDeleteEnabled ?: SdkClient.SdkOptional.Omitted), "domains_enabled" to
-    (request.domainsEnabled ?: SdkClient.SdkOptional.Omitted), "slug_disabled" to
-    (request.slugDisabled ?: SdkClient.SdkOptional.Omitted), "domains_enrollment_modes" to
-    (SdkClient.omitIfNull(request.domainsEnrollmentModes)), "creator_role_id" to
-    (request.creatorRoleId ?: SdkClient.SdkOptional.Omitted), "domains_default_role_id" to
-    (request.domainsDefaultRoleId ?: SdkClient.SdkOptional.Omitted)), operationId = "updateInstanceOrganizationSettings", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "402" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
+    fun updateInstanceOrganizationSettings(
+        clientConfig: ClientConfig,
+        request: UpdateInstanceOrganizationSettingsRequest,
+        options: RequestOptions? = null,
+    ): OrganizationSettings {
+        return SdkClient.request<OrganizationSettings>(
+                SdkClient.RequestSpec(
+                    "PATCH",
+                    "/instance/organization_settings",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "enabled" to (request.enabled ?: SdkClient.SdkOptional.Omitted),
+                            "max_allowed_memberships" to
+                                (request.maxAllowedMemberships ?: SdkClient.SdkOptional.Omitted),
+                            "admin_delete_enabled" to
+                                (request.adminDeleteEnabled ?: SdkClient.SdkOptional.Omitted),
+                            "domains_enabled" to
+                                (request.domainsEnabled ?: SdkClient.SdkOptional.Omitted),
+                            "slug_disabled" to
+                                (request.slugDisabled ?: SdkClient.SdkOptional.Omitted),
+                            "domains_enrollment_modes" to
+                                (SdkClient.omitIfNull(request.domainsEnrollmentModes)),
+                            "creator_role_id" to
+                                (request.creatorRoleId ?: SdkClient.SdkOptional.Omitted),
+                            "domains_default_role_id" to
+                                (request.domainsDefaultRoleId ?: SdkClient.SdkOptional.Omitted),
+                        ),
+                    operationId = "updateInstanceOrganizationSettings",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ClerkErrors::class.java,
+                            "402" to ClerkErrors::class.java,
+                            "403" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                            "422" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }

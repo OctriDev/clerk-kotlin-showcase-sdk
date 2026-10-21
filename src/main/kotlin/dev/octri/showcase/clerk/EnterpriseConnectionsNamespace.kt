@@ -3,57 +3,97 @@
 
 package dev.octri.showcase.clerk
 
-
 class EnterpriseConnectionsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Returns the list of enterprise connections for the instance. Results can be paginated using the optional `limit` and `offset` query parameters.
+     * Returns the list of enterprise connections for the instance. Results can be paginated using
+     * the optional `limit` and `offset` query parameters.
      */
-    fun list(limit: Long? = null, offset: Long? = null, organizationId: String? = null, active: Boolean? = null, options: RequestOptions? = null): EnterpriseConnections {
-        return dev.octri.showcase.clerk.methods.EnterpriseConnectionsMethods.listEnterpriseConnections(clientConfig, limit, offset, organizationId, active, options)
+    fun list(
+        limit: Long? = null,
+        offset: Long? = null,
+        organizationId: String? = null,
+        active: Boolean? = null,
+        options: RequestOptions? = null,
+    ): EnterpriseConnections {
+        return dev.octri.showcase.clerk.methods.EnterpriseConnectionsMethods
+            .listEnterpriseConnections(clientConfig, limit, offset, organizationId, active, options)
     }
 
     /**
-     * Creates a new enterprise connection for an identity provider and associates it with one or more domains. Supply `name`, `provider`, and at least one valid fully qualified domain name in `domains`; choose `saml` or `oidc` settings to configure the connection for the selected provider. When `active` is true, provide IdP metadata in `saml` for SAML connections.
+     * Creates a new enterprise connection for an identity provider and associates it with one or
+     * more domains. Supply `name`, `provider`, and at least one valid fully qualified domain name
+     * in `domains`; choose `saml` or `oidc` settings to configure the connection for the selected
+     * provider. When `active` is true, provide IdP metadata in `saml` for SAML connections.
      *
      * Create a new enterprise connection.
      */
-    fun create(request: dev.octri.showcase.clerk.methods.EnterpriseConnectionsMethods.CreateEnterpriseConnectionRequest, options: RequestOptions? = null): EnterpriseConnection {
-        return dev.octri.showcase.clerk.methods.EnterpriseConnectionsMethods.createEnterpriseConnection(clientConfig, request, options)
+    fun create(
+        request:
+            dev.octri.showcase.clerk.methods.EnterpriseConnectionsMethods.CreateEnterpriseConnectionRequest,
+        options: RequestOptions? = null,
+    ): EnterpriseConnection {
+        return dev.octri.showcase.clerk.methods.EnterpriseConnectionsMethods
+            .createEnterpriseConnection(clientConfig, request, options)
     }
 
     /**
-     * Fetches the enterprise connection whose ID matches the provided `enterprise_connection_id` in the path.
+     * Fetches the enterprise connection whose ID matches the provided `enterprise_connection_id` in
+     * the path.
      */
     fun get(enterpriseConnectionId: String, options: RequestOptions? = null): EnterpriseConnection {
-        return dev.octri.showcase.clerk.methods.EnterpriseConnectionsMethods.getEnterpriseConnection(clientConfig, enterpriseConnectionId, options)
+        return dev.octri.showcase.clerk.methods.EnterpriseConnectionsMethods
+            .getEnterpriseConnection(clientConfig, enterpriseConnectionId, options)
     }
 
     /**
-     * Updates the enterprise connection whose ID matches the provided `enterprise_connection_id` in the path. When enabling the connection (setting `active` to true), any existing verified organization domains that match the connection's domains (e.g. used for enrollment modes like automatic invitation) may be deleted so the connection can be enabled.
+     * Updates the enterprise connection whose ID matches the provided `enterprise_connection_id` in
+     * the path. When enabling the connection (setting `active` to true), any existing verified
+     * organization domains that match the connection's domains (e.g. used for enrollment modes like
+     * automatic invitation) may be deleted so the connection can be enabled.
      */
-    fun update(request: dev.octri.showcase.clerk.methods.EnterpriseConnectionsMethods.UpdateEnterpriseConnectionRequest, options: RequestOptions? = null): EnterpriseConnection {
-        return dev.octri.showcase.clerk.methods.EnterpriseConnectionsMethods.updateEnterpriseConnection(clientConfig, request, options)
+    fun update(
+        request:
+            dev.octri.showcase.clerk.methods.EnterpriseConnectionsMethods.UpdateEnterpriseConnectionRequest,
+        options: RequestOptions? = null,
+    ): EnterpriseConnection {
+        return dev.octri.showcase.clerk.methods.EnterpriseConnectionsMethods
+            .updateEnterpriseConnection(clientConfig, request, options)
     }
 
     /**
-     * Deletes the enterprise connection whose ID matches the provided `enterprise_connection_id` in the path.
+     * Deletes the enterprise connection whose ID matches the provided `enterprise_connection_id` in
+     * the path.
      */
     fun delete(enterpriseConnectionId: String, options: RequestOptions? = null): DeletedObject {
-        return dev.octri.showcase.clerk.methods.EnterpriseConnectionsMethods.deleteEnterpriseConnection(clientConfig, enterpriseConnectionId, options)
+        return dev.octri.showcase.clerk.methods.EnterpriseConnectionsMethods
+            .deleteEnterpriseConnection(clientConfig, enterpriseConnectionId, options)
     }
 
-    /**
-     * Returns a paginated list of SAML or OIDC debug test runs for an enterprise connection.
-     */
-    fun listTestRuns(enterpriseConnectionId: String, status: List<ListEnterpriseConnectionTestRunsParameterItemEnum>? = null, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): EnterpriseConnectionTestRuns {
-        return dev.octri.showcase.clerk.methods.EnterpriseConnectionsMethods.listEnterpriseConnectionTestRuns(clientConfig, enterpriseConnectionId, status, limit, offset, options)
+    /** Returns a paginated list of SAML or OIDC debug test runs for an enterprise connection. */
+    fun listTestRuns(
+        enterpriseConnectionId: String,
+        status: List<ListEnterpriseConnectionTestRunsParameterItemEnum>? = null,
+        limit: Long? = null,
+        offset: Long? = null,
+        options: RequestOptions? = null,
+    ): EnterpriseConnectionTestRuns {
+        return dev.octri.showcase.clerk.methods.EnterpriseConnectionsMethods
+            .listEnterpriseConnectionTestRuns(
+                clientConfig,
+                enterpriseConnectionId,
+                status,
+                limit,
+                offset,
+                options,
+            )
     }
 
-    /**
-     * Returns a short-lived URL that starts the IdP test flow for this connection.
-     */
-    fun createTestRun(enterpriseConnectionId: String, options: RequestOptions? = null): EnterpriseConnectionTestRunResponse {
-        return dev.octri.showcase.clerk.methods.EnterpriseConnectionsMethods.createEnterpriseConnectionTestRun(clientConfig, enterpriseConnectionId, options)
+    /** Returns a short-lived URL that starts the IdP test flow for this connection. */
+    fun createTestRun(
+        enterpriseConnectionId: String,
+        options: RequestOptions? = null,
+    ): EnterpriseConnectionTestRunResponse {
+        return dev.octri.showcase.clerk.methods.EnterpriseConnectionsMethods
+            .createEnterpriseConnectionTestRun(clientConfig, enterpriseConnectionId, options)
     }
-
 }

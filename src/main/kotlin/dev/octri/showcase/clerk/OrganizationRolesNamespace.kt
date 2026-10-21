@@ -3,59 +3,141 @@
 
 package dev.octri.showcase.clerk
 
-
 class OrganizationRolesNamespace(private val clientConfig: ClientConfig) {
     /**
-     * This request returns the list of organization roles for the instance. Results can be paginated using the optional `limit` and `offset` query parameters. The organization roles are ordered by descending creation date. Most recent roles will be returned first.
+     * This request returns the list of organization roles for the instance. Results can be
+     * paginated using the optional `limit` and `offset` query parameters. The organization roles
+     * are ordered by descending creation date. Most recent roles will be returned first.
      */
-    fun list(query: String? = null, orderBy: String? = null, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): Roles {
-        return dev.octri.showcase.clerk.methods.OrganizationRoles.listOrganizationRoles(clientConfig, query, orderBy, limit, offset, options)
+    fun list(
+        query: String? = null,
+        orderBy: String? = null,
+        limit: Long? = null,
+        offset: Long? = null,
+        options: RequestOptions? = null,
+    ): Roles {
+        return dev.octri.showcase.clerk.methods.OrganizationRoles.listOrganizationRoles(
+            clientConfig,
+            query,
+            orderBy,
+            limit,
+            offset,
+            options,
+        )
     }
 
     /**
-     * Creates a new organization role with the given name and permissions for an instance. The key must be unique for the instance and start with the 'org:' prefix, followed by lowercase alphanumeric characters and underscores only. You can optionally provide a description for the role and specify whether it should be included in the initial role set. Organization roles support permissions that can be assigned to control access within the organization.
+     * Creates a new organization role with the given name and permissions for an instance. The key
+     * must be unique for the instance and start with the 'org:' prefix, followed by lowercase
+     * alphanumeric characters and underscores only. You can optionally provide a description for
+     * the role and specify whether it should be included in the initial role set. Organization
+     * roles support permissions that can be assigned to control access within the organization.
      */
-    fun create(name: String, key: String, description: SdkClient.SdkOptional<String?>? = null, permissions: SdkClient.SdkOptional<List<String>?>? = null, includeInInitialRoleSet: SdkClient.SdkOptional<Boolean?>? = null, options: RequestOptions? = null): Role {
-        return dev.octri.showcase.clerk.methods.OrganizationRoles.createOrganizationRole(clientConfig, name, key, description, permissions, includeInInitialRoleSet, options)
+    fun create(
+        name: String,
+        key: String,
+        description: SdkClient.SdkOptional<String?>? = null,
+        permissions: SdkClient.SdkOptional<List<String>?>? = null,
+        includeInInitialRoleSet: SdkClient.SdkOptional<Boolean?>? = null,
+        options: RequestOptions? = null,
+    ): Role {
+        return dev.octri.showcase.clerk.methods.OrganizationRoles.createOrganizationRole(
+            clientConfig,
+            name,
+            key,
+            description,
+            permissions,
+            includeInInitialRoleSet,
+            options,
+        )
     }
 
-    /**
-     * Use this request to retrieve an existing organization role by its ID.
-     */
+    /** Use this request to retrieve an existing organization role by its ID. */
     fun get(organizationRoleId: String, options: RequestOptions? = null): Role {
-        return dev.octri.showcase.clerk.methods.OrganizationRoles.getOrganizationRole(clientConfig, organizationRoleId, options)
+        return dev.octri.showcase.clerk.methods.OrganizationRoles.getOrganizationRole(
+            clientConfig,
+            organizationRoleId,
+            options,
+        )
     }
 
     /**
-     * Updates an existing organization role. You can update the name, key, description, and permissions of the role. All parameters are optional - you can update only the fields you want to change. If the role is used as a creator role or domain default role, updating the key will cascade the update to the organization settings.
+     * Updates an existing organization role. You can update the name, key, description, and
+     * permissions of the role. All parameters are optional - you can update only the fields you
+     * want to change. If the role is used as a creator role or domain default role, updating the
+     * key will cascade the update to the organization settings.
      */
-    fun update(organizationRoleId: String, name: SdkClient.SdkOptional<String?>? = null, key: SdkClient.SdkOptional<String?>? = null, description: SdkClient.SdkOptional<String?>? = null, permissions: SdkClient.SdkOptional<List<String>?>? = null, options: RequestOptions? = null): Role {
-        return dev.octri.showcase.clerk.methods.OrganizationRoles.updateOrganizationRole(clientConfig, organizationRoleId, name, key, description, permissions, options)
+    fun update(
+        organizationRoleId: String,
+        name: SdkClient.SdkOptional<String?>? = null,
+        key: SdkClient.SdkOptional<String?>? = null,
+        description: SdkClient.SdkOptional<String?>? = null,
+        permissions: SdkClient.SdkOptional<List<String>?>? = null,
+        options: RequestOptions? = null,
+    ): Role {
+        return dev.octri.showcase.clerk.methods.OrganizationRoles.updateOrganizationRole(
+            clientConfig,
+            organizationRoleId,
+            name,
+            key,
+            description,
+            permissions,
+            options,
+        )
     }
 
     /**
-     * Deletes the organization role. The role cannot be deleted if it is currently used as the default creator role, domain default role, assigned to any members, or exists in any invitations.
+     * Deletes the organization role. The role cannot be deleted if it is currently used as the
+     * default creator role, domain default role, assigned to any members, or exists in any
+     * invitations.
      */
     fun delete(organizationRoleId: String, options: RequestOptions? = null): DeletedObject {
-        return dev.octri.showcase.clerk.methods.OrganizationRoles.deleteOrganizationRole(clientConfig, organizationRoleId, options)
+        return dev.octri.showcase.clerk.methods.OrganizationRoles.deleteOrganizationRole(
+            clientConfig,
+            organizationRoleId,
+            options,
+        )
     }
 
     /**
-     * Assigns a permission to an organization role. Use the `organization_role_id` and `permission_id` path parameters to identify the role and permission to link. The response contains the updated role and its permissions.
+     * Assigns a permission to an organization role. Use the `organization_role_id` and
+     * `permission_id` path parameters to identify the role and permission to link. The response
+     * contains the updated role and its permissions.
      *
      * Assigns a permission to an organization role
      */
-    fun assignPermissionTo(organizationRoleId: String, permissionId: String, options: RequestOptions? = null): Role {
-        return dev.octri.showcase.clerk.methods.OrganizationRoles.assignPermissionToOrganizationRole(clientConfig, organizationRoleId, permissionId, options)
+    fun assignPermissionTo(
+        organizationRoleId: String,
+        permissionId: String,
+        options: RequestOptions? = null,
+    ): Role {
+        return dev.octri.showcase.clerk.methods.OrganizationRoles
+            .assignPermissionToOrganizationRole(
+                clientConfig,
+                organizationRoleId,
+                permissionId,
+                options,
+            )
     }
 
     /**
-     * Removes a permission from an organization role. Use the `organization_role_id` and `permission_id` path parameters to identify the role and permission to unlink. The response contains the updated role and its remaining permissions.
+     * Removes a permission from an organization role. Use the `organization_role_id` and
+     * `permission_id` path parameters to identify the role and permission to unlink. The response
+     * contains the updated role and its remaining permissions.
      *
      * Removes a permission from an organization role
      */
-    fun removePermissionFrom(organizationRoleId: String, permissionId: String, options: RequestOptions? = null): Role {
-        return dev.octri.showcase.clerk.methods.OrganizationRoles.removePermissionFromOrganizationRole(clientConfig, organizationRoleId, permissionId, options)
+    fun removePermissionFrom(
+        organizationRoleId: String,
+        permissionId: String,
+        options: RequestOptions? = null,
+    ): Role {
+        return dev.octri.showcase.clerk.methods.OrganizationRoles
+            .removePermissionFromOrganizationRole(
+                clientConfig,
+                organizationRoleId,
+                permissionId,
+                options,
+            )
     }
-
 }

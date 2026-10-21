@@ -3,44 +3,24 @@
 
 package dev.octri.showcase.clerk.models
 
-/**
- * Typed representation of the `ActorToken` API schema.
- */
+/** Typed representation of the `ActorToken` API schema. */
 data class ActorToken(
-    /**
-     * Required enumerated value serialized in the `object` wire field.
-     */
+    /** Required enumerated value serialized in the `object` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ActorTokenObjectEnum,
-    /**
-     * Required `string` value serialized in the `id` wire field.
-     */
+    /** Required `string` value serialized in the `id` wire field. */
     val id: String,
-    /**
-     * Required enumerated value serialized in the `status` wire field.
-     */
+    /** Required enumerated value serialized in the `status` wire field. */
     val status: ActorTokenStatusEnum,
-    /**
-     * Required `string` value serialized in the `user_id` wire field.
-     */
+    /** Required `string` value serialized in the `user_id` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String,
-    /**
-     * Required object value serialized in the `actor` wire field.
-     */
+    /** Required object value serialized in the `actor` wire field. */
     val actor: Map<String, Any>,
-    /**
-     * Unix timestamp of creation.
-     */
+    /** Unix timestamp of creation. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Unix timestamp of last update.
-     */
+    /** Unix timestamp of last update. */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
-    /**
-     * Optional `string` value serialized in the `token` wire field.
-     */
+    /** Optional `string` value serialized in the `token` wire field. */
     val token: String? = null,
-    /**
-     * Optional `string` value serialized in the `url` wire field.
-     */
-    val url: String? = null
+    /** Optional `string` value serialized in the `url` wire field. */
+    val url: String? = null,
 )

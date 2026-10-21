@@ -3,56 +3,96 @@
 
 package dev.octri.showcase.clerk
 
-
 class SamlConnectionsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Returns the list of SAML Connections for an instance. Results can be paginated using the optional `limit` and `offset` query parameters. The SAML Connections are ordered by descending creation date and the most recent will be returned first. Deprecated: Use the Enterprise Connections API instead. This endpoint will be removed in future versions.
+     * Returns the list of SAML Connections for an instance. Results can be paginated using the
+     * optional `limit` and `offset` query parameters. The SAML Connections are ordered by
+     * descending creation date and the most recent will be returned first. Deprecated: Use the
+     * Enterprise Connections API instead. This endpoint will be removed in future versions.
      *
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
-    fun list(limit: Long? = null, offset: Long? = null, query: String? = null, orderBy: String? = null, organizationId: List<String>? = null, options: RequestOptions? = null): SAMLConnections {
-        return dev.octri.showcase.clerk.methods.SamlConnectionsMethods.listSamlConnections(clientConfig, limit, offset, query, orderBy, organizationId, options)
+    fun list(
+        limit: Long? = null,
+        offset: Long? = null,
+        query: String? = null,
+        orderBy: String? = null,
+        organizationId: List<String>? = null,
+        options: RequestOptions? = null,
+    ): SAMLConnections {
+        return dev.octri.showcase.clerk.methods.SamlConnectionsMethods.listSamlConnections(
+            clientConfig,
+            limit,
+            offset,
+            query,
+            orderBy,
+            organizationId,
+            options,
+        )
     }
 
     /**
-     * Create a new SAML Connection. Deprecated: Use the Enterprise Connections API instead. This endpoint will be removed in future versions.
+     * Create a new SAML Connection. Deprecated: Use the Enterprise Connections API instead. This
+     * endpoint will be removed in future versions.
      *
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
-    fun create(request: dev.octri.showcase.clerk.methods.SamlConnectionsMethods.CreateSamlConnectionRequest, options: RequestOptions? = null): SAMLConnection {
-        return dev.octri.showcase.clerk.methods.SamlConnectionsMethods.createSamlConnection(clientConfig, request, options)
+    fun create(
+        request:
+            dev.octri.showcase.clerk.methods.SamlConnectionsMethods.CreateSamlConnectionRequest,
+        options: RequestOptions? = null,
+    ): SAMLConnection {
+        return dev.octri.showcase.clerk.methods.SamlConnectionsMethods.createSamlConnection(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Fetches the SAML Connection whose ID matches the provided `saml_connection_id` in the path. Deprecated: Use the Enterprise Connections API instead. This endpoint will be removed in future versions.
+     * Fetches the SAML Connection whose ID matches the provided `saml_connection_id` in the path.
+     * Deprecated: Use the Enterprise Connections API instead. This endpoint will be removed in
+     * future versions.
      *
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
     fun get(samlConnectionId: String, options: RequestOptions? = null): SAMLConnection {
-        return dev.octri.showcase.clerk.methods.SamlConnectionsMethods.getSamlConnection(clientConfig, samlConnectionId, options)
+        return dev.octri.showcase.clerk.methods.SamlConnectionsMethods.getSamlConnection(
+            clientConfig,
+            samlConnectionId,
+            options,
+        )
     }
 
     /**
-     * Updates the SAML Connection whose ID matches the provided `id` in the path. Deprecated: Use the Enterprise Connections API instead. This endpoint will be removed in future versions.
+     * Updates the SAML Connection whose ID matches the provided `id` in the path. Deprecated: Use
+     * the Enterprise Connections API instead. This endpoint will be removed in future versions.
      *
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
-    fun update(request: dev.octri.showcase.clerk.methods.SamlConnectionsMethods.UpdateSamlConnectionRequest, options: RequestOptions? = null): SAMLConnection {
-        return dev.octri.showcase.clerk.methods.SamlConnectionsMethods.updateSamlConnection(clientConfig, request, options)
+    fun update(
+        request:
+            dev.octri.showcase.clerk.methods.SamlConnectionsMethods.UpdateSamlConnectionRequest,
+        options: RequestOptions? = null,
+    ): SAMLConnection {
+        return dev.octri.showcase.clerk.methods.SamlConnectionsMethods.updateSamlConnection(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Deletes the SAML Connection whose ID matches the provided `id` in the path. Deprecated: Use the Enterprise Connections API instead. This endpoint will be removed in future versions.
+     * Deletes the SAML Connection whose ID matches the provided `id` in the path. Deprecated: Use
+     * the Enterprise Connections API instead. This endpoint will be removed in future versions.
      *
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
     fun delete(samlConnectionId: String, options: RequestOptions? = null): DeletedObject {
-        return dev.octri.showcase.clerk.methods.SamlConnectionsMethods.deleteSamlConnection(clientConfig, samlConnectionId, options)
+        return dev.octri.showcase.clerk.methods.SamlConnectionsMethods.deleteSamlConnection(
+            clientConfig,
+            samlConnectionId,
+            options,
+        )
     }
-
 }

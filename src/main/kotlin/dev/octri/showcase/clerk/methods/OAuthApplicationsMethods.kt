@@ -7,53 +7,75 @@ import dev.octri.showcase.clerk.ClerkErrors
 import dev.octri.showcase.clerk.ClientConfig
 import dev.octri.showcase.clerk.DeletedObject
 import dev.octri.showcase.clerk.OAuthApplication
-import dev.octri.showcase.clerk.OAuthApplications
 import dev.octri.showcase.clerk.OAuthApplicationWithSecret
+import dev.octri.showcase.clerk.OAuthApplications
 import dev.octri.showcase.clerk.RequestOptions
 import dev.octri.showcase.clerk.SdkClient
 import dev.octri.showcase.clerk.Validation
 
 object OAuthApplicationsMethods {
 
-
     /**
-     * This request returns the list of OAuth applications for an instance. Results can be paginated using the optional `limit` and `offset` query parameters. The OAuth applications are ordered by descending creation date. Most recent OAuth applications will be returned first.
+     * This request returns the list of OAuth applications for an instance. Results can be paginated
+     * using the optional `limit` and `offset` query parameters. The OAuth applications are ordered
+     * by descending creation date. Most recent OAuth applications will be returned first.
      *
-     * @param limit Applies a limit to the number of results returned. Can be used
-     *   for paginating the results together with `offset`.
-     * @param offset Skip the first `offset` results when paginating. Needs to be an
-     *   integer greater or equal to zero. To be used in conjunction with `limit`.
-     * @param orderBy Allows to return OAuth applications in a particular order. At
-     *   the moment, you can order the returned OAuth applications by their
-     *   `created_at` and `name`. In order to specify the direction, you can use the
-     *   `+/-` symbols prepended in the property to order by. For example, if you want
-     *   OAuth applications to be returned in descending order according to their
-     *   `created_at` property, you can use `-created_at`. If you don't use `+` or `-`,
-     *   then `+` is implied. We only support one…
-     * @param nameQuery Returns OAuth applications with names that match the given
-     *   query, via case-insensitive partial match. Also returns the OAuth application
-     *   whose `client_id` is exactly the given query, which is useful for resolving a
-     *   `client_id` to the OAuth application `id` required by the read, update and
-     *   delete endpoints.
+     * @param limit Applies a limit to the number of results returned. Can be used for paginating
+     *   the results together with `offset`.
+     * @param offset Skip the first `offset` results when paginating. Needs to be an integer greater
+     *   or equal to zero. To be used in conjunction with `limit`.
+     * @param orderBy Allows to return OAuth applications in a particular order. At the moment, you
+     *   can order the returned OAuth applications by their `created_at` and `name`. In order to
+     *   specify the direction, you can use the `+/-` symbols prepended in the property to order by.
+     *   For example, if you want OAuth applications to be returned in descending order according to
+     *   their `created_at` property, you can use `-created_at`. If you don't use `+` or `-`, then
+     *   `+` is implied. We only support one…
+     * @param nameQuery Returns OAuth applications with names that match the given query, via
+     *   case-insensitive partial match. Also returns the OAuth application whose `client_id` is
+     *   exactly the given query, which is useful for resolving a `client_id` to the OAuth
+     *   application `id` required by the read, update and delete endpoints.
      */
-    fun listOAuthApplications(clientConfig: ClientConfig, limit: Long? = null, offset: Long? = null, orderBy: String? = null, nameQuery: String? = null, options: RequestOptions? = null): OAuthApplications {
+    fun listOAuthApplications(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        offset: Long? = null,
+        orderBy: String? = null,
+        nameQuery: String? = null,
+        options: RequestOptions? = null,
+    ): OAuthApplications {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 500.0))
-}
+        }
 
         if (offset != null) {
             Validation.validateRange("offset", offset, Validation.RangeOpts(min = 0.0))
-}
+        }
 
-        return SdkClient.request<OAuthApplications>(SdkClient.RequestSpec("GET", "/oauth_applications", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "offset" to SdkClient.queryValue(offset, "form", true), "order_by" to SdkClient.queryValue(orderBy, "form", true), "name_query" to
-    SdkClient.queryValue(nameQuery, "form", true)), operationId = "listOAuthApplications", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
+        return SdkClient.request<OAuthApplications>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/oauth_applications",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "limit" to SdkClient.queryValue(limit, "form", true),
+                            "offset" to SdkClient.queryValue(offset, "form", true),
+                            "order_by" to SdkClient.queryValue(orderBy, "form", true),
+                            "name_query" to SdkClient.queryValue(nameQuery, "form", true),
+                        ),
+                    operationId = "listOAuthApplications",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ClerkErrors::class.java,
+                            "403" to ClerkErrors::class.java,
+                            "422" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /** Parameters for [createOAuthApplication]. */
     data class CreateOAuthApplicationRequest(
@@ -67,88 +89,127 @@ object OAuthApplicationsMethods {
         val tokenExchangeEnabled: Boolean? = null,
         val adoptAudienceResource: Boolean? = null,
         val deviceAuthorizationGrantEnabled: SdkClient.SdkOptional<Boolean?>? = null,
-        val public: SdkClient.SdkOptional<Boolean?>? = null
+        val public: SdkClient.SdkOptional<Boolean?>? = null,
     )
 
     /**
-     * Creates a new OAuth application with the given name and callback URL for an instance. The callback URL must be a valid URL. All URL schemes are allowed such as ``, ``, `myapp://`, etc...
+     * Creates a new OAuth application with the given name and callback URL for an instance. The
+     * callback URL must be a valid URL. All URL schemes are allowed such as ``, ``, `myapp://`,
+     * etc...
      *
      * @param name The name of the new OAuth application. Max length: 256
      * @param redirectUris An array of redirect URIs of the new OAuth application
      * @param callbackUrl The callback URL of the new OAuth application
-     * @param scopes Define the application's built-in and custom scope ceiling.
-     *   Provide scope keys as a space-delimited string. Custom keys must exist in the
-     *   instance OAuth scope catalog.
-     * @param consentScreenEnabled True to enable a consent screen to display in the
-     *   authentication flow.
-     * @param pkceRequired True to require the Proof Key of Code Exchange (PKCE)
+     * @param scopes Define the application's built-in and custom scope ceiling. Provide scope keys
+     *   as a space-delimited string. Custom keys must exist in the instance OAuth scope catalog.
+     * @param consentScreenEnabled True to enable a consent screen to display in the authentication
      *   flow.
-     * @param audienceUri An absolute resource URI for a confidential application
-     *   (RFC 8707 section 2). Registers a resource with no accepted scopes, or adopts
-     *   an unowned resource with confirmation. Every claimed URI remains permanently
-     *   reserved to this app, including retirement and deletion, and counts toward the
-     *   instance resource quota. Changing it stops new exchanges from the old audience
-     *   immediately. Already-issued tokens retain their lifetime. Clearing requires
-     *   exchange disabled in an earlier…
-     * @param tokenExchangeEnabled Enable exchanges from the active audience.
-     *   Requires an audience URI. Disabling preserves target configuration.
-     * @param adoptAudienceResource Confirm adoption of an existing unowned resource,
-     *   preserving its accepted scopes and target references. Does not override
-     *   another application's reservation.
-     * @param deviceAuthorizationGrantEnabled True to enable the OAuth Device
-     *   Authorization Grant for this application. Enabling requires the new OAuth IdP
-     *   and a reachable device verification page.
-     * @param public If true, this client is public and you can use the Proof Key of
-     *   Code Exchange (PKCE) flow.
+     * @param pkceRequired True to require the Proof Key of Code Exchange (PKCE) flow.
+     * @param audienceUri An absolute resource URI for a confidential application (RFC 8707 section
+     *   2). Registers a resource with no accepted scopes, or adopts an unowned resource with
+     *   confirmation. Every claimed URI remains permanently reserved to this app, including
+     *   retirement and deletion, and counts toward the instance resource quota. Changing it stops
+     *   new exchanges from the old audience immediately. Already-issued tokens retain their
+     *   lifetime. Clearing requires exchange disabled in an earlier…
+     * @param tokenExchangeEnabled Enable exchanges from the active audience. Requires an audience
+     *   URI. Disabling preserves target configuration.
+     * @param adoptAudienceResource Confirm adoption of an existing unowned resource, preserving its
+     *   accepted scopes and target references. Does not override another application's reservation.
+     * @param deviceAuthorizationGrantEnabled True to enable the OAuth Device Authorization Grant
+     *   for this application. Enabling requires the new OAuth IdP and a reachable device
+     *   verification page.
+     * @param public If true, this client is public and you can use the Proof Key of Code Exchange
+     *   (PKCE) flow.
      */
-    fun createOAuthApplication(clientConfig: ClientConfig, request: CreateOAuthApplicationRequest, options: RequestOptions? = null): OAuthApplicationWithSecret {
+    fun createOAuthApplication(
+        clientConfig: ClientConfig,
+        request: CreateOAuthApplicationRequest,
+        options: RequestOptions? = null,
+    ): OAuthApplicationWithSecret {
         validateCreateOAuthApplicationRequest(request)
 
-        return SdkClient.request<OAuthApplicationWithSecret>(SdkClient.RequestSpec("POST", "/oauth_applications", config = clientConfig, body = SdkClient.bodyMap("name" to (request.name), "redirect_uris" to
-    (request.redirectUris ?: SdkClient.SdkOptional.Omitted), "callback_url" to
-    (request.callbackUrl ?: SdkClient.SdkOptional.Omitted), "scopes" to
-    (request.scopes ?: SdkClient.SdkOptional.Omitted), "consent_screen_enabled" to
-    (request.consentScreenEnabled ?: SdkClient.SdkOptional.Omitted), "pkce_required" to
-    (request.pkceRequired ?: SdkClient.SdkOptional.Omitted), "audience_uri" to
-    (request.audienceUri ?: SdkClient.SdkOptional.Omitted), "token_exchange_enabled" to
-    (SdkClient.omitIfNull(request.tokenExchangeEnabled)), "adopt_audience_resource" to
-    (SdkClient.omitIfNull(request.adoptAudienceResource)), "device_authorization_grant_enabled" to
-    (request.deviceAuthorizationGrantEnabled ?: SdkClient.SdkOptional.Omitted), "public" to
-    (request.public ?: SdkClient.SdkOptional.Omitted)), operationId = "createOAuthApplication", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
+        return SdkClient.request<OAuthApplicationWithSecret>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/oauth_applications",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "name" to (request.name),
+                            "redirect_uris" to
+                                (request.redirectUris ?: SdkClient.SdkOptional.Omitted),
+                            "callback_url" to
+                                (request.callbackUrl ?: SdkClient.SdkOptional.Omitted),
+                            "scopes" to (request.scopes ?: SdkClient.SdkOptional.Omitted),
+                            "consent_screen_enabled" to
+                                (request.consentScreenEnabled ?: SdkClient.SdkOptional.Omitted),
+                            "pkce_required" to
+                                (request.pkceRequired ?: SdkClient.SdkOptional.Omitted),
+                            "audience_uri" to
+                                (request.audienceUri ?: SdkClient.SdkOptional.Omitted),
+                            "token_exchange_enabled" to
+                                (SdkClient.omitIfNull(request.tokenExchangeEnabled)),
+                            "adopt_audience_resource" to
+                                (SdkClient.omitIfNull(request.adoptAudienceResource)),
+                            "device_authorization_grant_enabled" to
+                                (request.deviceAuthorizationGrantEnabled
+                                    ?: SdkClient.SdkOptional.Omitted),
+                            "public" to (request.public ?: SdkClient.SdkOptional.Omitted),
+                        ),
+                    operationId = "createOAuthApplication",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ClerkErrors::class.java,
+                            "403" to ClerkErrors::class.java,
+                            "422" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
 
     private fun validateCreateOAuthApplicationRequest(request: CreateOAuthApplicationRequest) {
         val callbackUrlValue = request.callbackUrl?.getOrNull()
-if (callbackUrlValue != null) {
-            Validation.validateLength("callback_url", callbackUrlValue, Validation.LengthOpts(max = 1024))
-}
+        if (callbackUrlValue != null) {
+            Validation.validateLength(
+                "callback_url",
+                callbackUrlValue,
+                Validation.LengthOpts(max = 1024),
+            )
+        }
 
         val scopesValue = request.scopes?.getOrNull()
-if (scopesValue != null) {
+        if (scopesValue != null) {
             Validation.validateLength("scopes", scopesValue, Validation.LengthOpts(max = 1024))
-}
+        }
     }
-
-
-
-
-
 
     /**
      * Fetches the OAuth application whose ID matches the provided `id` in the path.
      *
      * @param oauthApplicationId The ID of the OAuth application
      */
-    fun getOAuthApplication(clientConfig: ClientConfig, oauthApplicationId: String, options: RequestOptions? = null): OAuthApplication {
-        return SdkClient.request<OAuthApplication>(SdkClient.RequestSpec("GET", "/oauth_applications/${SdkClient.encodePathSegment(oauthApplicationId)}", config = clientConfig, operationId = "getOAuthApplication", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
+    fun getOAuthApplication(
+        clientConfig: ClientConfig,
+        oauthApplicationId: String,
+        options: RequestOptions? = null,
+    ): OAuthApplication {
+        return SdkClient.request<OAuthApplication>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/oauth_applications/${SdkClient.encodePathSegment(oauthApplicationId)}",
+                    config = clientConfig,
+                    operationId = "getOAuthApplication",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf("403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /** Parameters for [updateOAuthApplication]. */
     data class UpdateOAuthApplicationRequest(
@@ -163,11 +224,14 @@ if (scopesValue != null) {
         val tokenExchangeEnabled: Boolean? = null,
         val adoptAudienceResource: Boolean? = null,
         val deviceAuthorizationGrantEnabled: SdkClient.SdkOptional<Boolean?>? = null,
-        val public: SdkClient.SdkOptional<Boolean?>? = null
+        val public: SdkClient.SdkOptional<Boolean?>? = null,
     )
 
     /**
-     * Updates an existing OAuth application with the properties you provide. Use `scopes` to replace the application's complete built-in and custom scope ceiling, rather than adding individual scopes. Include required built-in scopes and use custom scope keys from the instance OAuth scope catalog.
+     * Updates an existing OAuth application with the properties you provide. Use `scopes` to
+     * replace the application's complete built-in and custom scope ceiling, rather than adding
+     * individual scopes. Include required built-in scopes and use custom scope keys from the
+     * instance OAuth scope catalog.
      *
      * Updates an existing OAuth application
      *
@@ -175,136 +239,226 @@ if (scopesValue != null) {
      * @param name The new name of the OAuth application. Max length: 256
      * @param redirectUris An array of redirect URIs of the new OAuth application
      * @param callbackUrl The new callback URL of the OAuth application
-     * @param scopes Replace the application's complete built-in and custom scope
-     *   ceiling. Provide scope keys as a space-delimited string. Custom keys must
-     *   exist in the instance OAuth scope catalog. Required built-in scopes, such as
-     *   `offline_access`, must be included in the replacement set, otherwise the
-     *   request is rejected. Omit this field to leave all scope assignments unchanged.
-     * @param consentScreenEnabled True to enable a consent screen to display in the
-     *   authentication flow. This cannot be disabled for dynamically registered OAuth
-     *   Applications.
-     * @param pkceRequired True to require the Proof Key of Code Exchange (PKCE)
-     *   flow.
-     * @param audienceUri An absolute resource URI for a confidential application
-     *   (RFC 8707 section 2). Registers a resource with no accepted scopes, or adopts
-     *   an unowned resource with confirmation. Every claimed URI remains permanently
-     *   reserved to this app, including retirement and deletion, and counts toward the
-     *   instance resource quota. Changing it stops new exchanges from the old audience
-     *   immediately. Already-issued tokens retain their lifetime. Clearing requires
-     *   exchange disabled in an earlier…
-     * @param tokenExchangeEnabled Enable exchanges from the active audience.
-     *   Requires an audience URI. Disabling preserves target configuration.
-     * @param adoptAudienceResource Confirm adoption of an existing unowned resource,
-     *   preserving its accepted scopes and target references. Does not override
-     *   another application's reservation.
-     * @param deviceAuthorizationGrantEnabled True to enable the OAuth Device
-     *   Authorization Grant for this application. Enabling requires the new OAuth IdP
-     *   and a reachable device verification page. Omit this field to leave the setting
-     *   unchanged.
-     * @param public If true, this client is public and you can use the Proof Key of
-     *   Code Exchange (PKCE) flow.
+     * @param scopes Replace the application's complete built-in and custom scope ceiling. Provide
+     *   scope keys as a space-delimited string. Custom keys must exist in the instance OAuth scope
+     *   catalog. Required built-in scopes, such as `offline_access`, must be included in the
+     *   replacement set, otherwise the request is rejected. Omit this field to leave all scope
+     *   assignments unchanged.
+     * @param consentScreenEnabled True to enable a consent screen to display in the authentication
+     *   flow. This cannot be disabled for dynamically registered OAuth Applications.
+     * @param pkceRequired True to require the Proof Key of Code Exchange (PKCE) flow.
+     * @param audienceUri An absolute resource URI for a confidential application (RFC 8707 section
+     *   2). Registers a resource with no accepted scopes, or adopts an unowned resource with
+     *   confirmation. Every claimed URI remains permanently reserved to this app, including
+     *   retirement and deletion, and counts toward the instance resource quota. Changing it stops
+     *   new exchanges from the old audience immediately. Already-issued tokens retain their
+     *   lifetime. Clearing requires exchange disabled in an earlier…
+     * @param tokenExchangeEnabled Enable exchanges from the active audience. Requires an audience
+     *   URI. Disabling preserves target configuration.
+     * @param adoptAudienceResource Confirm adoption of an existing unowned resource, preserving its
+     *   accepted scopes and target references. Does not override another application's reservation.
+     * @param deviceAuthorizationGrantEnabled True to enable the OAuth Device Authorization Grant
+     *   for this application. Enabling requires the new OAuth IdP and a reachable device
+     *   verification page. Omit this field to leave the setting unchanged.
+     * @param public If true, this client is public and you can use the Proof Key of Code Exchange
+     *   (PKCE) flow.
      */
-    fun updateOAuthApplication(clientConfig: ClientConfig, request: UpdateOAuthApplicationRequest, options: RequestOptions? = null): OAuthApplication {
+    fun updateOAuthApplication(
+        clientConfig: ClientConfig,
+        request: UpdateOAuthApplicationRequest,
+        options: RequestOptions? = null,
+    ): OAuthApplication {
         validateUpdateOAuthApplicationRequest(request)
 
-        return SdkClient.request<OAuthApplication>(SdkClient.RequestSpec("PATCH", "/oauth_applications/${SdkClient.encodePathSegment(request.oauthApplicationId)}", config = clientConfig, body = SdkClient.bodyMap("name" to (request.name ?: SdkClient.SdkOptional.Omitted), "redirect_uris" to
-    (request.redirectUris ?: SdkClient.SdkOptional.Omitted), "callback_url" to
-    (request.callbackUrl ?: SdkClient.SdkOptional.Omitted), "scopes" to
-    (request.scopes ?: SdkClient.SdkOptional.Omitted), "consent_screen_enabled" to
-    (request.consentScreenEnabled ?: SdkClient.SdkOptional.Omitted), "pkce_required" to
-    (request.pkceRequired ?: SdkClient.SdkOptional.Omitted), "audience_uri" to
-    (request.audienceUri ?: SdkClient.SdkOptional.Omitted), "token_exchange_enabled" to
-    (SdkClient.omitIfNull(request.tokenExchangeEnabled)), "adopt_audience_resource" to
-    (SdkClient.omitIfNull(request.adoptAudienceResource)), "device_authorization_grant_enabled" to
-    (request.deviceAuthorizationGrantEnabled ?: SdkClient.SdkOptional.Omitted), "public" to
-    (request.public ?: SdkClient.SdkOptional.Omitted)), operationId = "updateOAuthApplication", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
+        return SdkClient.request<OAuthApplication>(
+                SdkClient.RequestSpec(
+                    "PATCH",
+                    "/oauth_applications/${SdkClient.encodePathSegment(request.oauthApplicationId)}",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "name" to (request.name ?: SdkClient.SdkOptional.Omitted),
+                            "redirect_uris" to
+                                (request.redirectUris ?: SdkClient.SdkOptional.Omitted),
+                            "callback_url" to
+                                (request.callbackUrl ?: SdkClient.SdkOptional.Omitted),
+                            "scopes" to (request.scopes ?: SdkClient.SdkOptional.Omitted),
+                            "consent_screen_enabled" to
+                                (request.consentScreenEnabled ?: SdkClient.SdkOptional.Omitted),
+                            "pkce_required" to
+                                (request.pkceRequired ?: SdkClient.SdkOptional.Omitted),
+                            "audience_uri" to
+                                (request.audienceUri ?: SdkClient.SdkOptional.Omitted),
+                            "token_exchange_enabled" to
+                                (SdkClient.omitIfNull(request.tokenExchangeEnabled)),
+                            "adopt_audience_resource" to
+                                (SdkClient.omitIfNull(request.adoptAudienceResource)),
+                            "device_authorization_grant_enabled" to
+                                (request.deviceAuthorizationGrantEnabled
+                                    ?: SdkClient.SdkOptional.Omitted),
+                            "public" to (request.public ?: SdkClient.SdkOptional.Omitted),
+                        ),
+                    operationId = "updateOAuthApplication",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ClerkErrors::class.java,
+                            "403" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                            "422" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
 
     private fun validateUpdateOAuthApplicationRequest(request: UpdateOAuthApplicationRequest) {
         val callbackUrlValue = request.callbackUrl?.getOrNull()
-if (callbackUrlValue != null) {
-            Validation.validateLength("callback_url", callbackUrlValue, Validation.LengthOpts(max = 1024))
-}
+        if (callbackUrlValue != null) {
+            Validation.validateLength(
+                "callback_url",
+                callbackUrlValue,
+                Validation.LengthOpts(max = 1024),
+            )
+        }
 
         val scopesValue = request.scopes?.getOrNull()
-if (scopesValue != null) {
+        if (scopesValue != null) {
             Validation.validateLength("scopes", scopesValue, Validation.LengthOpts(max = 1024))
-}
+        }
     }
-
-
-
-
-
 
     /**
      * Deletes the given OAuth application. This is not reversible.
      *
      * @param oauthApplicationId The ID of the OAuth application to delete
      */
-    fun deleteOAuthApplication(clientConfig: ClientConfig, oauthApplicationId: String, options: RequestOptions? = null): DeletedObject {
-        return SdkClient.request<DeletedObject>(SdkClient.RequestSpec("DELETE", "/oauth_applications/${SdkClient.encodePathSegment(oauthApplicationId)}", config = clientConfig, operationId = "deleteOAuthApplication", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
+    fun deleteOAuthApplication(
+        clientConfig: ClientConfig,
+        oauthApplicationId: String,
+        options: RequestOptions? = null,
+    ): DeletedObject {
+        return SdkClient.request<DeletedObject>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/oauth_applications/${SdkClient.encodePathSegment(oauthApplicationId)}",
+                    config = clientConfig,
+                    operationId = "deleteOAuthApplication",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf("403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
-     * Uploads an image to set or replace an OAuth application's logo. Send the request as `multipart/form-data` with the image in the `file` field; supported types are JPEG, PNG, GIF, and WebP, and the file must not exceed 10 MB. You can provide `uploader_user_id` to credit a user with the upload.
+     * Uploads an image to set or replace an OAuth application's logo. Send the request as
+     * `multipart/form-data` with the image in the `file` field; supported types are JPEG, PNG, GIF,
+     * and WebP, and the file must not exceed 10 MB. You can provide `uploader_user_id` to credit a
+     * user with the upload.
      *
-     * Set or replace an OAuth application's logo by uploading an image file. This endpoint uses the `multipart/form-data` request content type and accepts a file of image type. The file size cannot exceed 10MB. Only the following file content types are supported: `image/jpeg`, `image/png`, `image/gif`, `image/webp`.
+     * Set or replace an OAuth application's logo by uploading an image file. This endpoint uses the
+     * `multipart/form-data` request content type and accepts a file of image type. The file size
+     * cannot exceed 10MB. Only the following file content types are supported: `image/jpeg`,
+     * `image/png`, `image/gif`, `image/webp`.
      *
-     * @param oauthApplicationId The ID of the OAuth application for which to upload
-     *   a logo
-     * @param uploaderUserId The ID of the user that will be credited with the image
-     *   upload.
+     * @param oauthApplicationId The ID of the OAuth application for which to upload a logo
+     * @param uploaderUserId The ID of the user that will be credited with the image upload.
      */
-    fun uploadOAuthApplicationLogo(clientConfig: ClientConfig, oauthApplicationId: String, file: SdkClient.UploadFile, uploaderUserId: String? = null, options: RequestOptions? = null): OAuthApplication {
-        return SdkClient.request<OAuthApplication>(SdkClient.RequestSpec("PUT", "/oauth_applications/${SdkClient.encodePathSegment(oauthApplicationId)}/logo", config = clientConfig, body = SdkClient.bodyMap("file" to (file), "uploader_user_id" to (SdkClient.omitIfNull(uploaderUserId))), contentType = "multipart/form-data", operationId = "uploadOAuthApplicationLogo", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "413" to ClerkErrors::class.java))).data
+    fun uploadOAuthApplicationLogo(
+        clientConfig: ClientConfig,
+        oauthApplicationId: String,
+        file: SdkClient.UploadFile,
+        uploaderUserId: String? = null,
+        options: RequestOptions? = null,
+    ): OAuthApplication {
+        return SdkClient.request<OAuthApplication>(
+                SdkClient.RequestSpec(
+                    "PUT",
+                    "/oauth_applications/${SdkClient.encodePathSegment(oauthApplicationId)}/logo",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "file" to (file),
+                            "uploader_user_id" to (SdkClient.omitIfNull(uploaderUserId)),
+                        ),
+                    contentType = "multipart/form-data",
+                    operationId = "uploadOAuthApplicationLogo",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ClerkErrors::class.java,
+                            "403" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                            "413" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
-     * Rotates the OAuth application's client secret. When the client secret is rotated, make sure to update it in authorized OAuth clients.
+     * Rotates the OAuth application's client secret. When the client secret is rotated, make sure
+     * to update it in authorized OAuth clients.
      *
-     * @param oauthApplicationId The ID of the OAuth application for which to rotate
-     *   the client secret
+     * @param oauthApplicationId The ID of the OAuth application for which to rotate the client
+     *   secret
      */
-    fun rotateOAuthApplicationSecret(clientConfig: ClientConfig, oauthApplicationId: String, options: RequestOptions? = null): OAuthApplicationWithSecret {
-        return SdkClient.request<OAuthApplicationWithSecret>(SdkClient.RequestSpec("POST", "/oauth_applications/${SdkClient.encodePathSegment(oauthApplicationId)}/rotate_secret", config = clientConfig, operationId = "rotateOAuthApplicationSecret", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
+    fun rotateOAuthApplicationSecret(
+        clientConfig: ClientConfig,
+        oauthApplicationId: String,
+        options: RequestOptions? = null,
+    ): OAuthApplicationWithSecret {
+        return SdkClient.request<OAuthApplicationWithSecret>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/oauth_applications/${SdkClient.encodePathSegment(oauthApplicationId)}/rotate_secret",
+                    config = clientConfig,
+                    operationId = "rotateOAuthApplicationSecret",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf("403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
-     * Revoke both OAuth access token and refresh token for the associated grant for the given OAuth application. The request may specify either token. JWT access tokens cannot be revoked.
+     * Revoke both OAuth access token and refresh token for the associated grant for the given OAuth
+     * application. The request may specify either token. JWT access tokens cannot be revoked.
      *
-     * @param oauthApplicationId The ID of the OAuth application for which to revoke
-     *   the token
-     * @param token The opaque OAuth access token or refresh token to revoke. All
-     *   tokens associated with the same OAuth grant are also revoked.
+     * @param oauthApplicationId The ID of the OAuth application for which to revoke the token
+     * @param token The opaque OAuth access token or refresh token to revoke. All tokens associated
+     *   with the same OAuth grant are also revoked.
      */
-    fun revokeOAuthApplicationToken(clientConfig: ClientConfig, oauthApplicationId: String, token: String, options: RequestOptions? = null): Unit {
-        SdkClient.request<Unit>(SdkClient.RequestSpec("POST", "/oauth_applications/${SdkClient.encodePathSegment(oauthApplicationId)}/revoke_token", config = clientConfig, body = SdkClient.bodyMap("token" to (token)), operationId = "revokeOAuthApplicationToken", decoder = SdkClient.ResponseDecoder.EMPTY, options = options, errors = mapOf("400" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java)))
+    fun revokeOAuthApplicationToken(
+        clientConfig: ClientConfig,
+        oauthApplicationId: String,
+        token: String,
+        options: RequestOptions? = null,
+    ): Unit {
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/oauth_applications/${SdkClient.encodePathSegment(oauthApplicationId)}/revoke_token",
+                config = clientConfig,
+                body = SdkClient.bodyMap("token" to (token)),
+                operationId = "revokeOAuthApplicationToken",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ClerkErrors::class.java,
+                        "403" to ClerkErrors::class.java,
+                        "404" to ClerkErrors::class.java,
+                        "422" to ClerkErrors::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

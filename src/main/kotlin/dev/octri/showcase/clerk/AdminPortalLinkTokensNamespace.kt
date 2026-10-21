@@ -3,20 +3,45 @@
 
 package dev.octri.showcase.clerk
 
-
 class AdminPortalLinkTokensNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates a single-use admin portal link token, optionally scoped to an organization and IT contact. Supply `organization_id`, `it_contact_id`, `scopes`, and `seconds_until_expiration` as needed; the expiration defaults to 3600 seconds. Treat the returned token as a secret because it is URL-borne.
+     * Creates a single-use admin portal link token, optionally scoped to an organization and IT
+     * contact. Supply `organization_id`, `it_contact_id`, `scopes`, and `seconds_until_expiration`
+     * as needed; the expiration defaults to 3600 seconds. Treat the returned token as a secret
+     * because it is URL-borne.
      */
-    fun create(organizationId: String? = null, itContactId: String? = null, scopes: List<String>? = null, secondsUntilExpiration: Long? = null, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.AdminPortalLinkTokens.CreateAdminPortalLinkTokenResponse {
-        return dev.octri.showcase.clerk.methods.AdminPortalLinkTokens.createAdminPortalLinkToken(clientConfig, organizationId, itContactId, scopes, secondsUntilExpiration, options)
+    fun create(
+        organizationId: String? = null,
+        itContactId: String? = null,
+        scopes: List<String>? = null,
+        secondsUntilExpiration: Long? = null,
+        options: RequestOptions? = null,
+    ): dev.octri.showcase.clerk.methods.AdminPortalLinkTokens.CreateAdminPortalLinkTokenResponse {
+        return dev.octri.showcase.clerk.methods.AdminPortalLinkTokens.createAdminPortalLinkToken(
+            clientConfig,
+            organizationId,
+            itContactId,
+            scopes,
+            secondsUntilExpiration,
+            options,
+        )
     }
 
     /**
-     * Revokes an admin portal link token identified by its token ID. You can include `revocation_reason` to record why the token was revoked. The response contains the token's updated revocation state.
+     * Revokes an admin portal link token identified by its token ID. You can include
+     * `revocation_reason` to record why the token was revoked. The response contains the token's
+     * updated revocation state.
      */
-    fun revoke(adminPortalLinkTokenId: String, revocationReason: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.AdminPortalLinkTokens.RevokeAdminPortalLinkTokenResponse {
-        return dev.octri.showcase.clerk.methods.AdminPortalLinkTokens.revokeAdminPortalLinkToken(clientConfig, adminPortalLinkTokenId, revocationReason, options)
+    fun revoke(
+        adminPortalLinkTokenId: String,
+        revocationReason: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): dev.octri.showcase.clerk.methods.AdminPortalLinkTokens.RevokeAdminPortalLinkTokenResponse {
+        return dev.octri.showcase.clerk.methods.AdminPortalLinkTokens.revokeAdminPortalLinkToken(
+            clientConfig,
+            adminPortalLinkTokenId,
+            revocationReason,
+            options,
+        )
     }
-
 }

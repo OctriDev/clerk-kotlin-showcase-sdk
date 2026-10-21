@@ -3,57 +3,134 @@
 
 package dev.octri.showcase.clerk
 
-
 class RoleSetsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Returns a list of role sets for the instance. Results can be paginated using the optional `limit` and `offset` query parameters. The role sets are ordered by descending creation date by default.
+     * Returns a list of role sets for the instance. Results can be paginated using the optional
+     * `limit` and `offset` query parameters. The role sets are ordered by descending creation date
+     * by default.
      */
-    fun list(query: String? = null, orderBy: String? = null, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): RoleSets {
-        return dev.octri.showcase.clerk.methods.RoleSetsMethods.listRoleSets(clientConfig, query, orderBy, limit, offset, options)
+    fun list(
+        query: String? = null,
+        orderBy: String? = null,
+        limit: Long? = null,
+        offset: Long? = null,
+        options: RequestOptions? = null,
+    ): RoleSets {
+        return dev.octri.showcase.clerk.methods.RoleSetsMethods.listRoleSets(
+            clientConfig,
+            query,
+            orderBy,
+            limit,
+            offset,
+            options,
+        )
     }
 
     /**
-     * Creates a new role set with the given name and roles. The key must be unique for the instance and start with the 'role_set:' prefix, followed by lowercase alphanumeric characters and underscores only. You must provide at least one role and specify a default role key and creator role key.
+     * Creates a new role set with the given name and roles. The key must be unique for the instance
+     * and start with the 'role_set:' prefix, followed by lowercase alphanumeric characters and
+     * underscores only. You must provide at least one role and specify a default role key and
+     * creator role key.
      */
-    fun create(request: dev.octri.showcase.clerk.methods.RoleSetsMethods.CreateRoleSetRequest, options: RequestOptions? = null): RoleSet {
-        return dev.octri.showcase.clerk.methods.RoleSetsMethods.createRoleSet(clientConfig, request, options)
+    fun create(
+        request: dev.octri.showcase.clerk.methods.RoleSetsMethods.CreateRoleSetRequest,
+        options: RequestOptions? = null,
+    ): RoleSet {
+        return dev.octri.showcase.clerk.methods.RoleSetsMethods.createRoleSet(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Retrieves a role set by its key or ID, including its roles and organization-member defaults. Use `role_set_key_or_id` to identify the role set; the response also includes its type and creation and update timestamps.
+     * Retrieves a role set by its key or ID, including its roles and organization-member defaults.
+     * Use `role_set_key_or_id` to identify the role set; the response also includes its type and
+     * creation and update timestamps.
      *
      * Retrieves an existing role set by its key or ID.
      */
     fun get(roleSetKeyOrId: String, options: RequestOptions? = null): RoleSet {
-        return dev.octri.showcase.clerk.methods.RoleSetsMethods.getRoleSet(clientConfig, roleSetKeyOrId, options)
+        return dev.octri.showcase.clerk.methods.RoleSetsMethods.getRoleSet(
+            clientConfig,
+            roleSetKeyOrId,
+            options,
+        )
     }
 
     /**
-     * Updates an existing role set. You can update the name, key, description, type, default role, or creator role. All parameters are optional - you can update only the fields you want to change.
+     * Updates an existing role set. You can update the name, key, description, type, default role,
+     * or creator role. All parameters are optional - you can update only the fields you want to
+     * change.
      */
-    fun update(request: dev.octri.showcase.clerk.methods.RoleSetsMethods.UpdateRoleSetRequest, options: RequestOptions? = null): RoleSet {
-        return dev.octri.showcase.clerk.methods.RoleSetsMethods.updateRoleSet(clientConfig, request, options)
+    fun update(
+        request: dev.octri.showcase.clerk.methods.RoleSetsMethods.UpdateRoleSetRequest,
+        options: RequestOptions? = null,
+    ): RoleSet {
+        return dev.octri.showcase.clerk.methods.RoleSetsMethods.updateRoleSet(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Replaces a role set with another role set. This is functionally equivalent to deleting the role set but allows for atomic replacement with migration support. Organizations using this role set will be migrated to the destination role set.
+     * Replaces a role set with another role set. This is functionally equivalent to deleting the
+     * role set but allows for atomic replacement with migration support. Organizations using this
+     * role set will be migrated to the destination role set.
      */
-    fun replace(roleSetKeyOrId: String, destRoleSetKey: String, reassignmentMappings: ReassignmentMappings? = null, options: RequestOptions? = null): DeletedObject {
-        return dev.octri.showcase.clerk.methods.RoleSetsMethods.replaceRoleSet(clientConfig, roleSetKeyOrId, destRoleSetKey, reassignmentMappings, options)
+    fun replace(
+        roleSetKeyOrId: String,
+        destRoleSetKey: String,
+        reassignmentMappings: ReassignmentMappings? = null,
+        options: RequestOptions? = null,
+    ): DeletedObject {
+        return dev.octri.showcase.clerk.methods.RoleSetsMethods.replaceRoleSet(
+            clientConfig,
+            roleSetKeyOrId,
+            destRoleSetKey,
+            reassignmentMappings,
+            options,
+        )
     }
 
     /**
-     * Adds one or more roles to an existing role set. You can optionally update the default role or creator role when adding new roles.
+     * Adds one or more roles to an existing role set. You can optionally update the default role or
+     * creator role when adding new roles.
      */
-    fun addRolesTo(roleSetKeyOrId: String, roleKeys: List<String>, defaultRoleKey: String? = null, creatorRoleKey: String? = null, options: RequestOptions? = null): RoleSet {
-        return dev.octri.showcase.clerk.methods.RoleSetsMethods.addRolesToRoleSet(clientConfig, roleSetKeyOrId, roleKeys, defaultRoleKey, creatorRoleKey, options)
+    fun addRolesTo(
+        roleSetKeyOrId: String,
+        roleKeys: List<String>,
+        defaultRoleKey: String? = null,
+        creatorRoleKey: String? = null,
+        options: RequestOptions? = null,
+    ): RoleSet {
+        return dev.octri.showcase.clerk.methods.RoleSetsMethods.addRolesToRoleSet(
+            clientConfig,
+            roleSetKeyOrId,
+            roleKeys,
+            defaultRoleKey,
+            creatorRoleKey,
+            options,
+        )
     }
 
     /**
-     * Replaces a role in a role set with another role. This atomically removes the source role and reassigns any members to the destination role.
+     * Replaces a role in a role set with another role. This atomically removes the source role and
+     * reassigns any members to the destination role.
      */
-    fun replaceRoleIn(roleSetKeyOrId: String, roleKey: String, toRoleKey: String, options: RequestOptions? = null): RoleSet {
-        return dev.octri.showcase.clerk.methods.RoleSetsMethods.replaceRoleInRoleSet(clientConfig, roleSetKeyOrId, roleKey, toRoleKey, options)
+    fun replaceRoleIn(
+        roleSetKeyOrId: String,
+        roleKey: String,
+        toRoleKey: String,
+        options: RequestOptions? = null,
+    ): RoleSet {
+        return dev.octri.showcase.clerk.methods.RoleSetsMethods.replaceRoleInRoleSet(
+            clientConfig,
+            roleSetKeyOrId,
+            roleKey,
+            toRoleKey,
+            options,
+        )
     }
-
 }

@@ -3,42 +3,25 @@
 
 package dev.octri.showcase.clerk.models
 
-/**
- * Typed representation of the `InvitationRevoked` API schema.
- */
+/** Typed representation of the `InvitationRevoked` API schema. */
 data class InvitationRevoked(
-    /**
-     * Required enumerated value serialized in the `object` wire field.
-     */
+    /** Required enumerated value serialized in the `object` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: InvitationObjectEnum,
-    /**
-     * Required `string` value serialized in the `id` wire field.
-     */
+    /** Required `string` value serialized in the `id` wire field. */
     val id: String,
-    /**
-     * Required `email`-formatted value serialized in the `email_address` wire field.
-     */
+    /** Required `email`-formatted value serialized in the `email_address` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("email_address") val emailAddress: String,
-    /**
-     * Required object value serialized in the `public_metadata` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("public_metadata") val publicMetadata: Map<String, Any>,
+    /** Required object value serialized in the `public_metadata` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("public_metadata")
+    val publicMetadata: Map<String, Any>,
     val status: InvitationRevokedVariant1StatusEnum,
-    /**
-     * Unix timestamp of creation.
-     */
+    /** Unix timestamp of creation. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * Unix timestamp of last update.
-     */
+    /** Unix timestamp of last update. */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
     val revoked: Boolean? = null,
-    /**
-     * Optional `string` value serialized in the `url` wire field.
-     */
+    /** Optional `string` value serialized in the `url` wire field. */
     val url: String? = null,
-    /**
-     * Unix timestamp of expiration.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long? = null
+    /** Unix timestamp of expiration. */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_at") val expiresAt: Long? = null,
 )

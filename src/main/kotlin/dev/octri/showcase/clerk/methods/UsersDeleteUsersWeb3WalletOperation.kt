@@ -14,10 +14,31 @@ internal object UsersDeleteUsersWeb3WalletOperation {
      * Delete the web3 wallet identification for a given user.
      *
      * @param userId The ID of the user that owns the web3 wallet
-     * @param web3WalletIdentificationId The ID of the web3 wallet identity to be
-     *   deleted
+     * @param web3WalletIdentificationId The ID of the web3 wallet identity to be deleted
      */
-    fun deleteUsersWeb3Wallet(clientConfig: ClientConfig, userId: String, web3WalletIdentificationId: String, options: RequestOptions? = null): DeletedObject {
-        return SdkClient.request<DeletedObject>(SdkClient.RequestSpec("DELETE", "/users/${SdkClient.encodePathSegment(userId)}/web3_wallets/${SdkClient.encodePathSegment(web3WalletIdentificationId)}", config = clientConfig, operationId = "deleteUsersWeb3Wallet", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
+    fun deleteUsersWeb3Wallet(
+        clientConfig: ClientConfig,
+        userId: String,
+        web3WalletIdentificationId: String,
+        options: RequestOptions? = null,
+    ): DeletedObject {
+        return SdkClient.request<DeletedObject>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/users/${SdkClient.encodePathSegment(userId)}/web3_wallets/${SdkClient.encodePathSegment(web3WalletIdentificationId)}",
+                    config = clientConfig,
+                    operationId = "deleteUsersWeb3Wallet",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to ClerkErrors::class.java,
+                            "403" to ClerkErrors::class.java,
+                            "404" to ClerkErrors::class.java,
+                            "500" to ClerkErrors::class.java,
+                        ),
+                )
+            )
+            .data
     }
 }

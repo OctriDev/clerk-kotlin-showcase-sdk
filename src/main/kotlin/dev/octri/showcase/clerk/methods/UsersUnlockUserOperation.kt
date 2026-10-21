@@ -11,13 +11,29 @@ import dev.octri.showcase.clerk.User
 
 internal object UsersUnlockUserOperation {
     /**
-     * Removes the lock from a user account. Use `user_id` to identify the user whose lock you want to remove. A 200 response returns the updated user object.
+     * Removes the lock from a user account. Use `user_id` to identify the user whose lock you want
+     * to remove. A 200 response returns the updated user object.
      *
      * Removes the lock from the given user.
      *
      * @param userId The ID of the user to unlock
      */
-    fun unlockUser(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): User {
-        return SdkClient.request<User>(SdkClient.RequestSpec("POST", "/users/${SdkClient.encodePathSegment(userId)}/unlock", config = clientConfig, operationId = "unlockUser", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to ClerkErrors::class.java))).data
+    fun unlockUser(
+        clientConfig: ClientConfig,
+        userId: String,
+        options: RequestOptions? = null,
+    ): User {
+        return SdkClient.request<User>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/users/${SdkClient.encodePathSegment(userId)}/unlock",
+                    config = clientConfig,
+                    operationId = "unlockUser",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                    errors = mapOf("403" to ClerkErrors::class.java),
+                )
+            )
+            .data
     }
 }
