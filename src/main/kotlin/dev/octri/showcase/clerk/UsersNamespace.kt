@@ -412,7 +412,7 @@ class UsersNamespace(private val clientConfig: ClientConfig) {
         passkeyIdentificationId: String,
         options: RequestOptions? = null,
     ): DeletedObject {
-        return dev.octri.showcase.clerk.methods.Users.deleteUsersPasskey(
+        return dev.octri.showcase.clerk.methods.Users.deleteUserPasskey(
             clientConfig,
             userId,
             passkeyIdentificationId,

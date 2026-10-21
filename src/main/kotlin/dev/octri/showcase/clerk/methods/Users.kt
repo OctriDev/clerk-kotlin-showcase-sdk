@@ -652,13 +652,13 @@ object Users {
      * Delete the passkey identification for a given user. The user is notified through email or SMS
      * unless the passkey registration was never completed.
      */
-    fun deleteUsersPasskey(
+    fun deleteUserPasskey(
         clientConfig: ClientConfig,
         userId: String,
         passkeyIdentificationId: String,
         options: RequestOptions? = null,
     ): DeletedObject =
-        dev.octri.showcase.clerk.methods.UsersDeleteUsersPasskeyOperation.deleteUsersPasskey(
+        dev.octri.showcase.clerk.methods.UsersDeleteUserPasskeyOperation.deleteUserPasskey(
             clientConfig,
             userId,
             passkeyIdentificationId,
