@@ -12,59 +12,26 @@ import dev.octri.showcase.clerk.Validation
 
 internal object UsersGetOAuthAccessTokenOperation {
     /**
-     * Fetch the corresponding OAuth access token for a user that has previously authenticated with
-     * a particular OAuth provider. For OAuth 2.0, if the access token has expired and we have a
-     * corresponding refresh token, the access token will be refreshed transparently the new one
-     * will be returned.
+     * Fetch the corresponding OAuth access token for a user that has previously authenticated with a particular OAuth provider. For OAuth 2.0, if the access token has expired and we have a corresponding refresh token, the access token will be refreshed transparently the new one will be returned.
      *
      * @param userId The ID of the user for which to retrieve the OAuth access token
      * @param provider The ID of the OAuth provider (e.g. `oauth_google`)
-     * @param paginated Whether to paginate the results. If true, the results will be paginated. If
-     *   false, the results will not be paginated.
-     * @param limit Applies a limit to the number of results returned. Can be used for paginating
-     *   the results together with `offset`.
-     * @param offset Skip the first `offset` results when paginating. Needs to be an integer greater
-     *   or equal to zero. To be used in conjunction with `limit`.
+     * @param paginated Whether to paginate the results. If true, the results will be
+     *   paginated. If false, the results will not be paginated.
+     * @param limit Applies a limit to the number of results returned. Can be used
+     *   for paginating the results together with `offset`.
+     * @param offset Skip the first `offset` results when paginating. Needs to be an
+     *   integer greater or equal to zero. To be used in conjunction with `limit`.
      */
-    fun getOAuthAccessToken(
-        clientConfig: ClientConfig,
-        userId: String,
-        provider: String,
-        paginated: Boolean? = null,
-        limit: Long? = null,
-        offset: Long? = null,
-        options: RequestOptions? = null,
-    ): OAuthAccessToken {
+    fun getOAuthAccessToken(clientConfig: ClientConfig, userId: String, provider: String, paginated: Boolean? = null, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): OAuthAccessToken {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 500.0))
-        }
+}
 
         if (offset != null) {
             Validation.validateRange("offset", offset, Validation.RangeOpts(min = 0.0))
-        }
+}
 
-        return SdkClient.request<OAuthAccessToken>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/users/${SdkClient.encodePathSegment(userId)}/oauth_access_tokens/${SdkClient.encodePathSegment(provider)}",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "paginated" to SdkClient.queryValue(paginated, "form", true),
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "offset" to SdkClient.queryValue(offset, "form", true),
-                        ),
-                    operationId = "getOAuthAccessToken",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<OAuthAccessToken>(SdkClient.RequestSpec("GET", "/users/${SdkClient.encodePathSegment(userId)}/oauth_access_tokens/${SdkClient.encodePathSegment(provider)}", config = clientConfig, query = mapOf("paginated" to SdkClient.queryValue(paginated, "form", true), "limit" to SdkClient.queryValue(limit, "form", true), "offset" to SdkClient.queryValue(offset, "form", true)), operationId = "getOAuthAccessToken", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
 }

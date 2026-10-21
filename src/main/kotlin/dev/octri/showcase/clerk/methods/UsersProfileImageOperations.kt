@@ -11,67 +11,26 @@ import dev.octri.showcase.clerk.User
 
 internal object UsersSetUserProfileImageOperation {
     /**
-     * Sets or replaces a user's profile image. Send the image in the `file` field as multipart form
-     * data, and use `user_id` to identify the account to update. A 200 response returns the updated
-     * user object.
+     * Sets or replaces a user's profile image. Send the image in the `file` field as multipart form data, and use `user_id` to identify the account to update. A 200 response returns the updated user object.
      *
      * Update a user's profile image
      *
      * @param userId The ID of the user to update the profile image for
      */
-    fun setUserProfileImage(
-        clientConfig: ClientConfig,
-        userId: String,
-        file: SdkClient.UploadFile? = null,
-        options: RequestOptions? = null,
-    ): User {
-        return SdkClient.request<User>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/users/${SdkClient.encodePathSegment(userId)}/profile_image",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("file" to (SdkClient.omitIfNull(file))),
-                    contentType = "multipart/form-data",
-                    operationId = "setUserProfileImage",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun setUserProfileImage(clientConfig: ClientConfig, userId: String, file: SdkClient.UploadFile? = null, options: RequestOptions? = null): User {
+        return SdkClient.request<User>(SdkClient.RequestSpec("POST", "/users/${SdkClient.encodePathSegment(userId)}/profile_image", config = clientConfig, body = SdkClient.bodyMap("file" to (SdkClient.omitIfNull(file))), contentType = "multipart/form-data", operationId = "setUserProfileImage", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
     }
 }
 
 internal object UsersDeleteUserProfileImageOperation {
     /**
-     * Deletes the profile image associated with a user account. Use `user_id` to identify the
-     * account whose image you want to remove. A 200 response returns the updated user object.
+     * Deletes the profile image associated with a user account. Use `user_id` to identify the account whose image you want to remove. A 200 response returns the updated user object.
      *
      * Delete a user's profile image
      *
      * @param userId The ID of the user to delete the profile image for
      */
-    fun deleteUserProfileImage(
-        clientConfig: ClientConfig,
-        userId: String,
-        options: RequestOptions? = null,
-    ): User {
-        return SdkClient.request<User>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/users/${SdkClient.encodePathSegment(userId)}/profile_image",
-                    config = clientConfig,
-                    operationId = "deleteUserProfileImage",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors = mapOf("404" to ClerkErrors::class.java),
-                )
-            )
-            .data
+    fun deleteUserProfileImage(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): User {
+        return SdkClient.request<User>(SdkClient.RequestSpec("DELETE", "/users/${SdkClient.encodePathSegment(userId)}/profile_image", config = clientConfig, operationId = "deleteUserProfileImage", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("404" to ClerkErrors::class.java))).data
     }
 }

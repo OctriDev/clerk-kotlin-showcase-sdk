@@ -14,302 +14,154 @@ import dev.octri.showcase.clerk.Validation
 
 object OrganizationRoles {
 
+
     /**
-     * This request returns the list of organization roles for the instance. Results can be
-     * paginated using the optional `limit` and `offset` query parameters. The organization roles
-     * are ordered by descending creation date. Most recent roles will be returned first.
+     * This request returns the list of organization roles for the instance. Results can be paginated using the optional `limit` and `offset` query parameters. The organization roles are ordered by descending creation date. Most recent roles will be returned first.
      *
-     * @param query Returns organization roles with ID, name, or key that match the given query.
-     *   Uses exact match for organization role ID and partial match for name and key.
-     * @param orderBy Allows to return organization roles in a particular order. At the moment, you
-     *   can order the returned organization roles by their `created_at`, `name`, or `key`. In order
-     *   to specify the direction, you can use the `+/-` symbols prepended in the property to order
-     *   by. For example, if you want organization roles to be returned in descending order
-     *   according to their `created_at` property, you can use `-created_at`. If you don't use `+`
-     *   or `-`, then `+` is implied. Defaults to…
-     * @param limit Applies a limit to the number of results returned. Can be used for paginating
-     *   the results together with `offset`.
-     * @param offset Skip the first `offset` results when paginating. Needs to be an integer greater
-     *   or equal to zero. To be used in conjunction with `limit`.
+     * @param query Returns organization roles with ID, name, or key that match the
+     *   given query. Uses exact match for organization role ID and partial match for
+     *   name and key.
+     * @param orderBy Allows to return organization roles in a particular order. At
+     *   the moment, you can order the returned organization roles by their
+     *   `created_at`, `name`, or `key`. In order to specify the direction, you can use
+     *   the `+/-` symbols prepended in the property to order by. For example, if you
+     *   want organization roles to be returned in descending order according to their
+     *   `created_at` property, you can use `-created_at`. If you don't use `+` or `-`,
+     *   then `+` is implied. Defaults to…
+     * @param limit Applies a limit to the number of results returned. Can be used
+     *   for paginating the results together with `offset`.
+     * @param offset Skip the first `offset` results when paginating. Needs to be an
+     *   integer greater or equal to zero. To be used in conjunction with `limit`.
      */
-    fun listOrganizationRoles(
-        clientConfig: ClientConfig,
-        query: String? = null,
-        orderBy: String? = null,
-        limit: Long? = null,
-        offset: Long? = null,
-        options: RequestOptions? = null,
-    ): Roles {
+    fun listOrganizationRoles(clientConfig: ClientConfig, query: String? = null, orderBy: String? = null, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): Roles {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 500.0))
-        }
+}
 
         if (offset != null) {
             Validation.validateRange("offset", offset, Validation.RangeOpts(min = 0.0))
-        }
+}
 
-        return SdkClient.request<Roles>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/organization_roles",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "query" to SdkClient.queryValue(query, "form", true),
-                            "order_by" to SdkClient.queryValue(orderBy, "form", true),
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "offset" to SdkClient.queryValue(offset, "form", true),
-                        ),
-                    operationId = "listOrganizationRoles",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<Roles>(SdkClient.RequestSpec("GET", "/organization_roles", config = clientConfig, query = mapOf("query" to SdkClient.queryValue(query, "form", true), "order_by" to SdkClient.queryValue(orderBy, "form", true), "limit" to SdkClient.queryValue(limit, "form", true), "offset" to SdkClient.queryValue(offset, "form", true)), operationId = "listOrganizationRoles", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
+
+
+
+
+
+
 
     /**
-     * Creates a new organization role with the given name and permissions for an instance. The key
-     * must be unique for the instance and start with the 'org:' prefix, followed by lowercase
-     * alphanumeric characters and underscores only. You can optionally provide a description for
-     * the role and specify whether it should be included in the initial role set. Organization
-     * roles support permissions that can be assigned to control access within the organization.
+     * Creates a new organization role with the given name and permissions for an instance. The key must be unique for the instance and start with the 'org:' prefix, followed by lowercase alphanumeric characters and underscores only. You can optionally provide a description for the role and specify whether it should be included in the initial role set. Organization roles support permissions that can be assigned to control access within the organization.
      *
      * @param name The name of the new organization role
-     * @param key A unique key for the organization role. Must start with 'org:' and contain only
-     *   lowercase alphanumeric characters and underscores.
+     * @param key A unique key for the organization role. Must start with 'org:' and
+     *   contain only lowercase alphanumeric characters and underscores.
      * @param description Optional description for the role
      * @param permissions Array of permission IDs to assign to the role
-     * @param includeInInitialRoleSet Whether this role should be included in the initial role set
+     * @param includeInInitialRoleSet Whether this role should be included in the
+     *   initial role set
      */
-    fun createOrganizationRole(
-        clientConfig: ClientConfig,
-        name: String,
-        key: String,
-        description: SdkClient.SdkOptional<String?>? = null,
-        permissions: SdkClient.SdkOptional<List<String>?>? = null,
-        includeInInitialRoleSet: SdkClient.SdkOptional<Boolean?>? = null,
-        options: RequestOptions? = null,
-    ): Role {
-        return SdkClient.request<Role>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/organization_roles",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (name),
-                            "key" to (key),
-                            "description" to (description ?: SdkClient.SdkOptional.Omitted),
-                            "permissions" to (permissions ?: SdkClient.SdkOptional.Omitted),
-                            "include_in_initial_role_set" to
-                                (includeInInitialRoleSet ?: SdkClient.SdkOptional.Omitted),
-                        ),
-                    operationId = "createOrganizationRole",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "402" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun createOrganizationRole(clientConfig: ClientConfig, name: String, key: String, description: SdkClient.SdkOptional<String?>? = null, permissions: SdkClient.SdkOptional<List<String>?>? = null, includeInInitialRoleSet: SdkClient.SdkOptional<Boolean?>? = null, options: RequestOptions? = null): Role {
+        return SdkClient.request<Role>(SdkClient.RequestSpec("POST", "/organization_roles", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "key" to (key), "description" to
+    (description ?: SdkClient.SdkOptional.Omitted), "permissions" to
+    (permissions ?: SdkClient.SdkOptional.Omitted), "include_in_initial_role_set" to
+    (includeInInitialRoleSet ?: SdkClient.SdkOptional.Omitted)), operationId = "createOrganizationRole", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "402" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
+
+
+
+
+
+
 
     /**
      * Use this request to retrieve an existing organization role by its ID.
      *
      * @param organizationRoleId The ID of the organization role
      */
-    fun getOrganizationRole(
-        clientConfig: ClientConfig,
-        organizationRoleId: String,
-        options: RequestOptions? = null,
-    ): Role {
-        return SdkClient.request<Role>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/organization_roles/${SdkClient.encodePathSegment(organizationRoleId)}",
-                    config = clientConfig,
-                    operationId = "getOrganizationRole",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun getOrganizationRole(clientConfig: ClientConfig, organizationRoleId: String, options: RequestOptions? = null): Role {
+        return SdkClient.request<Role>(SdkClient.RequestSpec("GET", "/organization_roles/${SdkClient.encodePathSegment(organizationRoleId)}", config = clientConfig, operationId = "getOrganizationRole", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Updates an existing organization role. You can update the name, key, description, and
-     * permissions of the role. All parameters are optional - you can update only the fields you
-     * want to change. If the role is used as a creator role or domain default role, updating the
-     * key will cascade the update to the organization settings.
+     * Updates an existing organization role. You can update the name, key, description, and permissions of the role. All parameters are optional - you can update only the fields you want to change. If the role is used as a creator role or domain default role, updating the key will cascade the update to the organization settings.
      *
      * @param organizationRoleId The ID of the organization role to update
      * @param name The new name for the organization role
-     * @param key A unique key for the organization role. Must start with 'org:' and contain only
-     *   lowercase alphanumeric characters and underscores.
+     * @param key A unique key for the organization role. Must start with 'org:' and
+     *   contain only lowercase alphanumeric characters and underscores.
      * @param description Optional description for the role
-     * @param permissions Array of permission IDs to assign to the role. If provided, this will
-     *   replace the existing permissions.
+     * @param permissions Array of permission IDs to assign to the role. If provided,
+     *   this will replace the existing permissions.
      */
-    fun updateOrganizationRole(
-        clientConfig: ClientConfig,
-        organizationRoleId: String,
-        name: SdkClient.SdkOptional<String?>? = null,
-        key: SdkClient.SdkOptional<String?>? = null,
-        description: SdkClient.SdkOptional<String?>? = null,
-        permissions: SdkClient.SdkOptional<List<String>?>? = null,
-        options: RequestOptions? = null,
-    ): Role {
-        return SdkClient.request<Role>(
-                SdkClient.RequestSpec(
-                    "PATCH",
-                    "/organization_roles/${SdkClient.encodePathSegment(organizationRoleId)}",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (name ?: SdkClient.SdkOptional.Omitted),
-                            "key" to (key ?: SdkClient.SdkOptional.Omitted),
-                            "description" to (description ?: SdkClient.SdkOptional.Omitted),
-                            "permissions" to (permissions ?: SdkClient.SdkOptional.Omitted),
-                        ),
-                    operationId = "updateOrganizationRole",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun updateOrganizationRole(clientConfig: ClientConfig, organizationRoleId: String, name: SdkClient.SdkOptional<String?>? = null, key: SdkClient.SdkOptional<String?>? = null, description: SdkClient.SdkOptional<String?>? = null, permissions: SdkClient.SdkOptional<List<String>?>? = null, options: RequestOptions? = null): Role {
+        return SdkClient.request<Role>(SdkClient.RequestSpec("PATCH", "/organization_roles/${SdkClient.encodePathSegment(organizationRoleId)}", config = clientConfig, body = SdkClient.bodyMap("name" to (name ?: SdkClient.SdkOptional.Omitted), "key" to (key ?: SdkClient.SdkOptional.Omitted), "description" to
+    (description ?: SdkClient.SdkOptional.Omitted), "permissions" to
+    (permissions ?: SdkClient.SdkOptional.Omitted)), operationId = "updateOrganizationRole", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Deletes the organization role. The role cannot be deleted if it is currently used as the
-     * default creator role, domain default role, assigned to any members, or exists in any
-     * invitations.
+     * Deletes the organization role. The role cannot be deleted if it is currently used as the default creator role, domain default role, assigned to any members, or exists in any invitations.
      *
      * @param organizationRoleId The ID of the organization role to delete
      */
-    fun deleteOrganizationRole(
-        clientConfig: ClientConfig,
-        organizationRoleId: String,
-        options: RequestOptions? = null,
-    ): DeletedObject {
-        return SdkClient.request<DeletedObject>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/organization_roles/${SdkClient.encodePathSegment(organizationRoleId)}",
-                    config = clientConfig,
-                    operationId = "deleteOrganizationRole",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun deleteOrganizationRole(clientConfig: ClientConfig, organizationRoleId: String, options: RequestOptions? = null): DeletedObject {
+        return SdkClient.request<DeletedObject>(SdkClient.RequestSpec("DELETE", "/organization_roles/${SdkClient.encodePathSegment(organizationRoleId)}", config = clientConfig, operationId = "deleteOrganizationRole", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Assigns a permission to an organization role. Use the `organization_role_id` and
-     * `permission_id` path parameters to identify the role and permission to link. The response
-     * contains the updated role and its permissions.
+     * Assigns a permission to an organization role. Use the `organization_role_id` and `permission_id` path parameters to identify the role and permission to link. The response contains the updated role and its permissions.
      *
      * Assigns a permission to an organization role
      *
      * @param organizationRoleId The ID of the organization role
      * @param permissionId The ID of the permission to assign
      */
-    fun assignPermissionToOrganizationRole(
-        clientConfig: ClientConfig,
-        organizationRoleId: String,
-        permissionId: String,
-        options: RequestOptions? = null,
-    ): Role {
-        return SdkClient.request<Role>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/organization_roles/${SdkClient.encodePathSegment(organizationRoleId)}/permissions/${SdkClient.encodePathSegment(permissionId)}",
-                    config = clientConfig,
-                    operationId = "assignPermissionToOrganizationRole",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "409" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun assignPermissionToOrganizationRole(clientConfig: ClientConfig, organizationRoleId: String, permissionId: String, options: RequestOptions? = null): Role {
+        return SdkClient.request<Role>(SdkClient.RequestSpec("POST", "/organization_roles/${SdkClient.encodePathSegment(organizationRoleId)}/permissions/${SdkClient.encodePathSegment(permissionId)}", config = clientConfig, operationId = "assignPermissionToOrganizationRole", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "409" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Removes a permission from an organization role. Use the `organization_role_id` and
-     * `permission_id` path parameters to identify the role and permission to unlink. The response
-     * contains the updated role and its remaining permissions.
+     * Removes a permission from an organization role. Use the `organization_role_id` and `permission_id` path parameters to identify the role and permission to unlink. The response contains the updated role and its remaining permissions.
      *
      * Removes a permission from an organization role
      *
      * @param organizationRoleId The ID of the organization role
      * @param permissionId The ID of the permission to remove
      */
-    fun removePermissionFromOrganizationRole(
-        clientConfig: ClientConfig,
-        organizationRoleId: String,
-        permissionId: String,
-        options: RequestOptions? = null,
-    ): Role {
-        return SdkClient.request<Role>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/organization_roles/${SdkClient.encodePathSegment(organizationRoleId)}/permissions/${SdkClient.encodePathSegment(permissionId)}",
-                    config = clientConfig,
-                    operationId = "removePermissionFromOrganizationRole",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun removePermissionFromOrganizationRole(clientConfig: ClientConfig, organizationRoleId: String, permissionId: String, options: RequestOptions? = null): Role {
+        return SdkClient.request<Role>(SdkClient.RequestSpec("DELETE", "/organization_roles/${SdkClient.encodePathSegment(organizationRoleId)}/permissions/${SdkClient.encodePathSegment(permissionId)}", config = clientConfig, operationId = "removePermissionFromOrganizationRole", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
+
+
+
+
+
+
+
 }

@@ -11,95 +11,61 @@ import dev.octri.showcase.clerk.SdkClient
 
 object ActorTokens {
 
+/**
+ * The actor payload. It needs to include a sub property which should contain the ID of the actor. This whole payload will be also included in the JWT session token.
+ */
+data class CreateActorTokenActor(
     /**
-     * The actor payload. It needs to include a sub property which should contain the ID of the
-     * actor. This whole payload will be also included in the JWT session token.
+     * The ID of the actor.
      */
-    data class CreateActorTokenActor(
-        /** The ID of the actor. */
-        val sub: String
-    ) {
-        @field:com.fasterxml.jackson.annotation.JsonAnySetter
-        @get:com.fasterxml.jackson.annotation.JsonAnyGetter
-        val additionalProperties: MutableMap<String, Any?> = linkedMapOf()
-    }
+    val sub: String
+) {
+    @field:com.fasterxml.jackson.annotation.JsonAnySetter
+    @get:com.fasterxml.jackson.annotation.JsonAnyGetter
+    val additionalProperties: MutableMap<String, Any?> = linkedMapOf()
+}
+
 
     /**
-     * Create an actor token that can be used to impersonate the given user. The `actor` parameter
-     * needs to include at least a "sub" key whose value is the ID of the actor (impersonating)
-     * user.
+     * Create an actor token that can be used to impersonate the given user. The `actor` parameter needs to include at least a "sub" key whose value is the ID of the actor (impersonating) user.
      *
      * @param userId The ID of the user being impersonated.
-     * @param actor The actor payload. It needs to include a sub property which should contain the
-     *   ID of the actor. This whole payload will be also included in the JWT session token.
-     * @param expiresInSeconds Optional parameter to specify the life duration of the actor token in
-     *   seconds. By default, the duration is 1 hour.
-     * @param sessionMaxDurationInSeconds The maximum duration that the session which will be
-     *   created by the generated actor token should last. By default, the duration of a session
-     *   created via an actor token, lasts 30 minutes.
+     * @param actor The actor payload. It needs to include a sub property which
+     *   should contain the ID of the actor. This whole payload will be also included
+     *   in the JWT session token.
+     * @param expiresInSeconds Optional parameter to specify the life duration of the
+     *   actor token in seconds. By default, the duration is 1 hour.
+     * @param sessionMaxDurationInSeconds The maximum duration that the session which
+     *   will be created by the generated actor token should last. By default, the
+     *   duration of a session created via an actor token, lasts 30 minutes.
      */
-    fun createActorToken(
-        clientConfig: ClientConfig,
-        userId: String,
-        actor: CreateActorTokenActor,
-        expiresInSeconds: Long? = null,
-        sessionMaxDurationInSeconds: Long? = null,
-        options: RequestOptions? = null,
-    ): ActorToken {
-        return SdkClient.request<ActorToken>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/actor_tokens",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "user_id" to (userId),
-                            "actor" to (actor),
-                            "expires_in_seconds" to (SdkClient.omitIfNull(expiresInSeconds)),
-                            "session_max_duration_in_seconds" to
-                                (SdkClient.omitIfNull(sessionMaxDurationInSeconds)),
-                        ),
-                    operationId = "createActorToken",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "402" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun createActorToken(clientConfig: ClientConfig, userId: String, actor: CreateActorTokenActor, expiresInSeconds: Long? = null, sessionMaxDurationInSeconds: Long? = null, options: RequestOptions? = null): ActorToken {
+        return SdkClient.request<ActorToken>(SdkClient.RequestSpec("POST", "/actor_tokens", config = clientConfig, body = SdkClient.bodyMap("user_id" to (userId), "actor" to (actor), "expires_in_seconds" to
+    (SdkClient.omitIfNull(expiresInSeconds)), "session_max_duration_in_seconds" to
+    (SdkClient.omitIfNull(sessionMaxDurationInSeconds))), operationId = "createActorToken", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "402" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Revokes a pending actor token, changing its status to revoked. Use `actor_token_id` to
-     * identify the token; the response includes its resulting status and associated actor and user
-     * details.
+     * Revokes a pending actor token, changing its status to revoked. Use `actor_token_id` to identify the token; the response includes its resulting status and associated actor and user details.
      *
      * Revokes a pending actor token.
      *
      * @param actorTokenId The ID of the actor token to be revoked.
      */
-    fun revokeActorToken(
-        clientConfig: ClientConfig,
-        actorTokenId: String,
-        options: RequestOptions? = null,
-    ): ActorToken {
-        return SdkClient.request<ActorToken>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/actor_tokens/${SdkClient.encodePathSegment(actorTokenId)}/revoke",
-                    config = clientConfig,
-                    operationId = "revokeActorToken",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf("400" to ClerkErrors::class.java, "404" to ClerkErrors::class.java),
-                )
-            )
-            .data
+    fun revokeActorToken(clientConfig: ClientConfig, actorTokenId: String, options: RequestOptions? = null): ActorToken {
+        return SdkClient.request<ActorToken>(SdkClient.RequestSpec("POST", "/actor_tokens/${SdkClient.encodePathSegment(actorTokenId)}/revoke", config = clientConfig, operationId = "revokeActorToken", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "404" to ClerkErrors::class.java))).data
     }
+
+
+
+
+
+
+
 }

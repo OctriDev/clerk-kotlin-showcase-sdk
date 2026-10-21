@@ -3,11 +3,16 @@
 
 package dev.octri.showcase.clerk.models
 
-/** Typed representation of the `PaginatedCommerceSubscriptionItemResponse` API schema. */
+/**
+ * Typed representation of the `PaginatedCommerceSubscriptionItemResponse` API schema.
+ */
 data class PaginatedCommerceSubscriptionItemResponse(
-    /** Array of subscription items. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<CommerceSubscriptionItem>,
-    /** Total number of subscription items. */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long,
+    /**
+     * Array of subscription items.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<CommerceSubscriptionItem>,
+    /**
+     * Total number of subscription items.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long
 )

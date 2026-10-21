@@ -3,48 +3,31 @@
 
 package dev.octri.showcase.clerk
 
+
 class UsersNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Returns a list of all users. The users are returned sorted by creation date, with the newest
-     * users appearing first. To walk more than a few pages, paginate with `starting_after` rather
-     * than `offset`. A cursor page costs the same no matter how far into the list it sits, while a
-     * large `offset` has to walk and discard every row before it, so it gets progressively slower
-     * and eventually times out. Cursor pagination requires the `created_at` ordering, which is the
-     * default.
+     * Returns a list of all users. The users are returned sorted by creation date, with the newest users appearing first. To walk more than a few pages, paginate with `starting_after` rather than `offset`. A cursor page costs the same no matter how far into the list it sits, while a large `offset` has to walk and discard every row before it, so it gets progressively slower and eventually times out. Cursor pagination requires the `created_at` ordering, which is the default.
      */
-    fun list(
-        request: dev.octri.showcase.clerk.methods.Users.ListUsersRequest,
-        options: RequestOptions? = null,
-    ): List<User> {
+    fun list(request: dev.octri.showcase.clerk.methods.Users.ListUsersRequest, options: RequestOptions? = null): List<User> {
         return dev.octri.showcase.clerk.methods.Users.listUsers(clientConfig, request, options)
     }
 
     /**
-     * Creates a new user. Your user management settings determine how you should setup your user
-     * model. By default, any email address and phone number created using this method is marked as
-     * verified. Use the `email_address_identification_status` and
-     * `phone_number_identification_status` arrays to instead create some or all of them as reserved
-     * (unverified but usable for sign-in and locked so no other user can claim them). Note: If you
-     * are performing a migration, check out our guide…
+     * Creates a new user. Your user management settings determine how you should setup your user model. By default, any email address and phone number created using this method is marked as verified. Use the `email_address_identification_status` and `phone_number_identification_status` arrays to instead create some or all of them as reserved (unverified but usable for sign-in and locked so no other user can claim them). Note: If you are performing a migration, check out our guide…
      */
-    fun create(
-        request: dev.octri.showcase.clerk.methods.Users.CreateUserRequest,
-        options: RequestOptions? = null,
-    ): User {
+    fun create(request: dev.octri.showcase.clerk.methods.Users.CreateUserRequest, options: RequestOptions? = null): User {
         return dev.octri.showcase.clerk.methods.Users.createUser(clientConfig, request, options)
     }
 
-    /** Returns a total count of all users that match the given filtering criteria. */
-    fun getCount(
-        request: dev.octri.showcase.clerk.methods.Users.GetUsersCountRequest,
-        options: RequestOptions? = null,
-    ): TotalCount {
+    /**
+     * Returns a total count of all users that match the given filtering criteria.
+     */
+    fun getCount(request: dev.octri.showcase.clerk.methods.Users.GetUsersCountRequest, options: RequestOptions? = null): TotalCount {
         return dev.octri.showcase.clerk.methods.Users.getUsersCount(clientConfig, request, options)
     }
 
     /**
-     * Retrieves the details of a user by their identifier. Use `user_id` to select the user whose
-     * account details you need.
+     * Retrieves the details of a user by their identifier. Use `user_id` to select the user whose account details you need.
      *
      * Retrieve the details of a user
      */
@@ -53,23 +36,14 @@ class UsersNamespace(private val clientConfig: ClientConfig) {
     }
 
     /**
-     * Update a user's attributes. You can set the user's primary contact identifiers (email address
-     * and phone numbers) by updating the `primary_email_address_id` and `primary_phone_number_id`
-     * attributes respectively. Both IDs should correspond to verified identifications that belong
-     * to the user. You can remove a user's username by setting the username attribute to null or
-     * the blank string "". As of API version 2026-05-12, this endpoint no longer accepts
-     * `public_metadata`,…
+     * Update a user's attributes. You can set the user's primary contact identifiers (email address and phone numbers) by updating the `primary_email_address_id` and `primary_phone_number_id` attributes respectively. Both IDs should correspond to verified identifications that belong to the user. You can remove a user's username by setting the username attribute to null or the blank string "". As of API version 2026-05-12, this endpoint no longer accepts `public_metadata`,…
      */
-    fun update(
-        request: dev.octri.showcase.clerk.methods.Users.UpdateUserRequest,
-        options: RequestOptions? = null,
-    ): User {
+    fun update(request: dev.octri.showcase.clerk.methods.Users.UpdateUserRequest, options: RequestOptions? = null): User {
         return dev.octri.showcase.clerk.methods.Users.updateUser(clientConfig, request, options)
     }
 
     /**
-     * Deletes the specified user. Use `user_id` to identify the user to remove; the response
-     * confirms whether the deletion occurred.
+     * Deletes the specified user. Use `user_id` to identify the user to remove; the response confirms whether the deletion occurred.
      *
      * Delete the specified user
      */
@@ -78,16 +52,14 @@ class UsersNamespace(private val clientConfig: ClientConfig) {
     }
 
     /**
-     * Marks the given user as banned, which means that all their sessions are revoked and they are
-     * not allowed to sign in again.
+     * Marks the given user as banned, which means that all their sessions are revoked and they are not allowed to sign in again.
      */
     fun ban(userId: String, options: RequestOptions? = null): User {
         return dev.octri.showcase.clerk.methods.Users.banUser(clientConfig, userId, options)
     }
 
     /**
-     * Removes the ban mark from a user account. Use `user_id` to identify the user whose ban you
-     * want to remove. A 200 response returns the updated user object.
+     * Removes the ban mark from a user account. Use `user_id` to identify the user whose ban you want to remove. A 200 response returns the updated user object.
      *
      * Removes the ban mark from the given user.
      */
@@ -96,16 +68,14 @@ class UsersNamespace(private val clientConfig: ClientConfig) {
     }
 
     /**
-     * Marks multiple users as banned, which means that all their sessions are revoked and they are
-     * not allowed to sign in again.
+     * Marks multiple users as banned, which means that all their sessions are revoked and they are not allowed to sign in again.
      */
     fun banBulk(userIds: List<String>, options: RequestOptions? = null): List<User> {
         return dev.octri.showcase.clerk.methods.Users.banUsersBulk(clientConfig, userIds, options)
     }
 
     /**
-     * Removes the ban marks from multiple user accounts in one request. Supply `user_ids` with
-     * between 1 and 50 user IDs. A 200 response returns the updated user objects.
+     * Removes the ban marks from multiple user accounts in one request. Supply `user_ids` with between 1 and 50 user IDs. A 200 response returns the updated user objects.
      *
      * Removes the ban mark from multiple users.
      */
@@ -114,16 +84,14 @@ class UsersNamespace(private val clientConfig: ClientConfig) {
     }
 
     /**
-     * Marks the given user as locked, which means they are not allowed to sign in again until the
-     * lock expires. Lock duration can be configured in the instance's restrictions settings.
+     * Marks the given user as locked, which means they are not allowed to sign in again until the lock expires. Lock duration can be configured in the instance's restrictions settings.
      */
     fun lock(userId: String, options: RequestOptions? = null): User {
         return dev.octri.showcase.clerk.methods.Users.lockUser(clientConfig, userId, options)
     }
 
     /**
-     * Removes the lock from a user account. Use `user_id` to identify the user whose lock you want
-     * to remove. A 200 response returns the updated user object.
+     * Removes the lock from a user account. Use `user_id` to identify the user whose lock you want to remove. A 200 response returns the updated user object.
      *
      * Removes the lock from the given user.
      */
@@ -132,430 +100,196 @@ class UsersNamespace(private val clientConfig: ClientConfig) {
     }
 
     /**
-     * Sets or replaces a user's profile image. Send the image in the `file` field as multipart form
-     * data, and use `user_id` to identify the account to update. A 200 response returns the updated
-     * user object.
+     * Sets or replaces a user's profile image. Send the image in the `file` field as multipart form data, and use `user_id` to identify the account to update. A 200 response returns the updated user object.
      *
      * Update a user's profile image
      */
-    fun setProfileImage(
-        userId: String,
-        file: SdkClient.UploadFile? = null,
-        options: RequestOptions? = null,
-    ): User {
-        return dev.octri.showcase.clerk.methods.Users.setUserProfileImage(
-            clientConfig,
-            userId,
-            file,
-            options,
-        )
+    fun setProfileImage(userId: String, file: SdkClient.UploadFile? = null, options: RequestOptions? = null): User {
+        return dev.octri.showcase.clerk.methods.Users.setUserProfileImage(clientConfig, userId, file, options)
     }
 
     /**
-     * Deletes the profile image associated with a user account. Use `user_id` to identify the
-     * account whose image you want to remove. A 200 response returns the updated user object.
+     * Deletes the profile image associated with a user account. Use `user_id` to identify the account whose image you want to remove. A 200 response returns the updated user object.
      *
      * Delete a user's profile image
      */
     fun deleteProfileImage(userId: String, options: RequestOptions? = null): User {
-        return dev.octri.showcase.clerk.methods.Users.deleteUserProfileImage(
-            clientConfig,
-            userId,
-            options,
-        )
+        return dev.octri.showcase.clerk.methods.Users.deleteUserProfileImage(clientConfig, userId, options)
     }
 
     /**
-     * Update a user's metadata attributes by merging existing values with the provided parameters.
-     * This endpoint behaves differently than the *Update a user* endpoint. Metadata values will not
-     * be replaced entirely. Instead, a deep merge will be performed. Deep means that any nested
-     * JSON objects will be merged as well. You can remove metadata keys at any level by setting
-     * their value to `null`.
+     * Update a user's metadata attributes by merging existing values with the provided parameters. This endpoint behaves differently than the *Update a user* endpoint. Metadata values will not be replaced entirely. Instead, a deep merge will be performed. Deep means that any nested JSON objects will be merged as well. You can remove metadata keys at any level by setting their value to `null`.
      */
-    fun updateMetadata(
-        userId: String,
-        publicMetadata: Map<String, Any>? = null,
-        privateMetadata: Map<String, Any>? = null,
-        unsafeMetadata: Map<String, Any>? = null,
-        options: RequestOptions? = null,
-    ): User {
-        return dev.octri.showcase.clerk.methods.Users.updateUserMetadata(
-            clientConfig,
-            userId,
-            publicMetadata,
-            privateMetadata,
-            unsafeMetadata,
-            options,
-        )
+    fun updateMetadata(userId: String, publicMetadata: Map<String, Any>? = null, privateMetadata: Map<String, Any>? = null, unsafeMetadata: Map<String, Any>? = null, options: RequestOptions? = null): User {
+        return dev.octri.showcase.clerk.methods.Users.updateUserMetadata(clientConfig, userId, publicMetadata, privateMetadata, unsafeMetadata, options)
     }
 
     /**
-     * Replace a user's metadata attributes with the provided values. Unlike `PATCH
-     * /v1/users/{user_id}/metadata` (merge semantics), this endpoint replaces the supplied metadata
-     * fields entirely — the prior contents of each supplied field are discarded. Fields omitted
-     * from the request body are left unchanged. Prefer the `PATCH` endpoint for partial updates.
-     * Use `PUT` only when you explicitly intend to overwrite a metadata field wholesale.
+     * Replace a user's metadata attributes with the provided values. Unlike `PATCH /v1/users/{user_id}/metadata` (merge semantics), this endpoint replaces the supplied metadata fields entirely — the prior contents of each supplied field are discarded. Fields omitted from the request body are left unchanged. Prefer the `PATCH` endpoint for partial updates. Use `PUT` only when you explicitly intend to overwrite a metadata field wholesale.
      */
-    fun replaceMetadata(
-        userId: String,
-        publicMetadata: Map<String, Any>? = null,
-        privateMetadata: Map<String, Any>? = null,
-        unsafeMetadata: Map<String, Any>? = null,
-        options: RequestOptions? = null,
-    ): User {
-        return dev.octri.showcase.clerk.methods.Users.replaceUserMetadata(
-            clientConfig,
-            userId,
-            publicMetadata,
-            privateMetadata,
-            unsafeMetadata,
-            options,
-        )
+    fun replaceMetadata(userId: String, publicMetadata: Map<String, Any>? = null, privateMetadata: Map<String, Any>? = null, unsafeMetadata: Map<String, Any>? = null, options: RequestOptions? = null): User {
+        return dev.octri.showcase.clerk.methods.Users.replaceUserMetadata(clientConfig, userId, publicMetadata, privateMetadata, unsafeMetadata, options)
     }
 
     /**
-     * Retrieves the billing subscription for the specified user. This includes subscription
-     * details, active plans, billing information, and payment status. The subscription contains
-     * subscription items which represent the individual plans the user is subscribed to.
+     * Retrieves the billing subscription for the specified user. This includes subscription details, active plans, billing information, and payment status. The subscription contains subscription items which represent the individual plans the user is subscribed to.
      */
-    fun getBillingSubscription(
-        userId: String,
-        options: RequestOptions? = null,
-    ): CommerceSubscription {
-        return dev.octri.showcase.clerk.methods.Users.getUserBillingSubscription(
-            clientConfig,
-            userId,
-            options,
-        )
+    fun getBillingSubscription(userId: String, options: RequestOptions? = null): CommerceSubscription {
+        return dev.octri.showcase.clerk.methods.Users.getUserBillingSubscription(clientConfig, userId, options)
     }
 
     /**
-     * Retrieves the current credit balance for the specified user. Credits can be applied during
-     * checkout to reduce the charge or automatically applied to upcoming recurring charges
+     * Retrieves the current credit balance for the specified user. Credits can be applied during checkout to reduce the charge or automatically applied to upcoming recurring charges
      */
-    fun getBillingCreditBalance(
-        userId: String,
-        options: RequestOptions? = null,
-    ): CommerceCreditBalanceResponse {
-        return dev.octri.showcase.clerk.methods.Users.getUserBillingCreditBalance(
-            clientConfig,
-            userId,
-            options,
-        )
+    fun getBillingCreditBalance(userId: String, options: RequestOptions? = null): CommerceCreditBalanceResponse {
+        return dev.octri.showcase.clerk.methods.Users.getUserBillingCreditBalance(clientConfig, userId, options)
     }
 
     /**
-     * Increases or decreases the credit balance for the specified user. Each adjustment is recorded
-     * as a ledger entry. The idempotency_key parameter ensures that duplicate requests are safely
-     * handled.
+     * Increases or decreases the credit balance for the specified user. Each adjustment is recorded as a ledger entry. The idempotency_key parameter ensures that duplicate requests are safely handled.
      */
-    fun adjustBillingCreditBalance(
-        request: dev.octri.showcase.clerk.methods.Users.AdjustUserBillingCreditBalanceRequest,
-        options: RequestOptions? = null,
-    ): CommerceCreditLedgerResponse {
-        return dev.octri.showcase.clerk.methods.Users.adjustUserBillingCreditBalance(
-            clientConfig,
-            request,
-            options,
-        )
+    fun adjustBillingCreditBalance(request: dev.octri.showcase.clerk.methods.Users.AdjustUserBillingCreditBalanceRequest, options: RequestOptions? = null): CommerceCreditLedgerResponse {
+        return dev.octri.showcase.clerk.methods.Users.adjustUserBillingCreditBalance(clientConfig, request, options)
     }
 
     /**
-     * Fetch the corresponding OAuth access token for a user that has previously authenticated with
-     * a particular OAuth provider. For OAuth 2.0, if the access token has expired and we have a
-     * corresponding refresh token, the access token will be refreshed transparently the new one
-     * will be returned.
+     * Fetch the corresponding OAuth access token for a user that has previously authenticated with a particular OAuth provider. For OAuth 2.0, if the access token has expired and we have a corresponding refresh token, the access token will be refreshed transparently the new one will be returned.
      */
-    fun getOAuthAccessToken(
-        userId: String,
-        provider: String,
-        paginated: Boolean? = null,
-        limit: Long? = null,
-        offset: Long? = null,
-        options: RequestOptions? = null,
-    ): OAuthAccessToken {
-        return dev.octri.showcase.clerk.methods.Users.getOAuthAccessToken(
-            clientConfig,
-            userId,
-            provider,
-            paginated,
-            limit,
-            offset,
-            options,
-        )
-    }
-
-    /** Retrieve a paginated list of the user's organization memberships */
-    fun getOrganizationMemberships(
-        userId: String,
-        limit: Long? = null,
-        offset: Long? = null,
-        options: RequestOptions? = null,
-    ): OrganizationMemberships {
-        return dev.octri.showcase.clerk.methods.Users.usersGetOrganizationMemberships(
-            clientConfig,
-            userId,
-            limit,
-            offset,
-            options,
-        )
-    }
-
-    /** Retrieve a paginated list of the user's organization invitations */
-    fun getOrganizationInvitations(
-        userId: String,
-        limit: Long? = null,
-        offset: Long? = null,
-        status: UsersGetOrganizationInvitationsParameterEnum? = null,
-        options: RequestOptions? = null,
-    ): OrganizationInvitationsWithPublicOrganizationData {
-        return dev.octri.showcase.clerk.methods.Users.usersGetOrganizationInvitations(
-            clientConfig,
-            userId,
-            limit,
-            offset,
-            status,
-            options,
-        )
+    fun getOAuthAccessToken(userId: String, provider: String, paginated: Boolean? = null, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): OAuthAccessToken {
+        return dev.octri.showcase.clerk.methods.Users.getOAuthAccessToken(clientConfig, userId, provider, paginated, limit, offset, options)
     }
 
     /**
-     * Removes the password credential from the given user. This is a privileged operation and does
-     * not require the user's current password. Password removal is allowed even when the user has
-     * no other sign-in method configured. If the user does not have a password, the user is
-     * returned unchanged and no password-deletion or user-update event is emitted. By default,
-     * existing sessions remain active. Set `sign_out_of_other_sessions` to `true` to revoke
-     * sessions active when the request…
+     * Retrieve a paginated list of the user's organization memberships
      */
-    fun removePassword(
-        userId: String,
-        signOutOfOtherSessions: Boolean? = null,
-        options: RequestOptions? = null,
-    ): User {
-        return dev.octri.showcase.clerk.methods.Users.removeUserPassword(
-            clientConfig,
-            userId,
-            signOutOfOtherSessions,
-            options,
-        )
+    fun getOrganizationMemberships(userId: String, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): OrganizationMemberships {
+        return dev.octri.showcase.clerk.methods.Users.usersGetOrganizationMemberships(clientConfig, userId, limit, offset, options)
     }
 
     /**
-     * Check that the user's password matches the supplied input. Useful for custom auth flows and
-     * re-verification.
+     * Retrieve a paginated list of the user's organization invitations
      */
-    fun verifyPassword(
-        userId: String,
-        password: String,
-        options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.Users.VerifyPasswordResponse {
-        return dev.octri.showcase.clerk.methods.Users.verifyPassword(
-            clientConfig,
-            userId,
-            password,
-            options,
-        )
+    fun getOrganizationInvitations(userId: String, limit: Long? = null, offset: Long? = null, status: UsersGetOrganizationInvitationsParameterEnum? = null, options: RequestOptions? = null): OrganizationInvitationsWithPublicOrganizationData {
+        return dev.octri.showcase.clerk.methods.Users.usersGetOrganizationInvitations(clientConfig, userId, limit, offset, status, options)
     }
 
     /**
-     * Verify that the provided TOTP or backup code is valid for the user. Verifying a backup code
-     * will result it in being consumed (i.e. it will become invalid). Useful for custom auth flows
-     * and re-verification.
+     * Removes the password credential from the given user. This is a privileged operation and does not require the user's current password. Password removal is allowed even when the user has no other sign-in method configured. If the user does not have a password, the user is returned unchanged and no password-deletion or user-update event is emitted. By default, existing sessions remain active. Set `sign_out_of_other_sessions` to `true` to revoke sessions active when the request…
      */
-    fun verifyTotp(
-        userId: String,
-        code: String,
-        options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.Users.VerifyTOTPResponse {
-        return dev.octri.showcase.clerk.methods.Users.verifyTotp(
-            clientConfig,
-            userId,
-            code,
-            options,
-        )
+    fun removePassword(userId: String, signOutOfOtherSessions: Boolean? = null, options: RequestOptions? = null): User {
+        return dev.octri.showcase.clerk.methods.Users.removeUserPassword(clientConfig, userId, signOutOfOtherSessions, options)
     }
 
     /**
-     * Disable all of a user's MFA methods (e.g. OTP sent via SMS, TOTP on their authenticator app)
-     * at once.
+     * Check that the user's password matches the supplied input. Useful for custom auth flows and re-verification.
      */
-    fun disableMfa(
-        userId: String,
-        options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.Users.DisableMFAResponse {
+    fun verifyPassword(userId: String, password: String, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.Users.VerifyPasswordResponse {
+        return dev.octri.showcase.clerk.methods.Users.verifyPassword(clientConfig, userId, password, options)
+    }
+
+    /**
+     * Verify that the provided TOTP or backup code is valid for the user. Verifying a backup code will result it in being consumed (i.e. it will become invalid). Useful for custom auth flows and re-verification.
+     */
+    fun verifyTotp(userId: String, code: String, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.Users.VerifyTOTPResponse {
+        return dev.octri.showcase.clerk.methods.Users.verifyTotp(clientConfig, userId, code, options)
+    }
+
+    /**
+     * Disable all of a user's MFA methods (e.g. OTP sent via SMS, TOTP on their authenticator app) at once.
+     */
+    fun disableMfa(userId: String, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.Users.DisableMFAResponse {
         return dev.octri.showcase.clerk.methods.Users.disableMfa(clientConfig, userId, options)
     }
 
     /**
-     * Deletes all backup codes for a user, disabling them for future use. Supply `user_id` to
-     * identify the user whose backup codes you want to disable.
+     * Deletes all backup codes for a user, disabling them for future use. Supply `user_id` to identify the user whose backup codes you want to disable.
      *
      * Disable all of a user's backup codes.
      */
-    fun deleteBackupCode(
-        userId: String,
-        options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.Users.DeleteBackupCodeResponse {
-        return dev.octri.showcase.clerk.methods.Users.deleteBackupCode(
-            clientConfig,
-            userId,
-            options,
-        )
+    fun deleteBackupCode(userId: String, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.Users.DeleteBackupCodeResponse {
+        return dev.octri.showcase.clerk.methods.Users.deleteBackupCode(clientConfig, userId, options)
     }
 
     /**
-     * Delete the passkey identification for a given user. The user is notified through email or SMS
-     * unless the passkey registration was never completed.
+     * Delete the passkey identification for a given user. The user is notified through email or SMS unless the passkey registration was never completed.
      */
-    fun deletePasskey(
-        userId: String,
-        passkeyIdentificationId: String,
-        options: RequestOptions? = null,
-    ): DeletedObject {
-        return dev.octri.showcase.clerk.methods.Users.deleteUserPasskey(
-            clientConfig,
-            userId,
-            passkeyIdentificationId,
-            options,
-        )
+    fun deletePasskey(userId: String, passkeyIdentificationId: String, options: RequestOptions? = null): DeletedObject {
+        return dev.octri.showcase.clerk.methods.Users.deleteUserPasskey(clientConfig, userId, passkeyIdentificationId, options)
     }
 
     /**
      * Returns the active trusted devices enrolled by the user.
      *
-     * @deprecated This operation is deprecated and may be removed in a future release.
+     * @deprecated This operation is deprecated and may be removed in a future
+     *   release.
      */
     fun listTrustedDevices(userId: String, options: RequestOptions? = null): TrustedDeviceList {
-        return dev.octri.showcase.clerk.methods.Users.listUserTrustedDevices(
-            clientConfig,
-            userId,
-            options,
-        )
+        return dev.octri.showcase.clerk.methods.Users.listUserTrustedDevices(clientConfig, userId, options)
     }
 
     /**
      * Revokes an active trusted device enrolled by the user.
      *
-     * @deprecated This operation is deprecated and may be removed in a future release.
+     * @deprecated This operation is deprecated and may be removed in a future
+     *   release.
      */
-    fun revokeTrustedDevice(
-        userId: String,
-        trustedDeviceId: String,
-        options: RequestOptions? = null,
-    ): TrustedDevice {
-        return dev.octri.showcase.clerk.methods.Users.revokeUserTrustedDevice(
-            clientConfig,
-            userId,
-            trustedDeviceId,
-            options,
-        )
-    }
-
-    /** Returns the active biometric credentials enrolled by the user. */
-    fun listBiometricCredentials(
-        userId: String,
-        options: RequestOptions? = null,
-    ): BiometricCredentialList {
-        return dev.octri.showcase.clerk.methods.Users.listUserBiometricCredentials(
-            clientConfig,
-            userId,
-            options,
-        )
-    }
-
-    /** Revokes an active biometric credential enrolled by the user. */
-    fun revokeBiometricCredential(
-        userId: String,
-        biometricCredentialId: String,
-        options: RequestOptions? = null,
-    ): BiometricCredential {
-        return dev.octri.showcase.clerk.methods.Users.revokeUserBiometricCredential(
-            clientConfig,
-            userId,
-            biometricCredentialId,
-            options,
-        )
-    }
-
-    /** Delete the web3 wallet identification for a given user. */
-    fun deleteWeb3Wallet(
-        userId: String,
-        web3WalletIdentificationId: String,
-        options: RequestOptions? = null,
-    ): DeletedObject {
-        return dev.octri.showcase.clerk.methods.Users.deleteUsersWeb3Wallet(
-            clientConfig,
-            userId,
-            web3WalletIdentificationId,
-            options,
-        )
+    fun revokeTrustedDevice(userId: String, trustedDeviceId: String, options: RequestOptions? = null): TrustedDevice {
+        return dev.octri.showcase.clerk.methods.Users.revokeUserTrustedDevice(clientConfig, userId, trustedDeviceId, options)
     }
 
     /**
-     * Deletes all TOTP credentials associated with a user. Supply the `user_id` of the user whose
-     * TOTPs you want to delete; the operation removes all of that user's TOTPs.
+     * Returns the active biometric credentials enrolled by the user.
+     */
+    fun listBiometricCredentials(userId: String, options: RequestOptions? = null): BiometricCredentialList {
+        return dev.octri.showcase.clerk.methods.Users.listUserBiometricCredentials(clientConfig, userId, options)
+    }
+
+    /**
+     * Revokes an active biometric credential enrolled by the user.
+     */
+    fun revokeBiometricCredential(userId: String, biometricCredentialId: String, options: RequestOptions? = null): BiometricCredential {
+        return dev.octri.showcase.clerk.methods.Users.revokeUserBiometricCredential(clientConfig, userId, biometricCredentialId, options)
+    }
+
+    /**
+     * Delete the web3 wallet identification for a given user.
+     */
+    fun deleteWeb3Wallet(userId: String, web3WalletIdentificationId: String, options: RequestOptions? = null): DeletedObject {
+        return dev.octri.showcase.clerk.methods.Users.deleteUsersWeb3Wallet(clientConfig, userId, web3WalletIdentificationId, options)
+    }
+
+    /**
+     * Deletes all TOTP credentials associated with a user. Supply the `user_id` of the user whose TOTPs you want to delete; the operation removes all of that user's TOTPs.
      *
      * Deletes all of the user's TOTPs.
      */
-    fun deleteTotp(
-        userId: String,
-        options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.Users.DeleteTOTPResponse {
+    fun deleteTotp(userId: String, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.Users.DeleteTOTPResponse {
         return dev.octri.showcase.clerk.methods.Users.deleteTotp(clientConfig, userId, options)
     }
 
     /**
-     * Deletes an external account associated with a user. Supply the `user_id` and
-     * `external_account_id` for the account you want to remove.
+     * Deletes an external account associated with a user. Supply the `user_id` and `external_account_id` for the account you want to remove.
      *
      * Delete an external account by ID.
      */
-    fun deleteExternalAccount(
-        userId: String,
-        externalAccountId: String,
-        options: RequestOptions? = null,
-    ): DeletedObject {
-        return dev.octri.showcase.clerk.methods.Users.deleteExternalAccount(
-            clientConfig,
-            userId,
-            externalAccountId,
-            options,
-        )
+    fun deleteExternalAccount(userId: String, externalAccountId: String, options: RequestOptions? = null): DeletedObject {
+        return dev.octri.showcase.clerk.methods.Users.deleteExternalAccount(clientConfig, userId, externalAccountId, options)
     }
 
     /**
-     * Marks a user's password as compromised so the user is prompted to reset it at their next
-     * sign-in. Supply the `user_id` of the user whose password you want to flag. You can optionally
-     * set `revoke_all_sessions` to revoke the user's sessions as part of the operation.
+     * Marks a user's password as compromised so the user is prompted to reset it at their next sign-in. Supply the `user_id` of the user whose password you want to flag. You can optionally set `revoke_all_sessions` to revoke the user's sessions as part of the operation.
      *
-     * Sets the given user's password as compromised. The user will be prompted to reset their
-     * password on their next sign-in.
+     * Sets the given user's password as compromised. The user will be prompted to reset their password on their next sign-in.
      */
-    fun setPasswordCompromised(
-        userId: String,
-        revokeAllSessions: SdkClient.SdkOptional<Boolean?>? = null,
-        options: RequestOptions? = null,
-    ): User {
-        return dev.octri.showcase.clerk.methods.Users.setUserPasswordCompromised(
-            clientConfig,
-            userId,
-            revokeAllSessions,
-            options,
-        )
+    fun setPasswordCompromised(userId: String, revokeAllSessions: SdkClient.SdkOptional<Boolean?>? = null, options: RequestOptions? = null): User {
+        return dev.octri.showcase.clerk.methods.Users.setUserPasswordCompromised(clientConfig, userId, revokeAllSessions, options)
     }
 
     /**
-     * Sets the given user's password as no longer compromised. The user will no longer be prompted
-     * to reset their password on their next sign-in. If the user is in reserved-email password
-     * quarantine, the quarantine is preserved and the returned user will still have
-     * `requires_password_reset` set to `true`. Reserved-email password quarantine can only be
-     * cleared by completing a password reset or changing/removing the password.
+     * Sets the given user's password as no longer compromised. The user will no longer be prompted to reset their password on their next sign-in. If the user is in reserved-email password quarantine, the quarantine is preserved and the returned user will still have `requires_password_reset` set to `true`. Reserved-email password quarantine can only be cleared by completing a password reset or changing/removing the password.
      */
     fun unsetPasswordCompromised(userId: String, options: RequestOptions? = null): User {
-        return dev.octri.showcase.clerk.methods.Users.unsetUserPasswordCompromised(
-            clientConfig,
-            userId,
-            options,
-        )
+        return dev.octri.showcase.clerk.methods.Users.unsetUserPasswordCompromised(clientConfig, userId, options)
     }
+
 }

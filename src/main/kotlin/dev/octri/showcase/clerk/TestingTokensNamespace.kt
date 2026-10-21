@@ -3,18 +3,15 @@
 
 package dev.octri.showcase.clerk
 
+
 class TestingTokensNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates a testing token for use with Frontend API requests. Pass the returned `token` value
-     * in the `__clerk_testing_token` query parameter; the response includes its expiration time as
-     * `expires_at`.
+     * Creates a testing token for use with Frontend API requests. Pass the returned `token` value in the `__clerk_testing_token` query parameter; the response includes its expiration time as `expires_at`.
      *
      * Retrieve a new testing token.
      */
     fun create(options: RequestOptions? = null): TestingToken {
-        return dev.octri.showcase.clerk.methods.TestingTokens.createTestingToken(
-            clientConfig,
-            options,
-        )
+        return dev.octri.showcase.clerk.methods.TestingTokens.createTestingToken(clientConfig, options)
     }
+
 }

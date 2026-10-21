@@ -3,83 +3,104 @@
 
 package dev.octri.showcase.clerk.models
 
-/** An organization domain */
+/**
+ * An organization domain
+ */
 data class OrganizationDomain(
     /**
-     * String representing the object's type. Objects of the same type share the same value. Always
-     * `organization_domain`
+     * String representing the object's type. Objects of the same type share the same value. Always `organization_domain`
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: OrganizationDomainObjectEnum,
-    /** Unique identifier for the organization domain */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: OrganizationDomainObjectEnum,
+    /**
+     * Unique identifier for the organization domain
+     */
     val id: String,
-    /** Unique identifier for the organization */
+    /**
+     * Unique identifier for the organization
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("organization_id") val organizationId: String,
-    /** Name of the organization domain */
+    /**
+     * Name of the organization domain
+     */
     val name: String,
-    /** Mode of enrollment for the domain */
-    @com.fasterxml.jackson.annotation.JsonProperty("enrollment_mode")
-    val enrollmentMode: OrganizationDomainEnrollmentModeEnum,
-    /** Affiliation email address for the domain, if available. */
-    @com.fasterxml.jackson.annotation.JsonProperty("affiliation_email_address", required = true)
-    val affiliationEmailAddress: String?,
     /**
-     * Verification details for the user-facing affiliation between the domain and the organization
-     * (e.g. affiliation_email_code).
+     * Mode of enrollment for the domain
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("affiliation_verification", required = true)
-    val affiliationVerification: OrganizationDomainVerification?,
+    @com.fasterxml.jackson.annotation.JsonProperty("enrollment_mode") val enrollmentMode: OrganizationDomainEnrollmentModeEnum,
     /**
-     * Verification details for the underlying DNS domain ownership proof (TXT challenge or
-     * dashboard override). Null until ownership has been attempted.
+     * Affiliation email address for the domain, if available.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("ownership_verification", required = true)
-    val ownershipVerification: OrganizationDomainVerification?,
+    @com.fasterxml.jackson.annotation.JsonProperty("affiliation_email_address", required = true) val affiliationEmailAddress: String?,
     /**
-     * Deprecated alias for `affiliation_verification`. Kept for backward compatibility on the
-     * current API version; will be removed in the next API version. Prefer
-     * `affiliation_verification`.
+     * Verification details for the user-facing affiliation between the domain and the organization (e.g. affiliation_email_code).
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("verification", required = true)
-    val verification: OrganizationDomainVerification?,
-    /** Total number of pending invitations associated with this domain */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_pending_invitations")
-    val totalPendingInvitations: Int,
-    /** Total number of pending suggestions associated with this domain */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_pending_suggestions")
-    val totalPendingSuggestions: Int,
-    /** Unix timestamp when the domain was created */
+    @com.fasterxml.jackson.annotation.JsonProperty("affiliation_verification", required = true) val affiliationVerification: OrganizationDomainVerification?,
+    /**
+     * Verification details for the underlying DNS domain ownership proof (TXT challenge or dashboard override). Null until ownership has been attempted.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ownership_verification", required = true) val ownershipVerification: OrganizationDomainVerification?,
+    /**
+     * Deprecated alias for `affiliation_verification`. Kept for backward compatibility on the current API version; will be removed in the next API version. Prefer `affiliation_verification`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("verification", required = true) val verification: OrganizationDomainVerification?,
+    /**
+     * Total number of pending invitations associated with this domain
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_pending_invitations") val totalPendingInvitations: Int,
+    /**
+     * Total number of pending suggestions associated with this domain
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_pending_suggestions") val totalPendingSuggestions: Int,
+    /**
+     * Unix timestamp when the domain was created
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** Unix timestamp of the last update to the domain */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
-    /** Public organization data associated with this domain */
-    @com.fasterxml.jackson.annotation.JsonProperty("public_organization_data")
-    val publicOrganizationData: OrganizationInvitationPublicOrganizationData? = null,
-)
-
-/** Typed representation of the `OrganizationDomains` API schema. */
-data class OrganizationDomains(
-    /** Required array value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<OrganizationDomain>,
-    /** Total number of organization domains */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long,
-)
-
-/** The verification object from an organization domain */
-data class OrganizationDomainVerification(
-    /** Status of the verification. It can be `unverified`, `verified`, `failed`, or `expired`. */
-    val status: String,
-    /** Name of the strategy used to verify the domain */
-    val strategy: String,
-    /** How many attempts have been made to verify the domain */
-    @com.fasterxml.jackson.annotation.JsonProperty("attempts", required = true) val attempts: Long?,
-    /** Unix timestamp of when the verification will expire */
-    @com.fasterxml.jackson.annotation.JsonProperty("expire_at", required = true)
-    val expireAt: Long?,
     /**
-     * Unix timestamp of when ownership was verified. Only populated on `ownership_verification`;
-     * null on `affiliation_verification`.
+     * Unix timestamp of the last update to the domain
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("verified_at", required = true)
-    val verifiedAt: Long?,
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
+    /**
+     * Public organization data associated with this domain
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("public_organization_data") val publicOrganizationData: OrganizationInvitationPublicOrganizationData? = null
+)
+
+/**
+ * Typed representation of the `OrganizationDomains` API schema.
+ */
+data class OrganizationDomains(
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<OrganizationDomain>,
+    /**
+     * Total number of organization domains
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long
+)
+
+/**
+ * The verification object from an organization domain
+ */
+data class OrganizationDomainVerification(
+    /**
+     * Status of the verification. It can be `unverified`, `verified`, `failed`, or `expired`.
+     */
+    val status: String,
+    /**
+     * Name of the strategy used to verify the domain
+     */
+    val strategy: String,
+    /**
+     * How many attempts have been made to verify the domain
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attempts", required = true) val attempts: Long?,
+    /**
+     * Unix timestamp of when the verification will expire
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expire_at", required = true) val expireAt: Long?,
+    /**
+     * Unix timestamp of when ownership was verified. Only populated on `ownership_verification`; null on `affiliation_verification`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("verified_at", required = true) val verifiedAt: Long?
 )

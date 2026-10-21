@@ -13,122 +13,40 @@ import dev.octri.showcase.clerk.SdkClient
 
 internal object UsersGetUserBillingSubscriptionOperation {
     /**
-     * Retrieves the billing subscription for the specified user. This includes subscription
-     * details, active plans, billing information, and payment status. The subscription contains
-     * subscription items which represent the individual plans the user is subscribed to.
+     * Retrieves the billing subscription for the specified user. This includes subscription details, active plans, billing information, and payment status. The subscription contains subscription items which represent the individual plans the user is subscribed to.
      *
      * @param userId The ID of the user whose subscription to retrieve
      */
-    fun getUserBillingSubscription(
-        clientConfig: ClientConfig,
-        userId: String,
-        options: RequestOptions? = null,
-    ): CommerceSubscription {
-        return SdkClient.request<CommerceSubscription>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/users/${SdkClient.encodePathSegment(userId)}/billing/subscription",
-                    config = clientConfig,
-                    operationId = "getUserBillingSubscription",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                            "500" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun getUserBillingSubscription(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): CommerceSubscription {
+        return SdkClient.request<CommerceSubscription>(SdkClient.RequestSpec("GET", "/users/${SdkClient.encodePathSegment(userId)}/billing/subscription", config = clientConfig, operationId = "getUserBillingSubscription", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
     }
 }
 
 internal object UsersGetUserBillingCreditBalanceOperation {
     /**
-     * Retrieves the current credit balance for the specified user. Credits can be applied during
-     * checkout to reduce the charge or automatically applied to upcoming recurring charges
+     * Retrieves the current credit balance for the specified user. Credits can be applied during checkout to reduce the charge or automatically applied to upcoming recurring charges
      *
      * @param userId The ID of the user whose credit balance to retrieve
      */
-    fun getUserBillingCreditBalance(
-        clientConfig: ClientConfig,
-        userId: String,
-        options: RequestOptions? = null,
-    ): CommerceCreditBalanceResponse {
-        return SdkClient.request<CommerceCreditBalanceResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/users/${SdkClient.encodePathSegment(userId)}/billing/credits",
-                    config = clientConfig,
-                    operationId = "getUserBillingCreditBalance",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                            "500" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun getUserBillingCreditBalance(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): CommerceCreditBalanceResponse {
+        return SdkClient.request<CommerceCreditBalanceResponse>(SdkClient.RequestSpec("GET", "/users/${SdkClient.encodePathSegment(userId)}/billing/credits", config = clientConfig, operationId = "getUserBillingCreditBalance", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
     }
 }
 
 internal object UsersAdjustUserBillingCreditBalanceOperation {
     /**
-     * Increases or decreases the credit balance for the specified user. Each adjustment is recorded
-     * as a ledger entry. The idempotency_key parameter ensures that duplicate requests are safely
-     * handled.
+     * Increases or decreases the credit balance for the specified user. Each adjustment is recorded as a ledger entry. The idempotency_key parameter ensures that duplicate requests are safely handled.
      *
      * @param userId The ID of the user whose credit balance to adjust
      * @param amount The credit amount in cents. Must be greater than zero.
      * @param action Whether to increase or decrease the credit balance.
-     * @param idempotencyKey A unique key to ensure the adjustment is applied only once. Repeated
-     *   requests with the same key return the original ledger entry.
-     * @param currency The currency code (e.g. "USD"). Defaults to USD if not provided.
+     * @param idempotencyKey A unique key to ensure the adjustment is applied only
+     *   once. Repeated requests with the same key return the original ledger entry.
+     * @param currency The currency code (e.g. "USD"). Defaults to USD if not
+     *   provided.
      * @param note An optional note to attach to the ledger entry.
      */
-    fun adjustUserBillingCreditBalance(
-        clientConfig: ClientConfig,
-        request: Users.AdjustUserBillingCreditBalanceRequest,
-        options: RequestOptions? = null,
-    ): CommerceCreditLedgerResponse {
-        return SdkClient.request<CommerceCreditLedgerResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/users/${SdkClient.encodePathSegment(request.userId)}/billing/credits",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "amount" to (request.amount),
-                            "action" to (request.action),
-                            "idempotency_key" to (request.idempotencyKey),
-                            "currency" to (SdkClient.omitIfNull(request.currency)),
-                            "note" to (SdkClient.omitIfNull(request.note)),
-                        ),
-                    operationId = "adjustUserBillingCreditBalance",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "409" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                            "500" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun adjustUserBillingCreditBalance(clientConfig: ClientConfig, request: Users.AdjustUserBillingCreditBalanceRequest, options: RequestOptions? = null): CommerceCreditLedgerResponse {
+        return SdkClient.request<CommerceCreditLedgerResponse>(SdkClient.RequestSpec("POST", "/users/${SdkClient.encodePathSegment(request.userId)}/billing/credits", config = clientConfig, body = SdkClient.bodyMap("amount" to (request.amount), "action" to (request.action), "idempotency_key" to (request.idempotencyKey), "currency" to (SdkClient.omitIfNull(request.currency)), "note" to (SdkClient.omitIfNull(request.note))), operationId = "adjustUserBillingCreditBalance", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "409" to ClerkErrors::class.java, "422" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
     }
 }

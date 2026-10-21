@@ -3,52 +3,76 @@
 
 package dev.octri.showcase.clerk.models
 
-/** Typed representation of the `CommercePriceTransitionDetails` API schema. */
+/**
+ * Typed representation of the `CommercePriceTransitionDetails` API schema.
+ */
 data class CommercePriceTransitionDetails(
-    /** Required object value serialized in the `previous_plan` wire field. */
+    /**
+     * Required object value serialized in the `previous_plan` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("previous_plan") val previousPlan: CommercePlan2,
-    /** Required object value serialized in the `previous_price` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("previous_price")
-    val previousPrice: BillingPriceResponse,
-    /** Unix timestamp (milliseconds) when the new price takes effect. */
+    /**
+     * Required object value serialized in the `previous_price` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("previous_price") val previousPrice: BillingPriceResponse,
+    /**
+     * Unix timestamp (milliseconds) when the new price takes effect.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("effective_at") val effectiveAt: Long,
-    /** When the new price takes effect. */
-    @com.fasterxml.jackson.annotation.JsonProperty("effective_mode")
-    val effectiveMode: CommercePriceTransitionDetailsEffectiveModeEnum,
-    /** Whether an immediate charge was made. */
-    @com.fasterxml.jackson.annotation.JsonProperty("charged_immediately")
-    val chargedImmediately: Boolean,
-    /** The status of the previous subscription item after transition. */
-    @com.fasterxml.jackson.annotation.JsonProperty("previous_subscription_item_status")
-    val previousSubscriptionItemStatus:
-        CommercePriceTransitionDetailsPreviousSubscriptionItemStatusEnum,
-    /** The ID of the previous subscription item. */
-    @com.fasterxml.jackson.annotation.JsonProperty("previous_subscription_item_id")
-    val previousSubscriptionItemId: String,
-    /** Unix timestamp (milliseconds) for the next billing date. */
-    @com.fasterxml.jackson.annotation.JsonProperty("next_billing_date")
-    val nextBillingDate: Long? = null,
-    /** Amount charged immediately, if any. */
-    @com.fasterxml.jackson.annotation.JsonProperty("immediate_charge")
-    val immediateCharge: CommerceMoneyResponse? = null,
+    /**
+     * When the new price takes effect.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("effective_mode") val effectiveMode: CommercePriceTransitionDetailsEffectiveModeEnum,
+    /**
+     * Whether an immediate charge was made.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("charged_immediately") val chargedImmediately: Boolean,
+    /**
+     * The status of the previous subscription item after transition.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("previous_subscription_item_status") val previousSubscriptionItemStatus: CommercePriceTransitionDetailsPreviousSubscriptionItemStatusEnum,
+    /**
+     * The ID of the previous subscription item.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("previous_subscription_item_id") val previousSubscriptionItemId: String,
+    /**
+     * Unix timestamp (milliseconds) for the next billing date.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("next_billing_date") val nextBillingDate: Long? = null,
+    /**
+     * Amount charged immediately, if any.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("immediate_charge") val immediateCharge: CommerceMoneyResponse? = null
 )
 
-/** Typed representation of the `CommercePriceTransitionResponse` API schema. */
+/**
+ * Typed representation of the `CommercePriceTransitionResponse` API schema.
+ */
 data class CommercePriceTransitionResponse(
-    /** String representing the object's type. Objects of the same type share the same value. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: CommercePriceTransitionResponseObjectEnum,
-    /** Required object value serialized in the `subscription_item` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("subscription_item")
-    val subscriptionItem: CommerceSubscriptionItem2,
-    /** Required object value serialized in the `transition` wire field. */
-    val transition: CommercePriceTransitionDetails,
+    /**
+     * String representing the object's type. Objects of the same type share the same value.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: CommercePriceTransitionResponseObjectEnum,
+    /**
+     * Required object value serialized in the `subscription_item` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("subscription_item") val subscriptionItem: CommerceSubscriptionItem2,
+    /**
+     * Required object value serialized in the `transition` wire field.
+     */
+    val transition: CommercePriceTransitionDetails
 )
 
-/** Typed representation of the `PriceTransitionRequest` API schema. */
+/**
+ * Typed representation of the `PriceTransitionRequest` API schema.
+ */
 data class PriceTransitionRequest(
-    /** The current price ID of the subscription item. */
+    /**
+     * The current price ID of the subscription item.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("from_price_id") val fromPriceId: String,
-    /** The target price ID to transition to. */
-    @com.fasterxml.jackson.annotation.JsonProperty("to_price_id") val toPriceId: String,
+    /**
+     * The target price ID to transition to.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("to_price_id") val toPriceId: String
 )

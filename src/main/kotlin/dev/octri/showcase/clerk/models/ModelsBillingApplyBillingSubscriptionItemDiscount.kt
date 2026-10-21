@@ -3,8 +3,12 @@
 
 package dev.octri.showcase.clerk.models
 
-/** Typed representation of the `ApplyCommerceDiscountRequest` API schema. */
+/**
+ * Typed representation of the `ApplyCommerceDiscountRequest` API schema.
+ */
 data class ApplyCommerceDiscountRequest(
-    /** The ID of the discount to apply to the subscription item. */
+    /**
+     * The ID of the discount to apply to the subscription item.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("discount_id") val discountId: String
 )

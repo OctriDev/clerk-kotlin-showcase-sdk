@@ -3,105 +3,152 @@
 
 package dev.octri.showcase.clerk.models
 
-/** Typed representation of the `SignUp` API schema. */
+/**
+ * Typed representation of the `SignUp` API schema.
+ */
 data class SignUp(
-    /** Required enumerated value serialized in the `object` wire field. */
+    /**
+     * Required enumerated value serialized in the `object` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: SignUpObjectEnum,
-    /** Required `string` value serialized in the `id` wire field. */
+    /**
+     * Required `string` value serialized in the `id` wire field.
+     */
     val id: String,
-    /** Required enumerated value serialized in the `status` wire field. */
+    /**
+     * Required enumerated value serialized in the `status` wire field.
+     */
     val status: SignUpStatusEnum,
-    /** Required array value serialized in the `required_fields` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("required_fields")
-    val requiredFields: List<String>,
-    /** Required array value serialized in the `optional_fields` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("optional_fields")
-    val optionalFields: List<String>,
-    /** Required array value serialized in the `missing_fields` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("missing_fields")
-    val missingFields: List<String>,
-    /** Required array value serialized in the `unverified_fields` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("unverified_fields")
-    val unverifiedFields: List<String>,
-    /** Required object value serialized in the `verifications` wire field. */
+    /**
+     * Required array value serialized in the `required_fields` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("required_fields") val requiredFields: List<String>,
+    /**
+     * Required array value serialized in the `optional_fields` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("optional_fields") val optionalFields: List<String>,
+    /**
+     * Required array value serialized in the `missing_fields` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("missing_fields") val missingFields: List<String>,
+    /**
+     * Required array value serialized in the `unverified_fields` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("unverified_fields") val unverifiedFields: List<String>,
+    /**
+     * Required object value serialized in the `verifications` wire field.
+     */
     val verifications: SignUpVerifications,
-    /** Required `string` value serialized in the `username` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("username", required = true)
-    val username: String?,
-    /** Required `string` value serialized in the `email_address` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("email_address", required = true)
-    val emailAddress: String?,
-    /** Required `string` value serialized in the `phone_number` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("phone_number", required = true)
-    val phoneNumber: String?,
-    /** Required `string` value serialized in the `web3_wallet` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("web3_wallet", required = true)
-    val web3Wallet: String?,
-    /** Required `boolean` value serialized in the `password_enabled` wire field. */
+    /**
+     * Required `string` value serialized in the `username` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("username", required = true) val username: String?,
+    /**
+     * Required `string` value serialized in the `email_address` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("email_address", required = true) val emailAddress: String?,
+    /**
+     * Required `string` value serialized in the `phone_number` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("phone_number", required = true) val phoneNumber: String?,
+    /**
+     * Required `string` value serialized in the `web3_wallet` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("web3_wallet", required = true) val web3Wallet: String?,
+    /**
+     * Required `boolean` value serialized in the `password_enabled` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("password_enabled") val passwordEnabled: Boolean,
-    /** Required `string` value serialized in the `first_name` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("first_name", required = true)
-    val firstName: String?,
-    /** Required `string` value serialized in the `last_name` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_name", required = true)
-    val lastName: String?,
-    /** Required `boolean` value serialized in the `custom_action` wire field. */
+    /**
+     * Required `string` value serialized in the `first_name` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("first_name", required = true) val firstName: String?,
+    /**
+     * Required `string` value serialized in the `last_name` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_name", required = true) val lastName: String?,
+    /**
+     * Required `boolean` value serialized in the `custom_action` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("custom_action") val customAction: Boolean,
-    /** Required `string` value serialized in the `external_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("external_id", required = true)
-    val externalId: String?,
-    /** Required `string` value serialized in the `created_session_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_session_id", required = true)
-    val createdSessionId: String?,
-    /** Required `string` value serialized in the `created_user_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_user_id", required = true)
-    val createdUserId: String?,
-    /** Unix timestamp at which the user abandoned the sign up attempt. */
+    /**
+     * Required `string` value serialized in the `external_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("external_id", required = true) val externalId: String?,
+    /**
+     * Required `string` value serialized in the `created_session_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_session_id", required = true) val createdSessionId: String?,
+    /**
+     * Required `string` value serialized in the `created_user_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_user_id", required = true) val createdUserId: String?,
+    /**
+     * Unix timestamp at which the user abandoned the sign up attempt.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("abandon_at") val abandonAt: Long,
-    /** Unix timestamp at which the user accepted the legal requirements. */
-    @com.fasterxml.jackson.annotation.JsonProperty("legal_accepted_at", required = true)
-    val legalAcceptedAt: Long?,
-    /** Optional object value serialized in the `unsafe_metadata` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("unsafe_metadata")
-    val unsafeMetadata: Map<String, Any>? = null,
-    /** Optional object value serialized in the `public_metadata` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("public_metadata")
-    val publicMetadata: Map<String, Any>? = null,
-    /** The IANA timezone associated with the sign-up attempt. */
+    /**
+     * Unix timestamp at which the user accepted the legal requirements.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("legal_accepted_at", required = true) val legalAcceptedAt: Long?,
+    /**
+     * Optional object value serialized in the `unsafe_metadata` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("unsafe_metadata") val unsafeMetadata: Map<String, Any>? = null,
+    /**
+     * Optional object value serialized in the `public_metadata` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("public_metadata") val publicMetadata: Map<String, Any>? = null,
+    /**
+     * The IANA timezone associated with the sign-up attempt.
+     */
     val timezone: String? = null,
-    /** The user locale preference for the sign-up specified as a BCP-47 language tag. */
+    /**
+     * The user locale preference for the sign-up specified as a BCP-47 language tag.
+     */
     val locale: String? = null,
-    /** Optional object value serialized in the `external_account` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("external_account")
-    val externalAccount: Map<String, Any>? = null,
+    /**
+     * Optional object value serialized in the `external_account` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("external_account") val externalAccount: Map<String, Any>? = null
 )
 
-/** Typed representation of the `SignUpVerification` API schema. */
+/**
+ * Typed representation of the `SignUpVerification` API schema.
+ */
 data class SignUpVerification(
-    /** Optional enumerated value serialized in the `next_action` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("next_action")
-    val nextAction: SignUpVerificationNextActionEnum? = null,
-    /** Optional array value serialized in the `supported_strategies` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("supported_strategies")
-    val supportedStrategies: List<String>? = null,
+    /**
+     * Optional enumerated value serialized in the `next_action` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("next_action") val nextAction: SignUpVerificationNextActionEnum? = null,
+    /**
+     * Optional array value serialized in the `supported_strategies` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("supported_strategies") val supportedStrategies: List<String>? = null
 ) {
     @field:com.fasterxml.jackson.annotation.JsonAnySetter
     @get:com.fasterxml.jackson.annotation.JsonAnyGetter
     val additionalProperties: MutableMap<String, Any?> = linkedMapOf()
 }
 
-/** Typed representation of the `SignUpVerifications` API schema. */
+/**
+ * Typed representation of the `SignUpVerifications` API schema.
+ */
 data class SignUpVerifications(
-    /** Required object value serialized in the `email_address` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("email_address", required = true)
-    val emailAddress: SignUpVerification?,
-    /** Required object value serialized in the `phone_number` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("phone_number", required = true)
-    val phoneNumber: SignUpVerification?,
-    /** Required object value serialized in the `web3_wallet` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("web3_wallet", required = true)
-    val web3Wallet: SignUpVerification?,
-    /** Required object value serialized in the `external_account` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("external_account", required = true)
-    val externalAccount: Map<String, Any>?,
+    /**
+     * Required object value serialized in the `email_address` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("email_address", required = true) val emailAddress: SignUpVerification?,
+    /**
+     * Required object value serialized in the `phone_number` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("phone_number", required = true) val phoneNumber: SignUpVerification?,
+    /**
+     * Required object value serialized in the `web3_wallet` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("web3_wallet", required = true) val web3Wallet: SignUpVerification?,
+    /**
+     * Required object value serialized in the `external_account` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("external_account", required = true) val externalAccount: Map<String, Any>?
 )

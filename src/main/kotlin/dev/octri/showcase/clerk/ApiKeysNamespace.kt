@@ -3,112 +3,62 @@
 
 package dev.octri.showcase.clerk
 
+
 class ApiKeysNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates an API key for the specified subject. Supply `name` and `subject`, and provide
-     * optional claims, scopes, creator, and expiration settings as needed. The response includes
-     * the key secret, so handle it as a credential.
+     * Creates an API key for the specified subject. Supply `name` and `subject`, and provide optional claims, scopes, creator, and expiration settings as needed. The response includes the key secret, so handle it as a credential.
      */
-    fun create(
-        request: dev.octri.showcase.clerk.methods.ApiKeys.CreateApiKeyRequest,
-        options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.ApiKeys.CreateApiKeyResponse {
+    fun create(request: dev.octri.showcase.clerk.methods.ApiKeys.CreateApiKeyRequest, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.ApiKeys.CreateApiKeyResponse {
         return dev.octri.showcase.clerk.methods.ApiKeys.createApiKey(clientConfig, request, options)
     }
 
     /**
-     * Lists API keys associated with a specified subject. Use `include_invalid` to control whether
-     * invalid keys are included, and use `query` to filter the results. Use `limit` and `offset` to
-     * paginate the results.
+     * Lists API keys associated with a specified subject. Use `include_invalid` to control whether invalid keys are included, and use `query` to filter the results. Use `limit` and `offset` to paginate the results.
      */
-    fun list(
-        request: dev.octri.showcase.clerk.methods.ApiKeys.ListApiKeysRequest,
-        options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.ApiKeys.ListApiKeysResponse {
+    fun list(request: dev.octri.showcase.clerk.methods.ApiKeys.ListApiKeysRequest, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.ApiKeys.ListApiKeysResponse {
         return dev.octri.showcase.clerk.methods.ApiKeys.listApiKeys(clientConfig, request, options)
     }
 
     /**
-     * Retrieves an API key by its identifier. Supply the key ID in the path using either the `ak_`
-     * or `api_key_` prefix followed by 32 hexadecimal characters. The response contains the key's
-     * configuration and status.
+     * Retrieves an API key by its identifier. Supply the key ID in the path using either the `ak_` or `api_key_` prefix followed by 32 hexadecimal characters. The response contains the key's configuration and status.
      */
-    fun get(
-        apiKeyId: String,
-        options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.ApiKeys.GetApiKeyResponse {
+    fun get(apiKeyId: String, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.ApiKeys.GetApiKeyResponse {
         return dev.octri.showcase.clerk.methods.ApiKeys.getApiKey(clientConfig, apiKeyId, options)
     }
 
     /**
-     * Updates configurable properties of an API key. Include only the fields you want to change,
-     * such as `scopes`, `description`, `subject`, or `seconds_until_expiration`. The response
-     * contains the updated API key object.
+     * Updates configurable properties of an API key. Include only the fields you want to change, such as `scopes`, `description`, `subject`, or `seconds_until_expiration`. The response contains the updated API key object.
      */
-    fun update(
-        request: dev.octri.showcase.clerk.methods.ApiKeys.UpdateApiKeyRequest,
-        options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.ApiKeys.UpdateApiKeyResponse {
+    fun update(request: dev.octri.showcase.clerk.methods.ApiKeys.UpdateApiKeyRequest, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.ApiKeys.UpdateApiKeyResponse {
         return dev.octri.showcase.clerk.methods.ApiKeys.updateApiKey(clientConfig, request, options)
     }
 
     /**
-     * Deletes an API key identified by its ID. Supply the identifier using the `ak_` or `api_key_`
-     * prefix followed by 32 hexadecimal characters. The response confirms that the key was deleted.
+     * Deletes an API key identified by its ID. Supply the identifier using the `ak_` or `api_key_` prefix followed by 32 hexadecimal characters. The response confirms that the key was deleted.
      */
-    fun delete(
-        apiKeyId: String,
-        options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.ApiKeys.DeleteApiKeyResponse {
-        return dev.octri.showcase.clerk.methods.ApiKeys.deleteApiKey(
-            clientConfig,
-            apiKeyId,
-            options,
-        )
+    fun delete(apiKeyId: String, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.ApiKeys.DeleteApiKeyResponse {
+        return dev.octri.showcase.clerk.methods.ApiKeys.deleteApiKey(clientConfig, apiKeyId, options)
     }
 
     /**
-     * Retrieves the secret for an API key by its identifier. Supply the key ID using the `ak_` or
-     * `api_key_` prefix followed by 32 hexadecimal characters. Treat the returned secret as a
-     * credential.
+     * Retrieves the secret for an API key by its identifier. Supply the key ID using the `ak_` or `api_key_` prefix followed by 32 hexadecimal characters. Treat the returned secret as a credential.
      */
-    fun getSecret(
-        apiKeyId: String,
-        options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.ApiKeys.GetApiKeySecretResponse {
-        return dev.octri.showcase.clerk.methods.ApiKeys.getApiKeySecret(
-            clientConfig,
-            apiKeyId,
-            options,
-        )
+    fun getSecret(apiKeyId: String, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.ApiKeys.GetApiKeySecretResponse {
+        return dev.octri.showcase.clerk.methods.ApiKeys.getApiKeySecret(clientConfig, apiKeyId, options)
     }
 
     /**
-     * Revokes an API key identified by its ID. You can include `revocation_reason` to record why
-     * the key was revoked. The response contains the API key's updated revocation state.
+     * Revokes an API key identified by its ID. You can include `revocation_reason` to record why the key was revoked. The response contains the API key's updated revocation state.
      */
-    fun revoke(
-        apiKeyId: String,
-        revocationReason: SdkClient.SdkOptional<String?>? = null,
-        options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.ApiKeys.RevokeApiKeyResponse {
-        return dev.octri.showcase.clerk.methods.ApiKeys.revokeApiKey(
-            clientConfig,
-            apiKeyId,
-            revocationReason,
-            options,
-        )
+    fun revoke(apiKeyId: String, revocationReason: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.ApiKeys.RevokeApiKeyResponse {
+        return dev.octri.showcase.clerk.methods.ApiKeys.revokeApiKey(clientConfig, apiKeyId, revocationReason, options)
     }
 
     /**
-     * Verifies an API key using its secret. Supply the key in the `secret` field to retrieve its
-     * metadata and status. The response includes whether the key is revoked or expired and its
-     * associated subject and scopes.
+     * Verifies an API key using its secret. Supply the key in the `secret` field to retrieve its metadata and status. The response includes whether the key is revoked or expired and its associated subject and scopes.
      */
-    fun verify(
-        secret: String,
-        options: RequestOptions? = null,
-    ): dev.octri.showcase.clerk.methods.ApiKeys.VerifyApiKeyResponse {
+    fun verify(secret: String, options: RequestOptions? = null): dev.octri.showcase.clerk.methods.ApiKeys.VerifyApiKeyResponse {
         return dev.octri.showcase.clerk.methods.ApiKeys.verifyApiKey(clientConfig, secret, options)
     }
+
 }

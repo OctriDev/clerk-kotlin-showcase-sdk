@@ -16,28 +16,8 @@ internal object UsersListUserBiometricCredentialsOperation {
      *
      * @param userId The ID of the user whose biometric credentials are returned
      */
-    fun listUserBiometricCredentials(
-        clientConfig: ClientConfig,
-        userId: String,
-        options: RequestOptions? = null,
-    ): BiometricCredentialList {
-        return SdkClient.request<BiometricCredentialList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/users/${SdkClient.encodePathSegment(userId)}/biometric_credentials",
-                    config = clientConfig,
-                    operationId = "listUserBiometricCredentials",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "500" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun listUserBiometricCredentials(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): BiometricCredentialList {
+        return SdkClient.request<BiometricCredentialList>(SdkClient.RequestSpec("GET", "/users/${SdkClient.encodePathSegment(userId)}/biometric_credentials", config = clientConfig, operationId = "listUserBiometricCredentials", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
     }
 }
 
@@ -48,28 +28,7 @@ internal object UsersRevokeUserBiometricCredentialOperation {
      * @param userId The ID of the user that owns the biometric credential
      * @param biometricCredentialId The ID of the biometric credential to revoke
      */
-    fun revokeUserBiometricCredential(
-        clientConfig: ClientConfig,
-        userId: String,
-        biometricCredentialId: String,
-        options: RequestOptions? = null,
-    ): BiometricCredential {
-        return SdkClient.request<BiometricCredential>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/users/${SdkClient.encodePathSegment(userId)}/biometric_credentials/${SdkClient.encodePathSegment(biometricCredentialId)}",
-                    config = clientConfig,
-                    operationId = "revokeUserBiometricCredential",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "403" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "500" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun revokeUserBiometricCredential(clientConfig: ClientConfig, userId: String, biometricCredentialId: String, options: RequestOptions? = null): BiometricCredential {
+        return SdkClient.request<BiometricCredential>(SdkClient.RequestSpec("DELETE", "/users/${SdkClient.encodePathSegment(userId)}/biometric_credentials/${SdkClient.encodePathSegment(biometricCredentialId)}", config = clientConfig, operationId = "revokeUserBiometricCredential", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java))).data
     }
 }

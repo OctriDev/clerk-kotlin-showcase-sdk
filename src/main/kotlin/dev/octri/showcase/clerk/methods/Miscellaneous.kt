@@ -9,6 +9,7 @@ import dev.octri.showcase.clerk.SdkClient
 
 object Miscellaneous {
 
+
     /** Parameters for [getPublicInterstitial]. */
     data class GetPublicInterstitialRequest(
         val frontendApi: String? = null,
@@ -17,13 +18,11 @@ object Miscellaneous {
         val proxyUrl: String? = null,
         val domain: String? = null,
         val signInUrl: String? = null,
-        val useDomainForScript: Boolean? = null,
+        val useDomainForScript: Boolean? = null
     )
 
     /**
-     * The Clerk interstitial endpoint serves an html page that loads clerk.js in order to check the
-     * user's authentication state. It is used by Clerk SDKs when the user's authentication state
-     * cannot be immediately determined.
+     * The Clerk interstitial endpoint serves an html page that loads clerk.js in order to check the user's authentication state. It is used by Clerk SDKs when the user's authentication state cannot be immediately determined.
      *
      * @param frontendApi Please use `frontend_api` instead
      * @param frontendApi2 The Frontend API key of your instance
@@ -33,32 +32,21 @@ object Miscellaneous {
      * @param signInUrl The sign in URL of your instance
      * @param useDomainForScript Whether to use the domain for the script URL
      */
-    fun getPublicInterstitial(
-        clientConfig: ClientConfig,
-        request: GetPublicInterstitialRequest,
-        options: RequestOptions? = null,
-    ): Unit {
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "GET",
-                "/public/interstitial",
-                config = clientConfig,
-                query =
-                    mapOf(
-                        "frontendApi" to SdkClient.queryValue(request.frontendApi, "form", true),
-                        "frontend_api" to SdkClient.queryValue(request.frontendApi2, "form", true),
-                        "publishable_key" to
-                            SdkClient.queryValue(request.publishableKey, "form", true),
-                        "proxy_url" to SdkClient.queryValue(request.proxyUrl, "form", true),
-                        "domain" to SdkClient.queryValue(request.domain, "form", true),
-                        "sign_in_url" to SdkClient.queryValue(request.signInUrl, "form", true),
-                        "use_domain_for_script" to
-                            SdkClient.queryValue(request.useDomainForScript, "form", true),
-                    ),
-                operationId = "getPublicInterstitial",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                options = options,
-            )
-        )
+    fun getPublicInterstitial(clientConfig: ClientConfig, request: GetPublicInterstitialRequest, options: RequestOptions? = null): Unit {
+        SdkClient.request<Unit>(SdkClient.RequestSpec("GET", "/public/interstitial", config = clientConfig, query = mapOf("frontendApi" to
+    SdkClient.queryValue(request.frontendApi, "form", true), "frontend_api" to
+    SdkClient.queryValue(request.frontendApi2, "form", true), "publishable_key" to
+    SdkClient.queryValue(request.publishableKey, "form", true), "proxy_url" to
+    SdkClient.queryValue(request.proxyUrl, "form", true), "domain" to
+    SdkClient.queryValue(request.domain, "form", true), "sign_in_url" to
+    SdkClient.queryValue(request.signInUrl, "form", true), "use_domain_for_script" to
+    SdkClient.queryValue(request.useDomainForScript, "form", true)), operationId = "getPublicInterstitial", decoder = SdkClient.ResponseDecoder.EMPTY, options = options))
     }
+
+
+
+
+
+
+
 }

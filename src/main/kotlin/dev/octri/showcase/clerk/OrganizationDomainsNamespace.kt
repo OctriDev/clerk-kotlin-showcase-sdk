@@ -3,121 +3,52 @@
 
 package dev.octri.showcase.clerk
 
+
 class OrganizationDomainsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates a new organization domain. By default the domain is verified, but can be optionally
-     * set to unverified.
+     * Creates a new organization domain. By default the domain is verified, but can be optionally set to unverified.
      */
-    fun create(
-        organizationId: String,
-        name: String? = null,
-        enrollmentMode: String? = null,
-        verified: SdkClient.SdkOptional<Boolean?>? = null,
-        options: RequestOptions? = null,
-    ): OrganizationDomain {
-        return dev.octri.showcase.clerk.methods.OrganizationDomainsMethods.createOrganizationDomain(
-            clientConfig,
-            organizationId,
-            name,
-            enrollmentMode,
-            verified,
-            options,
-        )
+    fun create(organizationId: String, name: String? = null, enrollmentMode: String? = null, verified: SdkClient.SdkOptional<Boolean?>? = null, options: RequestOptions? = null): OrganizationDomain {
+        return dev.octri.showcase.clerk.methods.OrganizationDomainsMethods.createOrganizationDomain(clientConfig, organizationId, name, enrollmentMode, verified, options)
     }
 
     /**
-     * Lists domains associated with an organization. Filter the results by verification status or
-     * enrollment mode, and use `limit` and `offset` to control the result window. The response
-     * includes the matching domains and their total count.
+     * Lists domains associated with an organization. Filter the results by verification status or enrollment mode, and use `limit` and `offset` to control the result window. The response includes the matching domains and their total count.
      *
      * Get a list of all domains of an organization.
      */
-    fun list(
-        organizationId: String,
-        verified: String? = null,
-        enrollmentMode: String? = null,
-        limit: Long? = null,
-        offset: Long? = null,
-        options: RequestOptions? = null,
-    ): OrganizationDomains {
-        return dev.octri.showcase.clerk.methods.OrganizationDomainsMethods.listOrganizationDomains(
-            clientConfig,
-            organizationId,
-            verified,
-            enrollmentMode,
-            limit,
-            offset,
-            options,
-        )
-    }
-
-    /** Updates the properties of an existing organization domain. */
-    fun update(
-        organizationId: String,
-        domainId: String,
-        enrollmentMode: SdkClient.SdkOptional<String?>? = null,
-        verified: SdkClient.SdkOptional<Boolean?>? = null,
-        options: RequestOptions? = null,
-    ): OrganizationDomain {
-        return dev.octri.showcase.clerk.methods.OrganizationDomainsMethods.updateOrganizationDomain(
-            clientConfig,
-            organizationId,
-            domainId,
-            enrollmentMode,
-            verified,
-            options,
-        )
+    fun list(organizationId: String, verified: String? = null, enrollmentMode: String? = null, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): OrganizationDomains {
+        return dev.octri.showcase.clerk.methods.OrganizationDomainsMethods.listOrganizationDomains(clientConfig, organizationId, verified, enrollmentMode, limit, offset, options)
     }
 
     /**
-     * Deletes a domain from an organization. Use the `organization_id` and `domain_id` path
-     * parameters to identify the organization and domain to remove. A successful response indicates
-     * that the domain was deleted.
+     * Updates the properties of an existing organization domain.
+     */
+    fun update(organizationId: String, domainId: String, enrollmentMode: SdkClient.SdkOptional<String?>? = null, verified: SdkClient.SdkOptional<Boolean?>? = null, options: RequestOptions? = null): OrganizationDomain {
+        return dev.octri.showcase.clerk.methods.OrganizationDomainsMethods.updateOrganizationDomain(clientConfig, organizationId, domainId, enrollmentMode, verified, options)
+    }
+
+    /**
+     * Deletes a domain from an organization. Use the `organization_id` and `domain_id` path parameters to identify the organization and domain to remove. A successful response indicates that the domain was deleted.
      *
      * Removes the given domain from the organization.
      */
-    fun delete(
-        organizationId: String,
-        domainId: String,
-        options: RequestOptions? = null,
-    ): DeletedObject {
-        return dev.octri.showcase.clerk.methods.OrganizationDomainsMethods.deleteOrganizationDomain(
-            clientConfig,
-            organizationId,
-            domainId,
-            options,
-        )
+    fun delete(organizationId: String, domainId: String, options: RequestOptions? = null): DeletedObject {
+        return dev.octri.showcase.clerk.methods.OrganizationDomainsMethods.deleteOrganizationDomain(clientConfig, organizationId, domainId, options)
     }
 
     /**
-     * Flips the organization domain's ownership state to verified via the manual override path,
-     * bypassing the self-serve TXT DNS challenge. The domain row records strategy=`manual_override`
-     * and an `organization_domain.ownership_verified` audit event is emitted with the same
-     * strategy. Idempotent: re-calling on an already-verified domain returns the current ownership
-     * state without re-emitting the audit event.
+     * Flips the organization domain's ownership state to verified via the manual override path, bypassing the self-serve TXT DNS challenge. The domain row records strategy=`manual_override` and an `organization_domain.ownership_verified` audit event is emitted with the same strategy. Idempotent: re-calling on an already-verified domain returns the current ownership state without re-emitting the audit event.
      */
-    fun verifyOwnership(
-        organizationId: String,
-        domainId: String,
-        options: RequestOptions? = null,
-    ): OrganizationDomain {
-        return dev.octri.showcase.clerk.methods.OrganizationDomainsMethods
-            .verifyOrganizationDomainOwnership(clientConfig, organizationId, domainId, options)
+    fun verifyOwnership(organizationId: String, domainId: String, options: RequestOptions? = null): OrganizationDomain {
+        return dev.octri.showcase.clerk.methods.OrganizationDomainsMethods.verifyOrganizationDomainOwnership(clientConfig, organizationId, domainId, options)
     }
 
     /**
-     * Retrieves a list of all organization domains within the current instance. This endpoint can
-     * be used to list all domains across all organizations or filter domains by organization,
-     * verification status, enrollment mode, or search query. The response includes pagination
-     * information and details about each domain including its verification status, enrollment mode,
-     * and associated counts.
+     * Retrieves a list of all organization domains within the current instance. This endpoint can be used to list all domains across all organizations or filter domains by organization, verification status, enrollment mode, or search query. The response includes pagination information and details about each domain including its verification status, enrollment mode, and associated counts.
      */
-    fun listAll(
-        request:
-            dev.octri.showcase.clerk.methods.OrganizationDomainsMethods.ListAllOrganizationDomainsRequest,
-        options: RequestOptions? = null,
-    ): OrganizationDomains {
-        return dev.octri.showcase.clerk.methods.OrganizationDomainsMethods
-            .listAllOrganizationDomains(clientConfig, request, options)
+    fun listAll(request: dev.octri.showcase.clerk.methods.OrganizationDomainsMethods.ListAllOrganizationDomainsRequest, options: RequestOptions? = null): OrganizationDomains {
+        return dev.octri.showcase.clerk.methods.OrganizationDomainsMethods.listAllOrganizationDomains(clientConfig, request, options)
     }
+
 }

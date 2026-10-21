@@ -3,31 +3,22 @@
 
 package dev.octri.showcase.clerk
 
+
 class SignUpsNamespace(private val clientConfig: ClientConfig) {
-    /** Retrieve the details of the sign-up with the given ID */
+    /**
+     * Retrieve the details of the sign-up with the given ID
+     */
     fun get(id: String, options: RequestOptions? = null): SignUp {
         return dev.octri.showcase.clerk.methods.SignUps.getSignUp(clientConfig, id, options)
     }
 
     /**
-     * Updates an existing sign-up with the fields you provide. Use `external_id` to associate the
-     * sign-up with an identifier from your external system, or set `custom_action` to mark it as a
-     * custom action. The response includes the sign-up's current status and verification details.
+     * Updates an existing sign-up with the fields you provide. Use `external_id` to associate the sign-up with an identifier from your external system, or set `custom_action` to mark it as a custom action. The response includes the sign-up's current status and verification details.
      *
      * Update the sign-up with the given ID
      */
-    fun update(
-        id: String,
-        externalId: SdkClient.SdkOptional<String?>? = null,
-        customAction: SdkClient.SdkOptional<Boolean?>? = null,
-        options: RequestOptions? = null,
-    ): SignUp {
-        return dev.octri.showcase.clerk.methods.SignUps.updateSignUp(
-            clientConfig,
-            id,
-            externalId,
-            customAction,
-            options,
-        )
+    fun update(id: String, externalId: SdkClient.SdkOptional<String?>? = null, customAction: SdkClient.SdkOptional<Boolean?>? = null, options: RequestOptions? = null): SignUp {
+        return dev.octri.showcase.clerk.methods.SignUps.updateSignUp(clientConfig, id, externalId, customAction, options)
     }
+
 }

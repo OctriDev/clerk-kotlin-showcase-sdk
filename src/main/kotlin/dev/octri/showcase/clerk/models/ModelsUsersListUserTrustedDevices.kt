@@ -3,10 +3,16 @@
 
 package dev.octri.showcase.clerk.models
 
-/** Typed representation of the `TrustedDeviceList` API schema. */
+/**
+ * Typed representation of the `TrustedDeviceList` API schema.
+ */
 data class TrustedDeviceList(
-    /** Required array value serialized in the `data` wire field. */
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<TrustedDevice>,
-    /** Total number of trusted devices */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long,
+    /**
+     * Total number of trusted devices
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long
 )

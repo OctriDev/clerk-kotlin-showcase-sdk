@@ -11,104 +11,41 @@ import dev.octri.showcase.clerk.User
 
 internal object UsersUpdateUserMetadataOperation {
     /**
-     * Update a user's metadata attributes by merging existing values with the provided parameters.
-     * This endpoint behaves differently than the *Update a user* endpoint. Metadata values will not
-     * be replaced entirely. Instead, a deep merge will be performed. Deep means that any nested
-     * JSON objects will be merged as well. You can remove metadata keys at any level by setting
-     * their value to `null`.
+     * Update a user's metadata attributes by merging existing values with the provided parameters. This endpoint behaves differently than the *Update a user* endpoint. Metadata values will not be replaced entirely. Instead, a deep merge will be performed. Deep means that any nested JSON objects will be merged as well. You can remove metadata keys at any level by setting their value to `null`.
      *
      * @param userId The ID of the user whose metadata will be updated and merged
-     * @param publicMetadata Metadata saved on the user, that is visible to both your frontend and
+     * @param publicMetadata Metadata saved on the user, that is visible to both your
+     *   frontend and backend. The new object will be merged with the existing value.
+     * @param privateMetadata Metadata saved on the user that is only visible to your
      *   backend. The new object will be merged with the existing value.
-     * @param privateMetadata Metadata saved on the user that is only visible to your backend. The
-     *   new object will be merged with the existing value.
-     * @param unsafeMetadata Metadata saved on the user, that can be updated from both the Frontend
-     *   and Backend APIs. The new object will be merged with the existing value. Note: Since this
-     *   data can be modified from the frontend, it is not guaranteed to be safe.
+     * @param unsafeMetadata Metadata saved on the user, that can be updated from
+     *   both the Frontend and Backend APIs. The new object will be merged with the
+     *   existing value. Note: Since this data can be modified from the frontend, it is
+     *   not guaranteed to be safe.
      */
-    fun updateUserMetadata(
-        clientConfig: ClientConfig,
-        userId: String,
-        publicMetadata: Map<String, Any>? = null,
-        privateMetadata: Map<String, Any>? = null,
-        unsafeMetadata: Map<String, Any>? = null,
-        options: RequestOptions? = null,
-    ): User {
-        return SdkClient.request<User>(
-                SdkClient.RequestSpec(
-                    "PATCH",
-                    "/users/${SdkClient.encodePathSegment(userId)}/metadata",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "public_metadata" to (SdkClient.omitIfNull(publicMetadata)),
-                            "private_metadata" to (SdkClient.omitIfNull(privateMetadata)),
-                            "unsafe_metadata" to (SdkClient.omitIfNull(unsafeMetadata)),
-                        ),
-                    operationId = "updateUserMetadata",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun updateUserMetadata(clientConfig: ClientConfig, userId: String, publicMetadata: Map<String, Any>? = null, privateMetadata: Map<String, Any>? = null, unsafeMetadata: Map<String, Any>? = null, options: RequestOptions? = null): User {
+        return SdkClient.request<User>(SdkClient.RequestSpec("PATCH", "/users/${SdkClient.encodePathSegment(userId)}/metadata", config = clientConfig, body = SdkClient.bodyMap("public_metadata" to (SdkClient.omitIfNull(publicMetadata)), "private_metadata" to
+    (SdkClient.omitIfNull(privateMetadata)), "unsafe_metadata" to (SdkClient.omitIfNull(unsafeMetadata))), operationId = "updateUserMetadata", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
 }
 
 internal object UsersReplaceUserMetadataOperation {
     /**
-     * Replace a user's metadata attributes with the provided values. Unlike `PATCH
-     * /v1/users/{user_id}/metadata` (merge semantics), this endpoint replaces the supplied metadata
-     * fields entirely — the prior contents of each supplied field are discarded. Fields omitted
-     * from the request body are left unchanged. Prefer the `PATCH` endpoint for partial updates.
-     * Use `PUT` only when you explicitly intend to overwrite a metadata field wholesale.
+     * Replace a user's metadata attributes with the provided values. Unlike `PATCH /v1/users/{user_id}/metadata` (merge semantics), this endpoint replaces the supplied metadata fields entirely — the prior contents of each supplied field are discarded. Fields omitted from the request body are left unchanged. Prefer the `PATCH` endpoint for partial updates. Use `PUT` only when you explicitly intend to overwrite a metadata field wholesale.
      *
      * @param userId The ID of the user whose metadata will be replaced
-     * @param publicMetadata Metadata saved on the user, that is visible to both your frontend and
+     * @param publicMetadata Metadata saved on the user, that is visible to both your
+     *   frontend and backend. The existing value will be replaced entirely with the
+     *   new object.
+     * @param privateMetadata Metadata saved on the user that is only visible to your
      *   backend. The existing value will be replaced entirely with the new object.
-     * @param privateMetadata Metadata saved on the user that is only visible to your backend. The
-     *   existing value will be replaced entirely with the new object.
-     * @param unsafeMetadata Metadata saved on the user, that can be updated from both the Frontend
-     *   and Backend APIs. The existing value will be replaced entirely with the new object. Note:
-     *   Since this data can be modified from the frontend, it is not guaranteed to be safe.
+     * @param unsafeMetadata Metadata saved on the user, that can be updated from
+     *   both the Frontend and Backend APIs. The existing value will be replaced
+     *   entirely with the new object. Note: Since this data can be modified from the
+     *   frontend, it is not guaranteed to be safe.
      */
-    fun replaceUserMetadata(
-        clientConfig: ClientConfig,
-        userId: String,
-        publicMetadata: Map<String, Any>? = null,
-        privateMetadata: Map<String, Any>? = null,
-        unsafeMetadata: Map<String, Any>? = null,
-        options: RequestOptions? = null,
-    ): User {
-        return SdkClient.request<User>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/users/${SdkClient.encodePathSegment(userId)}/metadata",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "public_metadata" to (SdkClient.omitIfNull(publicMetadata)),
-                            "private_metadata" to (SdkClient.omitIfNull(privateMetadata)),
-                            "unsafe_metadata" to (SdkClient.omitIfNull(unsafeMetadata)),
-                        ),
-                    operationId = "replaceUserMetadata",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to ClerkErrors::class.java,
-                            "401" to ClerkErrors::class.java,
-                            "404" to ClerkErrors::class.java,
-                            "422" to ClerkErrors::class.java,
-                        ),
-                )
-            )
-            .data
+    fun replaceUserMetadata(clientConfig: ClientConfig, userId: String, publicMetadata: Map<String, Any>? = null, privateMetadata: Map<String, Any>? = null, unsafeMetadata: Map<String, Any>? = null, options: RequestOptions? = null): User {
+        return SdkClient.request<User>(SdkClient.RequestSpec("PUT", "/users/${SdkClient.encodePathSegment(userId)}/metadata", config = clientConfig, body = SdkClient.bodyMap("public_metadata" to (SdkClient.omitIfNull(publicMetadata)), "private_metadata" to
+    (SdkClient.omitIfNull(privateMetadata)), "unsafe_metadata" to (SdkClient.omitIfNull(unsafeMetadata))), operationId = "replaceUserMetadata", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java))).data
     }
 }

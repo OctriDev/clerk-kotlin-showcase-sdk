@@ -3,51 +3,82 @@
 
 package dev.octri.showcase.clerk.models
 
-/** An organization invitation */
+/**
+ * An organization invitation
+ */
 data class OrganizationInvitation(
-    /** String representing the object's type. Objects of the same type share the same value. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: OrganizationInvitationObjectEnum,
-    /** Required `string` value serialized in the `id` wire field. */
+    /**
+     * String representing the object's type. Objects of the same type share the same value.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: OrganizationInvitationObjectEnum,
+    /**
+     * Required `string` value serialized in the `id` wire field.
+     */
     val id: String,
-    /** Required `string` value serialized in the `email_address` wire field. */
+    /**
+     * Required `string` value serialized in the `email_address` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("email_address") val emailAddress: String,
-    /** Required `string` value serialized in the `role` wire field. */
+    /**
+     * Required `string` value serialized in the `role` wire field.
+     */
     val role: String,
-    /** Required `string` value serialized in the `role_name` wire field. */
+    /**
+     * Required `string` value serialized in the `role_name` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("role_name") val roleName: String,
-    /** Required `string` value serialized in the `inviter_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("inviter_id", required = true)
-    val inviterId: String?,
-    /** An organization inviter's public user data */
-    @com.fasterxml.jackson.annotation.JsonProperty("public_inviter_data", required = true)
-    val publicInviterData: OrganizationInvitationPublicUserData?,
-    /** Required object value serialized in the `public_metadata` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("public_metadata")
-    val publicMetadata: Map<String, Any>,
-    /** Required `string` value serialized in the `url` wire field. */
+    /**
+     * Required `string` value serialized in the `inviter_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("inviter_id", required = true) val inviterId: String?,
+    /**
+     * An organization inviter's public user data
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("public_inviter_data", required = true) val publicInviterData: OrganizationInvitationPublicUserData?,
+    /**
+     * Required object value serialized in the `public_metadata` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("public_metadata") val publicMetadata: Map<String, Any>,
+    /**
+     * Required `string` value serialized in the `url` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("url", required = true) val url: String?,
-    /** Unix timestamp of expiration. */
-    @com.fasterxml.jackson.annotation.JsonProperty("expires_at", required = true)
-    val expiresAt: Long?,
-    /** Unix timestamp of creation. */
+    /**
+     * Unix timestamp of expiration.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("expires_at", required = true) val expiresAt: Long?,
+    /**
+     * Unix timestamp of creation.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** Unix timestamp of last update. */
+    /**
+     * Unix timestamp of last update.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
-    /** Optional `string` value serialized in the `organization_id` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("organization_id")
-    val organizationId: String? = null,
-    /** Optional `string` value serialized in the `status` wire field. */
+    /**
+     * Optional `string` value serialized in the `organization_id` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("organization_id") val organizationId: String? = null,
+    /**
+     * Optional `string` value serialized in the `status` wire field.
+     */
     val status: String? = null,
-    /** Optional object value serialized in the `private_metadata` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("private_metadata")
-    val privateMetadata: Map<String, Any>? = null,
+    /**
+     * Optional object value serialized in the `private_metadata` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("private_metadata") val privateMetadata: Map<String, Any>? = null
 )
 
-/** Typed representation of the `OrganizationInvitations` API schema. */
+/**
+ * Typed representation of the `OrganizationInvitations` API schema.
+ */
 data class OrganizationInvitations(
-    /** Required array value serialized in the `data` wire field. */
+    /**
+     * Required array value serialized in the `data` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<OrganizationInvitation>,
-    /** Total number of organization invitations */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long,
+    /**
+     * Total number of organization invitations
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long
 )
