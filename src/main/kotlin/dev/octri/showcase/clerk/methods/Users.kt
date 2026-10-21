@@ -472,8 +472,8 @@ data class DeleteTOTPResponse(
     /**
      * Delete the passkey identification for a given user. The user is notified through email or SMS unless the passkey registration was never completed.
      */
-    fun deleteUsersPasskey(clientConfig: ClientConfig, userId: String, passkeyIdentificationId: String, options: RequestOptions? = null): DeletedObject =
-        dev.octri.showcase.clerk.methods.UsersDeleteUsersPasskeyOperation.deleteUsersPasskey(
+    fun deleteUserPasskey(clientConfig: ClientConfig, userId: String, passkeyIdentificationId: String, options: RequestOptions? = null): DeletedObject =
+        dev.octri.showcase.clerk.methods.UsersDeleteUserPasskeyOperation.deleteUserPasskey(
             clientConfig,
             userId,
             passkeyIdentificationId,

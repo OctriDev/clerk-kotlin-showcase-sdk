@@ -214,7 +214,7 @@ class UsersNamespace(private val clientConfig: ClientConfig) {
      * Delete the passkey identification for a given user. The user is notified through email or SMS unless the passkey registration was never completed.
      */
     fun deletePasskey(userId: String, passkeyIdentificationId: String, options: RequestOptions? = null): DeletedObject {
-        return dev.octri.showcase.clerk.methods.Users.deleteUsersPasskey(clientConfig, userId, passkeyIdentificationId, options)
+        return dev.octri.showcase.clerk.methods.Users.deleteUserPasskey(clientConfig, userId, passkeyIdentificationId, options)
     }
 
     /**
