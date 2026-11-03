@@ -19,142 +19,264 @@ object AllowListBlockList {
     /**
      * Get a list of all identifiers allowed to sign up to an instance
      *
-     * @param paginated Whether to paginate the results. If true, the results will be
-     *   paginated. If false, the results will not be paginated.
-     * @param limit Applies a limit to the number of results returned. Can be used
-     *   for paginating the results together with `offset`.
-     * @param offset Skip the first `offset` results when paginating. Needs to be an
-     *   integer greater or equal to zero. To be used in conjunction with `limit`.
+     * @param paginated Whether to paginate the results. If true, the results will be paginated. If
+     *   false, the results will not be paginated.
+     * @param limit Applies a limit to the number of results returned. Can be used for paginating
+     *   the results together with `offset`.
+     * @param offset Skip the first `offset` results when paginating. Needs to be an integer greater
+     *   or equal to zero. To be used in conjunction with `limit`.
      */
-    fun listAllowlistIdentifiers(clientConfig: ClientConfig, paginated: Boolean? = null, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): List<AllowlistIdentifier> {
-        return listAllowlistIdentifiersWithRawResponse(clientConfig, paginated, limit, offset, options).data
+    fun listAllowlistIdentifiers(
+        clientConfig: ClientConfig,
+        paginated: Boolean? = null,
+        limit: Long? = null,
+        offset: Long? = null,
+        options: RequestOptions? = null,
+    ): List<AllowlistIdentifier> {
+        return listAllowlistIdentifiersWithRawResponse(
+                clientConfig,
+                paginated,
+                limit,
+                offset,
+                options,
+            )
+            .data
     }
 
-
-    /** [listAllowlistIdentifiers], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listAllowlistIdentifiersWithRawResponse(clientConfig: ClientConfig, paginated: Boolean? = null, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): SdkResponse<List<AllowlistIdentifier>> {
+    /**
+     * [listAllowlistIdentifiers], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun listAllowlistIdentifiersWithRawResponse(
+        clientConfig: ClientConfig,
+        paginated: Boolean? = null,
+        limit: Long? = null,
+        offset: Long? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<List<AllowlistIdentifier>> {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 500.0))
-}
+        }
 
         if (offset != null) {
             Validation.validateRange("offset", offset, Validation.RangeOpts(min = 0.0))
-}
+        }
 
-        return SdkClient.request<List<AllowlistIdentifier>>(SdkClient.RequestSpec("GET", "/allowlist_identifiers", config = clientConfig, query = mapOf("paginated" to SdkClient.queryValue(paginated, "form", true), "limit" to SdkClient.queryValue(limit, "form", true), "offset" to SdkClient.queryValue(offset, "form", true)), operationId = "listAllowlistIdentifiers", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "402" to ClerkErrors::class.java)))
+        return SdkClient.request<List<AllowlistIdentifier>>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/allowlist_identifiers",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "paginated" to SdkClient.queryValue(paginated, "form", true),
+                        "limit" to SdkClient.queryValue(limit, "form", true),
+                        "offset" to SdkClient.queryValue(offset, "form", true),
+                    ),
+                operationId = "listAllowlistIdentifiers",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors = mapOf("401" to ClerkErrors::class.java, "402" to ClerkErrors::class.java),
+            )
+        )
     }
-
-
-
-
-
 
     /**
      * Create an identifier allowed to sign up to an instance
      *
-     * @param identifier The identifier to be added in the allow-list. This can be an
-     *   email address, a phone number, or a web3 wallet.
-     * @param notify This flag denotes whether the given identifier will receive an
-     *   invitation to join the application. Note that this only works for email
-     *   address and phone number identifiers.
+     * @param identifier The identifier to be added in the allow-list. This can be an email address,
+     *   a phone number, or a web3 wallet.
+     * @param notify This flag denotes whether the given identifier will receive an invitation to
+     *   join the application. Note that this only works for email address and phone number
+     *   identifiers.
      */
-    fun createAllowlistIdentifier(clientConfig: ClientConfig, identifier: String, notify: Boolean? = null, options: RequestOptions? = null): AllowlistIdentifier {
-        return createAllowlistIdentifierWithRawResponse(clientConfig, identifier, notify, options).data
+    fun createAllowlistIdentifier(
+        clientConfig: ClientConfig,
+        identifier: String,
+        notify: Boolean? = null,
+        options: RequestOptions? = null,
+    ): AllowlistIdentifier {
+        return createAllowlistIdentifierWithRawResponse(clientConfig, identifier, notify, options)
+            .data
     }
-
-
-    /** [createAllowlistIdentifier], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun createAllowlistIdentifierWithRawResponse(clientConfig: ClientConfig, identifier: String, notify: Boolean? = null, options: RequestOptions? = null): SdkResponse<AllowlistIdentifier> {
-        return SdkClient.request<AllowlistIdentifier>(SdkClient.RequestSpec("POST", "/allowlist_identifiers", config = clientConfig, body = SdkClient.bodyMap("identifier" to (identifier), "notify" to (SdkClient.omitIfNull(notify))), operationId = "createAllowlistIdentifier", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "402" to ClerkErrors::class.java, "422" to ClerkErrors::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Deletes an identifier from the instance allow-list. Use the `identifier_id` path parameter to select the entry to remove. The response confirms whether the object was deleted.
+     * [createAllowlistIdentifier], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun createAllowlistIdentifierWithRawResponse(
+        clientConfig: ClientConfig,
+        identifier: String,
+        notify: Boolean? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<AllowlistIdentifier> {
+        return SdkClient.request<AllowlistIdentifier>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/allowlist_identifiers",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "identifier" to (identifier),
+                        "notify" to (SdkClient.omitIfNull(notify)),
+                    ),
+                operationId = "createAllowlistIdentifier",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ClerkErrors::class.java,
+                        "402" to ClerkErrors::class.java,
+                        "422" to ClerkErrors::class.java,
+                    ),
+            )
+        )
+    }
+
+    /**
+     * Deletes an identifier from the instance allow-list. Use the `identifier_id` path parameter to
+     * select the entry to remove. The response confirms whether the object was deleted.
      *
      * Delete an identifier from the instance allow-list
      *
      * @param identifierId The ID of the identifier to delete from the allow-list
      */
-    fun deleteAllowlistIdentifier(clientConfig: ClientConfig, identifierId: String, options: RequestOptions? = null): DeletedObject {
+    fun deleteAllowlistIdentifier(
+        clientConfig: ClientConfig,
+        identifierId: String,
+        options: RequestOptions? = null,
+    ): DeletedObject {
         return deleteAllowlistIdentifierWithRawResponse(clientConfig, identifierId, options).data
     }
 
-
-    /** [deleteAllowlistIdentifier], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun deleteAllowlistIdentifierWithRawResponse(clientConfig: ClientConfig, identifierId: String, options: RequestOptions? = null): SdkResponse<DeletedObject> {
-        return SdkClient.request<DeletedObject>(SdkClient.RequestSpec("DELETE", "/allowlist_identifiers/${SdkClient.encodePathSegment(identifierId)}", config = clientConfig, operationId = "deleteAllowlistIdentifier", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("402" to ClerkErrors::class.java, "404" to ClerkErrors::class.java)))
+    /**
+     * [deleteAllowlistIdentifier], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun deleteAllowlistIdentifierWithRawResponse(
+        clientConfig: ClientConfig,
+        identifierId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<DeletedObject> {
+        return SdkClient.request<DeletedObject>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/allowlist_identifiers/${SdkClient.encodePathSegment(identifierId)}",
+                config = clientConfig,
+                operationId = "deleteAllowlistIdentifier",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors = mapOf("402" to ClerkErrors::class.java, "404" to ClerkErrors::class.java),
+            )
+        )
     }
 
-
-
-
-
-
-    /**
-     * Get a list of all identifiers which are not allowed to access an instance
-     */
-    fun listBlocklistIdentifiers(clientConfig: ClientConfig, options: RequestOptions? = null): BlocklistIdentifiers {
+    /** Get a list of all identifiers which are not allowed to access an instance */
+    fun listBlocklistIdentifiers(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): BlocklistIdentifiers {
         return listBlocklistIdentifiersWithRawResponse(clientConfig, options).data
     }
 
-
-    /** [listBlocklistIdentifiers], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listBlocklistIdentifiersWithRawResponse(clientConfig: ClientConfig, options: RequestOptions? = null): SdkResponse<BlocklistIdentifiers> {
-        return SdkClient.request<BlocklistIdentifiers>(SdkClient.RequestSpec("GET", "/blocklist_identifiers", config = clientConfig, operationId = "listBlocklistIdentifiers", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "402" to ClerkErrors::class.java)))
+    /**
+     * [listBlocklistIdentifiers], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun listBlocklistIdentifiersWithRawResponse(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): SdkResponse<BlocklistIdentifiers> {
+        return SdkClient.request<BlocklistIdentifiers>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/blocklist_identifiers",
+                config = clientConfig,
+                operationId = "listBlocklistIdentifiers",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors = mapOf("401" to ClerkErrors::class.java, "402" to ClerkErrors::class.java),
+            )
+        )
     }
-
-
-
-
-
 
     /**
      * Create an identifier that is blocked from accessing an instance
      *
-     * @param identifier The identifier to be added in the block-list. This can be an
-     *   email address, a phone number, or a web3 wallet.
+     * @param identifier The identifier to be added in the block-list. This can be an email address,
+     *   a phone number, or a web3 wallet.
      */
-    fun createBlocklistIdentifier(clientConfig: ClientConfig, identifier: String, options: RequestOptions? = null): BlocklistIdentifier {
+    fun createBlocklistIdentifier(
+        clientConfig: ClientConfig,
+        identifier: String,
+        options: RequestOptions? = null,
+    ): BlocklistIdentifier {
         return createBlocklistIdentifierWithRawResponse(clientConfig, identifier, options).data
     }
 
-
-    /** [createBlocklistIdentifier], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun createBlocklistIdentifierWithRawResponse(clientConfig: ClientConfig, identifier: String, options: RequestOptions? = null): SdkResponse<BlocklistIdentifier> {
-        return SdkClient.request<BlocklistIdentifier>(SdkClient.RequestSpec("POST", "/blocklist_identifiers", config = clientConfig, body = SdkClient.bodyMap("identifier" to (identifier)), operationId = "createBlocklistIdentifier", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "402" to ClerkErrors::class.java, "422" to ClerkErrors::class.java)))
+    /**
+     * [createBlocklistIdentifier], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun createBlocklistIdentifierWithRawResponse(
+        clientConfig: ClientConfig,
+        identifier: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<BlocklistIdentifier> {
+        return SdkClient.request<BlocklistIdentifier>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/blocklist_identifiers",
+                config = clientConfig,
+                body = SdkClient.bodyMap("identifier" to (identifier)),
+                operationId = "createBlocklistIdentifier",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ClerkErrors::class.java,
+                        "402" to ClerkErrors::class.java,
+                        "422" to ClerkErrors::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Deletes an identifier from the instance block-list. Supply `identifier_id` to select the block-list identifier; a successful response indicates whether the object was deleted.
+     * Deletes an identifier from the instance block-list. Supply `identifier_id` to select the
+     * block-list identifier; a successful response indicates whether the object was deleted.
      *
      * Delete an identifier from the instance block-list
      *
      * @param identifierId The ID of the identifier to delete from the block-list
      */
-    fun deleteBlocklistIdentifier(clientConfig: ClientConfig, identifierId: String, options: RequestOptions? = null): DeletedObject {
+    fun deleteBlocklistIdentifier(
+        clientConfig: ClientConfig,
+        identifierId: String,
+        options: RequestOptions? = null,
+    ): DeletedObject {
         return deleteBlocklistIdentifierWithRawResponse(clientConfig, identifierId, options).data
     }
 
-
-    /** [deleteBlocklistIdentifier], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun deleteBlocklistIdentifierWithRawResponse(clientConfig: ClientConfig, identifierId: String, options: RequestOptions? = null): SdkResponse<DeletedObject> {
-        return SdkClient.request<DeletedObject>(SdkClient.RequestSpec("DELETE", "/blocklist_identifiers/${SdkClient.encodePathSegment(identifierId)}", config = clientConfig, operationId = "deleteBlocklistIdentifier", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("402" to ClerkErrors::class.java, "404" to ClerkErrors::class.java)))
+    /**
+     * [deleteBlocklistIdentifier], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun deleteBlocklistIdentifierWithRawResponse(
+        clientConfig: ClientConfig,
+        identifierId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<DeletedObject> {
+        return SdkClient.request<DeletedObject>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/blocklist_identifiers/${SdkClient.encodePathSegment(identifierId)}",
+                config = clientConfig,
+                operationId = "deleteBlocklistIdentifier",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors = mapOf("402" to ClerkErrors::class.java, "404" to ClerkErrors::class.java),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

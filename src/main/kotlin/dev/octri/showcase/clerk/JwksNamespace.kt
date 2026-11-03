@@ -3,10 +3,10 @@
 
 package dev.octri.showcase.clerk
 
-
 class JwksNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Retrieves the instance's JSON Web Key Set. Use the returned keys when you need the public key material associated with the instance.
+     * Retrieves the instance's JSON Web Key Set. Use the returned keys when you need the public key
+     * material associated with the instance.
      *
      * Retrieve the JSON Web Key Set of the instance
      */
@@ -14,19 +14,27 @@ class JwksNamespace(private val clientConfig: ClientConfig) {
         return dev.octri.showcase.clerk.methods.JwksMethods.getJwks(clientConfig, options)
     }
 
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
+    /**
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [JwksNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [JwksNamespace], returning the [SdkResponse] envelope around each result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
         /**
-         * Retrieves the instance's JSON Web Key Set. Use the returned keys when you need the public key material associated with the instance.
+         * Retrieves the instance's JSON Web Key Set. Use the returned keys when you need the public
+         * key material associated with the instance.
          *
          * Retrieve the JSON Web Key Set of the instance
          */
         fun get(options: RequestOptions? = null): SdkResponse<JWKS> {
-            return dev.octri.showcase.clerk.methods.JwksMethods.getJwksWithRawResponse(clientConfig, options)
+            return dev.octri.showcase.clerk.methods.JwksMethods.getJwksWithRawResponse(
+                clientConfig,
+                options,
+            )
         }
-
     }
 }

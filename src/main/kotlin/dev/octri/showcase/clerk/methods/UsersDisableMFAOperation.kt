@@ -11,17 +11,38 @@ import dev.octri.showcase.clerk.SdkResponse
 
 internal object UsersDisableMFAOperation {
     /**
-     * Disable all of a user's MFA methods (e.g. OTP sent via SMS, TOTP on their authenticator app) at once.
+     * Disable all of a user's MFA methods (e.g. OTP sent via SMS, TOTP on their authenticator app)
+     * at once.
      *
      * @param userId The ID of the user whose MFA methods are to be disabled
      */
-    fun disableMfa(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): Users.DisableMFAResponse {
+    fun disableMfa(
+        clientConfig: ClientConfig,
+        userId: String,
+        options: RequestOptions? = null,
+    ): Users.DisableMFAResponse {
         return disableMfaWithRawResponse(clientConfig, userId, options).data
     }
 
-
-    /** [disableMfa], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun disableMfaWithRawResponse(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): SdkResponse<Users.DisableMFAResponse> {
-        return SdkClient.request<Users.DisableMFAResponse>(SdkClient.RequestSpec("DELETE", "/users/${SdkClient.encodePathSegment(userId)}/mfa", config = clientConfig, operationId = "disableMfa", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java)))
+    /**
+     * [disableMfa], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun disableMfaWithRawResponse(
+        clientConfig: ClientConfig,
+        userId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<Users.DisableMFAResponse> {
+        return SdkClient.request<Users.DisableMFAResponse>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/users/${SdkClient.encodePathSegment(userId)}/mfa",
+                config = clientConfig,
+                operationId = "disableMfa",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors = mapOf("404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java),
+            )
+        )
     }
 }

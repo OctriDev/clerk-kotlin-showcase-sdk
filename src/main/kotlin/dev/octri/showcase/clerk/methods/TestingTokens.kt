@@ -12,24 +12,36 @@ import dev.octri.showcase.clerk.TestingToken
 object TestingTokens {
 
     /**
-     * Creates a testing token for use with Frontend API requests. Pass the returned `token` value in the `__clerk_testing_token` query parameter; the response includes its expiration time as `expires_at`.
+     * Creates a testing token for use with Frontend API requests. Pass the returned `token` value
+     * in the `__clerk_testing_token` query parameter; the response includes its expiration time as
+     * `expires_at`.
      *
      * Retrieve a new testing token.
      */
-    fun createTestingToken(clientConfig: ClientConfig, options: RequestOptions? = null): TestingToken {
+    fun createTestingToken(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): TestingToken {
         return createTestingTokenWithRawResponse(clientConfig, options).data
     }
 
-
-    /** [createTestingToken], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun createTestingTokenWithRawResponse(clientConfig: ClientConfig, options: RequestOptions? = null): SdkResponse<TestingToken> {
-        return SdkClient.request<TestingToken>(SdkClient.RequestSpec("POST", "/testing_tokens", config = clientConfig, operationId = "createTestingToken", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+    /**
+     * [createTestingToken], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun createTestingTokenWithRawResponse(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): SdkResponse<TestingToken> {
+        return SdkClient.request<TestingToken>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/testing_tokens",
+                config = clientConfig,
+                operationId = "createTestingToken",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
-
-
-
-
-
-
-
 }

@@ -3,25 +3,33 @@
 
 package dev.octri.showcase.clerk
 
-typealias ListAllOrganizationDomainsParameterEnum = dev.octri.showcase.clerk.models.ListAllOrganizationDomainsParameterEnum
+typealias ListAllOrganizationDomainsParameterEnum =
+    dev.octri.showcase.clerk.models.ListAllOrganizationDomainsParameterEnum
 
-typealias ListAllOrganizationDomainsParameterItemEnum = dev.octri.showcase.clerk.models.ListAllOrganizationDomainsParameterItemEnum
+typealias ListAllOrganizationDomainsParameterItemEnum =
+    dev.octri.showcase.clerk.models.ListAllOrganizationDomainsParameterItemEnum
 
 typealias ListApiKeysParameterEnum = dev.octri.showcase.clerk.models.ListApiKeysParameterEnum
 
-typealias ListApiKeysResponseDataItemObjectEnum = dev.octri.showcase.clerk.models.ListApiKeysResponseDataItemObjectEnum
+typealias ListApiKeysResponseDataItemObjectEnum =
+    dev.octri.showcase.clerk.models.ListApiKeysResponseDataItemObjectEnum
 
-typealias ListEnterpriseConnectionTestRunsParameterItemEnum = dev.octri.showcase.clerk.models.ListEnterpriseConnectionTestRunsParameterItemEnum
+typealias ListEnterpriseConnectionTestRunsParameterItemEnum =
+    dev.octri.showcase.clerk.models.ListEnterpriseConnectionTestRunsParameterItemEnum
 
-typealias ListInstanceOrganizationInvitationsParameterEnum = dev.octri.showcase.clerk.models.ListInstanceOrganizationInvitationsParameterEnum
+typealias ListInstanceOrganizationInvitationsParameterEnum =
+    dev.octri.showcase.clerk.models.ListInstanceOrganizationInvitationsParameterEnum
 
-typealias ListInvitationsParameterEnum = dev.octri.showcase.clerk.models.ListInvitationsParameterEnum
+typealias ListInvitationsParameterEnum =
+    dev.octri.showcase.clerk.models.ListInvitationsParameterEnum
 
-typealias ListOrganizationInvitationsParameterEnum = dev.octri.showcase.clerk.models.ListOrganizationInvitationsParameterEnum
+typealias ListOrganizationInvitationsParameterEnum =
+    dev.octri.showcase.clerk.models.ListOrganizationInvitationsParameterEnum
 
 typealias ListSessionsParameterEnum = dev.octri.showcase.clerk.models.ListSessionsParameterEnum
 
-typealias ListWaitlistEntriesParameterEnum = dev.octri.showcase.clerk.models.ListWaitlistEntriesParameterEnum
+typealias ListWaitlistEntriesParameterEnum =
+    dev.octri.showcase.clerk.models.ListWaitlistEntriesParameterEnum
 
 typealias Machine = dev.octri.showcase.clerk.models.Machine
 
@@ -39,9 +47,11 @@ typealias MachineScope = dev.octri.showcase.clerk.models.MachineScope
 
 typealias MachineScopeDeleted = dev.octri.showcase.clerk.models.MachineScopeDeleted
 
-typealias MachineScopeDeletedDeletedEnum = dev.octri.showcase.clerk.models.MachineScopeDeletedDeletedEnum
+typealias MachineScopeDeletedDeletedEnum =
+    dev.octri.showcase.clerk.models.MachineScopeDeletedDeletedEnum
 
-typealias MachineScopeDeletedObjectEnum = dev.octri.showcase.clerk.models.MachineScopeDeletedObjectEnum
+typealias MachineScopeDeletedObjectEnum =
+    dev.octri.showcase.clerk.models.MachineScopeDeletedObjectEnum
 
 typealias MachineScopeObjectEnum = dev.octri.showcase.clerk.models.MachineScopeObjectEnum
 
@@ -49,15 +59,18 @@ typealias MachineSecretKey = dev.octri.showcase.clerk.models.MachineSecretKey
 
 typealias MachineSecretKeyObjectEnum = dev.octri.showcase.clerk.models.MachineSecretKeyObjectEnum
 
-typealias MachineWithoutScopedMachines = dev.octri.showcase.clerk.models.MachineWithoutScopedMachines
+typealias MachineWithoutScopedMachines =
+    dev.octri.showcase.clerk.models.MachineWithoutScopedMachines
 
-typealias MachineWithoutScopedMachinesObjectEnum = dev.octri.showcase.clerk.models.MachineWithoutScopedMachinesObjectEnum
+typealias MachineWithoutScopedMachinesObjectEnum =
+    dev.octri.showcase.clerk.models.MachineWithoutScopedMachinesObjectEnum
 
 typealias OAuthAccessToken = dev.octri.showcase.clerk.models.OAuthAccessToken
 
 typealias OAuthAccessTokenItem = dev.octri.showcase.clerk.models.OAuthAccessTokenItem
 
-typealias OAuthAccessTokenItemObjectEnum = dev.octri.showcase.clerk.models.OAuthAccessTokenItemObjectEnum
+typealias OAuthAccessTokenItemObjectEnum =
+    dev.octri.showcase.clerk.models.OAuthAccessTokenItemObjectEnum
 
 typealias OAuthApplication = dev.octri.showcase.clerk.models.OAuthApplication
 
@@ -67,7 +80,8 @@ typealias OAuthApplications = dev.octri.showcase.clerk.models.OAuthApplications
 
 typealias OAuthApplicationSettings = dev.octri.showcase.clerk.models.OAuthApplicationSettings
 
-typealias OAuthApplicationSettingsObjectEnum = dev.octri.showcase.clerk.models.OAuthApplicationSettingsObjectEnum
+typealias OAuthApplicationSettingsObjectEnum =
+    dev.octri.showcase.clerk.models.OAuthApplicationSettingsObjectEnum
 
 typealias OAuthApplicationWithSecret = dev.octri.showcase.clerk.models.OAuthApplicationWithSecret
 
@@ -75,35 +89,46 @@ typealias Organization = dev.octri.showcase.clerk.models.Organization
 
 typealias OrganizationDomain = dev.octri.showcase.clerk.models.OrganizationDomain
 
-typealias OrganizationDomainEnrollmentModeEnum = dev.octri.showcase.clerk.models.OrganizationDomainEnrollmentModeEnum
+typealias OrganizationDomainEnrollmentModeEnum =
+    dev.octri.showcase.clerk.models.OrganizationDomainEnrollmentModeEnum
 
-typealias OrganizationDomainObjectEnum = dev.octri.showcase.clerk.models.OrganizationDomainObjectEnum
+typealias OrganizationDomainObjectEnum =
+    dev.octri.showcase.clerk.models.OrganizationDomainObjectEnum
 
 typealias OrganizationDomains = dev.octri.showcase.clerk.models.OrganizationDomains
 
-typealias OrganizationDomainVerification = dev.octri.showcase.clerk.models.OrganizationDomainVerification
+typealias OrganizationDomainVerification =
+    dev.octri.showcase.clerk.models.OrganizationDomainVerification
 
 typealias OrganizationInvitation = dev.octri.showcase.clerk.models.OrganizationInvitation
 
-typealias OrganizationInvitationObjectEnum = dev.octri.showcase.clerk.models.OrganizationInvitationObjectEnum
+typealias OrganizationInvitationObjectEnum =
+    dev.octri.showcase.clerk.models.OrganizationInvitationObjectEnum
 
-typealias OrganizationInvitationPublicOrganizationData = dev.octri.showcase.clerk.models.OrganizationInvitationPublicOrganizationData
+typealias OrganizationInvitationPublicOrganizationData =
+    dev.octri.showcase.clerk.models.OrganizationInvitationPublicOrganizationData
 
-typealias OrganizationInvitationPublicUserData = dev.octri.showcase.clerk.models.OrganizationInvitationPublicUserData
+typealias OrganizationInvitationPublicUserData =
+    dev.octri.showcase.clerk.models.OrganizationInvitationPublicUserData
 
 typealias OrganizationInvitations = dev.octri.showcase.clerk.models.OrganizationInvitations
 
-typealias OrganizationInvitationsWithPublicOrganizationData = dev.octri.showcase.clerk.models.OrganizationInvitationsWithPublicOrganizationData
+typealias OrganizationInvitationsWithPublicOrganizationData =
+    dev.octri.showcase.clerk.models.OrganizationInvitationsWithPublicOrganizationData
 
-typealias OrganizationInvitationWithPublicOrganizationData = dev.octri.showcase.clerk.models.OrganizationInvitationWithPublicOrganizationData
+typealias OrganizationInvitationWithPublicOrganizationData =
+    dev.octri.showcase.clerk.models.OrganizationInvitationWithPublicOrganizationData
 
-typealias OrganizationInvitationWithPublicOrganizationDataVariant0ObjectEnum = dev.octri.showcase.clerk.models.OrganizationInvitationWithPublicOrganizationDataVariant0ObjectEnum
+typealias OrganizationInvitationWithPublicOrganizationDataVariant0ObjectEnum =
+    dev.octri.showcase.clerk.models.OrganizationInvitationWithPublicOrganizationDataVariant0ObjectEnum
 
 typealias OrganizationMembership = dev.octri.showcase.clerk.models.OrganizationMembership
 
-typealias OrganizationMembershipObjectEnum = dev.octri.showcase.clerk.models.OrganizationMembershipObjectEnum
+typealias OrganizationMembershipObjectEnum =
+    dev.octri.showcase.clerk.models.OrganizationMembershipObjectEnum
 
-typealias OrganizationMembershipPublicUserData = dev.octri.showcase.clerk.models.OrganizationMembershipPublicUserData
+typealias OrganizationMembershipPublicUserData =
+    dev.octri.showcase.clerk.models.OrganizationMembershipPublicUserData
 
 typealias OrganizationMemberships = dev.octri.showcase.clerk.models.OrganizationMemberships
 
@@ -113,21 +138,28 @@ typealias Organizations = dev.octri.showcase.clerk.models.Organizations
 
 typealias OrganizationSettings = dev.octri.showcase.clerk.models.OrganizationSettings
 
-typealias OrganizationSettingsDomainsEnrollmentModesItemEnum = dev.octri.showcase.clerk.models.OrganizationSettingsDomainsEnrollmentModesItemEnum
+typealias OrganizationSettingsDomainsEnrollmentModesItemEnum =
+    dev.octri.showcase.clerk.models.OrganizationSettingsDomainsEnrollmentModesItemEnum
 
-typealias OrganizationSettingsObjectEnum = dev.octri.showcase.clerk.models.OrganizationSettingsObjectEnum
+typealias OrganizationSettingsObjectEnum =
+    dev.octri.showcase.clerk.models.OrganizationSettingsObjectEnum
 
 typealias OrganizationWithLogo = dev.octri.showcase.clerk.models.OrganizationWithLogo
 
-typealias PaginatedBillingPaymentAttemptResponse = dev.octri.showcase.clerk.models.PaginatedBillingPaymentAttemptResponse
+typealias PaginatedBillingPaymentAttemptResponse =
+    dev.octri.showcase.clerk.models.PaginatedBillingPaymentAttemptResponse
 
-typealias PaginatedBillingPriceResponse = dev.octri.showcase.clerk.models.PaginatedBillingPriceResponse
+typealias PaginatedBillingPriceResponse =
+    dev.octri.showcase.clerk.models.PaginatedBillingPriceResponse
 
-typealias PaginatedBillingStatementResponse = dev.octri.showcase.clerk.models.PaginatedBillingStatementResponse
+typealias PaginatedBillingStatementResponse =
+    dev.octri.showcase.clerk.models.PaginatedBillingStatementResponse
 
-typealias PaginatedCommercePlanResponse = dev.octri.showcase.clerk.models.PaginatedCommercePlanResponse
+typealias PaginatedCommercePlanResponse =
+    dev.octri.showcase.clerk.models.PaginatedCommercePlanResponse
 
-typealias PaginatedCommerceSubscriptionItemResponse = dev.octri.showcase.clerk.models.PaginatedCommerceSubscriptionItemResponse
+typealias PaginatedCommerceSubscriptionItemResponse =
+    dev.octri.showcase.clerk.models.PaginatedCommerceSubscriptionItemResponse
 
 typealias Passkey = dev.octri.showcase.clerk.models.Passkey
 
@@ -161,9 +193,11 @@ typealias RedirectURLObjectEnum = dev.octri.showcase.clerk.models.RedirectURLObj
 
 typealias RefreshSessionFormatEnum = dev.octri.showcase.clerk.models.RefreshSessionFormatEnum
 
-typealias ReplaceUserEmailAddressIdentificationStatusEnum = dev.octri.showcase.clerk.models.ReplaceUserEmailAddressIdentificationStatusEnum
+typealias ReplaceUserEmailAddressIdentificationStatusEnum =
+    dev.octri.showcase.clerk.models.ReplaceUserEmailAddressIdentificationStatusEnum
 
-typealias ReplaceUserPhoneNumberIdentificationStatusEnum = dev.octri.showcase.clerk.models.ReplaceUserPhoneNumberIdentificationStatusEnum
+typealias ReplaceUserPhoneNumberIdentificationStatusEnum =
+    dev.octri.showcase.clerk.models.ReplaceUserPhoneNumberIdentificationStatusEnum
 
 typealias Reverification = dev.octri.showcase.clerk.models.Reverification
 
@@ -175,11 +209,14 @@ typealias ReverificationStatusEnum = dev.octri.showcase.clerk.models.Reverificat
 
 typealias RevertTemplateParameterEnum = dev.octri.showcase.clerk.models.RevertTemplateParameterEnum
 
-typealias RevokeAdminPortalLinkTokenResponseObjectEnum = dev.octri.showcase.clerk.models.RevokeAdminPortalLinkTokenResponseObjectEnum
+typealias RevokeAdminPortalLinkTokenResponseObjectEnum =
+    dev.octri.showcase.clerk.models.RevokeAdminPortalLinkTokenResponseObjectEnum
 
-typealias RevokeApiKeyResponseObjectEnum = dev.octri.showcase.clerk.models.RevokeApiKeyResponseObjectEnum
+typealias RevokeApiKeyResponseObjectEnum =
+    dev.octri.showcase.clerk.models.RevokeApiKeyResponseObjectEnum
 
-typealias RevokeM2MTokenResponseObjectEnum = dev.octri.showcase.clerk.models.RevokeM2MTokenResponseObjectEnum
+typealias RevokeM2MTokenResponseObjectEnum =
+    dev.octri.showcase.clerk.models.RevokeM2MTokenResponseObjectEnum
 
 typealias Role = dev.octri.showcase.clerk.models.Role
 
@@ -213,13 +250,16 @@ typealias SAMLAccountVerification = dev.octri.showcase.clerk.models.SAMLAccountV
 
 typealias SAMLConnection = dev.octri.showcase.clerk.models.SAMLConnection
 
-typealias SAMLConnectionAttributeMapping = dev.octri.showcase.clerk.models.SAMLConnectionAttributeMapping
+typealias SAMLConnectionAttributeMapping =
+    dev.octri.showcase.clerk.models.SAMLConnectionAttributeMapping
 
-typealias SAMLConnectionIdpCertificatesItem = dev.octri.showcase.clerk.models.SAMLConnectionIdpCertificatesItem
+typealias SAMLConnectionIdpCertificatesItem =
+    dev.octri.showcase.clerk.models.SAMLConnectionIdpCertificatesItem
 
 typealias SAMLConnectionLoginHint = dev.octri.showcase.clerk.models.SAMLConnectionLoginHint
 
-typealias SAMLConnectionLoginHintModeEnum = dev.octri.showcase.clerk.models.SAMLConnectionLoginHintModeEnum
+typealias SAMLConnectionLoginHintModeEnum =
+    dev.octri.showcase.clerk.models.SAMLConnectionLoginHintModeEnum
 
 typealias SAMLConnectionObjectEnum = dev.octri.showcase.clerk.models.SAMLConnectionObjectEnum
 
@@ -229,7 +269,8 @@ typealias SCIMDirectories = dev.octri.showcase.clerk.models.SCIMDirectories
 
 typealias SCIMDirectory = dev.octri.showcase.clerk.models.SCIMDirectory
 
-typealias SCIMDirectoryCustomAttributesItem = dev.octri.showcase.clerk.models.SCIMDirectoryCustomAttributesItem
+typealias SCIMDirectoryCustomAttributesItem =
+    dev.octri.showcase.clerk.models.SCIMDirectoryCustomAttributesItem
 
 typealias SCIMDirectoryList = dev.octri.showcase.clerk.models.SCIMDirectoryList
 
@@ -239,13 +280,16 @@ typealias SCIMGroupRoleMapping = dev.octri.showcase.clerk.models.SCIMGroupRoleMa
 
 typealias SCIMGroupRoleMappingDeleted = dev.octri.showcase.clerk.models.SCIMGroupRoleMappingDeleted
 
-typealias SCIMGroupRoleMappingDeletedDeletedEnum = dev.octri.showcase.clerk.models.SCIMGroupRoleMappingDeletedDeletedEnum
+typealias SCIMGroupRoleMappingDeletedDeletedEnum =
+    dev.octri.showcase.clerk.models.SCIMGroupRoleMappingDeletedDeletedEnum
 
-typealias SCIMGroupRoleMappingDeletedObjectEnum = dev.octri.showcase.clerk.models.SCIMGroupRoleMappingDeletedObjectEnum
+typealias SCIMGroupRoleMappingDeletedObjectEnum =
+    dev.octri.showcase.clerk.models.SCIMGroupRoleMappingDeletedObjectEnum
 
 typealias SCIMGroupRoleMappingList = dev.octri.showcase.clerk.models.SCIMGroupRoleMappingList
 
-typealias SCIMGroupRoleMappingObjectEnum = dev.octri.showcase.clerk.models.SCIMGroupRoleMappingObjectEnum
+typealias SCIMGroupRoleMappingObjectEnum =
+    dev.octri.showcase.clerk.models.SCIMGroupRoleMappingObjectEnum
 
 typealias SCIMGroupRoleMappings = dev.octri.showcase.clerk.models.SCIMGroupRoleMappings
 
@@ -279,15 +323,18 @@ typealias SignUpStatusEnum = dev.octri.showcase.clerk.models.SignUpStatusEnum
 
 typealias SignUpVerification = dev.octri.showcase.clerk.models.SignUpVerification
 
-typealias SignUpVerificationNextActionEnum = dev.octri.showcase.clerk.models.SignUpVerificationNextActionEnum
+typealias SignUpVerificationNextActionEnum =
+    dev.octri.showcase.clerk.models.SignUpVerificationNextActionEnum
 
 typealias SignUpVerifications = dev.octri.showcase.clerk.models.SignUpVerifications
 
-typealias SSOBypassAllowlistPublicUserData = dev.octri.showcase.clerk.models.SSOBypassAllowlistPublicUserData
+typealias SSOBypassAllowlistPublicUserData =
+    dev.octri.showcase.clerk.models.SSOBypassAllowlistPublicUserData
 
 typealias SSOBypassAllowlistUser = dev.octri.showcase.clerk.models.SSOBypassAllowlistUser
 
-typealias SSOBypassAllowlistUserObjectEnum = dev.octri.showcase.clerk.models.SSOBypassAllowlistUserObjectEnum
+typealias SSOBypassAllowlistUserObjectEnum =
+    dev.octri.showcase.clerk.models.SSOBypassAllowlistUserObjectEnum
 
 typealias SSOBypassAllowlistUsers = dev.octri.showcase.clerk.models.SSOBypassAllowlistUsers
 
@@ -301,7 +348,8 @@ typealias TestingToken = dev.octri.showcase.clerk.models.TestingToken
 
 typealias TestingTokenObjectEnum = dev.octri.showcase.clerk.models.TestingTokenObjectEnum
 
-typealias ToggleTemplateDeliveryParameterEnum = dev.octri.showcase.clerk.models.ToggleTemplateDeliveryParameterEnum
+typealias ToggleTemplateDeliveryParameterEnum =
+    dev.octri.showcase.clerk.models.ToggleTemplateDeliveryParameterEnum
 
 typealias Token = dev.octri.showcase.clerk.models.Token
 
@@ -323,29 +371,39 @@ typealias TrustedDevicePlatformEnum = dev.octri.showcase.clerk.models.TrustedDev
 
 typealias TrustedDeviceStatusEnum = dev.octri.showcase.clerk.models.TrustedDeviceStatusEnum
 
-typealias UnknownEmailAddressVerification = dev.octri.showcase.clerk.models.UnknownEmailAddressVerification
+typealias UnknownEmailAddressVerification =
+    dev.octri.showcase.clerk.models.UnknownEmailAddressVerification
 
-typealias UnknownEnterpriseAccountVerification = dev.octri.showcase.clerk.models.UnknownEnterpriseAccountVerification
+typealias UnknownEnterpriseAccountVerification =
+    dev.octri.showcase.clerk.models.UnknownEnterpriseAccountVerification
 
-typealias UnknownExternalAccountWithVerificationVerification = dev.octri.showcase.clerk.models.UnknownExternalAccountWithVerificationVerification
+typealias UnknownExternalAccountWithVerificationVerification =
+    dev.octri.showcase.clerk.models.UnknownExternalAccountWithVerificationVerification
 
-typealias UnknownPhoneNumberVerification = dev.octri.showcase.clerk.models.UnknownPhoneNumberVerification
+typealias UnknownPhoneNumberVerification =
+    dev.octri.showcase.clerk.models.UnknownPhoneNumberVerification
 
-typealias UnknownSAMLAccountVerification = dev.octri.showcase.clerk.models.UnknownSAMLAccountVerification
+typealias UnknownSAMLAccountVerification =
+    dev.octri.showcase.clerk.models.UnknownSAMLAccountVerification
 
 typealias UnknownSessionRefresh = dev.octri.showcase.clerk.models.UnknownSessionRefresh
 
-typealias UnknownWeb3WalletVerification = dev.octri.showcase.clerk.models.UnknownWeb3WalletVerification
+typealias UnknownWeb3WalletVerification =
+    dev.octri.showcase.clerk.models.UnknownWeb3WalletVerification
 
-typealias UpdateApiKeyResponseObjectEnum = dev.octri.showcase.clerk.models.UpdateApiKeyResponseObjectEnum
+typealias UpdateApiKeyResponseObjectEnum =
+    dev.octri.showcase.clerk.models.UpdateApiKeyResponseObjectEnum
 
-typealias UpdateEnterpriseConnectionSamlLoginHintModeEnum = dev.octri.showcase.clerk.models.UpdateEnterpriseConnectionSamlLoginHintModeEnum
+typealias UpdateEnterpriseConnectionSamlLoginHintModeEnum =
+    dev.octri.showcase.clerk.models.UpdateEnterpriseConnectionSamlLoginHintModeEnum
 
-typealias UpdateInstancePreferredSignInStrategyWhenPasswordRequiredEnum = dev.octri.showcase.clerk.models.UpdateInstancePreferredSignInStrategyWhenPasswordRequiredEnum
+typealias UpdateInstancePreferredSignInStrategyWhenPasswordRequiredEnum =
+    dev.octri.showcase.clerk.models.UpdateInstancePreferredSignInStrategyWhenPasswordRequiredEnum
 
 typealias UpdateRoleSetTypeEnum = dev.octri.showcase.clerk.models.UpdateRoleSetTypeEnum
 
-typealias UpdateSAMLConnectionLoginHintModeEnum = dev.octri.showcase.clerk.models.UpdateSAMLConnectionLoginHintModeEnum
+typealias UpdateSAMLConnectionLoginHintModeEnum =
+    dev.octri.showcase.clerk.models.UpdateSAMLConnectionLoginHintModeEnum
 
 typealias UpsertTemplateParameterEnum = dev.octri.showcase.clerk.models.UpsertTemplateParameterEnum
 
@@ -353,7 +411,8 @@ typealias User = dev.octri.showcase.clerk.models.User
 
 typealias UserObjectEnum = dev.octri.showcase.clerk.models.UserObjectEnum
 
-typealias UsersGetOrganizationInvitationsParameterEnum = dev.octri.showcase.clerk.models.UsersGetOrganizationInvitationsParameterEnum
+typealias UsersGetOrganizationInvitationsParameterEnum =
+    dev.octri.showcase.clerk.models.UsersGetOrganizationInvitationsParameterEnum
 
 typealias VerificationAdmin = dev.octri.showcase.clerk.models.VerificationAdmin
 
@@ -361,29 +420,38 @@ typealias VerificationAdminObjectEnum = dev.octri.showcase.clerk.models.Verifica
 
 typealias VerificationAdminStatusEnum = dev.octri.showcase.clerk.models.VerificationAdminStatusEnum
 
-typealias VerificationAdminStrategyEnum = dev.octri.showcase.clerk.models.VerificationAdminStrategyEnum
+typealias VerificationAdminStrategyEnum =
+    dev.octri.showcase.clerk.models.VerificationAdminStrategyEnum
 
 typealias VerificationEmailLink = dev.octri.showcase.clerk.models.VerificationEmailLink
 
-typealias VerificationEmailLinkObjectEnum = dev.octri.showcase.clerk.models.VerificationEmailLinkObjectEnum
+typealias VerificationEmailLinkObjectEnum =
+    dev.octri.showcase.clerk.models.VerificationEmailLinkObjectEnum
 
-typealias VerificationEmailLinkStatusEnum = dev.octri.showcase.clerk.models.VerificationEmailLinkStatusEnum
+typealias VerificationEmailLinkStatusEnum =
+    dev.octri.showcase.clerk.models.VerificationEmailLinkStatusEnum
 
-typealias VerificationEmailLinkStrategyEnum = dev.octri.showcase.clerk.models.VerificationEmailLinkStrategyEnum
+typealias VerificationEmailLinkStrategyEnum =
+    dev.octri.showcase.clerk.models.VerificationEmailLinkStrategyEnum
 
 typealias VerificationFromOauth = dev.octri.showcase.clerk.models.VerificationFromOauth
 
-typealias VerificationFromOauthObjectEnum = dev.octri.showcase.clerk.models.VerificationFromOauthObjectEnum
+typealias VerificationFromOauthObjectEnum =
+    dev.octri.showcase.clerk.models.VerificationFromOauthObjectEnum
 
-typealias VerificationFromOauthStatusEnum = dev.octri.showcase.clerk.models.VerificationFromOauthStatusEnum
+typealias VerificationFromOauthStatusEnum =
+    dev.octri.showcase.clerk.models.VerificationFromOauthStatusEnum
 
 typealias VerificationGoogleOneTap = dev.octri.showcase.clerk.models.VerificationGoogleOneTap
 
-typealias VerificationGoogleOneTapObjectEnum = dev.octri.showcase.clerk.models.VerificationGoogleOneTapObjectEnum
+typealias VerificationGoogleOneTapObjectEnum =
+    dev.octri.showcase.clerk.models.VerificationGoogleOneTapObjectEnum
 
-typealias VerificationGoogleOneTapStatusEnum = dev.octri.showcase.clerk.models.VerificationGoogleOneTapStatusEnum
+typealias VerificationGoogleOneTapStatusEnum =
+    dev.octri.showcase.clerk.models.VerificationGoogleOneTapStatusEnum
 
-typealias VerificationGoogleOneTapStrategyEnum = dev.octri.showcase.clerk.models.VerificationGoogleOneTapStrategyEnum
+typealias VerificationGoogleOneTapStrategyEnum =
+    dev.octri.showcase.clerk.models.VerificationGoogleOneTapStrategyEnum
 
 typealias VerificationOauth = dev.octri.showcase.clerk.models.VerificationOauth
 
@@ -401,13 +469,17 @@ typealias VerificationOtpStrategyEnum = dev.octri.showcase.clerk.models.Verifica
 
 typealias VerificationPasskey = dev.octri.showcase.clerk.models.VerificationPasskey
 
-typealias VerificationPasskeyNonceEnum = dev.octri.showcase.clerk.models.VerificationPasskeyNonceEnum
+typealias VerificationPasskeyNonceEnum =
+    dev.octri.showcase.clerk.models.VerificationPasskeyNonceEnum
 
-typealias VerificationPasskeyObjectEnum = dev.octri.showcase.clerk.models.VerificationPasskeyObjectEnum
+typealias VerificationPasskeyObjectEnum =
+    dev.octri.showcase.clerk.models.VerificationPasskeyObjectEnum
 
-typealias VerificationPasskeyStatusEnum = dev.octri.showcase.clerk.models.VerificationPasskeyStatusEnum
+typealias VerificationPasskeyStatusEnum =
+    dev.octri.showcase.clerk.models.VerificationPasskeyStatusEnum
 
-typealias VerificationPasskeyStrategyEnum = dev.octri.showcase.clerk.models.VerificationPasskeyStrategyEnum
+typealias VerificationPasskeyStrategyEnum =
+    dev.octri.showcase.clerk.models.VerificationPasskeyStrategyEnum
 
 typealias VerificationResponse = dev.octri.showcase.clerk.models.VerificationResponse
 
@@ -417,7 +489,8 @@ typealias VerificationSamlObjectEnum = dev.octri.showcase.clerk.models.Verificat
 
 typealias VerificationSamlStatusEnum = dev.octri.showcase.clerk.models.VerificationSamlStatusEnum
 
-typealias VerificationSamlStrategyEnum = dev.octri.showcase.clerk.models.VerificationSamlStrategyEnum
+typealias VerificationSamlStrategyEnum =
+    dev.octri.showcase.clerk.models.VerificationSamlStrategyEnum
 
 typealias VerificationScim = dev.octri.showcase.clerk.models.VerificationScim
 
@@ -425,14 +498,18 @@ typealias VerificationScimObjectEnum = dev.octri.showcase.clerk.models.Verificat
 
 typealias VerificationScimStatusEnum = dev.octri.showcase.clerk.models.VerificationScimStatusEnum
 
-typealias VerificationScimStrategyEnum = dev.octri.showcase.clerk.models.VerificationScimStrategyEnum
+typealias VerificationScimStrategyEnum =
+    dev.octri.showcase.clerk.models.VerificationScimStrategyEnum
 
 typealias VerificationTicket = dev.octri.showcase.clerk.models.VerificationTicket
 
-typealias VerificationTicketObjectEnum = dev.octri.showcase.clerk.models.VerificationTicketObjectEnum
+typealias VerificationTicketObjectEnum =
+    dev.octri.showcase.clerk.models.VerificationTicketObjectEnum
 
-typealias VerificationTicketStatusEnum = dev.octri.showcase.clerk.models.VerificationTicketStatusEnum
+typealias VerificationTicketStatusEnum =
+    dev.octri.showcase.clerk.models.VerificationTicketStatusEnum
 
-typealias VerificationTicketStrategyEnum = dev.octri.showcase.clerk.models.VerificationTicketStrategyEnum
+typealias VerificationTicketStrategyEnum =
+    dev.octri.showcase.clerk.models.VerificationTicketStrategyEnum
 
 typealias VerificationWeb3 = dev.octri.showcase.clerk.models.VerificationWeb3

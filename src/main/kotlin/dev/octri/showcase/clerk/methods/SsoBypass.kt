@@ -7,74 +7,135 @@ import dev.octri.showcase.clerk.ClerkErrors
 import dev.octri.showcase.clerk.ClientConfig
 import dev.octri.showcase.clerk.DeletedObject
 import dev.octri.showcase.clerk.RequestOptions
-import dev.octri.showcase.clerk.SdkClient
-import dev.octri.showcase.clerk.SdkResponse
 import dev.octri.showcase.clerk.SSOBypassAllowlistUser
 import dev.octri.showcase.clerk.SSOBypassAllowlistUsers
+import dev.octri.showcase.clerk.SdkClient
+import dev.octri.showcase.clerk.SdkResponse
 
 object SsoBypass {
 
     /**
-     * Returns the users who may verify an email code instead of reaching their identity provider when enterprise SSO is unreachable.
+     * Returns the users who may verify an email code instead of reaching their identity provider
+     * when enterprise SSO is unreachable.
      *
-     * @param enterpriseConnectionId Restrict the list to the users this enterprise
-     *   connection serves.
+     * @param enterpriseConnectionId Restrict the list to the users this enterprise connection
+     *   serves.
      */
-    fun listSsoBypassAllowlistUsers(clientConfig: ClientConfig, enterpriseConnectionId: String? = null, options: RequestOptions? = null): SSOBypassAllowlistUsers {
-        return listSsoBypassAllowlistUsersWithRawResponse(clientConfig, enterpriseConnectionId, options).data
+    fun listSsoBypassAllowlistUsers(
+        clientConfig: ClientConfig,
+        enterpriseConnectionId: String? = null,
+        options: RequestOptions? = null,
+    ): SSOBypassAllowlistUsers {
+        return listSsoBypassAllowlistUsersWithRawResponse(
+                clientConfig,
+                enterpriseConnectionId,
+                options,
+            )
+            .data
     }
-
-
-    /** [listSsoBypassAllowlistUsers], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listSsoBypassAllowlistUsersWithRawResponse(clientConfig: ClientConfig, enterpriseConnectionId: String? = null, options: RequestOptions? = null): SdkResponse<SSOBypassAllowlistUsers> {
-        return SdkClient.request<SSOBypassAllowlistUsers>(SdkClient.RequestSpec("GET", "/sso_bypass_allowlist_users", config = clientConfig, query = mapOf("enterprise_connection_id" to
-    SdkClient.queryValue(enterpriseConnectionId, "form", true)), operationId = "listSsoBypassAllowlistUsers", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Puts a user on the allowlist. The request is rejected unless the user holds a verified email address on a domain one of the instance's enterprise connections serves.
+     * [listSsoBypassAllowlistUsers], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun listSsoBypassAllowlistUsersWithRawResponse(
+        clientConfig: ClientConfig,
+        enterpriseConnectionId: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<SSOBypassAllowlistUsers> {
+        return SdkClient.request<SSOBypassAllowlistUsers>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/sso_bypass_allowlist_users",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "enterprise_connection_id" to
+                            SdkClient.queryValue(enterpriseConnectionId, "form", true)
+                    ),
+                operationId = "listSsoBypassAllowlistUsers",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors = mapOf("403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java),
+            )
+        )
+    }
+
+    /**
+     * Puts a user on the allowlist. The request is rejected unless the user holds a verified email
+     * address on a domain one of the instance's enterprise connections serves.
      *
      * @param userId The ID of the user to allowlist.
      */
-    fun createSsoBypassAllowlistUser(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): SSOBypassAllowlistUser {
+    fun createSsoBypassAllowlistUser(
+        clientConfig: ClientConfig,
+        userId: String,
+        options: RequestOptions? = null,
+    ): SSOBypassAllowlistUser {
         return createSsoBypassAllowlistUserWithRawResponse(clientConfig, userId, options).data
     }
 
-
-    /** [createSsoBypassAllowlistUser], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun createSsoBypassAllowlistUserWithRawResponse(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): SdkResponse<SSOBypassAllowlistUser> {
-        return SdkClient.request<SSOBypassAllowlistUser>(SdkClient.RequestSpec("POST", "/sso_bypass_allowlist_users", config = clientConfig, body = SdkClient.bodyMap("user_id" to (userId)), operationId = "createSsoBypassAllowlistUser", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("402" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java)))
+    /**
+     * [createSsoBypassAllowlistUser], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun createSsoBypassAllowlistUserWithRawResponse(
+        clientConfig: ClientConfig,
+        userId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<SSOBypassAllowlistUser> {
+        return SdkClient.request<SSOBypassAllowlistUser>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/sso_bypass_allowlist_users",
+                config = clientConfig,
+                body = SdkClient.bodyMap("user_id" to (userId)),
+                operationId = "createSsoBypassAllowlistUser",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "402" to ClerkErrors::class.java,
+                        "403" to ClerkErrors::class.java,
+                        "404" to ClerkErrors::class.java,
+                        "422" to ClerkErrors::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
 
     /**
      * Removes the user from the allowlist, across every enterprise connection that serves them.
      *
      * @param userId The ID of the allowlisted user
      */
-    fun deleteSsoBypassAllowlistUser(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): DeletedObject {
+    fun deleteSsoBypassAllowlistUser(
+        clientConfig: ClientConfig,
+        userId: String,
+        options: RequestOptions? = null,
+    ): DeletedObject {
         return deleteSsoBypassAllowlistUserWithRawResponse(clientConfig, userId, options).data
     }
 
-
-    /** [deleteSsoBypassAllowlistUser], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun deleteSsoBypassAllowlistUserWithRawResponse(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): SdkResponse<DeletedObject> {
-        return SdkClient.request<DeletedObject>(SdkClient.RequestSpec("DELETE", "/sso_bypass_allowlist_users/${SdkClient.encodePathSegment(userId)}", config = clientConfig, operationId = "deleteSsoBypassAllowlistUser", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java)))
+    /**
+     * [deleteSsoBypassAllowlistUser], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun deleteSsoBypassAllowlistUserWithRawResponse(
+        clientConfig: ClientConfig,
+        userId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<DeletedObject> {
+        return SdkClient.request<DeletedObject>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/sso_bypass_allowlist_users/${SdkClient.encodePathSegment(userId)}",
+                config = clientConfig,
+                operationId = "deleteSsoBypassAllowlistUser",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors = mapOf("403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

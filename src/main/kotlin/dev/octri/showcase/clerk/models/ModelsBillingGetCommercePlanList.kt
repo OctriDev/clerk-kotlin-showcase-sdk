@@ -5,16 +5,10 @@ package dev.octri.showcase.clerk.models
 
 import dev.octri.showcase.clerk.SdkResource
 
-/**
- * Typed representation of the `PaginatedCommercePlanResponse` API schema.
- */
+/** Typed representation of the `PaginatedCommercePlanResponse` API schema. */
 data class PaginatedCommercePlanResponse(
-    /**
-     * Array of plans.
-     */
+    /** Array of plans. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<CommercePlan>,
-    /**
-     * Total number of plans.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long
+    /** Total number of plans. */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long,
 ) : SdkResource()

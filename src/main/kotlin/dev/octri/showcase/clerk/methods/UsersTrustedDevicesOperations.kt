@@ -16,17 +16,41 @@ internal object UsersListUserTrustedDevicesOperation {
      * Returns the active trusted devices enrolled by the user.
      *
      * @param userId The ID of the user whose trusted devices are returned
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
-    fun listUserTrustedDevices(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): TrustedDeviceList {
+    fun listUserTrustedDevices(
+        clientConfig: ClientConfig,
+        userId: String,
+        options: RequestOptions? = null,
+    ): TrustedDeviceList {
         return listUserTrustedDevicesWithRawResponse(clientConfig, userId, options).data
     }
 
-
-    /** [listUserTrustedDevices], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listUserTrustedDevicesWithRawResponse(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): SdkResponse<TrustedDeviceList> {
-        return SdkClient.request<TrustedDeviceList>(SdkClient.RequestSpec("GET", "/users/${SdkClient.encodePathSegment(userId)}/trusted_devices", config = clientConfig, operationId = "listUserTrustedDevices", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java)))
+    /**
+     * [listUserTrustedDevices], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun listUserTrustedDevicesWithRawResponse(
+        clientConfig: ClientConfig,
+        userId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<TrustedDeviceList> {
+        return SdkClient.request<TrustedDeviceList>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/users/${SdkClient.encodePathSegment(userId)}/trusted_devices",
+                config = clientConfig,
+                operationId = "listUserTrustedDevices",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "403" to ClerkErrors::class.java,
+                        "404" to ClerkErrors::class.java,
+                        "500" to ClerkErrors::class.java,
+                    ),
+            )
+        )
     }
 }
 
@@ -36,16 +60,48 @@ internal object UsersRevokeUserTrustedDeviceOperation {
      *
      * @param userId The ID of the user that owns the trusted device
      * @param trustedDeviceId The ID of the trusted device to revoke
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
-    fun revokeUserTrustedDevice(clientConfig: ClientConfig, userId: String, trustedDeviceId: String, options: RequestOptions? = null): TrustedDevice {
-        return revokeUserTrustedDeviceWithRawResponse(clientConfig, userId, trustedDeviceId, options).data
+    fun revokeUserTrustedDevice(
+        clientConfig: ClientConfig,
+        userId: String,
+        trustedDeviceId: String,
+        options: RequestOptions? = null,
+    ): TrustedDevice {
+        return revokeUserTrustedDeviceWithRawResponse(
+                clientConfig,
+                userId,
+                trustedDeviceId,
+                options,
+            )
+            .data
     }
 
-
-    /** [revokeUserTrustedDevice], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun revokeUserTrustedDeviceWithRawResponse(clientConfig: ClientConfig, userId: String, trustedDeviceId: String, options: RequestOptions? = null): SdkResponse<TrustedDevice> {
-        return SdkClient.request<TrustedDevice>(SdkClient.RequestSpec("DELETE", "/users/${SdkClient.encodePathSegment(userId)}/trusted_devices/${SdkClient.encodePathSegment(trustedDeviceId)}", config = clientConfig, operationId = "revokeUserTrustedDevice", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java)))
+    /**
+     * [revokeUserTrustedDevice], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun revokeUserTrustedDeviceWithRawResponse(
+        clientConfig: ClientConfig,
+        userId: String,
+        trustedDeviceId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<TrustedDevice> {
+        return SdkClient.request<TrustedDevice>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/users/${SdkClient.encodePathSegment(userId)}/trusted_devices/${SdkClient.encodePathSegment(trustedDeviceId)}",
+                config = clientConfig,
+                operationId = "revokeUserTrustedDevice",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "403" to ClerkErrors::class.java,
+                        "404" to ClerkErrors::class.java,
+                        "500" to ClerkErrors::class.java,
+                    ),
+            )
+        )
     }
 }

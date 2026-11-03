@@ -11,18 +11,43 @@ import dev.octri.showcase.clerk.SdkResponse
 
 internal object UsersVerifyTOTPOperation {
     /**
-     * Verify that the provided TOTP or backup code is valid for the user. Verifying a backup code will result it in being consumed (i.e. it will become invalid). Useful for custom auth flows and re-verification.
+     * Verify that the provided TOTP or backup code is valid for the user. Verifying a backup code
+     * will result it in being consumed (i.e. it will become invalid). Useful for custom auth flows
+     * and re-verification.
      *
      * @param userId The ID of the user for whom to verify the TOTP
      * @param code The TOTP or backup code to verify
      */
-    fun verifyTotp(clientConfig: ClientConfig, userId: String, code: String, options: RequestOptions? = null): Users.VerifyTOTPResponse {
+    fun verifyTotp(
+        clientConfig: ClientConfig,
+        userId: String,
+        code: String,
+        options: RequestOptions? = null,
+    ): Users.VerifyTOTPResponse {
         return verifyTotpWithRawResponse(clientConfig, userId, code, options).data
     }
 
-
-    /** [verifyTotp], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun verifyTotpWithRawResponse(clientConfig: ClientConfig, userId: String, code: String, options: RequestOptions? = null): SdkResponse<Users.VerifyTOTPResponse> {
-        return SdkClient.request<Users.VerifyTOTPResponse>(SdkClient.RequestSpec("POST", "/users/${SdkClient.encodePathSegment(userId)}/verify_totp", config = clientConfig, body = SdkClient.bodyMap("code" to (code)), operationId = "verifyTotp", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("500" to ClerkErrors::class.java)))
+    /**
+     * [verifyTotp], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun verifyTotpWithRawResponse(
+        clientConfig: ClientConfig,
+        userId: String,
+        code: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<Users.VerifyTOTPResponse> {
+        return SdkClient.request<Users.VerifyTOTPResponse>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/users/${SdkClient.encodePathSegment(userId)}/verify_totp",
+                config = clientConfig,
+                body = SdkClient.bodyMap("code" to (code)),
+                operationId = "verifyTotp",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors = mapOf("500" to ClerkErrors::class.java),
+            )
+        )
     }
 }

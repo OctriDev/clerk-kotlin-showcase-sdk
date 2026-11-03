@@ -12,18 +12,52 @@ import dev.octri.showcase.clerk.SdkResponse
 
 internal object UsersDeleteUserPasskeyOperation {
     /**
-     * Delete the passkey identification for a given user. The user is notified through email or SMS unless the passkey registration was never completed.
+     * Delete the passkey identification for a given user. The user is notified through email or SMS
+     * unless the passkey registration was never completed.
      *
      * @param userId The ID of the user that owns the passkey identity
      * @param passkeyIdentificationId The ID of the passkey identity to be deleted
      */
-    fun deleteUserPasskey(clientConfig: ClientConfig, userId: String, passkeyIdentificationId: String, options: RequestOptions? = null): DeletedObject {
-        return deleteUserPasskeyWithRawResponse(clientConfig, userId, passkeyIdentificationId, options).data
+    fun deleteUserPasskey(
+        clientConfig: ClientConfig,
+        userId: String,
+        passkeyIdentificationId: String,
+        options: RequestOptions? = null,
+    ): DeletedObject {
+        return deleteUserPasskeyWithRawResponse(
+                clientConfig,
+                userId,
+                passkeyIdentificationId,
+                options,
+            )
+            .data
     }
 
-
-    /** [deleteUserPasskey], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun deleteUserPasskeyWithRawResponse(clientConfig: ClientConfig, userId: String, passkeyIdentificationId: String, options: RequestOptions? = null): SdkResponse<DeletedObject> {
-        return SdkClient.request<DeletedObject>(SdkClient.RequestSpec("DELETE", "/users/${SdkClient.encodePathSegment(userId)}/passkeys/${SdkClient.encodePathSegment(passkeyIdentificationId)}", config = clientConfig, operationId = "deleteUserPasskey", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java)))
+    /**
+     * [deleteUserPasskey], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun deleteUserPasskeyWithRawResponse(
+        clientConfig: ClientConfig,
+        userId: String,
+        passkeyIdentificationId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<DeletedObject> {
+        return SdkClient.request<DeletedObject>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/users/${SdkClient.encodePathSegment(userId)}/passkeys/${SdkClient.encodePathSegment(passkeyIdentificationId)}",
+                config = clientConfig,
+                operationId = "deleteUserPasskey",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "403" to ClerkErrors::class.java,
+                        "404" to ClerkErrors::class.java,
+                        "500" to ClerkErrors::class.java,
+                    ),
+            )
+        )
     }
 }

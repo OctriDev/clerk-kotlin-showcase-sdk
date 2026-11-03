@@ -3,26 +3,45 @@
 
 package dev.octri.showcase.clerk
 
-
 class MiscellaneousNamespace(private val clientConfig: ClientConfig) {
     /**
-     * The Clerk interstitial endpoint serves an html page that loads clerk.js in order to check the user's authentication state. It is used by Clerk SDKs when the user's authentication state cannot be immediately determined.
+     * The Clerk interstitial endpoint serves an html page that loads clerk.js in order to check the
+     * user's authentication state. It is used by Clerk SDKs when the user's authentication state
+     * cannot be immediately determined.
      */
-    fun getPublicInterstitial(request: dev.octri.showcase.clerk.methods.Miscellaneous.GetPublicInterstitialRequest, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.clerk.methods.Miscellaneous.getPublicInterstitial(clientConfig, request, options)
+    fun getPublicInterstitial(
+        request: dev.octri.showcase.clerk.methods.Miscellaneous.GetPublicInterstitialRequest,
+        options: RequestOptions? = null,
+    ): Unit {
+        return dev.octri.showcase.clerk.methods.Miscellaneous.getPublicInterstitial(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
+    /**
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [MiscellaneousNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [MiscellaneousNamespace], returning the [SdkResponse] envelope around each
+     * result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
         /**
-         * The Clerk interstitial endpoint serves an html page that loads clerk.js in order to check the user's authentication state. It is used by Clerk SDKs when the user's authentication state cannot be immediately determined.
+         * The Clerk interstitial endpoint serves an html page that loads clerk.js in order to check
+         * the user's authentication state. It is used by Clerk SDKs when the user's authentication
+         * state cannot be immediately determined.
          */
-        fun getPublicInterstitial(request: dev.octri.showcase.clerk.methods.Miscellaneous.GetPublicInterstitialRequest, options: RequestOptions? = null): SdkResponse<Unit> {
-            return dev.octri.showcase.clerk.methods.Miscellaneous.getPublicInterstitialWithRawResponse(clientConfig, request, options)
+        fun getPublicInterstitial(
+            request: dev.octri.showcase.clerk.methods.Miscellaneous.GetPublicInterstitialRequest,
+            options: RequestOptions? = null,
+        ): SdkResponse<Unit> {
+            return dev.octri.showcase.clerk.methods.Miscellaneous
+                .getPublicInterstitialWithRawResponse(clientConfig, request, options)
         }
-
     }
 }

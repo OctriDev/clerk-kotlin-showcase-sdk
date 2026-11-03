@@ -19,131 +19,223 @@ import dev.octri.showcase.clerk.Validation
 
 object DirectoriesMethods {
 
-data class CreateDirectoryGroupRoleMappingsItem(
-    /**
-     * The organization role ID to assign to members of the group.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("role_id") val roleId: String,
-    /**
-     * The group ID from the identity provider. Exactly one of `directory_group_id` or `scim_group_id` is required.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("directory_group_id") val directoryGroupId: String? = null,
-    /**
-     * The legacy name for `directory_group_id`. Send either one, or both with the same value; sending both with different values is rejected.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("scim_group_id") val scimGroupId: String? = null,
-    /**
-     * Optional display name for the group.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("directory_group_display_name") val directoryGroupDisplayName: String? = null,
-    /**
-     * The legacy name for `directory_group_display_name`. Send either one, or both with the same value; sending both with different values is rejected.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("scim_group_display_name") val scimGroupDisplayName: String? = null,
-    /**
-     * The precedence for this mapping. If omitted, precedence is assigned by array order.
-     */
-    val precedence: Long? = null
-) : SdkResource()
+    data class CreateDirectoryGroupRoleMappingsItem(
+        /** The organization role ID to assign to members of the group. */
+        @com.fasterxml.jackson.annotation.JsonProperty("role_id") val roleId: String,
+        /**
+         * The group ID from the identity provider. Exactly one of `directory_group_id` or
+         * `scim_group_id` is required.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("directory_group_id")
+        val directoryGroupId: String? = null,
+        /**
+         * The legacy name for `directory_group_id`. Send either one, or both with the same value;
+         * sending both with different values is rejected.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("scim_group_id")
+        val scimGroupId: String? = null,
+        /** Optional display name for the group. */
+        @com.fasterxml.jackson.annotation.JsonProperty("directory_group_display_name")
+        val directoryGroupDisplayName: String? = null,
+        /**
+         * The legacy name for `directory_group_display_name`. Send either one, or both with the
+         * same value; sending both with different values is rejected.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("scim_group_display_name")
+        val scimGroupDisplayName: String? = null,
+        /** The precedence for this mapping. If omitted, precedence is assigned by array order. */
+        val precedence: Long? = null,
+    ) : SdkResource()
 
-data class ReplaceDirectoryGroupRoleMappingsMappingsItem(
-    /**
-     * The ID of the organization role to assign to members of the group.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("role_id") val roleId: String,
-    /**
-     * The group ID from the identity provider. Exactly one of `directory_group_id` or `scim_group_id` is required.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("directory_group_id") val directoryGroupId: String? = null,
-    /**
-     * The legacy name for `directory_group_id`. Send either one, or both with the same value; sending both with different values is rejected.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("scim_group_id") val scimGroupId: String? = null
-) : SdkResource()
+    data class ReplaceDirectoryGroupRoleMappingsMappingsItem(
+        /** The ID of the organization role to assign to members of the group. */
+        @com.fasterxml.jackson.annotation.JsonProperty("role_id") val roleId: String,
+        /**
+         * The group ID from the identity provider. Exactly one of `directory_group_id` or
+         * `scim_group_id` is required.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("directory_group_id")
+        val directoryGroupId: String? = null,
+        /**
+         * The legacy name for `directory_group_id`. Send either one, or both with the same value;
+         * sending both with different values is rejected.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("scim_group_id")
+        val scimGroupId: String? = null,
+    ) : SdkResource()
 
     /**
      * Returns a list of all directories for the instance.
      *
-     * @param limit Applies a limit to the number of results returned. Can be used
-     *   for paginating the results together with `offset`.
-     * @param offset Skip the first `offset` results when paginating. Needs to be an
-     *   integer greater or equal to zero. To be used in conjunction with `limit`.
+     * @param limit Applies a limit to the number of results returned. Can be used for paginating
+     *   the results together with `offset`.
+     * @param offset Skip the first `offset` results when paginating. Needs to be an integer greater
+     *   or equal to zero. To be used in conjunction with `limit`.
      */
-    fun listDirectories(clientConfig: ClientConfig, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): DirectoryList {
+    fun listDirectories(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        offset: Long? = null,
+        options: RequestOptions? = null,
+    ): DirectoryList {
         return listDirectoriesWithRawResponse(clientConfig, limit, offset, options).data
     }
 
-
-    /** [listDirectories], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listDirectoriesWithRawResponse(clientConfig: ClientConfig, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): SdkResponse<DirectoryList> {
+    /**
+     * [listDirectories], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun listDirectoriesWithRawResponse(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        offset: Long? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<DirectoryList> {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 500.0))
-}
+        }
 
         if (offset != null) {
             Validation.validateRange("offset", offset, Validation.RangeOpts(min = 0.0))
-}
+        }
 
-        return SdkClient.request<DirectoryList>(SdkClient.RequestSpec("GET", "/directories", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "offset" to SdkClient.queryValue(offset, "form", true)), operationId = "listDirectories", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java)))
+        return SdkClient.request<DirectoryList>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/directories",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "limit" to SdkClient.queryValue(limit, "form", true),
+                        "offset" to SdkClient.queryValue(offset, "form", true),
+                    ),
+                operationId = "listDirectories",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors = mapOf("401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Creates a directory for provisioning users from an identity provider and associates it with an enterprise connection. Supply `enterprise_connection_id` and `provider`; optionally include a name and group-to-role mappings to create with the directory. The response includes the directory configuration and its API key.
+     * Creates a directory for provisioning users from an identity provider and associates it with
+     * an enterprise connection. Supply `enterprise_connection_id` and `provider`; optionally
+     * include a name and group-to-role mappings to create with the directory. The response includes
+     * the directory configuration and its API key.
      *
      * Create a new directory for the instance.
      *
-     * @param enterpriseConnectionId The ID of the enterprise connection to associate
-     *   with this directory.
+     * @param enterpriseConnectionId The ID of the enterprise connection to associate with this
+     *   directory.
      * @param provider The identity provider for this directory.
      * @param name A human-friendly name for the directory.
-     * @param groupRoleMappings Optional directory group to organization role
-     *   mappings to create with the directory.
+     * @param groupRoleMappings Optional directory group to organization role mappings to create
+     *   with the directory.
      */
-    fun createDirectory(clientConfig: ClientConfig, enterpriseConnectionId: String, provider: String, name: String? = null, groupRoleMappings: List<CreateDirectoryGroupRoleMappingsItem>? = null, options: RequestOptions? = null): Directory {
-        return createDirectoryWithRawResponse(clientConfig, enterpriseConnectionId, provider, name, groupRoleMappings, options).data
+    fun createDirectory(
+        clientConfig: ClientConfig,
+        enterpriseConnectionId: String,
+        provider: String,
+        name: String? = null,
+        groupRoleMappings: List<CreateDirectoryGroupRoleMappingsItem>? = null,
+        options: RequestOptions? = null,
+    ): Directory {
+        return createDirectoryWithRawResponse(
+                clientConfig,
+                enterpriseConnectionId,
+                provider,
+                name,
+                groupRoleMappings,
+                options,
+            )
+            .data
     }
-
-
-    /** [createDirectory], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun createDirectoryWithRawResponse(clientConfig: ClientConfig, enterpriseConnectionId: String, provider: String, name: String? = null, groupRoleMappings: List<CreateDirectoryGroupRoleMappingsItem>? = null, options: RequestOptions? = null): SdkResponse<Directory> {
-        return SdkClient.request<Directory>(SdkClient.RequestSpec("POST", "/directories", config = clientConfig, body = SdkClient.bodyMap("enterprise_connection_id" to (enterpriseConnectionId), "provider" to (provider), "name" to (SdkClient.omitIfNull(name)), "group_role_mappings" to
-    (SdkClient.omitIfNull(groupRoleMappings))), operationId = "createDirectory", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "422" to ClerkErrors::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Retrieves the configuration for a directory used to provision users from an identity provider. Use `directory_id` to identify the directory whose details you need.
+     * [createDirectory], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun createDirectoryWithRawResponse(
+        clientConfig: ClientConfig,
+        enterpriseConnectionId: String,
+        provider: String,
+        name: String? = null,
+        groupRoleMappings: List<CreateDirectoryGroupRoleMappingsItem>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Directory> {
+        return SdkClient.request<Directory>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/directories",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "enterprise_connection_id" to (enterpriseConnectionId),
+                        "provider" to (provider),
+                        "name" to (SdkClient.omitIfNull(name)),
+                        "group_role_mappings" to (SdkClient.omitIfNull(groupRoleMappings)),
+                    ),
+                operationId = "createDirectory",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ClerkErrors::class.java,
+                        "401" to ClerkErrors::class.java,
+                        "403" to ClerkErrors::class.java,
+                        "422" to ClerkErrors::class.java,
+                    ),
+            )
+        )
+    }
+
+    /**
+     * Retrieves the configuration for a directory used to provision users from an identity
+     * provider. Use `directory_id` to identify the directory whose details you need.
      *
      * Returns the details of a directory.
      *
      * @param directoryId The ID of the directory to retrieve
      */
-    fun getDirectory(clientConfig: ClientConfig, directoryId: String, options: RequestOptions? = null): Directory {
+    fun getDirectory(
+        clientConfig: ClientConfig,
+        directoryId: String,
+        options: RequestOptions? = null,
+    ): Directory {
         return getDirectoryWithRawResponse(clientConfig, directoryId, options).data
     }
 
-
-    /** [getDirectory], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun getDirectoryWithRawResponse(clientConfig: ClientConfig, directoryId: String, options: RequestOptions? = null): SdkResponse<Directory> {
-        return SdkClient.request<Directory>(SdkClient.RequestSpec("GET", "/directories/${SdkClient.encodePathSegment(directoryId)}", config = clientConfig, operationId = "getDirectory", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java)))
+    /**
+     * [getDirectory], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun getDirectoryWithRawResponse(
+        clientConfig: ClientConfig,
+        directoryId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<Directory> {
+        return SdkClient.request<Directory>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/directories/${SdkClient.encodePathSegment(directoryId)}",
+                config = clientConfig,
+                operationId = "getDirectory",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to ClerkErrors::class.java,
+                        "403" to ClerkErrors::class.java,
+                        "404" to ClerkErrors::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Updates configurable properties of a directory used to provision users from an identity provider. Supply only the fields you want to change; `attribute_mapping` entries are merged into the existing mapping, and a key set to `null` is removed.
+     * Updates configurable properties of a directory used to provision users from an identity
+     * provider. Supply only the fields you want to change; `attribute_mapping` entries are merged
+     * into the existing mapping, and a key set to `null` is removed.
      *
      * Updates a directory.
      *
@@ -151,16 +243,17 @@ data class ReplaceDirectoryGroupRoleMappingsMappingsItem(
      * @param name A human-friendly name for the directory.
      * @param enabled Whether the directory is enabled.
      * @param provider The identity provider for this directory.
-     * @param attributeMapping Attribute-to-directory-path entries to merge into the
-     *   directory's attribute mapping. Set a key to `null` to remove it from the
-     *   mapping.
-     * @param groupRoleMappingEnabled Whether group-to-role mapping is enabled for
-     *   this directory.
+     * @param attributeMapping Attribute-to-directory-path entries to merge into the directory's
+     *   attribute mapping. Set a key to `null` to remove it from the mapping.
+     * @param groupRoleMappingEnabled Whether group-to-role mapping is enabled for this directory.
      */
-    fun updateDirectory(clientConfig: ClientConfig, request: UpdateDirectoryRequest, options: RequestOptions? = null): Directory {
+    fun updateDirectory(
+        clientConfig: ClientConfig,
+        request: UpdateDirectoryRequest,
+        options: RequestOptions? = null,
+    ): Directory {
         return updateDirectoryWithRawResponse(clientConfig, request, options).data
     }
-
 
     /** Parameters for [updateDirectory]. */
     data class UpdateDirectoryRequest(
@@ -169,157 +262,357 @@ data class ReplaceDirectoryGroupRoleMappingsMappingsItem(
         val enabled: Boolean? = null,
         val provider: String? = null,
         val attributeMapping: Map<String, String>? = null,
-        val groupRoleMappingEnabled: Boolean? = null
+        val groupRoleMappingEnabled: Boolean? = null,
     )
 
-    /** [updateDirectory], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun updateDirectoryWithRawResponse(clientConfig: ClientConfig, request: UpdateDirectoryRequest, options: RequestOptions? = null): SdkResponse<Directory> {
-        return SdkClient.request<Directory>(SdkClient.RequestSpec("PATCH", "/directories/${SdkClient.encodePathSegment(request.directoryId)}", config = clientConfig, body = SdkClient.bodyMap("name" to (SdkClient.omitIfNull(request.name)), "enabled" to (SdkClient.omitIfNull(request.enabled)), "provider" to (SdkClient.omitIfNull(request.provider)), "attribute_mapping" to
-    (SdkClient.omitIfNull(request.attributeMapping)), "group_role_mapping_enabled" to
-    (SdkClient.omitIfNull(request.groupRoleMappingEnabled))), operationId = "updateDirectory", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java)))
+    /**
+     * [updateDirectory], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun updateDirectoryWithRawResponse(
+        clientConfig: ClientConfig,
+        request: UpdateDirectoryRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<Directory> {
+        return SdkClient.request<Directory>(
+            SdkClient.RequestSpec(
+                "PATCH",
+                "/directories/${SdkClient.encodePathSegment(request.directoryId)}",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "name" to (SdkClient.omitIfNull(request.name)),
+                        "enabled" to (SdkClient.omitIfNull(request.enabled)),
+                        "provider" to (SdkClient.omitIfNull(request.provider)),
+                        "attribute_mapping" to (SdkClient.omitIfNull(request.attributeMapping)),
+                        "group_role_mapping_enabled" to
+                            (SdkClient.omitIfNull(request.groupRoleMappingEnabled)),
+                    ),
+                operationId = "updateDirectory",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ClerkErrors::class.java,
+                        "401" to ClerkErrors::class.java,
+                        "403" to ClerkErrors::class.java,
+                        "404" to ClerkErrors::class.java,
+                        "422" to ClerkErrors::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Deletes a directory and stops provisioning for it. Provisioning requests authenticated with the directory's API key are rejected afterwards.
+     * Deletes a directory and stops provisioning for it. Provisioning requests authenticated with
+     * the directory's API key are rejected afterwards.
      *
      * @param directoryId The ID of the directory to delete
      */
-    fun deleteDirectory(clientConfig: ClientConfig, directoryId: String, options: RequestOptions? = null): DeletedObject {
+    fun deleteDirectory(
+        clientConfig: ClientConfig,
+        directoryId: String,
+        options: RequestOptions? = null,
+    ): DeletedObject {
         return deleteDirectoryWithRawResponse(clientConfig, directoryId, options).data
     }
 
-
-    /** [deleteDirectory], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun deleteDirectoryWithRawResponse(clientConfig: ClientConfig, directoryId: String, options: RequestOptions? = null): SdkResponse<DeletedObject> {
-        return SdkClient.request<DeletedObject>(SdkClient.RequestSpec("DELETE", "/directories/${SdkClient.encodePathSegment(directoryId)}", config = clientConfig, operationId = "deleteDirectory", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java)))
+    /**
+     * [deleteDirectory], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun deleteDirectoryWithRawResponse(
+        clientConfig: ClientConfig,
+        directoryId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<DeletedObject> {
+        return SdkClient.request<DeletedObject>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/directories/${SdkClient.encodePathSegment(directoryId)}",
+                config = clientConfig,
+                operationId = "deleteDirectory",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to ClerkErrors::class.java,
+                        "403" to ClerkErrors::class.java,
+                        "404" to ClerkErrors::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Generates a new API key for the directory and returns it in the `api_key` field. This is the only way to obtain the key after creation, so make sure to update it in your identity provider. The previous key remains valid for a short grace period before it expires.
+     * Generates a new API key for the directory and returns it in the `api_key` field. This is the
+     * only way to obtain the key after creation, so make sure to update it in your identity
+     * provider. The previous key remains valid for a short grace period before it expires.
      *
      * @param directoryId The ID of the directory whose API key to rotate
      */
-    fun rotateDirectoryApiKey(clientConfig: ClientConfig, directoryId: String, options: RequestOptions? = null): Directory {
+    fun rotateDirectoryApiKey(
+        clientConfig: ClientConfig,
+        directoryId: String,
+        options: RequestOptions? = null,
+    ): Directory {
         return rotateDirectoryApiKeyWithRawResponse(clientConfig, directoryId, options).data
     }
 
-
-    /** [rotateDirectoryApiKey], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun rotateDirectoryApiKeyWithRawResponse(clientConfig: ClientConfig, directoryId: String, options: RequestOptions? = null): SdkResponse<Directory> {
-        return SdkClient.request<Directory>(SdkClient.RequestSpec("POST", "/directories/${SdkClient.encodePathSegment(directoryId)}/rotate_api_key", config = clientConfig, operationId = "rotateDirectoryApiKey", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java)))
+    /**
+     * [rotateDirectoryApiKey], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun rotateDirectoryApiKeyWithRawResponse(
+        clientConfig: ClientConfig,
+        directoryId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<Directory> {
+        return SdkClient.request<Directory>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/directories/${SdkClient.encodePathSegment(directoryId)}/rotate_api_key",
+                config = clientConfig,
+                operationId = "rotateDirectoryApiKey",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to ClerkErrors::class.java,
+                        "403" to ClerkErrors::class.java,
+                        "404" to ClerkErrors::class.java,
+                        "422" to ClerkErrors::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Returns the list of directory group to organization role mappings for a directory, ordered by precedence.
+     * Returns the list of directory group to organization role mappings for a directory, ordered by
+     * precedence.
      *
      * @param directoryId The ID of the directory.
      */
-    fun listDirectoryGroupRoleMappings(clientConfig: ClientConfig, directoryId: String, options: RequestOptions? = null): DirectoryGroupRoleMappingList {
-        return listDirectoryGroupRoleMappingsWithRawResponse(clientConfig, directoryId, options).data
+    fun listDirectoryGroupRoleMappings(
+        clientConfig: ClientConfig,
+        directoryId: String,
+        options: RequestOptions? = null,
+    ): DirectoryGroupRoleMappingList {
+        return listDirectoryGroupRoleMappingsWithRawResponse(clientConfig, directoryId, options)
+            .data
     }
-
-
-    /** [listDirectoryGroupRoleMappings], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listDirectoryGroupRoleMappingsWithRawResponse(clientConfig: ClientConfig, directoryId: String, options: RequestOptions? = null): SdkResponse<DirectoryGroupRoleMappingList> {
-        return SdkClient.request<DirectoryGroupRoleMappingList>(SdkClient.RequestSpec("GET", "/directories/${SdkClient.encodePathSegment(directoryId)}/group_role_mappings", config = clientConfig, operationId = "listDirectoryGroupRoleMappings", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Creates a new directory group to organization role mapping for a directory. Mappings can be created while group role mapping is disabled on the directory, but they only take effect once it is enabled.
-     *
-     * @param directoryId The ID of the directory.
-     * @param roleId The ID of the organization role to assign to members of the
-     *   group.
-     * @param directoryGroupId The group ID from the identity provider. Exactly one
-     *   of `directory_group_id` or `scim_group_id` is required.
-     * @param scimGroupId The legacy name for `directory_group_id`. Send either one,
-     *   or both with the same value; sending both with different values is rejected.
-     * @param precedence The precedence for this mapping. Lower values take priority
-     *   when a user belongs to multiple mapped groups. If omitted, the mapping is
-     *   appended with the next-highest precedence.
+     * [listDirectoryGroupRoleMappings], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
      */
-    fun createDirectoryGroupRoleMapping(clientConfig: ClientConfig, directoryId: String, roleId: String, directoryGroupId: String? = null, scimGroupId: String? = null, precedence: Long? = null, options: RequestOptions? = null): DirectoryGroupRoleMapping {
-        return createDirectoryGroupRoleMappingWithRawResponse(clientConfig, directoryId, roleId, directoryGroupId, scimGroupId, precedence, options).data
+    fun listDirectoryGroupRoleMappingsWithRawResponse(
+        clientConfig: ClientConfig,
+        directoryId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<DirectoryGroupRoleMappingList> {
+        return SdkClient.request<DirectoryGroupRoleMappingList>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/directories/${SdkClient.encodePathSegment(directoryId)}/group_role_mappings",
+                config = clientConfig,
+                operationId = "listDirectoryGroupRoleMappings",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to ClerkErrors::class.java,
+                        "403" to ClerkErrors::class.java,
+                        "404" to ClerkErrors::class.java,
+                    ),
+            )
+        )
     }
 
+    /**
+     * Creates a new directory group to organization role mapping for a directory. Mappings can be
+     * created while group role mapping is disabled on the directory, but they only take effect once
+     * it is enabled.
+     *
+     * @param directoryId The ID of the directory.
+     * @param roleId The ID of the organization role to assign to members of the group.
+     * @param directoryGroupId The group ID from the identity provider. Exactly one of
+     *   `directory_group_id` or `scim_group_id` is required.
+     * @param scimGroupId The legacy name for `directory_group_id`. Send either one, or both with
+     *   the same value; sending both with different values is rejected.
+     * @param precedence The precedence for this mapping. Lower values take priority when a user
+     *   belongs to multiple mapped groups. If omitted, the mapping is appended with the
+     *   next-highest precedence.
+     */
+    fun createDirectoryGroupRoleMapping(
+        clientConfig: ClientConfig,
+        directoryId: String,
+        roleId: String,
+        directoryGroupId: String? = null,
+        scimGroupId: String? = null,
+        precedence: Long? = null,
+        options: RequestOptions? = null,
+    ): DirectoryGroupRoleMapping {
+        return createDirectoryGroupRoleMappingWithRawResponse(
+                clientConfig,
+                directoryId,
+                roleId,
+                directoryGroupId,
+                scimGroupId,
+                precedence,
+                options,
+            )
+            .data
+    }
 
-    /** [createDirectoryGroupRoleMapping], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun createDirectoryGroupRoleMappingWithRawResponse(clientConfig: ClientConfig, directoryId: String, roleId: String, directoryGroupId: String? = null, scimGroupId: String? = null, precedence: Long? = null, options: RequestOptions? = null): SdkResponse<DirectoryGroupRoleMapping> {
+    /**
+     * [createDirectoryGroupRoleMapping], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun createDirectoryGroupRoleMappingWithRawResponse(
+        clientConfig: ClientConfig,
+        directoryId: String,
+        roleId: String,
+        directoryGroupId: String? = null,
+        scimGroupId: String? = null,
+        precedence: Long? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<DirectoryGroupRoleMapping> {
         if (precedence != null) {
             Validation.validateRange("precedence", precedence, Validation.RangeOpts(min = 1.0))
-}
+        }
 
-        return SdkClient.request<DirectoryGroupRoleMapping>(SdkClient.RequestSpec("POST", "/directories/${SdkClient.encodePathSegment(directoryId)}/group_role_mappings", config = clientConfig, body = SdkClient.bodyMap("role_id" to (roleId), "directory_group_id" to
-    (SdkClient.omitIfNull(directoryGroupId)), "scim_group_id" to (SdkClient.omitIfNull(scimGroupId)), "precedence" to (SdkClient.omitIfNull(precedence))), operationId = "createDirectoryGroupRoleMapping", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java)))
+        return SdkClient.request<DirectoryGroupRoleMapping>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/directories/${SdkClient.encodePathSegment(directoryId)}/group_role_mappings",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "role_id" to (roleId),
+                        "directory_group_id" to (SdkClient.omitIfNull(directoryGroupId)),
+                        "scim_group_id" to (SdkClient.omitIfNull(scimGroupId)),
+                        "precedence" to (SdkClient.omitIfNull(precedence)),
+                    ),
+                operationId = "createDirectoryGroupRoleMapping",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ClerkErrors::class.java,
+                        "401" to ClerkErrors::class.java,
+                        "403" to ClerkErrors::class.java,
+                        "404" to ClerkErrors::class.java,
+                        "422" to ClerkErrors::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Replaces the entire set of directory group role mappings for a directory. The position of each item in the `mappings` array determines its precedence (the first item gets precedence 1). Passing an empty array removes all mappings. Mappings can be replaced while group role mapping is disabled on the directory, but they only take effect once it is enabled.
+     * Replaces the entire set of directory group role mappings for a directory. The position of
+     * each item in the `mappings` array determines its precedence (the first item gets precedence
+     * 1). Passing an empty array removes all mappings. Mappings can be replaced while group role
+     * mapping is disabled on the directory, but they only take effect once it is enabled.
      *
      * @param directoryId The ID of the directory.
-     * @param mappings The desired set of mappings. Array order sets precedence
-     *   (1-indexed). An empty array clears all mappings.
+     * @param mappings The desired set of mappings. Array order sets precedence (1-indexed). An
+     *   empty array clears all mappings.
      */
-    fun replaceDirectoryGroupRoleMappings(clientConfig: ClientConfig, directoryId: String, mappings: List<ReplaceDirectoryGroupRoleMappingsMappingsItem>, options: RequestOptions? = null): DirectoryGroupRoleMappingList {
-        return replaceDirectoryGroupRoleMappingsWithRawResponse(clientConfig, directoryId, mappings, options).data
+    fun replaceDirectoryGroupRoleMappings(
+        clientConfig: ClientConfig,
+        directoryId: String,
+        mappings: List<ReplaceDirectoryGroupRoleMappingsMappingsItem>,
+        options: RequestOptions? = null,
+    ): DirectoryGroupRoleMappingList {
+        return replaceDirectoryGroupRoleMappingsWithRawResponse(
+                clientConfig,
+                directoryId,
+                mappings,
+                options,
+            )
+            .data
     }
-
-
-    /** [replaceDirectoryGroupRoleMappings], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun replaceDirectoryGroupRoleMappingsWithRawResponse(clientConfig: ClientConfig, directoryId: String, mappings: List<ReplaceDirectoryGroupRoleMappingsMappingsItem>, options: RequestOptions? = null): SdkResponse<DirectoryGroupRoleMappingList> {
-        return SdkClient.request<DirectoryGroupRoleMappingList>(SdkClient.RequestSpec("PUT", "/directories/${SdkClient.encodePathSegment(directoryId)}/group_role_mappings", config = clientConfig, body = SdkClient.bodyMap("mappings" to (mappings)), operationId = "replaceDirectoryGroupRoleMappings", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "422" to ClerkErrors::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Deletes a single directory group role mapping. Mappings can be deleted while group role mapping is disabled on the directory, but the change only takes effect once it is enabled.
+     * [replaceDirectoryGroupRoleMappings], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun replaceDirectoryGroupRoleMappingsWithRawResponse(
+        clientConfig: ClientConfig,
+        directoryId: String,
+        mappings: List<ReplaceDirectoryGroupRoleMappingsMappingsItem>,
+        options: RequestOptions? = null,
+    ): SdkResponse<DirectoryGroupRoleMappingList> {
+        return SdkClient.request<DirectoryGroupRoleMappingList>(
+            SdkClient.RequestSpec(
+                "PUT",
+                "/directories/${SdkClient.encodePathSegment(directoryId)}/group_role_mappings",
+                config = clientConfig,
+                body = SdkClient.bodyMap("mappings" to (mappings)),
+                operationId = "replaceDirectoryGroupRoleMappings",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ClerkErrors::class.java,
+                        "401" to ClerkErrors::class.java,
+                        "403" to ClerkErrors::class.java,
+                        "404" to ClerkErrors::class.java,
+                        "422" to ClerkErrors::class.java,
+                    ),
+            )
+        )
+    }
+
+    /**
+     * Deletes a single directory group role mapping. Mappings can be deleted while group role
+     * mapping is disabled on the directory, but the change only takes effect once it is enabled.
      *
      * @param directoryId The ID of the directory.
      * @param mappingId The ID of the directory group role mapping to delete.
      */
-    fun deleteDirectoryGroupRoleMapping(clientConfig: ClientConfig, directoryId: String, mappingId: String, options: RequestOptions? = null): DirectoryGroupRoleMappingDeleted {
-        return deleteDirectoryGroupRoleMappingWithRawResponse(clientConfig, directoryId, mappingId, options).data
+    fun deleteDirectoryGroupRoleMapping(
+        clientConfig: ClientConfig,
+        directoryId: String,
+        mappingId: String,
+        options: RequestOptions? = null,
+    ): DirectoryGroupRoleMappingDeleted {
+        return deleteDirectoryGroupRoleMappingWithRawResponse(
+                clientConfig,
+                directoryId,
+                mappingId,
+                options,
+            )
+            .data
     }
 
-
-    /** [deleteDirectoryGroupRoleMapping], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun deleteDirectoryGroupRoleMappingWithRawResponse(clientConfig: ClientConfig, directoryId: String, mappingId: String, options: RequestOptions? = null): SdkResponse<DirectoryGroupRoleMappingDeleted> {
-        return SdkClient.request<DirectoryGroupRoleMappingDeleted>(SdkClient.RequestSpec("DELETE", "/directories/${SdkClient.encodePathSegment(directoryId)}/group_role_mappings/${SdkClient.encodePathSegment(mappingId)}", config = clientConfig, operationId = "deleteDirectoryGroupRoleMapping", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java)))
+    /**
+     * [deleteDirectoryGroupRoleMapping], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun deleteDirectoryGroupRoleMappingWithRawResponse(
+        clientConfig: ClientConfig,
+        directoryId: String,
+        mappingId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<DirectoryGroupRoleMappingDeleted> {
+        return SdkClient.request<DirectoryGroupRoleMappingDeleted>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/directories/${SdkClient.encodePathSegment(directoryId)}/group_role_mappings/${SdkClient.encodePathSegment(mappingId)}",
+                config = clientConfig,
+                operationId = "deleteDirectoryGroupRoleMapping",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ClerkErrors::class.java,
+                        "401" to ClerkErrors::class.java,
+                        "403" to ClerkErrors::class.java,
+                        "404" to ClerkErrors::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

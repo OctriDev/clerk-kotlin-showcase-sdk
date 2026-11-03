@@ -15,28 +15,63 @@ internal object UsersGetOrganizationMembershipsOperation {
     /**
      * Retrieve a paginated list of the user's organization memberships
      *
-     * @param userId The ID of the user whose organization memberships we want to
-     *   retrieve
-     * @param limit Applies a limit to the number of results returned. Can be used
-     *   for paginating the results together with `offset`.
-     * @param offset Skip the first `offset` results when paginating. Needs to be an
-     *   integer greater or equal to zero. To be used in conjunction with `limit`.
+     * @param userId The ID of the user whose organization memberships we want to retrieve
+     * @param limit Applies a limit to the number of results returned. Can be used for paginating
+     *   the results together with `offset`.
+     * @param offset Skip the first `offset` results when paginating. Needs to be an integer greater
+     *   or equal to zero. To be used in conjunction with `limit`.
      */
-    fun usersGetOrganizationMemberships(clientConfig: ClientConfig, userId: String, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): OrganizationMemberships {
-        return usersGetOrganizationMembershipsWithRawResponse(clientConfig, userId, limit, offset, options).data
+    fun usersGetOrganizationMemberships(
+        clientConfig: ClientConfig,
+        userId: String,
+        limit: Long? = null,
+        offset: Long? = null,
+        options: RequestOptions? = null,
+    ): OrganizationMemberships {
+        return usersGetOrganizationMembershipsWithRawResponse(
+                clientConfig,
+                userId,
+                limit,
+                offset,
+                options,
+            )
+            .data
     }
 
-
-    /** [usersGetOrganizationMemberships], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun usersGetOrganizationMembershipsWithRawResponse(clientConfig: ClientConfig, userId: String, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): SdkResponse<OrganizationMemberships> {
+    /**
+     * [usersGetOrganizationMemberships], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun usersGetOrganizationMembershipsWithRawResponse(
+        clientConfig: ClientConfig,
+        userId: String,
+        limit: Long? = null,
+        offset: Long? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<OrganizationMemberships> {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 500.0))
-}
+        }
 
         if (offset != null) {
             Validation.validateRange("offset", offset, Validation.RangeOpts(min = 0.0))
-}
+        }
 
-        return SdkClient.request<OrganizationMemberships>(SdkClient.RequestSpec("GET", "/users/${SdkClient.encodePathSegment(userId)}/organization_memberships", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "offset" to SdkClient.queryValue(offset, "form", true)), operationId = "usersGetOrganizationMemberships", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to ClerkErrors::class.java)))
+        return SdkClient.request<OrganizationMemberships>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/users/${SdkClient.encodePathSegment(userId)}/organization_memberships",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "limit" to SdkClient.queryValue(limit, "form", true),
+                        "offset" to SdkClient.queryValue(offset, "form", true),
+                    ),
+                operationId = "usersGetOrganizationMemberships",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors = mapOf("403" to ClerkErrors::class.java),
+            )
+        )
     }
 }

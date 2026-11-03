@@ -20,215 +20,202 @@ import dev.octri.showcase.clerk.VerifyApiKeyResponseObjectEnum
 
 object ApiKeys {
 
-data class CreateApiKeyResponse(
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: CreateApiKeyResponseObjectEnum,
-    val id: String,
-    val type: String,
-    val subject: String,
-    val name: String,
-    @com.fasterxml.jackson.annotation.JsonProperty("claims", required = true) val claims: Any?,
-    val scopes: List<String>,
-    val secret: String,
-    val revoked: Boolean,
-    @com.fasterxml.jackson.annotation.JsonProperty("revocation_reason", required = true) val revocationReason: String?,
-    val expired: Boolean,
-    /**
-     * The timestamp for when the API key will expire, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("expiration", required = true) val expiration: Double?,
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by", required = true) val createdBy: String?,
-    /**
-     * The timestamp for when the API key was last used, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_used_at", required = true) val lastUsedAt: Double?,
-    /**
-     * The timestamp for when the API key was created, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Double,
-    /**
-     * The timestamp for when the API key was last updated, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Double,
-    val description: String? = null
-) : SdkResource()
+    data class CreateApiKeyResponse(
+        @com.fasterxml.jackson.annotation.JsonProperty("object")
+        val `object`: CreateApiKeyResponseObjectEnum,
+        val id: String,
+        val type: String,
+        val subject: String,
+        val name: String,
+        @com.fasterxml.jackson.annotation.JsonProperty("claims", required = true) val claims: Any?,
+        val scopes: List<String>,
+        val secret: String,
+        val revoked: Boolean,
+        @com.fasterxml.jackson.annotation.JsonProperty("revocation_reason", required = true)
+        val revocationReason: String?,
+        val expired: Boolean,
+        /** The timestamp for when the API key will expire, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("expiration", required = true)
+        val expiration: Double?,
+        @com.fasterxml.jackson.annotation.JsonProperty("created_by", required = true)
+        val createdBy: String?,
+        /** The timestamp for when the API key was last used, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("last_used_at", required = true)
+        val lastUsedAt: Double?,
+        /** The timestamp for when the API key was created, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Double,
+        /** The timestamp for when the API key was last updated, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Double,
+        val description: String? = null,
+    ) : SdkResource()
 
-data class ListApiKeysResponseDataItem(
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ListApiKeysResponseDataItemObjectEnum,
-    val id: String,
-    val type: String,
-    val subject: String,
-    val name: String,
-    @com.fasterxml.jackson.annotation.JsonProperty("claims", required = true) val claims: Any?,
-    val scopes: List<String>,
-    val revoked: Boolean,
-    @com.fasterxml.jackson.annotation.JsonProperty("revocation_reason", required = true) val revocationReason: String?,
-    val expired: Boolean,
-    /**
-     * The timestamp for when the API key will expire, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("expiration", required = true) val expiration: Double?,
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by", required = true) val createdBy: String?,
-    /**
-     * The timestamp for when the API key was last used, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_used_at", required = true) val lastUsedAt: Double?,
-    /**
-     * The timestamp for when the API key was created, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Double,
-    /**
-     * The timestamp for when the API key was last updated, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Double,
-    val description: String? = null
-) : SdkResource()
+    data class ListApiKeysResponseDataItem(
+        @com.fasterxml.jackson.annotation.JsonProperty("object")
+        val `object`: ListApiKeysResponseDataItemObjectEnum,
+        val id: String,
+        val type: String,
+        val subject: String,
+        val name: String,
+        @com.fasterxml.jackson.annotation.JsonProperty("claims", required = true) val claims: Any?,
+        val scopes: List<String>,
+        val revoked: Boolean,
+        @com.fasterxml.jackson.annotation.JsonProperty("revocation_reason", required = true)
+        val revocationReason: String?,
+        val expired: Boolean,
+        /** The timestamp for when the API key will expire, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("expiration", required = true)
+        val expiration: Double?,
+        @com.fasterxml.jackson.annotation.JsonProperty("created_by", required = true)
+        val createdBy: String?,
+        /** The timestamp for when the API key was last used, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("last_used_at", required = true)
+        val lastUsedAt: Double?,
+        /** The timestamp for when the API key was created, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Double,
+        /** The timestamp for when the API key was last updated, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Double,
+        val description: String? = null,
+    ) : SdkResource()
 
-data class ListApiKeysResponse(
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ListApiKeysResponseDataItem>,
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Double
-) : SdkResource()
+    data class ListApiKeysResponse(
+        @com.fasterxml.jackson.annotation.JsonProperty("data")
+        val `data`: List<ListApiKeysResponseDataItem>,
+        @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Double,
+    ) : SdkResource()
 
-data class GetApiKeyResponse(
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: GetApiKeyResponseObjectEnum,
-    val id: String,
-    val type: String,
-    val subject: String,
-    val name: String,
-    @com.fasterxml.jackson.annotation.JsonProperty("claims", required = true) val claims: Any?,
-    val scopes: List<String>,
-    val revoked: Boolean,
-    @com.fasterxml.jackson.annotation.JsonProperty("revocation_reason", required = true) val revocationReason: String?,
-    val expired: Boolean,
-    /**
-     * The timestamp for when the API key will expire, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("expiration", required = true) val expiration: Double?,
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by", required = true) val createdBy: String?,
-    /**
-     * The timestamp for when the API key was last used, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_used_at", required = true) val lastUsedAt: Double?,
-    /**
-     * The timestamp for when the API key was created, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Double,
-    /**
-     * The timestamp for when the API key was last updated, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Double,
-    val description: String? = null
-) : SdkResource()
+    data class GetApiKeyResponse(
+        @com.fasterxml.jackson.annotation.JsonProperty("object")
+        val `object`: GetApiKeyResponseObjectEnum,
+        val id: String,
+        val type: String,
+        val subject: String,
+        val name: String,
+        @com.fasterxml.jackson.annotation.JsonProperty("claims", required = true) val claims: Any?,
+        val scopes: List<String>,
+        val revoked: Boolean,
+        @com.fasterxml.jackson.annotation.JsonProperty("revocation_reason", required = true)
+        val revocationReason: String?,
+        val expired: Boolean,
+        /** The timestamp for when the API key will expire, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("expiration", required = true)
+        val expiration: Double?,
+        @com.fasterxml.jackson.annotation.JsonProperty("created_by", required = true)
+        val createdBy: String?,
+        /** The timestamp for when the API key was last used, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("last_used_at", required = true)
+        val lastUsedAt: Double?,
+        /** The timestamp for when the API key was created, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Double,
+        /** The timestamp for when the API key was last updated, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Double,
+        val description: String? = null,
+    ) : SdkResource()
 
-data class UpdateApiKeyResponse(
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: UpdateApiKeyResponseObjectEnum,
-    val id: String,
-    val type: String,
-    val subject: String,
-    val name: String,
-    @com.fasterxml.jackson.annotation.JsonProperty("claims", required = true) val claims: Any?,
-    val scopes: List<String>,
-    val revoked: Boolean,
-    @com.fasterxml.jackson.annotation.JsonProperty("revocation_reason", required = true) val revocationReason: String?,
-    val expired: Boolean,
-    /**
-     * The timestamp for when the API key will expire, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("expiration", required = true) val expiration: Double?,
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by", required = true) val createdBy: String?,
-    /**
-     * The timestamp for when the API key was last used, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_used_at", required = true) val lastUsedAt: Double?,
-    /**
-     * The timestamp for when the API key was created, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Double,
-    /**
-     * The timestamp for when the API key was last updated, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Double,
-    val description: String? = null
-) : SdkResource()
+    data class UpdateApiKeyResponse(
+        @com.fasterxml.jackson.annotation.JsonProperty("object")
+        val `object`: UpdateApiKeyResponseObjectEnum,
+        val id: String,
+        val type: String,
+        val subject: String,
+        val name: String,
+        @com.fasterxml.jackson.annotation.JsonProperty("claims", required = true) val claims: Any?,
+        val scopes: List<String>,
+        val revoked: Boolean,
+        @com.fasterxml.jackson.annotation.JsonProperty("revocation_reason", required = true)
+        val revocationReason: String?,
+        val expired: Boolean,
+        /** The timestamp for when the API key will expire, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("expiration", required = true)
+        val expiration: Double?,
+        @com.fasterxml.jackson.annotation.JsonProperty("created_by", required = true)
+        val createdBy: String?,
+        /** The timestamp for when the API key was last used, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("last_used_at", required = true)
+        val lastUsedAt: Double?,
+        /** The timestamp for when the API key was created, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Double,
+        /** The timestamp for when the API key was last updated, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Double,
+        val description: String? = null,
+    ) : SdkResource()
 
-data class DeleteApiKeyResponse(
-    val id: String,
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: DeleteApiKeyResponseObjectEnum,
-    val deleted: Boolean
-) : SdkResource()
+    data class DeleteApiKeyResponse(
+        val id: String,
+        @com.fasterxml.jackson.annotation.JsonProperty("object")
+        val `object`: DeleteApiKeyResponseObjectEnum,
+        val deleted: Boolean,
+    ) : SdkResource()
 
-data class GetApiKeySecretResponse(
-    val secret: String
-) : SdkResource()
+    data class GetApiKeySecretResponse(val secret: String) : SdkResource()
 
-data class RevokeApiKeyResponse(
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: RevokeApiKeyResponseObjectEnum,
-    val id: String,
-    val type: String,
-    val subject: String,
-    val name: String,
-    @com.fasterxml.jackson.annotation.JsonProperty("claims", required = true) val claims: Any?,
-    val scopes: List<String>,
-    val revoked: Boolean,
-    @com.fasterxml.jackson.annotation.JsonProperty("revocation_reason", required = true) val revocationReason: String?,
-    val expired: Boolean,
-    /**
-     * The timestamp for when the API key will expire, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("expiration", required = true) val expiration: Double?,
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by", required = true) val createdBy: String?,
-    /**
-     * The timestamp for when the API key was last used, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_used_at", required = true) val lastUsedAt: Double?,
-    /**
-     * The timestamp for when the API key was created, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Double,
-    /**
-     * The timestamp for when the API key was last updated, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Double,
-    val description: String? = null
-) : SdkResource()
+    data class RevokeApiKeyResponse(
+        @com.fasterxml.jackson.annotation.JsonProperty("object")
+        val `object`: RevokeApiKeyResponseObjectEnum,
+        val id: String,
+        val type: String,
+        val subject: String,
+        val name: String,
+        @com.fasterxml.jackson.annotation.JsonProperty("claims", required = true) val claims: Any?,
+        val scopes: List<String>,
+        val revoked: Boolean,
+        @com.fasterxml.jackson.annotation.JsonProperty("revocation_reason", required = true)
+        val revocationReason: String?,
+        val expired: Boolean,
+        /** The timestamp for when the API key will expire, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("expiration", required = true)
+        val expiration: Double?,
+        @com.fasterxml.jackson.annotation.JsonProperty("created_by", required = true)
+        val createdBy: String?,
+        /** The timestamp for when the API key was last used, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("last_used_at", required = true)
+        val lastUsedAt: Double?,
+        /** The timestamp for when the API key was created, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Double,
+        /** The timestamp for when the API key was last updated, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Double,
+        val description: String? = null,
+    ) : SdkResource()
 
-data class VerifyApiKeyResponse(
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: VerifyApiKeyResponseObjectEnum,
-    val id: String,
-    val type: String,
-    val subject: String,
-    val name: String,
-    @com.fasterxml.jackson.annotation.JsonProperty("claims", required = true) val claims: Any?,
-    val scopes: List<String>,
-    val revoked: Boolean,
-    @com.fasterxml.jackson.annotation.JsonProperty("revocation_reason", required = true) val revocationReason: String?,
-    val expired: Boolean,
-    /**
-     * The timestamp for when the API key will expire, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("expiration", required = true) val expiration: Double?,
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by", required = true) val createdBy: String?,
-    /**
-     * The timestamp for when the API key was last used, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_used_at", required = true) val lastUsedAt: Double?,
-    /**
-     * The timestamp for when the API key was created, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Double,
-    /**
-     * The timestamp for when the API key was last updated, in milliseconds
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Double,
-    val description: String? = null
-) : SdkResource()
+    data class VerifyApiKeyResponse(
+        @com.fasterxml.jackson.annotation.JsonProperty("object")
+        val `object`: VerifyApiKeyResponseObjectEnum,
+        val id: String,
+        val type: String,
+        val subject: String,
+        val name: String,
+        @com.fasterxml.jackson.annotation.JsonProperty("claims", required = true) val claims: Any?,
+        val scopes: List<String>,
+        val revoked: Boolean,
+        @com.fasterxml.jackson.annotation.JsonProperty("revocation_reason", required = true)
+        val revocationReason: String?,
+        val expired: Boolean,
+        /** The timestamp for when the API key will expire, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("expiration", required = true)
+        val expiration: Double?,
+        @com.fasterxml.jackson.annotation.JsonProperty("created_by", required = true)
+        val createdBy: String?,
+        /** The timestamp for when the API key was last used, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("last_used_at", required = true)
+        val lastUsedAt: Double?,
+        /** The timestamp for when the API key was created, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Double,
+        /** The timestamp for when the API key was last updated, in milliseconds */
+        @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Double,
+        val description: String? = null,
+    ) : SdkResource()
 
     /**
-     * Creates an API key for the specified subject. Supply `name` and `subject`, and provide optional claims, scopes, creator, and expiration settings as needed. The response includes the key secret, so handle it as a credential.
+     * Creates an API key for the specified subject. Supply `name` and `subject`, and provide
+     * optional claims, scopes, creator, and expiration settings as needed. The response includes
+     * the key secret, so handle it as a credential.
      */
-    fun createApiKey(clientConfig: ClientConfig, request: CreateApiKeyRequest, options: RequestOptions? = null): CreateApiKeyResponse {
+    fun createApiKey(
+        clientConfig: ClientConfig,
+        request: CreateApiKeyRequest,
+        options: RequestOptions? = null,
+    ): CreateApiKeyResponse {
         return createApiKeyWithRawResponse(clientConfig, request, options).data
     }
-
 
     /** Parameters for [createApiKey]. */
     data class CreateApiKeyRequest(
@@ -239,20 +226,43 @@ data class VerifyApiKeyResponse(
         val claims: SdkClient.SdkOptional<Any?>? = null,
         val scopes: List<String>? = null,
         val createdBy: SdkClient.SdkOptional<String?>? = null,
-        val secondsUntilExpiration: SdkClient.SdkOptional<Double?>? = null
+        val secondsUntilExpiration: SdkClient.SdkOptional<Double?>? = null,
     )
 
-    /** [createApiKey], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun createApiKeyWithRawResponse(clientConfig: ClientConfig, request: CreateApiKeyRequest, options: RequestOptions? = null): SdkResponse<CreateApiKeyResponse> {
+    /**
+     * [createApiKey], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun createApiKeyWithRawResponse(
+        clientConfig: ClientConfig,
+        request: CreateApiKeyRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<CreateApiKeyResponse> {
         validateCreateApiKeyRequest(request)
 
-        return SdkClient.request<CreateApiKeyResponse>(SdkClient.RequestSpec("POST", "/api_keys", config = clientConfig, body = SdkClient.bodyMap("name" to (request.name), "subject" to (request.subject), "type" to (SdkClient.omitIfNull(request.type)), "description" to
-    (request.description ?: SdkClient.SdkOptional.Omitted), "claims" to
-    (request.claims ?: SdkClient.SdkOptional.Omitted), "scopes" to (SdkClient.omitIfNull(request.scopes)), "created_by" to
-    (request.createdBy ?: SdkClient.SdkOptional.Omitted), "seconds_until_expiration" to
-    (request.secondsUntilExpiration ?: SdkClient.SdkOptional.Omitted)), operationId = "createApiKey", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+        return SdkClient.request<CreateApiKeyResponse>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/api_keys",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "name" to (request.name),
+                        "subject" to (request.subject),
+                        "type" to (SdkClient.omitIfNull(request.type)),
+                        "description" to (request.description ?: SdkClient.SdkOptional.Omitted),
+                        "claims" to (request.claims ?: SdkClient.SdkOptional.Omitted),
+                        "scopes" to (SdkClient.omitIfNull(request.scopes)),
+                        "created_by" to (request.createdBy ?: SdkClient.SdkOptional.Omitted),
+                        "seconds_until_expiration" to
+                            (request.secondsUntilExpiration ?: SdkClient.SdkOptional.Omitted),
+                    ),
+                operationId = "createApiKey",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
-
 
     private fun validateCreateApiKeyRequest(request: CreateApiKeyRequest) {
         validateCreateApiKeyRequestPart1(request)
@@ -266,38 +276,51 @@ data class VerifyApiKeyResponse(
         Validation.validatePattern("subject", request.subject, "^(user|org|mch|scim)_\\w{27}$")
 
         if (request.type != null) {
-            Validation.validateLength("type", request.type, Validation.LengthOpts(min = 3, max = 25))
-}
+            Validation.validateLength(
+                "type",
+                request.type,
+                Validation.LengthOpts(min = 3, max = 25),
+            )
+        }
 
         val descriptionValue = request.description?.getOrNull()
-if (descriptionValue != null) {
-            Validation.validateLength("description", descriptionValue, Validation.LengthOpts(max = 255))
-}
+        if (descriptionValue != null) {
+            Validation.validateLength(
+                "description",
+                descriptionValue,
+                Validation.LengthOpts(max = 255),
+            )
+        }
 
         val createdByValue = request.createdBy?.getOrNull()
-if (createdByValue != null) {
+        if (createdByValue != null) {
             Validation.validatePattern("created_by", createdByValue, "^user_\\w{27}$")
-}
+        }
     }
 
     private fun validateCreateApiKeyRequestPart2(request: CreateApiKeyRequest) {
         val secondsUntilExpirationValue = request.secondsUntilExpiration?.getOrNull()
-if (secondsUntilExpirationValue != null) {
-            Validation.validateRange("seconds_until_expiration", secondsUntilExpirationValue, Validation.RangeOpts(exclusiveMin = 0.0))
-}
+        if (secondsUntilExpirationValue != null) {
+            Validation.validateRange(
+                "seconds_until_expiration",
+                secondsUntilExpirationValue,
+                Validation.RangeOpts(exclusiveMin = 0.0),
+            )
+        }
     }
-
-
-
-
 
     /**
-     * Lists API keys associated with a specified subject. Use `include_invalid` to control whether invalid keys are included, and use `query` to filter the results. Use `limit` and `offset` to paginate the results.
+     * Lists API keys associated with a specified subject. Use `include_invalid` to control whether
+     * invalid keys are included, and use `query` to filter the results. Use `limit` and `offset` to
+     * paginate the results.
      */
-    fun listApiKeys(clientConfig: ClientConfig, request: ListApiKeysRequest, options: RequestOptions? = null): ListApiKeysResponse {
+    fun listApiKeys(
+        clientConfig: ClientConfig,
+        request: ListApiKeysRequest,
+        options: RequestOptions? = null,
+    ): ListApiKeysResponse {
         return listApiKeysWithRawResponse(clientConfig, request, options).data
     }
-
 
     /** Parameters for [listApiKeys]. */
     data class ListApiKeysRequest(
@@ -306,68 +329,111 @@ if (secondsUntilExpirationValue != null) {
         val includeInvalid: ListApiKeysParameterEnum? = null,
         val limit: Double? = null,
         val offset: SdkClient.SdkOptional<Double?>? = null,
-        val query: String? = null
+        val query: String? = null,
     )
 
-    /** [listApiKeys], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listApiKeysWithRawResponse(clientConfig: ClientConfig, request: ListApiKeysRequest, options: RequestOptions? = null): SdkResponse<ListApiKeysResponse> {
+    /**
+     * [listApiKeys], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun listApiKeysWithRawResponse(
+        clientConfig: ClientConfig,
+        request: ListApiKeysRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<ListApiKeysResponse> {
         validateListApiKeysRequest(request)
 
-        return SdkClient.request<ListApiKeysResponse>(SdkClient.RequestSpec("GET", "/api_keys", config = clientConfig, query = mapOf("subject" to
-    SdkClient.queryValue(request.subject, "form", true), "type" to SdkClient.queryValue(request.type, "form", true), "include_invalid" to
-    SdkClient.queryValue(request.includeInvalid, "form", true), "limit" to SdkClient.queryValue(request.limit, "form", true), "offset" to
-    SdkClient.queryValue(request.offset, "form", true), "query" to SdkClient.queryValue(request.query, "form", true)), operationId = "listApiKeys", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+        return SdkClient.request<ListApiKeysResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/api_keys",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "subject" to SdkClient.queryValue(request.subject, "form", true),
+                        "type" to SdkClient.queryValue(request.type, "form", true),
+                        "include_invalid" to
+                            SdkClient.queryValue(request.includeInvalid, "form", true),
+                        "limit" to SdkClient.queryValue(request.limit, "form", true),
+                        "offset" to SdkClient.queryValue(request.offset, "form", true),
+                        "query" to SdkClient.queryValue(request.query, "form", true),
+                    ),
+                operationId = "listApiKeys",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
-
 
     private fun validateListApiKeysRequest(request: ListApiKeysRequest) {
         Validation.validatePattern("subject", request.subject, "^(user|org|mch|scim)_\\w{27}$")
 
         if (request.type != null) {
             Validation.validateLength("type", request.type, Validation.LengthOpts(min = 3))
-}
+        }
 
         if (request.limit != null) {
-            Validation.validateRange("limit", request.limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-}
+            Validation.validateRange(
+                "limit",
+                request.limit,
+                Validation.RangeOpts(min = 1.0, max = 100.0),
+            )
+        }
 
         val offsetValue = request.offset?.getOrNull()
-if (offsetValue != null) {
+        if (offsetValue != null) {
             Validation.validateRange("offset", offsetValue, Validation.RangeOpts(min = 0.0))
-}
+        }
     }
 
-
-
-
-
     /**
-     * Retrieves an API key by its identifier. Supply the key ID in the path using either the `ak_` or `api_key_` prefix followed by 32 hexadecimal characters. The response contains the key's configuration and status.
+     * Retrieves an API key by its identifier. Supply the key ID in the path using either the `ak_`
+     * or `api_key_` prefix followed by 32 hexadecimal characters. The response contains the key's
+     * configuration and status.
      */
-    fun getApiKey(clientConfig: ClientConfig, apiKeyId: String, options: RequestOptions? = null): GetApiKeyResponse {
+    fun getApiKey(
+        clientConfig: ClientConfig,
+        apiKeyId: String,
+        options: RequestOptions? = null,
+    ): GetApiKeyResponse {
         return getApiKeyWithRawResponse(clientConfig, apiKeyId, options).data
     }
 
-
-    /** [getApiKey], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun getApiKeyWithRawResponse(clientConfig: ClientConfig, apiKeyId: String, options: RequestOptions? = null): SdkResponse<GetApiKeyResponse> {
+    /**
+     * [getApiKey], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun getApiKeyWithRawResponse(
+        clientConfig: ClientConfig,
+        apiKeyId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<GetApiKeyResponse> {
         Validation.validatePattern("apiKeyID", apiKeyId, "^(ak|api_key)_[0-9A-Fa-f]{32}$")
 
-        return SdkClient.request<GetApiKeyResponse>(SdkClient.RequestSpec("GET", "/api_keys/${SdkClient.encodePathSegment(apiKeyId)}", config = clientConfig, operationId = "getApiKey", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+        return SdkClient.request<GetApiKeyResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/api_keys/${SdkClient.encodePathSegment(apiKeyId)}",
+                config = clientConfig,
+                operationId = "getApiKey",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
-
-
-
-
-
 
     /**
-     * Updates configurable properties of an API key. Include only the fields you want to change, such as `scopes`, `description`, `subject`, or `seconds_until_expiration`. The response contains the updated API key object.
+     * Updates configurable properties of an API key. Include only the fields you want to change,
+     * such as `scopes`, `description`, `subject`, or `seconds_until_expiration`. The response
+     * contains the updated API key object.
      */
-    fun updateApiKey(clientConfig: ClientConfig, request: UpdateApiKeyRequest, options: RequestOptions? = null): UpdateApiKeyResponse {
+    fun updateApiKey(
+        clientConfig: ClientConfig,
+        request: UpdateApiKeyRequest,
+        options: RequestOptions? = null,
+    ): UpdateApiKeyResponse {
         return updateApiKeyWithRawResponse(clientConfig, request, options).data
     }
-
 
     /** Parameters for [updateApiKey]. */
     data class UpdateApiKeyRequest(
@@ -376,120 +442,211 @@ if (offsetValue != null) {
         val scopes: List<String>? = null,
         val description: SdkClient.SdkOptional<String?>? = null,
         val subject: String? = null,
-        val secondsUntilExpiration: SdkClient.SdkOptional<Double?>? = null
+        val secondsUntilExpiration: SdkClient.SdkOptional<Double?>? = null,
     )
 
-    /** [updateApiKey], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun updateApiKeyWithRawResponse(clientConfig: ClientConfig, request: UpdateApiKeyRequest, options: RequestOptions? = null): SdkResponse<UpdateApiKeyResponse> {
+    /**
+     * [updateApiKey], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun updateApiKeyWithRawResponse(
+        clientConfig: ClientConfig,
+        request: UpdateApiKeyRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<UpdateApiKeyResponse> {
         validateUpdateApiKeyRequest(request)
 
-        return SdkClient.request<UpdateApiKeyResponse>(SdkClient.RequestSpec("PATCH", "/api_keys/${SdkClient.encodePathSegment(request.apiKeyId)}", config = clientConfig, body = SdkClient.bodyMap("claims" to
-    (request.claims ?: SdkClient.SdkOptional.Omitted), "scopes" to (SdkClient.omitIfNull(request.scopes)), "description" to
-    (request.description ?: SdkClient.SdkOptional.Omitted), "subject" to (SdkClient.omitIfNull(request.subject)), "seconds_until_expiration" to
-    (request.secondsUntilExpiration ?: SdkClient.SdkOptional.Omitted)), operationId = "updateApiKey", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+        return SdkClient.request<UpdateApiKeyResponse>(
+            SdkClient.RequestSpec(
+                "PATCH",
+                "/api_keys/${SdkClient.encodePathSegment(request.apiKeyId)}",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "claims" to (request.claims ?: SdkClient.SdkOptional.Omitted),
+                        "scopes" to (SdkClient.omitIfNull(request.scopes)),
+                        "description" to (request.description ?: SdkClient.SdkOptional.Omitted),
+                        "subject" to (SdkClient.omitIfNull(request.subject)),
+                        "seconds_until_expiration" to
+                            (request.secondsUntilExpiration ?: SdkClient.SdkOptional.Omitted),
+                    ),
+                operationId = "updateApiKey",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
-
 
     private fun validateUpdateApiKeyRequest(request: UpdateApiKeyRequest) {
         Validation.validatePattern("apiKeyID", request.apiKeyId, "^(ak|api_key)_[0-9A-Fa-f]{32}$")
 
         val descriptionValue = request.description?.getOrNull()
-if (descriptionValue != null) {
-            Validation.validateLength("description", descriptionValue, Validation.LengthOpts(max = 255))
-}
+        if (descriptionValue != null) {
+            Validation.validateLength(
+                "description",
+                descriptionValue,
+                Validation.LengthOpts(max = 255),
+            )
+        }
 
         if (request.subject != null) {
             Validation.validatePattern("subject", request.subject, "^(user|org|mch|scim)_\\w{27}$")
-}
+        }
 
         val secondsUntilExpirationValue = request.secondsUntilExpiration?.getOrNull()
-if (secondsUntilExpirationValue != null) {
-            Validation.validateRange("seconds_until_expiration", secondsUntilExpirationValue, Validation.RangeOpts(exclusiveMin = 0.0))
-}
+        if (secondsUntilExpirationValue != null) {
+            Validation.validateRange(
+                "seconds_until_expiration",
+                secondsUntilExpirationValue,
+                Validation.RangeOpts(exclusiveMin = 0.0),
+            )
+        }
     }
 
-
-
-
-
     /**
-     * Deletes an API key identified by its ID. Supply the identifier using the `ak_` or `api_key_` prefix followed by 32 hexadecimal characters. The response confirms that the key was deleted.
+     * Deletes an API key identified by its ID. Supply the identifier using the `ak_` or `api_key_`
+     * prefix followed by 32 hexadecimal characters. The response confirms that the key was deleted.
      */
-    fun deleteApiKey(clientConfig: ClientConfig, apiKeyId: String, options: RequestOptions? = null): DeleteApiKeyResponse {
+    fun deleteApiKey(
+        clientConfig: ClientConfig,
+        apiKeyId: String,
+        options: RequestOptions? = null,
+    ): DeleteApiKeyResponse {
         return deleteApiKeyWithRawResponse(clientConfig, apiKeyId, options).data
     }
 
-
-    /** [deleteApiKey], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun deleteApiKeyWithRawResponse(clientConfig: ClientConfig, apiKeyId: String, options: RequestOptions? = null): SdkResponse<DeleteApiKeyResponse> {
+    /**
+     * [deleteApiKey], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun deleteApiKeyWithRawResponse(
+        clientConfig: ClientConfig,
+        apiKeyId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<DeleteApiKeyResponse> {
         Validation.validatePattern("apiKeyID", apiKeyId, "^(ak|api_key)_[0-9A-Fa-f]{32}$")
 
-        return SdkClient.request<DeleteApiKeyResponse>(SdkClient.RequestSpec("DELETE", "/api_keys/${SdkClient.encodePathSegment(apiKeyId)}", config = clientConfig, operationId = "deleteApiKey", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+        return SdkClient.request<DeleteApiKeyResponse>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/api_keys/${SdkClient.encodePathSegment(apiKeyId)}",
+                config = clientConfig,
+                operationId = "deleteApiKey",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Retrieves the secret for an API key by its identifier. Supply the key ID using the `ak_` or `api_key_` prefix followed by 32 hexadecimal characters. Treat the returned secret as a credential.
+     * Retrieves the secret for an API key by its identifier. Supply the key ID using the `ak_` or
+     * `api_key_` prefix followed by 32 hexadecimal characters. Treat the returned secret as a
+     * credential.
      */
-    fun getApiKeySecret(clientConfig: ClientConfig, apiKeyId: String, options: RequestOptions? = null): GetApiKeySecretResponse {
+    fun getApiKeySecret(
+        clientConfig: ClientConfig,
+        apiKeyId: String,
+        options: RequestOptions? = null,
+    ): GetApiKeySecretResponse {
         return getApiKeySecretWithRawResponse(clientConfig, apiKeyId, options).data
     }
 
-
-    /** [getApiKeySecret], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun getApiKeySecretWithRawResponse(clientConfig: ClientConfig, apiKeyId: String, options: RequestOptions? = null): SdkResponse<GetApiKeySecretResponse> {
+    /**
+     * [getApiKeySecret], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun getApiKeySecretWithRawResponse(
+        clientConfig: ClientConfig,
+        apiKeyId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<GetApiKeySecretResponse> {
         Validation.validatePattern("apiKeyID", apiKeyId, "^(ak|api_key)_[0-9A-Fa-f]{32}$")
 
-        return SdkClient.request<GetApiKeySecretResponse>(SdkClient.RequestSpec("GET", "/api_keys/${SdkClient.encodePathSegment(apiKeyId)}/secret", config = clientConfig, operationId = "getApiKeySecret", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+        return SdkClient.request<GetApiKeySecretResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/api_keys/${SdkClient.encodePathSegment(apiKeyId)}/secret",
+                config = clientConfig,
+                operationId = "getApiKeySecret",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Revokes an API key identified by its ID. You can include `revocation_reason` to record why the key was revoked. The response contains the API key's updated revocation state.
+     * Revokes an API key identified by its ID. You can include `revocation_reason` to record why
+     * the key was revoked. The response contains the API key's updated revocation state.
      */
-    fun revokeApiKey(clientConfig: ClientConfig, apiKeyId: String, revocationReason: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): RevokeApiKeyResponse {
+    fun revokeApiKey(
+        clientConfig: ClientConfig,
+        apiKeyId: String,
+        revocationReason: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): RevokeApiKeyResponse {
         return revokeApiKeyWithRawResponse(clientConfig, apiKeyId, revocationReason, options).data
     }
 
-
-    /** [revokeApiKey], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun revokeApiKeyWithRawResponse(clientConfig: ClientConfig, apiKeyId: String, revocationReason: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): SdkResponse<RevokeApiKeyResponse> {
+    /**
+     * [revokeApiKey], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun revokeApiKeyWithRawResponse(
+        clientConfig: ClientConfig,
+        apiKeyId: String,
+        revocationReason: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<RevokeApiKeyResponse> {
         Validation.validatePattern("apiKeyID", apiKeyId, "^(ak|api_key)_[0-9A-Fa-f]{32}$")
 
-        return SdkClient.request<RevokeApiKeyResponse>(SdkClient.RequestSpec("POST", "/api_keys/${SdkClient.encodePathSegment(apiKeyId)}/revoke", config = clientConfig, body = SdkClient.bodyMap("revocation_reason" to
-    (revocationReason ?: SdkClient.SdkOptional.Omitted)), operationId = "revokeApiKey", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+        return SdkClient.request<RevokeApiKeyResponse>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/api_keys/${SdkClient.encodePathSegment(apiKeyId)}/revoke",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "revocation_reason" to (revocationReason ?: SdkClient.SdkOptional.Omitted)
+                    ),
+                operationId = "revokeApiKey",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Verifies an API key using its secret. Supply the key in the `secret` field to retrieve its metadata and status. The response includes whether the key is revoked or expired and its associated subject and scopes.
+     * Verifies an API key using its secret. Supply the key in the `secret` field to retrieve its
+     * metadata and status. The response includes whether the key is revoked or expired and its
+     * associated subject and scopes.
      */
-    fun verifyApiKey(clientConfig: ClientConfig, secret: String, options: RequestOptions? = null): VerifyApiKeyResponse {
+    fun verifyApiKey(
+        clientConfig: ClientConfig,
+        secret: String,
+        options: RequestOptions? = null,
+    ): VerifyApiKeyResponse {
         return verifyApiKeyWithRawResponse(clientConfig, secret, options).data
     }
 
-
-    /** [verifyApiKey], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun verifyApiKeyWithRawResponse(clientConfig: ClientConfig, secret: String, options: RequestOptions? = null): SdkResponse<VerifyApiKeyResponse> {
-        return SdkClient.request<VerifyApiKeyResponse>(SdkClient.RequestSpec("POST", "/api_keys/verify", config = clientConfig, body = SdkClient.bodyMap("secret" to (secret)), operationId = "verifyApiKey", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+    /**
+     * [verifyApiKey], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun verifyApiKeyWithRawResponse(
+        clientConfig: ClientConfig,
+        secret: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<VerifyApiKeyResponse> {
+        return SdkClient.request<VerifyApiKeyResponse>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/api_keys/verify",
+                config = clientConfig,
+                body = SdkClient.bodyMap("secret" to (secret)),
+                operationId = "verifyApiKey",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
-
-
-
-
-
-
-
 }

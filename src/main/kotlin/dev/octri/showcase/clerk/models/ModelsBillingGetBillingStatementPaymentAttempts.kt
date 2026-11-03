@@ -5,16 +5,10 @@ package dev.octri.showcase.clerk.models
 
 import dev.octri.showcase.clerk.SdkResource
 
-/**
- * Typed representation of the `PaginatedBillingPaymentAttemptResponse` API schema.
- */
+/** Typed representation of the `PaginatedBillingPaymentAttemptResponse` API schema. */
 data class PaginatedBillingPaymentAttemptResponse(
-    /**
-     * Array of billing payment attempts.
-     */
+    /** Array of billing payment attempts. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<BillingPaymentAttempt>,
-    /**
-     * Total number of billing payment attempts.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long
+    /** Total number of billing payment attempts. */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long,
 ) : SdkResource()

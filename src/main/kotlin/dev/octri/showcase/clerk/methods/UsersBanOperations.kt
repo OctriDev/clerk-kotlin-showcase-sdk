@@ -13,7 +13,8 @@ import dev.octri.showcase.clerk.Validation
 
 internal object UsersBanUserOperation {
     /**
-     * Marks the given user as banned, which means that all their sessions are revoked and they are not allowed to sign in again.
+     * Marks the given user as banned, which means that all their sessions are revoked and they are
+     * not allowed to sign in again.
      *
      * @param userId The ID of the user to ban
      */
@@ -21,28 +22,66 @@ internal object UsersBanUserOperation {
         return banUserWithRawResponse(clientConfig, userId, options).data
     }
 
-
-    /** [banUser], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun banUserWithRawResponse(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): SdkResponse<User> {
-        return SdkClient.request<User>(SdkClient.RequestSpec("POST", "/users/${SdkClient.encodePathSegment(userId)}/ban", config = clientConfig, operationId = "banUser", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("402" to ClerkErrors::class.java)))
+    /**
+     * [banUser], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun banUserWithRawResponse(
+        clientConfig: ClientConfig,
+        userId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<User> {
+        return SdkClient.request<User>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/users/${SdkClient.encodePathSegment(userId)}/ban",
+                config = clientConfig,
+                operationId = "banUser",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors = mapOf("402" to ClerkErrors::class.java),
+            )
+        )
     }
 }
 
 internal object UsersBanUsersBulkOperation {
     /**
-     * Marks multiple users as banned, which means that all their sessions are revoked and they are not allowed to sign in again.
+     * Marks multiple users as banned, which means that all their sessions are revoked and they are
+     * not allowed to sign in again.
      *
      * @param userIds Array of user IDs to ban
      */
-    fun banUsersBulk(clientConfig: ClientConfig, userIds: List<String>, options: RequestOptions? = null): List<User> {
+    fun banUsersBulk(
+        clientConfig: ClientConfig,
+        userIds: List<String>,
+        options: RequestOptions? = null,
+    ): List<User> {
         return banUsersBulkWithRawResponse(clientConfig, userIds, options).data
     }
 
-
-    /** [banUsersBulk], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun banUsersBulkWithRawResponse(clientConfig: ClientConfig, userIds: List<String>, options: RequestOptions? = null): SdkResponse<List<User>> {
+    /**
+     * [banUsersBulk], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun banUsersBulkWithRawResponse(
+        clientConfig: ClientConfig,
+        userIds: List<String>,
+        options: RequestOptions? = null,
+    ): SdkResponse<List<User>> {
         Validation.validateItems("user_ids", userIds, Validation.LengthOpts(min = 1, max = 50))
 
-        return SdkClient.request<List<User>>(SdkClient.RequestSpec("POST", "/users/ban", config = clientConfig, body = SdkClient.bodyMap("user_ids" to (userIds)), operationId = "banUsersBulk", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "402" to ClerkErrors::class.java)))
+        return SdkClient.request<List<User>>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/users/ban",
+                config = clientConfig,
+                body = SdkClient.bodyMap("user_ids" to (userIds)),
+                operationId = "banUsersBulk",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors = mapOf("400" to ClerkErrors::class.java, "402" to ClerkErrors::class.java),
+            )
+        )
     }
 }

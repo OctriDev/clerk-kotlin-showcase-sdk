@@ -3,14 +3,14 @@
 
 package dev.octri.showcase.clerk.models
 
-/**
- * The type of enterprise connection the test run was performed against
- */
-class EnterpriseConnectionTestRunConnectionTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is EnterpriseConnectionTestRunConnectionTypeEnum && value == other.value
+/** The type of enterprise connection the test run was performed against */
+class EnterpriseConnectionTestRunConnectionTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is EnterpriseConnectionTestRunConnectionTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -18,19 +18,22 @@ class EnterpriseConnectionTestRunConnectionTypeEnum private constructor(
         @JvmField val SAML = EnterpriseConnectionTestRunConnectionTypeEnum("saml")
         @JvmField val OAUTH = EnterpriseConnectionTestRunConnectionTypeEnum("oauth")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = EnterpriseConnectionTestRunConnectionTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = EnterpriseConnectionTestRunConnectionTypeEnum(value)
     }
 }
 
-/**
- * The status of the test run
- */
-class EnterpriseConnectionTestRunStatusEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is EnterpriseConnectionTestRunStatusEnum && value == other.value
+/** The status of the test run */
+class EnterpriseConnectionTestRunStatusEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is EnterpriseConnectionTestRunStatusEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -39,192 +42,225 @@ class EnterpriseConnectionTestRunStatusEnum private constructor(
         @JvmField val SUCCESS = EnterpriseConnectionTestRunStatusEnum("success")
         @JvmField val FAILED = EnterpriseConnectionTestRunStatusEnum("failed")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = EnterpriseConnectionTestRunStatusEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = EnterpriseConnectionTestRunStatusEnum(value)
     }
 }
 
-/**
- * String representing the object's type. Objects of the same type share the same value.
- */
-class ExternalAccountWithVerificationObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ExternalAccountWithVerificationObjectEnum && value == other.value
+/** String representing the object's type. Objects of the same type share the same value. */
+class ExternalAccountWithVerificationObjectEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ExternalAccountWithVerificationObjectEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val EXTERNAL_ACCOUNT = ExternalAccountWithVerificationObjectEnum("external_account")
-        @JvmField val FACEBOOK_ACCOUNT = ExternalAccountWithVerificationObjectEnum("facebook_account")
+        @JvmField
+        val EXTERNAL_ACCOUNT = ExternalAccountWithVerificationObjectEnum("external_account")
+        @JvmField
+        val FACEBOOK_ACCOUNT = ExternalAccountWithVerificationObjectEnum("facebook_account")
         @JvmField val GOOGLE_ACCOUNT = ExternalAccountWithVerificationObjectEnum("google_account")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ExternalAccountWithVerificationObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ExternalAccountWithVerificationObjectEnum(value)
     }
 }
 
-/**
- * String representing the object's type. Objects of the same type share the same value.
- */
-class FeatureResponseObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is FeatureResponseObjectEnum && value == other.value
+/** String representing the object's type. Objects of the same type share the same value. */
+class FeatureResponseObjectEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is FeatureResponseObjectEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val FEATURE = FeatureResponseObjectEnum("feature")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = FeatureResponseObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = FeatureResponseObjectEnum(value)
     }
 }
 
-/**
- * String representing the object's type. Objects of the same type share the same value.
- */
-class FeatureResponse2ObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is FeatureResponse2ObjectEnum && value == other.value
+/** String representing the object's type. Objects of the same type share the same value. */
+class FeatureResponse2ObjectEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is FeatureResponse2ObjectEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val FEATURE = FeatureResponse2ObjectEnum("feature")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = FeatureResponse2ObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = FeatureResponse2ObjectEnum(value)
     }
 }
 
-/**
- * String representing the object's type. Objects of the same type share the same value.
- */
-class InstanceObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
+/** String representing the object's type. Objects of the same type share the same value. */
+class InstanceObjectEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
     override fun equals(other: Any?): Boolean = other is InstanceObjectEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val INSTANCE = InstanceObjectEnum("instance")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = InstanceObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = InstanceObjectEnum(value)
     }
 }
 
-/**
- * Required enumerated value serialized in the `object` wire field.
- */
-class InstanceCommunicationObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is InstanceCommunicationObjectEnum && value == other.value
+/** Required enumerated value serialized in the `object` wire field. */
+class InstanceCommunicationObjectEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is InstanceCommunicationObjectEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val INSTANCE_COMMUNICATION = InstanceCommunicationObjectEnum("instance_communication")
+        @JvmField
+        val INSTANCE_COMMUNICATION = InstanceCommunicationObjectEnum("instance_communication")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = InstanceCommunicationObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = InstanceCommunicationObjectEnum(value)
     }
 }
 
-/**
- * Required enumerated value serialized in the `object` wire field.
- */
-class InstanceProtectObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is InstanceProtectObjectEnum && value == other.value
+/** Required enumerated value serialized in the `object` wire field. */
+class InstanceProtectObjectEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is InstanceProtectObjectEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val INSTANCE_PROTECT = InstanceProtectObjectEnum("instance_protect")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = InstanceProtectObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = InstanceProtectObjectEnum(value)
     }
 }
 
-/**
- * String representing the object's type. Objects of the same type share the same value.
- */
-class InstanceRestrictionsObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is InstanceRestrictionsObjectEnum && value == other.value
+/** String representing the object's type. Objects of the same type share the same value. */
+class InstanceRestrictionsObjectEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is InstanceRestrictionsObjectEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val INSTANCE_RESTRICTIONS = InstanceRestrictionsObjectEnum("instance_restrictions")
+        @JvmField
+        val INSTANCE_RESTRICTIONS = InstanceRestrictionsObjectEnum("instance_restrictions")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = InstanceRestrictionsObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = InstanceRestrictionsObjectEnum(value)
     }
 }
 
-/**
- * String representing the object's type. Objects of the same type share the same value.
- */
-class InstanceSettingsObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is InstanceSettingsObjectEnum && value == other.value
+/** String representing the object's type. Objects of the same type share the same value. */
+class InstanceSettingsObjectEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is InstanceSettingsObjectEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val INSTANCE_SETTINGS = InstanceSettingsObjectEnum("instance_settings")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = InstanceSettingsObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = InstanceSettingsObjectEnum(value)
     }
 }
 
-/**
- * Required enumerated value serialized in the `object` wire field.
- */
-class InvitationObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is InvitationObjectEnum && value == other.value
+/** Required enumerated value serialized in the `object` wire field. */
+class InvitationObjectEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is InvitationObjectEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val INVITATION = InvitationObjectEnum("invitation")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = InvitationObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = InvitationObjectEnum(value)
     }
 }
 
-/**
- * Required enumerated value serialized in the `status` wire field.
- */
-class InvitationStatusEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is InvitationStatusEnum && value == other.value
+/** Required enumerated value serialized in the `status` wire field. */
+class InvitationStatusEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is InvitationStatusEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -234,343 +270,404 @@ class InvitationStatusEnum private constructor(
         @JvmField val REVOKED = InvitationStatusEnum("revoked")
         @JvmField val EXPIRED = InvitationStatusEnum("expired")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = InvitationStatusEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = InvitationStatusEnum(value)
     }
 }
 
-class InvitationRevokedVariant1RevokedEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: Boolean,
-) {
-    override fun equals(other: Any?): Boolean = other is InvitationRevokedVariant1RevokedEnum && value == other.value
+class InvitationRevokedVariant1RevokedEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: Boolean) {
+    override fun equals(other: Any?): Boolean =
+        other is InvitationRevokedVariant1RevokedEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value.toString()
 
     companion object {
 
         @JvmField val TRUE = InvitationRevokedVariant1RevokedEnum(true)
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: Boolean) = InvitationRevokedVariant1RevokedEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: Boolean) = InvitationRevokedVariant1RevokedEnum(value)
     }
 }
 
-class InvitationRevokedVariant1StatusEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is InvitationRevokedVariant1StatusEnum && value == other.value
+class InvitationRevokedVariant1StatusEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is InvitationRevokedVariant1StatusEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val REVOKED = InvitationRevokedVariant1StatusEnum("revoked")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = InvitationRevokedVariant1StatusEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = InvitationRevokedVariant1StatusEnum(value)
     }
 }
 
-/**
- * Required enumerated value serialized in the `kty` wire field.
- */
-class JWKSEcdsaPrivateKeyKtyEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is JWKSEcdsaPrivateKeyKtyEnum && value == other.value
+/** Required enumerated value serialized in the `kty` wire field. */
+class JWKSEcdsaPrivateKeyKtyEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is JWKSEcdsaPrivateKeyKtyEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val EC = JWKSEcdsaPrivateKeyKtyEnum("EC")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = JWKSEcdsaPrivateKeyKtyEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = JWKSEcdsaPrivateKeyKtyEnum(value)
     }
 }
 
-/**
- * Required enumerated value serialized in the `kty` wire field.
- */
-class JWKSEcdsaPublicKeyKtyEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is JWKSEcdsaPublicKeyKtyEnum && value == other.value
+/** Required enumerated value serialized in the `kty` wire field. */
+class JWKSEcdsaPublicKeyKtyEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is JWKSEcdsaPublicKeyKtyEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val EC = JWKSEcdsaPublicKeyKtyEnum("EC")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = JWKSEcdsaPublicKeyKtyEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = JWKSEcdsaPublicKeyKtyEnum(value)
     }
 }
 
-/**
- * Required enumerated value serialized in the `crv` wire field.
- */
-class JWKSEd25519PrivateKeyCrvEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is JWKSEd25519PrivateKeyCrvEnum && value == other.value
+/** Required enumerated value serialized in the `crv` wire field. */
+class JWKSEd25519PrivateKeyCrvEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is JWKSEd25519PrivateKeyCrvEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val ED25519 = JWKSEd25519PrivateKeyCrvEnum("Ed25519")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = JWKSEd25519PrivateKeyCrvEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = JWKSEd25519PrivateKeyCrvEnum(value)
     }
 }
 
-/**
- * Required enumerated value serialized in the `kty` wire field.
- */
-class JWKSEd25519PrivateKeyKtyEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is JWKSEd25519PrivateKeyKtyEnum && value == other.value
+/** Required enumerated value serialized in the `kty` wire field. */
+class JWKSEd25519PrivateKeyKtyEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is JWKSEd25519PrivateKeyKtyEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val OKP = JWKSEd25519PrivateKeyKtyEnum("OKP")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = JWKSEd25519PrivateKeyKtyEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = JWKSEd25519PrivateKeyKtyEnum(value)
     }
 }
 
-/**
- * Required enumerated value serialized in the `crv` wire field.
- */
-class JWKSEd25519PublicKeyCrvEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is JWKSEd25519PublicKeyCrvEnum && value == other.value
+/** Required enumerated value serialized in the `crv` wire field. */
+class JWKSEd25519PublicKeyCrvEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is JWKSEd25519PublicKeyCrvEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val ED25519 = JWKSEd25519PublicKeyCrvEnum("Ed25519")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = JWKSEd25519PublicKeyCrvEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = JWKSEd25519PublicKeyCrvEnum(value)
     }
 }
 
-/**
- * Required enumerated value serialized in the `kty` wire field.
- */
-class JWKSEd25519PublicKeyKtyEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is JWKSEd25519PublicKeyKtyEnum && value == other.value
+/** Required enumerated value serialized in the `kty` wire field. */
+class JWKSEd25519PublicKeyKtyEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is JWKSEd25519PublicKeyKtyEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val OKP = JWKSEd25519PublicKeyKtyEnum("OKP")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = JWKSEd25519PublicKeyKtyEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = JWKSEd25519PublicKeyKtyEnum(value)
     }
 }
 
-/**
- * Required enumerated value serialized in the `kty` wire field.
- */
-class JWKSRsaPrivateKeyKtyEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is JWKSRsaPrivateKeyKtyEnum && value == other.value
+/** Required enumerated value serialized in the `kty` wire field. */
+class JWKSRsaPrivateKeyKtyEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is JWKSRsaPrivateKeyKtyEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val RSA = JWKSRsaPrivateKeyKtyEnum("RSA")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = JWKSRsaPrivateKeyKtyEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = JWKSRsaPrivateKeyKtyEnum(value)
     }
 }
 
-/**
- * Required enumerated value serialized in the `kty` wire field.
- */
-class JWKSRsaPublicKeyKtyEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is JWKSRsaPublicKeyKtyEnum && value == other.value
+/** Required enumerated value serialized in the `kty` wire field. */
+class JWKSRsaPublicKeyKtyEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is JWKSRsaPublicKeyKtyEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val RSA = JWKSRsaPublicKeyKtyEnum("RSA")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = JWKSRsaPublicKeyKtyEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = JWKSRsaPublicKeyKtyEnum(value)
     }
 }
 
-/**
- * Required enumerated value serialized in the `kty` wire field.
- */
-class JWKSSymmetricKeyKtyEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is JWKSSymmetricKeyKtyEnum && value == other.value
+/** Required enumerated value serialized in the `kty` wire field. */
+class JWKSSymmetricKeyKtyEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is JWKSSymmetricKeyKtyEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val OCT = JWKSSymmetricKeyKtyEnum("oct")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = JWKSSymmetricKeyKtyEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = JWKSSymmetricKeyKtyEnum(value)
     }
 }
 
-/**
- * Required enumerated value serialized in the `object` wire field.
- */
-class JWTTemplateObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is JWTTemplateObjectEnum && value == other.value
+/** Required enumerated value serialized in the `object` wire field. */
+class JWTTemplateObjectEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is JWTTemplateObjectEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val JWT_TEMPLATE = JWTTemplateObjectEnum("jwt_template")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = JWTTemplateObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = JWTTemplateObjectEnum(value)
     }
 }
 
-/**
- * Whether the machine was successfully deleted
- */
-class MachineDeletedDeletedEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: Boolean,
-) {
-    override fun equals(other: Any?): Boolean = other is MachineDeletedDeletedEnum && value == other.value
+/** Whether the machine was successfully deleted */
+class MachineDeletedDeletedEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: Boolean) {
+    override fun equals(other: Any?): Boolean =
+        other is MachineDeletedDeletedEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value.toString()
 
     companion object {
 
         @JvmField val TRUE = MachineDeletedDeletedEnum(true)
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: Boolean) = MachineDeletedDeletedEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: Boolean) = MachineDeletedDeletedEnum(value)
     }
 }
 
-/**
- * String representing the object's type.
- */
-class MachineDeletedObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is MachineDeletedObjectEnum && value == other.value
+/** String representing the object's type. */
+class MachineDeletedObjectEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is MachineDeletedObjectEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val MACHINE = MachineDeletedObjectEnum("machine")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = MachineDeletedObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = MachineDeletedObjectEnum(value)
     }
 }
 
-/**
- * Required enumerated value serialized in the `object` wire field.
- */
-class MachineScopeObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is MachineScopeObjectEnum && value == other.value
+/** Required enumerated value serialized in the `object` wire field. */
+class MachineScopeObjectEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is MachineScopeObjectEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val MACHINE_SCOPE = MachineScopeObjectEnum("machine_scope")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = MachineScopeObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = MachineScopeObjectEnum(value)
     }
 }
 
-/**
- * Whether the machine scope was successfully deleted
- */
-class MachineScopeDeletedDeletedEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: Boolean,
-) {
-    override fun equals(other: Any?): Boolean = other is MachineScopeDeletedDeletedEnum && value == other.value
+/** Whether the machine scope was successfully deleted */
+class MachineScopeDeletedDeletedEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: Boolean) {
+    override fun equals(other: Any?): Boolean =
+        other is MachineScopeDeletedDeletedEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value.toString()
 
     companion object {
 
         @JvmField val TRUE = MachineScopeDeletedDeletedEnum(true)
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: Boolean) = MachineScopeDeletedDeletedEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: Boolean) = MachineScopeDeletedDeletedEnum(value)
     }
 }
 
-/**
- * String representing the object's type.
- */
-class MachineScopeDeletedObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is MachineScopeDeletedObjectEnum && value == other.value
+/** String representing the object's type. */
+class MachineScopeDeletedObjectEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is MachineScopeDeletedObjectEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val MACHINE_SCOPE = MachineScopeDeletedObjectEnum("machine_scope")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = MachineScopeDeletedObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = MachineScopeDeletedObjectEnum(value)
     }
 }
 
-/**
- * String representing the object's type.
- */
-class MachineSecretKeyObjectEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is MachineSecretKeyObjectEnum && value == other.value
+/** String representing the object's type. */
+class MachineSecretKeyObjectEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is MachineSecretKeyObjectEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val MACHINE_SECRET_KEY = MachineSecretKeyObjectEnum("machine_secret_key")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = MachineSecretKeyObjectEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = MachineSecretKeyObjectEnum(value)
     }
 }

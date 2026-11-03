@@ -12,7 +12,8 @@ import dev.octri.showcase.clerk.SdkResponse
 object JwksMethods {
 
     /**
-     * Retrieves the instance's JSON Web Key Set. Use the returned keys when you need the public key material associated with the instance.
+     * Retrieves the instance's JSON Web Key Set. Use the returned keys when you need the public key
+     * material associated with the instance.
      *
      * Retrieve the JSON Web Key Set of the instance
      */
@@ -20,16 +21,23 @@ object JwksMethods {
         return getJwksWithRawResponse(clientConfig, options).data
     }
 
-
-    /** [getJwks], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun getJwksWithRawResponse(clientConfig: ClientConfig, options: RequestOptions? = null): SdkResponse<JWKS> {
-        return SdkClient.request<JWKS>(SdkClient.RequestSpec("GET", "/jwks", config = clientConfig, operationId = "getJwks", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+    /**
+     * [getJwks], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun getJwksWithRawResponse(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): SdkResponse<JWKS> {
+        return SdkClient.request<JWKS>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/jwks",
+                config = clientConfig,
+                operationId = "getJwks",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
-
-
-
-
-
-
-
 }

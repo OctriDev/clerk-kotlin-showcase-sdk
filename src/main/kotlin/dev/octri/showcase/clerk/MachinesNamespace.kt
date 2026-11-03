@@ -3,154 +3,320 @@
 
 package dev.octri.showcase.clerk
 
-
 class MachinesNamespace(private val clientConfig: ClientConfig) {
     /**
-     * This request returns the list of machines for an instance. The machines are ordered by descending creation date (i.e. most recent machines will be returned first)
+     * This request returns the list of machines for an instance. The machines are ordered by
+     * descending creation date (i.e. most recent machines will be returned first)
      */
-    fun list(limit: Long? = null, offset: Long? = null, query: String? = null, orderBy: String? = null, options: RequestOptions? = null): MachineList {
-        return dev.octri.showcase.clerk.methods.Machines.listMachines(clientConfig, limit, offset, query, orderBy, options)
+    fun list(
+        limit: Long? = null,
+        offset: Long? = null,
+        query: String? = null,
+        orderBy: String? = null,
+        options: RequestOptions? = null,
+    ): MachineList {
+        return dev.octri.showcase.clerk.methods.Machines.listMachines(
+            clientConfig,
+            limit,
+            offset,
+            query,
+            orderBy,
+            options,
+        )
     }
 
     /**
-     * Creates a new machine. Provide a `name` and optionally configure its machine scopes and default token TTL. The response includes the machine's secret key, so store it securely.
+     * Creates a new machine. Provide a `name` and optionally configure its machine scopes and
+     * default token TTL. The response includes the machine's secret key, so store it securely.
      *
      * Creates a new machine.
      */
-    fun create(name: String, scopedMachines: List<String>? = null, defaultTokenTtl: Long? = null, options: RequestOptions? = null): MachineCreated {
-        return dev.octri.showcase.clerk.methods.Machines.createMachine(clientConfig, name, scopedMachines, defaultTokenTtl, options)
+    fun create(
+        name: String,
+        scopedMachines: List<String>? = null,
+        defaultTokenTtl: Long? = null,
+        options: RequestOptions? = null,
+    ): MachineCreated {
+        return dev.octri.showcase.clerk.methods.Machines.createMachine(
+            clientConfig,
+            name,
+            scopedMachines,
+            defaultTokenTtl,
+            options,
+        )
     }
 
     /**
-     * Retrieves the details of a machine. Use its `machine_id` to identify the machine whose configuration and scopes you need to inspect.
+     * Retrieves the details of a machine. Use its `machine_id` to identify the machine whose
+     * configuration and scopes you need to inspect.
      *
      * Returns the details of a machine.
      */
     fun get(machineId: String, options: RequestOptions? = null): Machine {
-        return dev.octri.showcase.clerk.methods.Machines.getMachine(clientConfig, machineId, options)
+        return dev.octri.showcase.clerk.methods.Machines.getMachine(
+            clientConfig,
+            machineId,
+            options,
+        )
+    }
+
+    /** Updates an existing machine. Only the provided fields will be updated. */
+    fun update(
+        machineId: String,
+        name: String? = null,
+        defaultTokenTtl: Long? = null,
+        options: RequestOptions? = null,
+    ): Machine {
+        return dev.octri.showcase.clerk.methods.Machines.updateMachine(
+            clientConfig,
+            machineId,
+            name,
+            defaultTokenTtl,
+            options,
+        )
     }
 
     /**
-     * Updates an existing machine. Only the provided fields will be updated.
-     */
-    fun update(machineId: String, name: String? = null, defaultTokenTtl: Long? = null, options: RequestOptions? = null): Machine {
-        return dev.octri.showcase.clerk.methods.Machines.updateMachine(clientConfig, machineId, name, defaultTokenTtl, options)
-    }
-
-    /**
-     * Deletes a machine. Use its `machine_id` to identify the machine you want to remove. The response confirms deletion with the machine ID and a `deleted` value.
+     * Deletes a machine. Use its `machine_id` to identify the machine you want to remove. The
+     * response confirms deletion with the machine ID and a `deleted` value.
      *
      * Deletes a machine.
      */
     fun delete(machineId: String, options: RequestOptions? = null): MachineDeleted {
-        return dev.octri.showcase.clerk.methods.Machines.deleteMachine(clientConfig, machineId, options)
+        return dev.octri.showcase.clerk.methods.Machines.deleteMachine(
+            clientConfig,
+            machineId,
+            options,
+        )
     }
 
     /**
-     * Retrieves the secret key for a machine. Use the `machine_id` to identify which machine's key you need.
+     * Retrieves the secret key for a machine. Use the `machine_id` to identify which machine's key
+     * you need.
      *
      * Returns the secret key for a machine.
      */
     fun getSecretKey(machineId: String, options: RequestOptions? = null): MachineSecretKey {
-        return dev.octri.showcase.clerk.methods.Machines.getMachineSecretKey(clientConfig, machineId, options)
+        return dev.octri.showcase.clerk.methods.Machines.getMachineSecretKey(
+            clientConfig,
+            machineId,
+            options,
+        )
     }
 
     /**
-     * Rotates the machine's secret key. When the secret key is rotated, make sure to update it in your machine/application. The previous secret key will remain valid for the duration specified by the previous_token_ttl parameter.
+     * Rotates the machine's secret key. When the secret key is rotated, make sure to update it in
+     * your machine/application. The previous secret key will remain valid for the duration
+     * specified by the previous_token_ttl parameter.
      */
-    fun rotateSecretKey(machineId: String, previousTokenTtl: Long, options: RequestOptions? = null): MachineSecretKey {
-        return dev.octri.showcase.clerk.methods.Machines.rotateMachineSecretKey(clientConfig, machineId, previousTokenTtl, options)
+    fun rotateSecretKey(
+        machineId: String,
+        previousTokenTtl: Long,
+        options: RequestOptions? = null,
+    ): MachineSecretKey {
+        return dev.octri.showcase.clerk.methods.Machines.rotateMachineSecretKey(
+            clientConfig,
+            machineId,
+            previousTokenTtl,
+            options,
+        )
     }
 
     /**
-     * Creates a new machine scope, allowing the specified machine to access another machine. Maximum of 150 scopes per machine.
+     * Creates a new machine scope, allowing the specified machine to access another machine.
+     * Maximum of 150 scopes per machine.
      */
-    fun createScope(machineId: String, toMachineId: String, options: RequestOptions? = null): MachineScope {
-        return dev.octri.showcase.clerk.methods.Machines.createMachineScope(clientConfig, machineId, toMachineId, options)
+    fun createScope(
+        machineId: String,
+        toMachineId: String,
+        options: RequestOptions? = null,
+    ): MachineScope {
+        return dev.octri.showcase.clerk.methods.Machines.createMachineScope(
+            clientConfig,
+            machineId,
+            toMachineId,
+            options,
+        )
+    }
+
+    /** Deletes a machine scope, removing access from one machine to another. */
+    fun deleteScope(
+        machineId: String,
+        otherMachineId: String,
+        options: RequestOptions? = null,
+    ): MachineScopeDeleted {
+        return dev.octri.showcase.clerk.methods.Machines.deleteMachineScope(
+            clientConfig,
+            machineId,
+            otherMachineId,
+            options,
+        )
     }
 
     /**
-     * Deletes a machine scope, removing access from one machine to another.
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
      */
-    fun deleteScope(machineId: String, otherMachineId: String, options: RequestOptions? = null): MachineScopeDeleted {
-        return dev.octri.showcase.clerk.methods.Machines.deleteMachineScope(clientConfig, machineId, otherMachineId, options)
-    }
-
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [MachinesNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [MachinesNamespace], returning the [SdkResponse] envelope around each
+     * result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
         /**
-         * This request returns the list of machines for an instance. The machines are ordered by descending creation date (i.e. most recent machines will be returned first)
+         * This request returns the list of machines for an instance. The machines are ordered by
+         * descending creation date (i.e. most recent machines will be returned first)
          */
-        fun list(limit: Long? = null, offset: Long? = null, query: String? = null, orderBy: String? = null, options: RequestOptions? = null): SdkResponse<MachineList> {
-            return dev.octri.showcase.clerk.methods.Machines.listMachinesWithRawResponse(clientConfig, limit, offset, query, orderBy, options)
+        fun list(
+            limit: Long? = null,
+            offset: Long? = null,
+            query: String? = null,
+            orderBy: String? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<MachineList> {
+            return dev.octri.showcase.clerk.methods.Machines.listMachinesWithRawResponse(
+                clientConfig,
+                limit,
+                offset,
+                query,
+                orderBy,
+                options,
+            )
         }
 
         /**
-         * Creates a new machine. Provide a `name` and optionally configure its machine scopes and default token TTL. The response includes the machine's secret key, so store it securely.
+         * Creates a new machine. Provide a `name` and optionally configure its machine scopes and
+         * default token TTL. The response includes the machine's secret key, so store it securely.
          *
          * Creates a new machine.
          */
-        fun create(name: String, scopedMachines: List<String>? = null, defaultTokenTtl: Long? = null, options: RequestOptions? = null): SdkResponse<MachineCreated> {
-            return dev.octri.showcase.clerk.methods.Machines.createMachineWithRawResponse(clientConfig, name, scopedMachines, defaultTokenTtl, options)
+        fun create(
+            name: String,
+            scopedMachines: List<String>? = null,
+            defaultTokenTtl: Long? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<MachineCreated> {
+            return dev.octri.showcase.clerk.methods.Machines.createMachineWithRawResponse(
+                clientConfig,
+                name,
+                scopedMachines,
+                defaultTokenTtl,
+                options,
+            )
         }
 
         /**
-         * Retrieves the details of a machine. Use its `machine_id` to identify the machine whose configuration and scopes you need to inspect.
+         * Retrieves the details of a machine. Use its `machine_id` to identify the machine whose
+         * configuration and scopes you need to inspect.
          *
          * Returns the details of a machine.
          */
         fun get(machineId: String, options: RequestOptions? = null): SdkResponse<Machine> {
-            return dev.octri.showcase.clerk.methods.Machines.getMachineWithRawResponse(clientConfig, machineId, options)
+            return dev.octri.showcase.clerk.methods.Machines.getMachineWithRawResponse(
+                clientConfig,
+                machineId,
+                options,
+            )
+        }
+
+        /** Updates an existing machine. Only the provided fields will be updated. */
+        fun update(
+            machineId: String,
+            name: String? = null,
+            defaultTokenTtl: Long? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<Machine> {
+            return dev.octri.showcase.clerk.methods.Machines.updateMachineWithRawResponse(
+                clientConfig,
+                machineId,
+                name,
+                defaultTokenTtl,
+                options,
+            )
         }
 
         /**
-         * Updates an existing machine. Only the provided fields will be updated.
-         */
-        fun update(machineId: String, name: String? = null, defaultTokenTtl: Long? = null, options: RequestOptions? = null): SdkResponse<Machine> {
-            return dev.octri.showcase.clerk.methods.Machines.updateMachineWithRawResponse(clientConfig, machineId, name, defaultTokenTtl, options)
-        }
-
-        /**
-         * Deletes a machine. Use its `machine_id` to identify the machine you want to remove. The response confirms deletion with the machine ID and a `deleted` value.
+         * Deletes a machine. Use its `machine_id` to identify the machine you want to remove. The
+         * response confirms deletion with the machine ID and a `deleted` value.
          *
          * Deletes a machine.
          */
-        fun delete(machineId: String, options: RequestOptions? = null): SdkResponse<MachineDeleted> {
-            return dev.octri.showcase.clerk.methods.Machines.deleteMachineWithRawResponse(clientConfig, machineId, options)
+        fun delete(
+            machineId: String,
+            options: RequestOptions? = null,
+        ): SdkResponse<MachineDeleted> {
+            return dev.octri.showcase.clerk.methods.Machines.deleteMachineWithRawResponse(
+                clientConfig,
+                machineId,
+                options,
+            )
         }
 
         /**
-         * Retrieves the secret key for a machine. Use the `machine_id` to identify which machine's key you need.
+         * Retrieves the secret key for a machine. Use the `machine_id` to identify which machine's
+         * key you need.
          *
          * Returns the secret key for a machine.
          */
-        fun getSecretKey(machineId: String, options: RequestOptions? = null): SdkResponse<MachineSecretKey> {
-            return dev.octri.showcase.clerk.methods.Machines.getMachineSecretKeyWithRawResponse(clientConfig, machineId, options)
+        fun getSecretKey(
+            machineId: String,
+            options: RequestOptions? = null,
+        ): SdkResponse<MachineSecretKey> {
+            return dev.octri.showcase.clerk.methods.Machines.getMachineSecretKeyWithRawResponse(
+                clientConfig,
+                machineId,
+                options,
+            )
         }
 
         /**
-         * Rotates the machine's secret key. When the secret key is rotated, make sure to update it in your machine/application. The previous secret key will remain valid for the duration specified by the previous_token_ttl parameter.
+         * Rotates the machine's secret key. When the secret key is rotated, make sure to update it
+         * in your machine/application. The previous secret key will remain valid for the duration
+         * specified by the previous_token_ttl parameter.
          */
-        fun rotateSecretKey(machineId: String, previousTokenTtl: Long, options: RequestOptions? = null): SdkResponse<MachineSecretKey> {
-            return dev.octri.showcase.clerk.methods.Machines.rotateMachineSecretKeyWithRawResponse(clientConfig, machineId, previousTokenTtl, options)
+        fun rotateSecretKey(
+            machineId: String,
+            previousTokenTtl: Long,
+            options: RequestOptions? = null,
+        ): SdkResponse<MachineSecretKey> {
+            return dev.octri.showcase.clerk.methods.Machines.rotateMachineSecretKeyWithRawResponse(
+                clientConfig,
+                machineId,
+                previousTokenTtl,
+                options,
+            )
         }
 
         /**
-         * Creates a new machine scope, allowing the specified machine to access another machine. Maximum of 150 scopes per machine.
+         * Creates a new machine scope, allowing the specified machine to access another machine.
+         * Maximum of 150 scopes per machine.
          */
-        fun createScope(machineId: String, toMachineId: String, options: RequestOptions? = null): SdkResponse<MachineScope> {
-            return dev.octri.showcase.clerk.methods.Machines.createMachineScopeWithRawResponse(clientConfig, machineId, toMachineId, options)
+        fun createScope(
+            machineId: String,
+            toMachineId: String,
+            options: RequestOptions? = null,
+        ): SdkResponse<MachineScope> {
+            return dev.octri.showcase.clerk.methods.Machines.createMachineScopeWithRawResponse(
+                clientConfig,
+                machineId,
+                toMachineId,
+                options,
+            )
         }
 
-        /**
-         * Deletes a machine scope, removing access from one machine to another.
-         */
-        fun deleteScope(machineId: String, otherMachineId: String, options: RequestOptions? = null): SdkResponse<MachineScopeDeleted> {
-            return dev.octri.showcase.clerk.methods.Machines.deleteMachineScopeWithRawResponse(clientConfig, machineId, otherMachineId, options)
+        /** Deletes a machine scope, removing access from one machine to another. */
+        fun deleteScope(
+            machineId: String,
+            otherMachineId: String,
+            options: RequestOptions? = null,
+        ): SdkResponse<MachineScopeDeleted> {
+            return dev.octri.showcase.clerk.methods.Machines.deleteMachineScopeWithRawResponse(
+                clientConfig,
+                machineId,
+                otherMachineId,
+                options,
+            )
         }
-
     }
 }

@@ -3,30 +3,44 @@
 
 package dev.octri.showcase.clerk
 
-
 class TestingTokensNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates a testing token for use with Frontend API requests. Pass the returned `token` value in the `__clerk_testing_token` query parameter; the response includes its expiration time as `expires_at`.
+     * Creates a testing token for use with Frontend API requests. Pass the returned `token` value
+     * in the `__clerk_testing_token` query parameter; the response includes its expiration time as
+     * `expires_at`.
      *
      * Retrieve a new testing token.
      */
     fun create(options: RequestOptions? = null): TestingToken {
-        return dev.octri.showcase.clerk.methods.TestingTokens.createTestingToken(clientConfig, options)
+        return dev.octri.showcase.clerk.methods.TestingTokens.createTestingToken(
+            clientConfig,
+            options,
+        )
     }
 
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
+    /**
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [TestingTokensNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [TestingTokensNamespace], returning the [SdkResponse] envelope around each
+     * result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
         /**
-         * Creates a testing token for use with Frontend API requests. Pass the returned `token` value in the `__clerk_testing_token` query parameter; the response includes its expiration time as `expires_at`.
+         * Creates a testing token for use with Frontend API requests. Pass the returned `token`
+         * value in the `__clerk_testing_token` query parameter; the response includes its
+         * expiration time as `expires_at`.
          *
          * Retrieve a new testing token.
          */
         fun create(options: RequestOptions? = null): SdkResponse<TestingToken> {
-            return dev.octri.showcase.clerk.methods.TestingTokens.createTestingTokenWithRawResponse(clientConfig, options)
+            return dev.octri.showcase.clerk.methods.TestingTokens.createTestingTokenWithRawResponse(
+                clientConfig,
+                options,
+            )
         }
-
     }
 }

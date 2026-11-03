@@ -12,17 +12,38 @@ import dev.octri.showcase.clerk.User
 
 internal object UsersLockUserOperation {
     /**
-     * Marks the given user as locked, which means they are not allowed to sign in again until the lock expires. Lock duration can be configured in the instance's restrictions settings.
+     * Marks the given user as locked, which means they are not allowed to sign in again until the
+     * lock expires. Lock duration can be configured in the instance's restrictions settings.
      *
      * @param userId The ID of the user to lock
      */
-    fun lockUser(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): User {
+    fun lockUser(
+        clientConfig: ClientConfig,
+        userId: String,
+        options: RequestOptions? = null,
+    ): User {
         return lockUserWithRawResponse(clientConfig, userId, options).data
     }
 
-
-    /** [lockUser], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun lockUserWithRawResponse(clientConfig: ClientConfig, userId: String, options: RequestOptions? = null): SdkResponse<User> {
-        return SdkClient.request<User>(SdkClient.RequestSpec("POST", "/users/${SdkClient.encodePathSegment(userId)}/lock", config = clientConfig, operationId = "lockUser", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("403" to ClerkErrors::class.java)))
+    /**
+     * [lockUser], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun lockUserWithRawResponse(
+        clientConfig: ClientConfig,
+        userId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<User> {
+        return SdkClient.request<User>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/users/${SdkClient.encodePathSegment(userId)}/lock",
+                config = clientConfig,
+                operationId = "lockUser",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors = mapOf("403" to ClerkErrors::class.java),
+            )
+        )
     }
 }

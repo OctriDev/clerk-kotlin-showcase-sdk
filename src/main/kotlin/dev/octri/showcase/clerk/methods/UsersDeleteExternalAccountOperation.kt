@@ -12,20 +12,55 @@ import dev.octri.showcase.clerk.SdkResponse
 
 internal object UsersDeleteExternalAccountOperation {
     /**
-     * Deletes an external account associated with a user. Supply the `user_id` and `external_account_id` for the account you want to remove.
+     * Deletes an external account associated with a user. Supply the `user_id` and
+     * `external_account_id` for the account you want to remove.
      *
      * Delete an external account by ID.
      *
      * @param userId The ID of the user's external account
      * @param externalAccountId The ID of the external account to delete
      */
-    fun deleteExternalAccount(clientConfig: ClientConfig, userId: String, externalAccountId: String, options: RequestOptions? = null): DeletedObject {
-        return deleteExternalAccountWithRawResponse(clientConfig, userId, externalAccountId, options).data
+    fun deleteExternalAccount(
+        clientConfig: ClientConfig,
+        userId: String,
+        externalAccountId: String,
+        options: RequestOptions? = null,
+    ): DeletedObject {
+        return deleteExternalAccountWithRawResponse(
+                clientConfig,
+                userId,
+                externalAccountId,
+                options,
+            )
+            .data
     }
 
-
-    /** [deleteExternalAccount], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun deleteExternalAccountWithRawResponse(clientConfig: ClientConfig, userId: String, externalAccountId: String, options: RequestOptions? = null): SdkResponse<DeletedObject> {
-        return SdkClient.request<DeletedObject>(SdkClient.RequestSpec("DELETE", "/users/${SdkClient.encodePathSegment(userId)}/external_accounts/${SdkClient.encodePathSegment(externalAccountId)}", config = clientConfig, operationId = "deleteExternalAccount", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "403" to ClerkErrors::class.java, "404" to ClerkErrors::class.java, "500" to ClerkErrors::class.java)))
+    /**
+     * [deleteExternalAccount], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun deleteExternalAccountWithRawResponse(
+        clientConfig: ClientConfig,
+        userId: String,
+        externalAccountId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<DeletedObject> {
+        return SdkClient.request<DeletedObject>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/users/${SdkClient.encodePathSegment(userId)}/external_accounts/${SdkClient.encodePathSegment(externalAccountId)}",
+                config = clientConfig,
+                operationId = "deleteExternalAccount",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ClerkErrors::class.java,
+                        "403" to ClerkErrors::class.java,
+                        "404" to ClerkErrors::class.java,
+                        "500" to ClerkErrors::class.java,
+                    ),
+            )
+        )
     }
 }

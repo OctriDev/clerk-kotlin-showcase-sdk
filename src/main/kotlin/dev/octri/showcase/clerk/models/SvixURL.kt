@@ -5,12 +5,8 @@ package dev.octri.showcase.clerk.models
 
 import dev.octri.showcase.clerk.SdkResource
 
-/**
- * Typed representation of the `SvixURL` API schema.
- */
+/** Typed representation of the `SvixURL` API schema. */
 data class SvixURL(
-    /**
-     * Required `string` value serialized in the `svix_url` wire field.
-     */
+    /** Required `string` value serialized in the `svix_url` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("svix_url") val svixUrl: String
 ) : SdkResource()

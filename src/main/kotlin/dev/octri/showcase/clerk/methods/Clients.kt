@@ -14,83 +14,156 @@ import dev.octri.showcase.clerk.Validation
 object Clients {
 
     /**
-     * Returns a list of all clients. The clients are returned sorted by creation date, with the newest clients appearing first. Warning: the endpoint is being deprecated and will be removed in future versions.
+     * Returns a list of all clients. The clients are returned sorted by creation date, with the
+     * newest clients appearing first. Warning: the endpoint is being deprecated and will be removed
+     * in future versions.
      *
-     * @param paginated Whether to paginate the results. If true, the results will be
-     *   paginated. If false, the results will not be paginated.
-     * @param limit Applies a limit to the number of results returned. Can be used
-     *   for paginating the results together with `offset`.
-     * @param offset Skip the first `offset` results when paginating. Needs to be an
-     *   integer greater or equal to zero. To be used in conjunction with `limit`.
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @param paginated Whether to paginate the results. If true, the results will be paginated. If
+     *   false, the results will not be paginated.
+     * @param limit Applies a limit to the number of results returned. Can be used for paginating
+     *   the results together with `offset`.
+     * @param offset Skip the first `offset` results when paginating. Needs to be an integer greater
+     *   or equal to zero. To be used in conjunction with `limit`.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
-    fun listClients(clientConfig: ClientConfig, paginated: Boolean? = null, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): List<Client> {
+    fun listClients(
+        clientConfig: ClientConfig,
+        paginated: Boolean? = null,
+        limit: Long? = null,
+        offset: Long? = null,
+        options: RequestOptions? = null,
+    ): List<Client> {
         return listClientsWithRawResponse(clientConfig, paginated, limit, offset, options).data
     }
 
-
-    /** [listClients], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listClientsWithRawResponse(clientConfig: ClientConfig, paginated: Boolean? = null, limit: Long? = null, offset: Long? = null, options: RequestOptions? = null): SdkResponse<List<Client>> {
+    /**
+     * [listClients], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun listClientsWithRawResponse(
+        clientConfig: ClientConfig,
+        paginated: Boolean? = null,
+        limit: Long? = null,
+        offset: Long? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<List<Client>> {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 500.0))
-}
+        }
 
         if (offset != null) {
             Validation.validateRange("offset", offset, Validation.RangeOpts(min = 0.0))
-}
+        }
 
-        return SdkClient.request<List<Client>>(SdkClient.RequestSpec("GET", "/clients", config = clientConfig, query = mapOf("paginated" to SdkClient.queryValue(paginated, "form", true), "limit" to SdkClient.queryValue(limit, "form", true), "offset" to SdkClient.queryValue(offset, "form", true)), operationId = "listClients", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "410" to ClerkErrors::class.java, "422" to ClerkErrors::class.java)))
+        return SdkClient.request<List<Client>>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/clients",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "paginated" to SdkClient.queryValue(paginated, "form", true),
+                        "limit" to SdkClient.queryValue(limit, "form", true),
+                        "offset" to SdkClient.queryValue(offset, "form", true),
+                    ),
+                operationId = "listClients",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ClerkErrors::class.java,
+                        "401" to ClerkErrors::class.java,
+                        "410" to ClerkErrors::class.java,
+                        "422" to ClerkErrors::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Verifies a client by validating the JWT supplied in the request body. Send the token for the active client to retrieve the associated client and session details.
+     * Verifies a client by validating the JWT supplied in the request body. Send the token for the
+     * active client to retrieve the associated client and session details.
      *
      * Verifies the client in the provided token
      *
      * @param token A JWT that represents the active client.
      */
-    fun verifyClient(clientConfig: ClientConfig, token: String, options: RequestOptions? = null): Client {
+    fun verifyClient(
+        clientConfig: ClientConfig,
+        token: String,
+        options: RequestOptions? = null,
+    ): Client {
         return verifyClientWithRawResponse(clientConfig, token, options).data
     }
 
-
-    /** [verifyClient], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun verifyClientWithRawResponse(clientConfig: ClientConfig, token: String, options: RequestOptions? = null): SdkResponse<Client> {
-        return SdkClient.request<Client>(SdkClient.RequestSpec("POST", "/clients/verify", config = clientConfig, body = SdkClient.bodyMap("token" to (token)), operationId = "verifyClient", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "404" to ClerkErrors::class.java)))
+    /**
+     * [verifyClient], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun verifyClientWithRawResponse(
+        clientConfig: ClientConfig,
+        token: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<Client> {
+        return SdkClient.request<Client>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/clients/verify",
+                config = clientConfig,
+                body = SdkClient.bodyMap("token" to (token)),
+                operationId = "verifyClient",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ClerkErrors::class.java,
+                        "401" to ClerkErrors::class.java,
+                        "404" to ClerkErrors::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Retrieves the details of a client and its associated session information. Use `client_id` to look up the client whose sessions and authentication state you need to inspect.
+     * Retrieves the details of a client and its associated session information. Use `client_id` to
+     * look up the client whose sessions and authentication state you need to inspect.
      *
      * Returns the details of a client.
      *
      * @param clientId Client ID.
      */
-    fun getClient(clientConfig: ClientConfig, clientId: String, options: RequestOptions? = null): Client {
+    fun getClient(
+        clientConfig: ClientConfig,
+        clientId: String,
+        options: RequestOptions? = null,
+    ): Client {
         return getClientWithRawResponse(clientConfig, clientId, options).data
     }
 
-
-    /** [getClient], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun getClientWithRawResponse(clientConfig: ClientConfig, clientId: String, options: RequestOptions? = null): SdkResponse<Client> {
-        return SdkClient.request<Client>(SdkClient.RequestSpec("GET", "/clients/${SdkClient.encodePathSegment(clientId)}", config = clientConfig, operationId = "getClient", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to ClerkErrors::class.java, "401" to ClerkErrors::class.java, "404" to ClerkErrors::class.java)))
+    /**
+     * [getClient], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun getClientWithRawResponse(
+        clientConfig: ClientConfig,
+        clientId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<Client> {
+        return SdkClient.request<Client>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/clients/${SdkClient.encodePathSegment(clientId)}",
+                config = clientConfig,
+                operationId = "getClient",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to ClerkErrors::class.java,
+                        "401" to ClerkErrors::class.java,
+                        "404" to ClerkErrors::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
-
-
 }
